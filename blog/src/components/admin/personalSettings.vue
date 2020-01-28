@@ -80,7 +80,6 @@ export default {
     },
     mounted() {
         this.getData();
-        console.log("tag", "");
     },
     watch: {},
     methods: {
@@ -100,6 +99,17 @@ export default {
                     data: this.personalData
                 })
                 .then(res => {
+                    if (res.data.code == 200) {
+                        this.$message({
+                            message: "个人信息更新成功！",
+                            type: "success"
+                        });
+                    } else {
+                        this.$message({
+                            message: res.data.message,
+                            type: "error"
+                        });
+                    }
                     console.log(res);
                 })
                 .catch(err => {
