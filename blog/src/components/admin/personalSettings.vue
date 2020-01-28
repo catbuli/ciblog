@@ -7,36 +7,37 @@
                     <li>
                         <h4>昵称</h4>
                         <el-input placeholder="请输入内容"
-                                  v-model="data.screenName"></el-input>
+                                  v-model="personalData.nickname"></el-input>
                         <span class="input-hint">用户昵称可以与用户名不同, 用于前台显示.
                             如果你将此项留空, 将默认使用用户名.</span>
                     </li>
                     <li>
                         <h4>个人主页地址</h4>
                         <el-input placeholder="请输入内容"
-                                  v-model="data.indexurl"></el-input>
+                                  v-model="personalData.indexurl"></el-input>
                         <span class="input-hint">此用户的个人主页地址, 请用 http:// 开头.</span>
                     </li>
                     <li>
                         <h4>哔哩哔哩主页</h4>
                         <el-input placeholder="请输入内容"
-                                  v-model="data.bilibili"></el-input>
+                                  v-model="personalData.bilibili"></el-input>
                         <span class="input-hint">bilibili个人主页.</span>
                     </li>
                     <li>
                         <h4>github主页</h4>
                         <el-input placeholder="请输入内容"
-                                  v-model="data.github"></el-input>
+                                  v-model="personalData.github"></el-input>
                         <span class="input-hint">github个人主页.</span>
                     </li>
                     <li>
                         <h4>电子邮箱</h4>
                         <el-input placeholder="请输入内容"
-                                  v-model="data.mail"></el-input>
+                                  v-model="personalData.mail"></el-input>
                         <span class="input-hint">电子邮箱啦.</span>
                     </li>
                     <li class="input-button">
-                        <el-button type="primary">更新信息</el-button>
+                        <el-button type="primary"
+                                   @click="submit">更新信息</el-button>
                     </li>
                 </ul>
             </el-form>
@@ -74,25 +75,37 @@ export default {
     },
     data() {
         return {
-            data: {}
+            personalData: {}
         };
     },
     mounted() {
-        this.getMessage();
+        this.getData();
     },
+    watch: {},
     methods: {
-        getMessage() {
+        getData() {
             this.$http
-                .post("/api/api/client")
+                .post("/api/api/client/personal")
                 .then(res => {
-                    this.data = res.data;
+                    this.personalData = res.data;
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        },
+        submit() {
+            this.$http
+                .post("/api/api/client/personal/update", {
+                    data: this.personalData
+                })
+                .then(res => {
+                    console.log(res);
                 })
                 .catch(err => {
                     console.log(err);
                 });
         }
-    },
-    watch: {}
+    }
 };
 </script>
 
