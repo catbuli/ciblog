@@ -71,9 +71,8 @@ export default {
     },
     methods: {
         getMessage() {
-            Axios.post("/api/intro")
+            Axios.post("/api/api/client")
                 .then(res => {
-                    this.articleLists = res.data;
                     this.name = res.data.name;
                     this.imgURL = res.data.imgURL;
                     this.bilibili = res.data.bilibili;

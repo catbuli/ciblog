@@ -29,8 +29,8 @@ export default {
         };
     },
     methods: {
-        test() {
-            Axios.post("/api/test")
+        getMessage() {
+            Axios.post("api/api/client")
                 .then(res => {
                     this.articleLists = res.data;
                 })
@@ -40,7 +40,7 @@ export default {
         }
     },
     mounted() {
-        this.test();
+        this.getMessage();
     }
 };
 </script>
