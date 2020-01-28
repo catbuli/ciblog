@@ -86,6 +86,9 @@ menu {
     margin: 0;
     padding: 0;
 }
+li {
+    list-style: none;
+}
 
 #app {
     font-family: "Avenir", Helvetica, Arial, sans-serif;
@@ -135,6 +138,6 @@ menu {
     transition: all 0.9s ease;
 }
 
-.fade-leave-active {
-}
+/* .fade-leave-active {
+} */
 </style>

@@ -15,5 +15,6 @@ export default {
 <style scoped>
 #admin-title {
     text-align: left;
+    font-weight: bold;
 }
 </style>

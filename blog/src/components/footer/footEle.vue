@@ -14,6 +14,7 @@ export default {
 
 <style scoped>
 .footEle {
+    clear: both;
     margin: 20px auto;
     width: 100%;
     color: black;
