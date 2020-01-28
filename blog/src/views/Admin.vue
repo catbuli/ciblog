@@ -1,21 +1,21 @@
 <template>
     <div id="Admin">
+        <adminNav></adminNav>
+        <div class="admin-main">
+            <router-view></router-view>
+        </div>
     </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import footEle from "@/components/footer/footEle.vue";
-import headEle from "@/components/header/headEle.vue";
-import backTop from "@/components/common/backTop.vue";
+import adminNav from "@/components/admin/common/adminNav.vue";
 import Axios from "axios";
 
 export default {
-    name: "home",
+    name: "admin",
     components: {
-        headEle,
-        footEle,
-        backTop
+        adminNav
     },
     data() {
         return {};
@@ -26,4 +26,7 @@ export default {
 </script>
 
 <style scoped>
+.admin-main {
+    width: 100%;
+}
 </style>

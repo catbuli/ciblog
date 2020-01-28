@@ -1,6 +1,7 @@
 <template>
     <div id="app">
-        <navEle @handleWeight="handleWeight"></navEle>
+        <navEle v-if="isAdmin"
+                @handleWeight="handleWeight"></navEle>
         <div id="mian"
              :class="[isShow ? '' : 'handle-main']">
             <transition name="fade"
@@ -17,7 +18,8 @@ export default {
     name: "app",
     data() {
         return {
-            isShow: true
+            isShow: true,
+            isAdmin: true
         };
     },
     watch: {
@@ -31,7 +33,18 @@ export default {
     methods: {
         handleWeight(params) {
             this.isShow = params;
+        },
+        checkRouter() {
+            let router_path = this.$route.path;
+            console.log(router_path);
+            if (router_path.indexOf("/admin") != -1) {
+                this.isAdmin = false;
+                this.isShow = false;
+            }
         }
+    },
+    mounted() {
+        this.checkRouter();
     }
 };
 </script>
