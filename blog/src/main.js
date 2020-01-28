@@ -13,6 +13,7 @@ import "./assets/styles/iconfont/iconfont.css"
 
 Vue.config.productionTip = false
 Vue.use(ElementUI);
+Vue.prototype.$http = Axios;
 
 new Vue({
     // Mock,
@@ -20,4 +21,3 @@ new Vue({
     store,
     render: h => h(App)
 }).$mount('#app')
-// Vue.prototype.Axios = Axios

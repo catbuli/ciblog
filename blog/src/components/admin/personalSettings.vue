@@ -6,28 +6,33 @@
                 <ul>
                     <li>
                         <h4>昵称</h4>
-                        <el-input placeholder="请输入内容"></el-input>
+                        <el-input placeholder="请输入内容"
+                                  v-model="data.screenName"></el-input>
                         <span class="input-hint">用户昵称可以与用户名不同, 用于前台显示.
                             如果你将此项留空, 将默认使用用户名.</span>
                     </li>
                     <li>
                         <h4>个人主页地址</h4>
-                        <el-input placeholder="请输入内容"></el-input>
+                        <el-input placeholder="请输入内容"
+                                  v-model="data.indexurl"></el-input>
                         <span class="input-hint">此用户的个人主页地址, 请用 http:// 开头.</span>
                     </li>
                     <li>
                         <h4>哔哩哔哩主页</h4>
-                        <el-input placeholder="请输入内容"></el-input>
+                        <el-input placeholder="请输入内容"
+                                  v-model="data.bilibili"></el-input>
                         <span class="input-hint">bilibili个人主页.</span>
                     </li>
                     <li>
                         <h4>github主页</h4>
-                        <el-input placeholder="请输入内容"></el-input>
+                        <el-input placeholder="请输入内容"
+                                  v-model="data.github"></el-input>
                         <span class="input-hint">github个人主页.</span>
                     </li>
                     <li>
                         <h4>电子邮箱</h4>
-                        <el-input placeholder="请输入内容"></el-input>
+                        <el-input placeholder="请输入内容"
+                                  v-model="data.mail"></el-input>
                         <span class="input-hint">电子邮箱啦.</span>
                     </li>
                     <li class="input-button">
@@ -67,8 +72,26 @@ export default {
         adminTitle,
         adminFrame
     },
-    mounted() {},
-    methods: {},
+    data() {
+        return {
+            data: {}
+        };
+    },
+    mounted() {
+        this.getMessage();
+    },
+    methods: {
+        getMessage() {
+            this.$http
+                .post("/api/api/client")
+                .then(res => {
+                    this.data = res.data;
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        }
+    },
     watch: {}
 };
 </script>
