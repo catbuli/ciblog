@@ -1,4 +1,4 @@
-# vue_demo
+# CIblog
 
 ## Project setup
 ```
