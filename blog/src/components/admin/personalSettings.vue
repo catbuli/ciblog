@@ -80,6 +80,7 @@ export default {
     },
     mounted() {
         this.getData();
+        console.log("tag", "");
     },
     watch: {},
     methods: {
