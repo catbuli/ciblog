@@ -1,17 +1,18 @@
 <template>
     <nav id="admin-nav">
         <el-menu class="el-menu-demo"
+                 router="true"
                  mode="horizontal"
                  background-color="#545c64"
                  text-color="#fff"
                  active-text-color="#ffd04b">
-            <el-submenu index="1">
+            <el-submenu>
                 <template slot="title">控制台</template>
-                <el-menu-item index="1-1">个人设置</el-menu-item>
+                <el-menu-item index="/admin">个人设置</el-menu-item>
                 <el-menu-item index="1-2">备份</el-menu-item>
             </el-submenu>
-            <el-menu-item index="2">
-                编写文章
+            <el-menu-item index="/admin/writePost">
+                写文章
             </el-menu-item>
             <el-submenu index="3">
                 <template slot="title">管理</template>
