@@ -87,27 +87,7 @@ export default {
             this.$store.dispatch("getPersonalDataAction");
         },
         submit() {
-            this.$http
-                .post("/api/api/client/personal/update", {
-                    data: this.personalData
-                })
-                .then(res => {
-                    if (res.data.code == 200) {
-                        this.$message({
-                            message: "个人信息更新成功！",
-                            type: "success"
-                        });
-                    } else {
-                        this.$message({
-                            message: res.data.message,
-                            type: "error"
-                        });
-                    }
-                    console.log(res);
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+            this.$store.dispatch("updatePersonalDataAction", this.personalData);
         }
     }
 };
