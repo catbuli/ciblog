@@ -101,6 +101,7 @@ ul {
 li {
     display: block;
     clear: both;
+    margin: 15px auto;
 }
 .input-button {
     margin: 20px auto;

@@ -77,17 +77,14 @@ export default {
     mounted() {
         this.getData();
     },
-    watch: {},
+    watch: {
+        "$store.state.global.personalData": function() {
+            this.personalData = this.$store.state.global.personalData;
+        }
+    },
     methods: {
         getData() {
-            this.$http
-                .post("/api/api/client/personal")
-                .then(res => {
-                    this.personalData = res.data;
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+            this.$store.dispatch("getPersonalDataAction");
         },
         submit() {
             this.$http
