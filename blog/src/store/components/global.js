@@ -34,7 +34,7 @@ export default {
                             message: "个人信息更新成功！",
                             type: "success"
                         });
-                        context.commit('getPersonalDataAction');
+                        context.dispatch('getPersonalDataAction');
                     } else {
                         Message({
                             message: res.data.message,
