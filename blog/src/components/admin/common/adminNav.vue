@@ -1,17 +1,17 @@
 <template>
     <nav id="admin-nav">
         <el-menu class="el-menu-demo"
-                 router="true"
                  mode="horizontal"
                  background-color="#545c64"
                  text-color="#fff"
-                 active-text-color="#ffd04b">
-            <el-submenu>
+                 active-text-color="#ffd04b"
+                 router>
+            <el-submenu index>
                 <template slot="title">控制台</template>
                 <el-menu-item index="/admin">个人设置</el-menu-item>
                 <el-menu-item index="1-2">备份</el-menu-item>
             </el-submenu>
-            <el-menu-item index="/admin/writePost">
+            <el-menu-item index="/admin/write_post">
                 写文章
             </el-menu-item>
             <el-submenu index="3">
@@ -29,8 +29,8 @@
                 <el-menu-item index="3-3">阅读</el-menu-item>
             </el-submenu>
             <el-menu-item index="5">网站</el-menu-item>
-            <el-menu-item index="6"
-                          style="right:0;position:absolute">登出</el-menu-item>
+            <!-- <el-menu-item index="6"
+                          style="right:0;position:absolute">登出</el-menu-item> -->
         </el-menu>
     </nav>
 </template>

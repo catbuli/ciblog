@@ -59,7 +59,7 @@ export default {
         toolContainer
     },
     mounted() {
-        this.getMessage();
+        this.getData();
         window.addEventListener("mousemove", this.handleMouse, true);
         window.addEventListener("scroll", this.handleScroll, true);
     },
@@ -70,18 +70,18 @@ export default {
         }
     },
     methods: {
-        getMessage() {
-            Axios.post("/api/api/client")
-                .then(res => {
-                    this.name = res.data.name;
-                    this.imgURL = res.data.imgURL;
-                    this.bilibili = res.data.bilibili;
-                    this.github = res.data.github;
-                    this.email = res.data.email;
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+        getData() {
+            // Axios.post("/api/api/client")
+            //     .then(res => {
+            //         this.name = res.data.name;
+            //         this.imgURL = res.data.imgURL;
+            //         this.bilibili = res.data.bilibili;
+            //         this.github = res.data.github;
+            //         this.email = res.data.email;
+            //     })
+            //     .catch(err => {
+            //         console.log(err);
+            //     });
         },
         handeNav(flag) {
             this.isShow = flag;

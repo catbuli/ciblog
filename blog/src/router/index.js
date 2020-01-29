@@ -30,11 +30,11 @@ const routes = [{
         component: Admin,
         children: [{
             path: '/admin',
-            name: 'personalSettings',
+            name: 'personal_settings',
             component: personalSettings,
         }, {
-            path: '/admin/writePost',
-            name: 'writePost',
+            path: '/admin/write_post',
+            name: 'write_post',
             component: writePost,
         }]
     }
