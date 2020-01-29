@@ -4,15 +4,15 @@
             <ul>
                 <li>
                     <h4>分类名称<sup>*</sup></h4>
-                    <el-input placeholder="请输入分类"></el-input>
+                    <el-input placeholder="请输入分类"
+                              v-model="name"></el-input>
                 </li>
                 <li>
-                    暂无
                 </li>
                 <li>
                     <h4>分类描述</h4>
                     <el-input placeholder="请输入内容"
-                              v-model="personalData.mail"
+                              v-model="description"
                               type="textarea"
                               :rows="4"></el-input>
                     <span class="input-hint">用来描述分类。</span>
@@ -35,12 +35,16 @@ export default {
     },
     data() {
         return {
-            personalData: {}
+            name: "",
+            description: ""
         };
     },
     methods: {
         submit() {
-            console.log("tag", "");
+            this.$store.dispatch("addCategoryAction", {
+                name: this.name,
+                description: this.description
+            });
         }
     }
 };

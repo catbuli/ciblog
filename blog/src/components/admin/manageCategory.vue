@@ -14,9 +14,9 @@
                              align="center"
                              label="名称">
             </el-table-column>
-            <el-table-column prop=""
+            <el-table-column prop="description"
                              align="center"
-                             label="子分类">
+                             label="分类描述">
             </el-table-column>
             <el-table-column prop="count"
                              align="center"
