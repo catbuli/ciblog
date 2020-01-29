@@ -60,12 +60,10 @@
 </template>
 
 <script>
-import adminTitle from "@/components/admin/common/adminTitle.vue";
 import adminFrame from "@/components/admin/common/adminFrame.vue";
 export default {
     name: "personalSettings",
     components: {
-        adminTitle,
         adminFrame
     },
     data() {

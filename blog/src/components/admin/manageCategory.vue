@@ -1,7 +1,10 @@
 <template>
     <adminFrame title="分类管理">
-        <el-table :data="tableData"
-                  style="width: 100%">
+        <el-button type="primary"
+                   icon="el-icon-plus"
+                   @click="$router.push('/admin/add_category')">
+        </el-button>
+        <el-table style="width: 100%">
             <el-table-column prop="date"
                              label="日期"
                              width="180">
@@ -20,10 +23,12 @@
 <script>
 import adminFrame from "@/components/admin/common/adminFrame.vue";
 export default {
-    name: "manageCategories",
+    name: "manageCategory",
     components: {
         adminFrame
-    }
+    },
+    mounted() {},
+    methods: {}
 };
 </script>
 
