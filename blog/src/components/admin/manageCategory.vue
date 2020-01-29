@@ -4,17 +4,23 @@
                    icon="el-icon-plus"
                    @click="$router.push('/admin/add_category')">
         </el-button>
-        <el-table style="width: 100%">
-            <el-table-column prop="date"
-                             label="日期"
-                             width="180">
+        <el-table style="width: 100%"
+                  :highlight-current-row="true"
+                  :data="categoryList">
+            <el-table-column type="selection"
+                             align="center">
             </el-table-column>
             <el-table-column prop="name"
-                             label="姓名"
-                             width="180">
+                             align="center"
+                             label="名称">
             </el-table-column>
-            <el-table-column prop="address"
-                             label="地址">
+            <el-table-column prop=""
+                             align="center"
+                             label="子分类">
+            </el-table-column>
+            <el-table-column prop="count"
+                             align="center"
+                             label="文章数">
             </el-table-column>
         </el-table>
     </adminFrame>
@@ -27,8 +33,25 @@ export default {
     components: {
         adminFrame
     },
-    mounted() {},
-    methods: {}
+    data() {
+        return {
+            categoryList: []
+        };
+    },
+    watch: {
+        "$store.state.category.categoryList": function() {
+            this.categoryList = this.$store.state.category.categoryList;
+            console.log(this.$store.state.category.categoryList);
+        }
+    },
+    mounted() {
+        this.getCategoryList();
+    },
+    methods: {
+        getCategoryList() {
+            this.$store.dispatch("getCategoryListAction");
+        }
+    }
 };
 </script>
 

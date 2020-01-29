@@ -30,6 +30,7 @@ class Personal extends Controller
                 'indexurl'  => $data['indexurl'],
             ], ['uid' => 1]);
         } catch (Exception $e) {
+
             $message = json([
                 'code' => "400",
                 'message' => $e->getMessage()
