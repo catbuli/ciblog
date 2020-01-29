@@ -6,6 +6,7 @@ import Article from '../views/Article.vue'
 import Admin from '../views/Admin.vue'
 import personalSettings from '../components/admin/personalSettings.vue'
 import writePost from '../components/admin/writePost.vue'
+import manageCategories from '../components/admin/manageCategories.vue'
 
 Vue.use(VueRouter)
 
@@ -36,6 +37,10 @@ const routes = [{
             path: '/admin/write_post',
             name: 'write_post',
             component: writePost,
+        }, {
+            path: '/admin/manage_categories',
+            name: 'manage_categories',
+            component: manageCategories,
         }]
     }
 ]

@@ -1,6 +1,5 @@
 <template>
-    <adminFrame>
-        <adminTitle title="个人设置">sss</adminTitle>
+    <adminFrame title="个人设置">
         <section>
             <ul>
                 <li>

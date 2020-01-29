@@ -40,7 +40,6 @@
                     </ul>
                 </el-col>
             </el-row>
-
         </section>
     </adminFrame>
 </template>

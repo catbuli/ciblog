@@ -1,11 +1,21 @@
 <template>
     <div id="admin-frame">
+        <adminTitle :title="title"></adminTitle>
         <slot></slot>
     </div>
 </template>
 
 <script>
-export default {};
+import adminTitle from "@/components/admin/common/adminTitle.vue";
+export default {
+    name: "adminFrame",
+    components: {
+        adminTitle
+    },
+    props: {
+        title: String
+    }
+};
 </script>
 
 <style scoped>

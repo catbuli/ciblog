@@ -6,7 +6,7 @@
                  text-color="#fff"
                  active-text-color="#ffd04b"
                  router>
-            <el-submenu index>
+            <el-submenu index="1">
                 <template slot="title">控制台</template>
                 <el-menu-item index="/admin">个人设置</el-menu-item>
                 <el-menu-item index="1-2">备份</el-menu-item>
@@ -16,7 +16,7 @@
             </el-menu-item>
             <el-submenu index="3">
                 <template slot="title">管理</template>
-                <el-menu-item index="2-1">文章</el-menu-item>
+                <el-menu-item index="/admin/manage_categories">文章</el-menu-item>
                 <el-menu-item index="2-2">评论</el-menu-item>
                 <el-menu-item index="2-3">分类</el-menu-item>
                 <el-menu-item index="2-4">标签</el-menu-item>
