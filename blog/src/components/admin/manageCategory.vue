@@ -6,7 +6,8 @@
         </el-button>
         <el-table style="width: 100%"
                   :highlight-current-row="true"
-                  :data="categoryList">
+                  :data="categoryList"
+                  v-loading="loading">
             <el-table-column type="selection"
                              align="center">
             </el-table-column>
@@ -35,13 +36,14 @@ export default {
     },
     data() {
         return {
-            categoryList: []
+            categoryList: [],
+            loading: true
         };
     },
     watch: {
         "$store.state.category.categoryList": function() {
             this.categoryList = this.$store.state.category.categoryList;
-            console.log(this.$store.state.category.categoryList);
+            this.loading = false;
         }
     },
     mounted() {
