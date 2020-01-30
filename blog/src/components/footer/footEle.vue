@@ -14,14 +14,8 @@ export default {
             nickname: ""
         };
     },
-    mounted() {
-        this.getData();
-    },
-    methods: {
-        getData() {
-            this.$store.dispatch("getPersonalDataAction");
-        }
-    }
+    mounted() {},
+    methods: {}
 };
 </script>
 

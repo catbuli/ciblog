@@ -59,6 +59,7 @@ export default {
         toolContainer
     },
     mounted() {
+        this.getData();
         window.addEventListener("mousemove", this.handleMouse, true);
         window.addEventListener("scroll", this.handleScroll, true);
     },
@@ -69,7 +70,9 @@ export default {
         }
     },
     methods: {
-        getData() {},
+        getData() {
+            this.$store.dispatch("getPersonalDataAction");
+        },
         handeNav(flag) {
             this.isShow = flag;
             this.$emit("handleWeight", flag);

@@ -14,7 +14,14 @@ export default {
     data() {
         return {};
     },
-    methods: {}
+    mounted() {
+        this.getData();
+    },
+    methods: {
+        getData() {
+            this.$store.dispatch("getPersonalDataAction");
+        }
+    }
 };
 </script>
 

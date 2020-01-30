@@ -28,20 +28,8 @@ export default {
             articleLists: ""
         };
     },
-    methods: {
-        test() {
-            Axios.post("/api/test")
-                .then(res => {
-                    this.articleLists = res.data;
-                })
-                .catch(err => {
-                    console.log(err);
-                });
-        }
-    },
-    mounted() {
-        this.test();
-    }
+    methods: {},
+    mounted() {}
 };
 </script>
 
