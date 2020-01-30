@@ -16,9 +16,9 @@
         <div class="intro">
             <div class="head-portrait">
                 <a href="articleList">
-                    <img :src="imgURL"
+                    <img :src="this.$store.state.global.personalData.imgurl"
                          alt />
-                    <p>猫不理的锅包肉</p>
+                    <p>{{this.$store.state.global.personalData.nickname}}</p>
                     <p>个人博客</p>
                 </a>
             </div>
@@ -59,7 +59,6 @@ export default {
         toolContainer
     },
     mounted() {
-        this.getData();
         window.addEventListener("mousemove", this.handleMouse, true);
         window.addEventListener("scroll", this.handleScroll, true);
     },
@@ -70,19 +69,7 @@ export default {
         }
     },
     methods: {
-        getData() {
-            // Axios.post("/api/api/client")
-            //     .then(res => {
-            //         this.name = res.data.name;
-            //         this.imgURL = res.data.imgURL;
-            //         this.bilibili = res.data.bilibili;
-            //         this.github = res.data.github;
-            //         this.email = res.data.email;
-            //     })
-            //     .catch(err => {
-            //         console.log(err);
-            //     });
-        },
+        getData() {},
         handeNav(flag) {
             this.isShow = flag;
             this.$emit("handleWeight", flag);

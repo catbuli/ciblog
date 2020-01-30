@@ -36,7 +36,7 @@ export default {
                         router.push('/admin/manage_category')
                         Notification({
                             title: "成功",
-                            message: "分类删除成功！",
+                            message: "分类添加成功！",
                             type: "success"
                         });
                         context.dispatch('getCategoryListAction');

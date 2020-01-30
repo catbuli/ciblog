@@ -10,7 +10,7 @@
         </el-button>
         <el-table class="category-table"
                   :highlight-current-row="true"
-                  :data="categoryList"
+                  :data="this.$store.state.category.categoryList"
                   v-loading="loading"
                   @selection-change="handleSelectionChange">
             <el-table-column type="selection"
@@ -41,14 +41,12 @@ export default {
     },
     data() {
         return {
-            categoryList: [],
             loading: true,
             selectRows: []
         };
     },
     watch: {
         "$store.state.category.categoryList": function() {
-            this.categoryList = this.$store.state.category.categoryList;
             this.loading = false;
         }
     },

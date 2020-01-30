@@ -71,18 +71,13 @@ export default {
             personalData: {}
         };
     },
-    mounted() {
-        this.getData();
-    },
+    mounted() {},
     watch: {
         "$store.state.global.personalData": function() {
             this.personalData = this.$store.state.global.personalData;
         }
     },
     methods: {
-        getData() {
-            this.$store.dispatch("getPersonalDataAction");
-        },
         submit() {
             this.$store.dispatch("updatePersonalDataAction", this.personalData);
         }

@@ -5,8 +5,8 @@
         <el-row v-loading="loading"
                 element-loading-text="标签列表加载中">
             <el-col :span="15">
-                <div v-if="tagList.length!==0">
-                    <el-tag v-for="tag in tagList"
+                <div v-if="this.$store.state.tag.tagList.length>0">
+                    <el-tag v-for="tag in this.$store.state.tag.tagList"
                             :key="tag.mid"
                             @close="delTag(tag)"
                             closable>
@@ -45,14 +45,12 @@ export default {
     },
     data() {
         return {
-            tagList: [],
             loading: true,
             tagName: ""
         };
     },
     watch: {
         "$store.state.tag.tagList": function() {
-            this.tagList = this.$store.state.tag.tagList;
             this.loading = false;
         }
     },
