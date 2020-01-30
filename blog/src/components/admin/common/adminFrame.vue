@@ -1,5 +1,6 @@
 <template>
-    <div id="admin-frame">
+    <div id="admin-frame"
+         :style="{ height: height,width:width}">
         <adminTitle :title="title"></adminTitle>
         <slot></slot>
     </div>
@@ -13,7 +14,12 @@ export default {
         adminTitle
     },
     props: {
-        title: String
+        title: String,
+        height: String,
+        width: String
+    },
+    mounted() {
+        console.log(this.height);
     }
 };
 </script>
@@ -23,5 +29,6 @@ export default {
     min-width: 1000px;
     width: 60%;
     margin: 0 auto;
+    text-align: left;
 }
 </style>

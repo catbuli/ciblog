@@ -19,7 +19,7 @@ export default {
             axios
                 .post("/api/api/client/tag")
                 .then(res => {
-                    context.commit('setCategoryData', res.data);
+                    context.commit('setTagData', res.data);
                 })
                 .catch(err => {
                     console.log(err);
@@ -28,17 +28,16 @@ export default {
         addTagAction(context, data) {
             axios
                 .post("/api/api/client/tag/add", {
-                    name: data.name,
-                    description: data.description
+                    name: data,
                 })
                 .then(res => {
                     if (res.data.code == 200) {
                         // router.push('/admin/manage_category')
                         Message({
-                            message: "分类添加成功！",
+                            message: "标签添加成功！",
                             type: "success"
                         });
-                        context.dispatch('getPersonalDataAction');
+                        context.dispatch('getTagListAction');
                     } else {
                         Message({
                             message: res.data.message,
