@@ -8,7 +8,8 @@
                  router>
             <el-submenu index="1">
                 <template slot="title">控制台</template>
-                <el-menu-item index="/admin">个人设置</el-menu-item>
+                <el-menu-item index="/admin">总览</el-menu-item>
+                <el-menu-item index="/admin/personal_settings">个人设置</el-menu-item>
                 <el-menu-item index="1-2">备份</el-menu-item>
             </el-submenu>
             <el-menu-item index="/admin/write_post">

@@ -9,6 +9,7 @@ import writePost from '../components/admin/writePost.vue'
 import manageCategory from '../components/admin/manageCategory.vue'
 import addCategory from '../components/admin/addCategory.vue'
 import manageTag from '../components/admin/manageTag.vue'
+import index from '../components/admin/index.vue'
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,10 @@ const routes = [{
         component: Admin,
         children: [{
                 path: '/admin',
+                name: 'index',
+                component: index,
+            }, {
+                path: '/admin/personal_settings',
                 name: 'personal_settings',
                 component: personalSettings,
             }, {
