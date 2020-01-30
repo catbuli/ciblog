@@ -2,7 +2,7 @@ import axios from 'axios'
 import router from '@/router'
 
 import {
-    Message
+    Notification
 } from 'element-ui';
 
 export default {
@@ -10,7 +10,7 @@ export default {
         categoryList: []
     },
     mutations: {
-        setCategoryData(state, data) {
+        setCategoryList(state, data) {
             state.categoryList = data;
         }
     },
@@ -19,7 +19,7 @@ export default {
             axios
                 .post("/api/api/client/category")
                 .then(res => {
-                    context.commit('setCategoryData', res.data);
+                    context.commit('setCategoryList', res.data);
                 })
                 .catch(err => {
                     console.log(err);
@@ -34,13 +34,39 @@ export default {
                 .then(res => {
                     if (res.data.code == 200) {
                         router.push('/admin/manage_category')
-                        Message({
-                            message: "分类添加成功！",
+                        Notification({
+                            title: "成功",
+                            message: "分类删除成功！",
                             type: "success"
                         });
-                        context.dispatch('getPersonalDataAction');
+                        context.dispatch('getCategoryListAction');
                     } else {
                         Message({
+                            message: res.data.message,
+                            type: "error"
+                        });
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        },
+        delCategoryAction(context, data) {
+            axios
+                .post("/api/api/client/category/del", {
+                    mid: data
+                })
+                .then(res => {
+                    if (res.data.code == 200) {
+                        Notification({
+                            title: "成功",
+                            message: "分类删除成功！",
+                            type: "success"
+                        });
+                        context.dispatch('getCategoryListAction');
+                    } else {
+                        Notification({
+                            title: "失败",
                             message: res.data.message,
                             type: "error"
                         });

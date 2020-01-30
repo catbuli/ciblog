@@ -23,4 +23,9 @@ class Category extends Controller
         ]);
         return $meta->addCategory();
     }
+    public function del($mid)
+    {
+        $meta = new Meta();
+        return $meta->delCategory($mid);
+    }
 }

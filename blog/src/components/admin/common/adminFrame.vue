@@ -18,9 +18,7 @@ export default {
         height: String,
         width: String
     },
-    mounted() {
-        console.log(this.height);
-    }
+    mounted() {}
 };
 </script>
 

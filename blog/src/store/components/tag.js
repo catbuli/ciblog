@@ -2,7 +2,6 @@ import axios from 'axios'
 import router from '@/router'
 
 import {
-    Message,
     Notification
 } from 'element-ui';
 
@@ -59,13 +58,15 @@ export default {
                 .then(res => {
                     if (res.data.code == 200) {
                         // router.push('/admin/manage_category')
-                        Message({
+                        Notification({
+                            title: "成功",
                             message: "标签添加成功！",
                             type: "success"
                         });
                         context.dispatch('getTagListAction');
                     } else {
-                        Message({
+                        Notification({
+                            title: "失败",
                             message: res.data.message,
                             type: "error"
                         });
