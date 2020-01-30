@@ -16,5 +16,6 @@ export default {
 #admin-title {
     text-align: left;
     font-weight: bold;
+    margin: 30px auto;
 }
 </style>

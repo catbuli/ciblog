@@ -19,7 +19,7 @@
                 <el-menu-item index="/admin/manage_category">文章</el-menu-item>
                 <el-menu-item index="2-2">评论</el-menu-item>
                 <el-menu-item index="/admin/manage_category">分类</el-menu-item>
-                <el-menu-item index="2-4">标签</el-menu-item>
+                <el-menu-item index="/admin/manage_tag">标签</el-menu-item>
                 <el-menu-item index="2-5">文件</el-menu-item>
             </el-submenu>
             <el-submenu index="4">

@@ -8,6 +8,7 @@ import personalSettings from '../components/admin/personalSettings.vue'
 import writePost from '../components/admin/writePost.vue'
 import manageCategory from '../components/admin/manageCategory.vue'
 import addCategory from '../components/admin/addCategory.vue'
+import manageTag from '../components/admin/manageTag.vue'
 
 Vue.use(VueRouter)
 
@@ -31,22 +32,28 @@ const routes = [{
         name: 'admin',
         component: Admin,
         children: [{
-            path: '/admin',
-            name: 'personal_settings',
-            component: personalSettings,
-        }, {
-            path: '/admin/write_post',
-            name: 'write_post',
-            component: writePost,
-        }, {
-            path: '/admin/manage_category',
-            name: 'manage_category',
-            component: manageCategory,
-        }, {
-            path: '/admin/add_category',
-            name: 'add_category',
-            component: addCategory,
-        }]
+                path: '/admin',
+                name: 'personal_settings',
+                component: personalSettings,
+            }, {
+                path: '/admin/write_post',
+                name: 'write_post',
+                component: writePost,
+            }, {
+                path: '/admin/manage_category',
+                name: 'manage_category',
+                component: manageCategory,
+            }, {
+                path: '/admin/add_category',
+                name: 'add_category',
+                component: addCategory,
+            },
+            {
+                path: '/admin/manage_tag',
+                name: 'manage_tag',
+                component: manageTag,
+            }
+        ]
     }
 ]
 
