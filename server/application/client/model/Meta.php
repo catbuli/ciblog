@@ -50,4 +50,20 @@ class Meta extends Model
         }
         return $message;
     }
+    public function delTag($mid)
+    {
+        $message = json([
+            'code' => "200",
+            'message' => "删除标签成功！"
+        ]);
+        try {
+            Meta::destroy($mid);
+        } catch (Exception $e) {
+            $message = json([
+                'code' => "400",
+                'message' => $e->getMessage()
+            ]);
+        }
+        return $message;
+    }
 }

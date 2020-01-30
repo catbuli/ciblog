@@ -25,4 +25,9 @@ class Tag extends Controller
         ]);
         return $meta->addTag();
     }
+    public function del($mid)
+    {
+        $meta = new Meta();
+        return $meta->delTag($mid);
+    }
 }

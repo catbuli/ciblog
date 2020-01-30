@@ -2,30 +2,35 @@
     <adminFrame title="标签管理"
                 height="500px"
                 width="60%">
-        <el-row>
+        <el-row v-loading="loading"
+                element-loading-text="标签列表加载中">
             <el-col :span="15">
-                <el-tag v-for="tag in tagList"
-                        :key="tag.mid"
-                        @close="handleClose"
-                        closable>
-                    {{tag.name}}
-                </el-tag>
+                <div v-if="tagList.length!==0">
+                    <el-tag v-for="tag in tagList"
+                            :key="tag.mid"
+                            @close="handleClose(tag)"
+                            closable>
+                        {{tag.name}}
+                    </el-tag>
+                </div>
+                <div v-else>
+                    <h3>暂无标签，请在右侧添加新的标签.</h3>
+                </div>
             </el-col>
-            <el-col :span="9">
-                <section id="add-tag">
-                    <ul>
-                        <li>
-                            <h4>标签名称<sup style="color:red">*</sup></h4>
-                            <el-input placeholder="请输入内容"
-                                      v-model="tagName"></el-input>
-                            <span class="input-hint">标签名称</span>
-                        </li>
-                        <li class="input-button">
-                            <el-button type="primary"
-                                       @click="addTag">添加标签</el-button>
-                        </li>
-                    </ul>
-                </section>
+            <el-col :span="9"
+                    style="float:right">
+                <ul>
+                    <li>
+                        <h4>标签名称<sup style="color:red">*</sup></h4>
+                        <el-input placeholder="请输入内容"
+                                  v-model="tagName"></el-input>
+                        <span class="input-hint">标签名称</span>
+                    </li>
+                    <li class="input-button">
+                        <el-button type="primary"
+                                   @click="addTag">添加标签</el-button>
+                    </li>
+                </ul>
             </el-col>
         </el-row>
     </adminFrame>
@@ -59,11 +64,20 @@ export default {
             this.$store.dispatch("getTagListAction");
         },
         handleClose(tag) {
-            this.tagList.splice(this.tagList.indexOf(tag), 1);
+            this.$confirm("此操作将永久删除该标签, 是否继续?", "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning"
+            })
+                .then(() => {
+                    this.$store.dispatch("delTagAction", tag.mid);
+                })
+                .catch(() => {});
         },
         addTag() {
             this.$store.dispatch("addTagAction", this.tagName);
             this.tagName = "";
+            this.loading = true;
         }
     }
 };
