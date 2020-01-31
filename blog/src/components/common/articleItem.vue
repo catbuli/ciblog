@@ -1,10 +1,10 @@
 <template>
     <ul id="articleItem">
         <li v-for="item in listData"
-            :key="item.id">
+            :key="item.aid">
             <a class="article-title"
                v-text="item.title"
-               @click="jump(item.id)"
+               @click="jump(item.aid)"
                href=""></a>
             <div class="card-top">
                 <i class="iconfont iconflag"></i>
@@ -12,17 +12,17 @@
                       v-text="item.category"></span>
                 <i class="iconfont icontime-circle"></i>
                 <span class="card-top-date"
-                      v-text="item.date"></span>
+                      v-text="item.create_date"></span>
             </div>
             <img class="article-image"
-                 :src="item.image"
-                 @click="jump(item.id)">
+                 :src="item.cover_url"
+                 @click="jump(item.aid)">
             <p class="article-content"
-               v-text="item.content"></p>
+               v-text="item.text"></p>
             <div class='card-line'></div>
             <div class="card-bottom">
                 <span class="card-bottom-left">
-                    <a @click="jump(item.id)"
+                    <a @click="jump(item.aid)"
                        href="">
                         <i class="iconfont iconellipsis"></i>
                         <i class="iconfont iconellipsis"></i>
@@ -30,9 +30,9 @@
                 </span>
                 <span class="card-bottom-right">
                     <i class="iconfont iconcomment"
-                       v-text="item.comment"></i>
+                       v-text="item.comment_count"></i>
                     <i class="iconfont iconeye"
-                       v-text="item.articlePV"></i>
+                       v-text="item.pv"></i>
                 </span>
             </div>
         </li>

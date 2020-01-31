@@ -1,7 +1,7 @@
 <template>
     <div id="ArticleList">
         <headEle></headEle>
-        <articleItem :list-data="articleLists"></articleItem>
+        <articleItem :list-data="$store.state.article.articleList"></articleItem>
         <footEle></footEle>
         <backTop></backTop>
     </div>
@@ -24,12 +24,16 @@ export default {
         backTop
     },
     data() {
-        return {
-            articleLists: ""
-        };
+        return {};
     },
-    methods: {},
-    mounted() {}
+    mounted() {
+        this.getData();
+    },
+    methods: {
+        getData() {
+            this.$store.dispatch("getArticleListAction");
+        }
+    }
 };
 </script>
 
