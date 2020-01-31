@@ -47,9 +47,7 @@ export default {
         };
     },
     methods: {
-        getMessage(id) {
-            console.log(id);
-        }
+        getMessage(id) {}
     },
     mounted() {
         this.getMessage(this.$route.params.id);

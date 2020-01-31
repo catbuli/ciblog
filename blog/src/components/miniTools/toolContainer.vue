@@ -37,9 +37,7 @@ export default {
         handleScroll(e) {
             this.isShow = false;
         },
-        search() {
-            console.log(2);
-        }
+        search() {}
     }
 };
 </script>

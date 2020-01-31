@@ -36,7 +36,6 @@ export default {
         },
         checkRouter() {
             let router_path = this.$route.path;
-            console.log(router_path);
             if (router_path.indexOf("/admin") != -1) {
                 this.isAdmin = false;
                 this.isShow = false;
