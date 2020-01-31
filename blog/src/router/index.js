@@ -5,7 +5,7 @@ import ArticleList from '../views/ArticleList.vue'
 import Article from '../views/Article.vue'
 import Admin from '../views/Admin.vue'
 import personalSettings from '../components/admin/personalSettings.vue'
-import writePost from '../components/admin/writePost.vue'
+import writeArticle from '../components/admin/writeArticle.vue'
 import manageCategory from '../components/admin/manageCategory.vue'
 import addCategory from '../components/admin/addCategory.vue'
 import manageTag from '../components/admin/manageTag.vue'
@@ -41,9 +41,9 @@ const routes = [{
                 name: 'personal_settings',
                 component: personalSettings,
             }, {
-                path: '/admin/write_post',
-                name: 'write_post',
-                component: writePost,
+                path: '/admin/write_article',
+                name: 'write_article',
+                component: writeArticle,
             }, {
                 path: '/admin/manage_category',
                 name: 'manage_category',
