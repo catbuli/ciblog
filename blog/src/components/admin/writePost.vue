@@ -2,11 +2,13 @@
     <adminFrame>
         <adminTitle title="写文章"></adminTitle>
         <section class="content-main">
-            <el-input placeholder="标题"></el-input>
-            <span class="input-hint">这是标题</span>
-            <mavonEditor class="markdown"
-                         @change="change"
-                         v-model="content"></mavonEditor>
+            <el-input placeholder="标题"
+                      v-model="article.title"></el-input>
+            <p class="input-hint"></p>
+            <div class="markdown">
+                <mavonEditor @change="change"
+                             v-model="article.text"></mavonEditor>
+            </div>
         </section>
         <section class="content-settings">
             <el-row class="setting-row">
@@ -14,31 +16,48 @@
             </el-row>
             <el-row class="setting-row">
                 <el-col :span='12'>
-                    <ul>
-                        <li>
-                            <el-col :span='6'>
-                                <p>文章预览字段</p>
-                            </el-col>
-                            <el-col :span='18'>
-                                <el-input placeholder="请输入内容"></el-input>
-                                <span class="input-hint">确认你的密码.</span>
-                            </el-col>
-                        </li>
-                        <li>
-                            <el-col :span='6'>
-                                <p>文章预览字段</p>
-                            </el-col>
-                            <el-col :span='18'>
-                                <el-input placeholder="请输入内容"></el-input>
-                                <span class="input-hint">确认你的密码.</span>
-                            </el-col>
-                        </li>
-                        <li class="input-button">
-                            <el-button type="primary"
-                                       @click="submit">发布</el-button>
-                        </li>
-                    </ul>
+                    <h4>文章分类</h4>
+                    <el-checkbox-group v-model="article.categoryList">
+                        <el-checkbox v-for="item in $store.state.category.categoryList"
+                                     :key="item.mid"
+                                     :label="item.mid"
+                                     border>{{item.name}}</el-checkbox>
+                    </el-checkbox-group>
                 </el-col>
+                <el-col :span='12'>
+                    <h4>发布日期</h4>
+                    <el-date-picker v-model="article.createDate"
+                                    type="datetime"
+                                    placeholder="选择日期时间"
+                                    align="right"
+                                    value-format="yyyy-MM-dd HH:ss:mm"
+                                    :picker-options="pickerOptions">
+                    </el-date-picker>
+                    <h4 style="margin-top:20px">封面链接</h4>
+                    <el-input placeholder="封面链接"
+                              v-model="article.coverurl"></el-input>
+                </el-col>
+            </el-row>
+            <el-row class="setting-row">
+                <el-col :span='12'>
+                    <h4>文章标签</h4>
+                    <el-checkbox-group v-model="article.tagList">
+                        <el-checkbox v-for="item in $store.state.tag.tagList"
+                                     :key="item.mid"
+                                     :label="item.mid"
+                                     border>{{item.name}}</el-checkbox>
+                    </el-checkbox-group>
+                    <el-input placeholder="新标签"
+                              v-model="tagName"
+                              class="new-tag"
+                              @keyup.enter.native="newTag"></el-input>
+                </el-col>
+                <el-col :span='12'>
+                </el-col>
+            </el-row>
+            <el-row class="setting-row">
+                <el-button type="primary"
+                           @click="submit">发布</el-button>
             </el-row>
         </section>
     </adminFrame>
@@ -58,30 +77,71 @@ export default {
     },
     data() {
         return {
-            html: "",
-            content: ""
+            article: {
+                categoryList: [],
+                tagList: [],
+                html: "",
+                text: "",
+                coverurl: "",
+                createDate: ""
+            },
+            tagName: "",
+            pickerOptions: {
+                shortcuts: [
+                    {
+                        text: "今天",
+                        onClick(picker) {
+                            picker.$emit("pick", new Date());
+                        }
+                    },
+                    {
+                        text: "昨天",
+                        onClick(picker) {
+                            const date = new Date();
+                            date.setTime(date.getTime() - 3600 * 1000 * 24);
+                            picker.$emit("pick", date);
+                        }
+                    },
+                    {
+                        text: "一周前",
+                        onClick(picker) {
+                            const date = new Date();
+                            date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+                            picker.$emit("pick", date);
+                        }
+                    }
+                ]
+            }
         };
     },
-    mounted() {},
+    mounted() {
+        this.getCategoryList();
+        this.getTagList();
+    },
     watch: {},
     methods: {
-        getData() {
-            this.$http
-                .post("/api/api/client/personal")
-                .then(res => {
-                    this.personalData = res.data;
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+        getCategoryList() {
+            this.$store.dispatch("getCategoryListAction");
+        },
+        getTagList() {
+            this.$store.dispatch("getTagListAction");
         },
         change(value, render) {
-            this.html = render;
+            this.article.html = render;
         },
         // 提交
         submit() {
-            console.log(this.content);
-            console.log(this.html);
+            console.log(this.article.title);
+            console.log(this.article.text);
+            console.log(this.article.html);
+            console.log(this.article.categoryList);
+            console.log(this.article.tagList);
+            console.log(this.article.createDate);
+            console.log(this.article.coverurl);
+        },
+        newTag() {
+            this.$store.dispatch("addTagAction", this.tagName);
+            this.tagName = "";
         }
     }
 };
@@ -95,7 +155,8 @@ section {
 .content-main {
     padding: 0;
 }
-ul {
+h4 {
+    margin-top: 0px;
 }
 li {
     display: block;
@@ -114,17 +175,29 @@ li {
     text-align: left;
     color: rgb(255, 136, 0);
 }
-.markdown {
-    max-height: 800px;
-}
 .content-settings {
     background: white;
 }
 .setting-row {
-    border-bottom: 1px solid #a0a0a0;
+    border-bottom: 1px solid #dfdfdf;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
 }
 .setting-row .setting-title {
     text-align: left;
-    margin-top: 0px;
+    margin: 0px;
+}
+.markdown {
+    max-height: 700px;
+    overflow: auto;
+}
+.el-checkbox {
+    margin: 0 10px 10px 0;
+}
+.el-checkbox.is-bordered + .el-checkbox.is-bordered {
+    margin-left: 0px;
+}
+.new-tag {
+    width: 150px;
 }
 </style>
