@@ -53,17 +53,17 @@ export default {
         },
         delArticleAction(context, data) {
             axios
-                .post("/api/api/client/article/del", {
-                    mid: data
+                .post("/api/api/client/articlec/del", {
+                    aid: data
                 })
                 .then(res => {
                     if (res.data.code == 200) {
                         Notification({
                             title: "成功",
-                            message: "分类删除成功！",
+                            message: "文章删除成功！",
                             type: "success"
                         });
-                        context.dispatch('getarticleListAction');
+                        context.dispatch('getArticleListAction');
                     } else {
                         Notification({
                             title: "失败",

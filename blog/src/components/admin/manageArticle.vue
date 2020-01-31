@@ -84,14 +84,14 @@ export default {
         },
         delArticle() {
             if (this.selectRows.length > 0) {
-                this.$confirm("此操作将永久删除所选分类, 是否继续?", "提示", {
+                this.$confirm("此操作将永久删除所选文章, 是否继续?", "提示", {
                     confirmButtonText: "确定",
                     cancelButtonText: "取消",
                     type: "warning"
                 })
                     .then(() => {
                         this.$store.dispatch(
-                            "delCategoryAction",
+                            "delArticleAction",
                             this.selectRows
                         );
                         this.loading = true;
@@ -103,7 +103,7 @@ export default {
             let flag = [];
             if (rows) {
                 rows.forEach(row => {
-                    flag.push(row.mid);
+                    flag.push(row.aid);
                 });
             }
             this.selectRows = flag;
