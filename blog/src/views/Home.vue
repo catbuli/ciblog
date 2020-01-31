@@ -27,10 +27,10 @@ export default {
         return {};
     },
     mounted() {
-        this.getData();
+        this.getArticleList();
     },
     methods: {
-        getData() {
+        getArticleList() {
             this.$store.dispatch("getArticleListAction");
         }
     }

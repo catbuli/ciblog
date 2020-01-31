@@ -1,32 +1,57 @@
 <template>
-    <adminFrame title="文章管理">
+    <adminFrame title="文章管理"
+                width="65%">
         <el-button type="primary"
                    icon="el-icon-plus"
                    @click="$router.push('/admin/write_article')">
         </el-button>
         <el-button type="primary"
                    icon="el-icon-delete"
-                   @click="delCategory">
+                   @click="delArticle">
         </el-button>
         <el-table class="article-table"
                   :highlight-current-row="true"
-                  :data="this.$store.state.category.categoryList"
+                  :data="this.$store.state.article.articleList"
                   v-loading="loading"
                   @selection-change="handleSelectionChange">
             <el-table-column type="selection"
                              align="center">
             </el-table-column>
-            <el-table-column prop="name"
-                             align="center"
-                             label="名称">
+            <el-table-column align="center"
+                             width="80px"
+                             label="评论数">
+                <template slot-scope="scope">
+                    <el-badge :value="scope.row.comment_count"
+                              class="item">
+                    </el-badge>
+                </template>
             </el-table-column>
-            <el-table-column prop="description"
-                             align="center"
-                             label="分类描述">
+            <el-table-column align="center"
+                             width="80px"
+                             label="访问量">
+                <template slot-scope="scope">
+                    <el-badge :value="scope.row.pv"
+                              class="item">
+                    </el-badge>
+                </template>
             </el-table-column>
-            <el-table-column prop="count"
+            <el-table-column prop="title"
                              align="center"
-                             label="文章数">
+                             label="标题">
+            </el-table-column>
+            <el-table-column prop="author_id"
+                             align="center"
+                             width="80px"
+                             label="作者">
+            </el-table-column>
+            <el-table-column prop=""
+                             align="center"
+                             label="分类">
+            </el-table-column>
+            <el-table-column prop="create_date"
+                             align="center"
+                             width="170px"
+                             label="发布日期">
             </el-table-column>
         </el-table>
     </adminFrame>
@@ -46,18 +71,18 @@ export default {
         };
     },
     watch: {
-        "$store.state.category.categoryList": function() {
+        "$store.state.article.articleList": function() {
             this.loading = false;
         }
     },
     mounted() {
-        this.getCategoryList();
+        this.getArticleList();
     },
     methods: {
-        getCategoryList() {
-            this.$store.dispatch("getCategoryListAction");
+        getArticleList() {
+            this.$store.dispatch("getArticleListAction");
         },
-        delCategory() {
+        delArticle() {
             if (this.selectRows.length > 0) {
                 this.$confirm("此操作将永久删除所选分类, 是否继续?", "提示", {
                     confirmButtonText: "确定",
