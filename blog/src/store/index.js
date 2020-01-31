@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import global_store from '../store/components/global.js'
 import category_store from '../store/components/category.js'
 import tag_store from '../store/components/tag.js'
+import article_store from '../store/components/article.js'
 
 Vue.use(Vuex)
 
@@ -15,6 +16,7 @@ export default new Vuex.Store({
     modules: {
         global: global_store,
         category: category_store,
-        tag: tag_store
+        tag: tag_store,
+        article: article_store
     }
 })
