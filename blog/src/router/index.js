@@ -6,6 +6,7 @@ import Article from '../views/Article.vue'
 import Admin from '../views/Admin.vue'
 import personalSettings from '../components/admin/personalSettings.vue'
 import writeArticle from '../components/admin/writeArticle.vue'
+import manageArticle from '../components/admin/manageArticle.vue'
 import manageCategory from '../components/admin/manageCategory.vue'
 import addCategory from '../components/admin/addCategory.vue'
 import manageTag from '../components/admin/manageTag.vue'
@@ -57,6 +58,11 @@ const routes = [{
                 path: '/admin/manage_tag',
                 name: 'manage_tag',
                 component: manageTag,
+            },
+            {
+                path: '/admin/manage_article',
+                name: 'manage_article',
+                component: manageArticle,
             }
         ]
     }

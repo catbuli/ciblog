@@ -27,10 +27,7 @@ export default {
         },
         addArticleAction(context, data) {
             axios
-                .post("/api/api/client/article/add", {
-                    name: data.name,
-                    description: data.description
-                })
+                .post("/api/api/client/article/add", data)
                 .then(res => {
                     if (res.data.code == 200) {
                         router.push('/admin/manage_article')

@@ -17,7 +17,7 @@
             </el-menu-item>
             <el-submenu index="3">
                 <template slot="title">管理</template>
-                <el-menu-item index="2-1">文章</el-menu-item>
+                <el-menu-item index="/admin/manage_article">文章</el-menu-item>
                 <el-menu-item index="2-2">评论</el-menu-item>
                 <el-menu-item index="/admin/manage_category">分类</el-menu-item>
                 <el-menu-item index="/admin/manage_tag">标签</el-menu-item>

@@ -131,13 +131,7 @@ export default {
         },
         // 提交
         submit() {
-            console.log(this.article.title);
-            console.log(this.article.text);
-            console.log(this.article.html);
-            console.log(this.article.categoryList);
-            console.log(this.article.tagList);
-            console.log(this.article.createDate);
-            console.log(this.article.coverurl);
+            console.log(this.article);
         },
         newTag() {
             this.$store.dispatch("addTagAction", this.tagName);
