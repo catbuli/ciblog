@@ -27,9 +27,9 @@ class Articlec extends Controller
         ]);
         return $article->addArticle();
     }
-    public function del($mid)
+    public function del($aid)
     {
         $article = new Article();
-        return $article->delCategory($mid);
+        return $article->delArticle($aid);
     }
 }

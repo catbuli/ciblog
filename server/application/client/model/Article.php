@@ -16,7 +16,7 @@ class Article extends Model
     {
         $message = json([
             'code' => "200",
-            'message' => "分账发布成功！"
+            'message' => "文章发布成功！"
         ]);
         try {
             $this->save();
@@ -28,46 +28,15 @@ class Article extends Model
         }
         return $message;
     }
-    public function addTag()
+
+    public function delArticle($aid)
     {
         $message = json([
             'code' => "200",
-            'message' => "添加标签成功！"
+            'message' => "文章删除成功！",
         ]);
         try {
-            $this->save();
-        } catch (Exception $e) {
-            $message = json([
-                'code' => "400",
-                'message' => $e->getMessage()
-            ]);
-        }
-        return $message;
-    }
-    public function delTag($mid)
-    {
-        $message = json([
-            'code' => "200",
-            'message' => "删除标签成功！"
-        ]);
-        try {
-            Meta::destroy($mid);
-        } catch (Exception $e) {
-            $message = json([
-                'code' => "400",
-                'message' => $e->getMessage()
-            ]);
-        }
-        return $message;
-    }
-    public function delCategory($mid)
-    {
-        $message = json([
-            'code' => "200",
-            'message' => "删除分类成功！",
-        ]);
-        try {
-            Meta::destroy($mid);
+            Article::destroy($aid);
         } catch (Exception $e) {
             $message = json([
                 'code' => "400",

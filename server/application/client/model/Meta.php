@@ -22,7 +22,7 @@ class Meta extends Model
     {
         $message = json([
             'code' => "200",
-            'message' => "添加分类成功！"
+            'message' => "分类添加成功！"
         ]);
         try {
             $this->save();
@@ -38,7 +38,7 @@ class Meta extends Model
     {
         $message = json([
             'code' => "200",
-            'message' => "添加标签成功！"
+            'message' => "标签添加成功！"
         ]);
         try {
             $this->save();
@@ -54,7 +54,7 @@ class Meta extends Model
     {
         $message = json([
             'code' => "200",
-            'message' => "删除标签成功！"
+            'message' => "标签删除成功！"
         ]);
         try {
             Meta::destroy($mid);
@@ -70,7 +70,7 @@ class Meta extends Model
     {
         $message = json([
             'code' => "200",
-            'message' => "删除分类成功！",
+            'message' => "分类删除成功！",
         ]);
         try {
             Meta::destroy($mid);
