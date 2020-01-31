@@ -27,18 +27,21 @@ export default {
         },
         addArticleAction(context, data) {
             axios
-                .post("/api/api/client/article/add", data)
+                .post("/api/api/client/articlec/add", {
+                    data
+                })
                 .then(res => {
                     if (res.data.code == 200) {
                         router.push('/admin/manage_article')
                         Notification({
                             title: "成功",
-                            message: "分类添加成功！",
+                            message: "文章发布成功！",
                             type: "success"
                         });
                         context.dispatch('getArticleListAction');
                     } else {
-                        Message({
+                        Notification({
+                            title: "失败",
                             message: res.data.message,
                             type: "error"
                         });

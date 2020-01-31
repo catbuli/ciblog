@@ -83,7 +83,8 @@ export default {
                 html: "",
                 text: "",
                 coverurl: "",
-                createDate: ""
+                createDate: "",
+                title: ""
             },
             tagName: "",
             pickerOptions: {
@@ -129,9 +130,8 @@ export default {
         change(value, render) {
             this.article.html = render;
         },
-        // 提交
         submit() {
-            console.log(this.article);
+            this.$store.dispatch("addArticleAction", this.article);
         },
         newTag() {
             this.$store.dispatch("addTagAction", this.tagName);
