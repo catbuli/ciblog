@@ -16,20 +16,20 @@ class Articlec extends Controller
     }
     public function edit($data)
     {
-        $article = new Article();
-        $categoryList = [];
-        $article->data([
-            // 'categoryList' => $data->categoryList,
-            // 'tagList' => $data->categoryList,
-            'html' => $data["html"],
-            'title' => $data["title"],
-            'text' => $data["text"],
-            'cover_url' => $data["coverurl"],
-            'create_date' => $data['createDate'],
-            'allow_comment' => $data['allow_comment'] == true ? 1 : 0,
-        ]);
+        // $article = new Article();
+        // $categoryList = [];
+        // $article->data([
+        //     // 'categoryList' => $data->categoryList,
+        //     // 'tagList' => $data->categoryList,
+        //     'html' => $data["html"],
+        //     'title' => $data["title"],
+        //     'text' => $data["text"],
+        //     'cover_url' => $data["coverurl"],
+        //     'create_date' => $data['createDate'],
+        //     'allow_comment' => $data['allow_comment'] == true ? 1 : 0,
+        // ]);
         // return $article->editArticle();
-        // return 
+        return 1;
     }
     public function add($data)
     {
@@ -40,8 +40,6 @@ class Articlec extends Controller
         try {
             $article = new Article();
             $article->data([
-                // 'categoryList' => $data->categoryList,
-                // 'tagList' => $data->categoryList,
                 'html' => $data["html"],
                 'title' => $data["title"],
                 'text' => $data["text"],
@@ -83,14 +81,32 @@ class Articlec extends Controller
     }
     public function byid($aid)
     {
-        $article = new Article();
-        $article = $article->getArticleById($aid);
-        $article->allow_comment = $article->allow_comment == 0 ? false : true;
-        $message = json([
-            'code' => "200",
-            'message' => "文章信息获取成功",
-            'data' => $article
-        ]);
+        try {
+            $article = new Article();
+            $article = $article->getArticleById($aid);
+            $article->allow_comment = $article->allow_comment == 0 ? false : true;
+            $categoryList = [];
+            $tagList = [];
+            foreach ($article->getArticleMeta($aid, "category") as $value) {
+                array_push($categoryList, $value->mid);
+            }
+            $article->categoryList = $categoryList;
+            foreach ($article->getArticleMeta($aid, "tag") as $value) {
+                array_push($tagList, $value->mid);
+            }
+            $article->tagList = $tagList;
+
+            $message = json([
+                'code' => "200",
+                'message' => "文章信息获取成功",
+                'data' => $article
+            ]);
+        } catch (Exception $e) {
+            $message = json([
+                'code' => "400",
+                'message' => $e->getMessage()
+            ]);
+        }
         return $message;
     }
 }

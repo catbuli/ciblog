@@ -1,5 +1,6 @@
 <template>
-    <adminFrame>
+    <adminFrame v-loading="loading"
+                element-loading-text="数据获取中">
         <adminTitle v-if="isEdit"
                     :title="'编辑文章　'+article.title"></adminTitle>
         <adminTitle v-else
@@ -98,6 +99,7 @@ export default {
                 title: "",
                 allow_comment: true
             },
+            loading: true,
             isEdit: false,
             tagName: "",
             pickerOptions: {
@@ -136,6 +138,7 @@ export default {
     watch: {
         "$store.state.article.article": function() {
             this.article = this.$store.state.article.article;
+            this.loading = false;
         }
     },
     methods: {

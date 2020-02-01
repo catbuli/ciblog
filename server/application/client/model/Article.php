@@ -5,6 +5,7 @@ namespace app\client\model;
 use think\Model;
 use think\Db;
 use think\Exception;
+use app\client\model\ArticleMeta;
 
 class Article extends Model
 {
@@ -15,6 +16,11 @@ class Article extends Model
     public function getArticleById($aid)
     {
         return Article::get($aid);
+    }
+    public function getArticleMeta($aid, $type)
+    {
+        $articleMeta = ArticleMeta::all(['aid' => $aid, 'type' => $type]);
+        return $articleMeta;
     }
     public function editArticle()
     {
