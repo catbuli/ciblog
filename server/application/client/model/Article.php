@@ -10,7 +10,11 @@ class Article extends Model
 {
     public function getArticleList()
     {
-        return json(Article::all());
+        return Article::all();
+    }
+    public function getArticleById($aid)
+    {
+        return Article::get($aid);
     }
     public function addArticle()
     {

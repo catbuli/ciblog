@@ -63,7 +63,11 @@
             </el-row>
             <el-row class="setting-row">
                 <el-button type="primary"
-                           @click="submit">发布</el-button>
+                           v-if="isEdit"
+                           @click="edit">发布</el-button>
+                <el-button type="primary"
+                           v-else
+                           @click="add">发布</el-button>
             </el-row>
         </section>
     </adminFrame>
@@ -158,8 +162,11 @@ export default {
         change(value, render) {
             this.article.html = render;
         },
-        submit() {
+        add() {
             this.$store.dispatch("addArticleAction", this.article);
+        },
+        edit() {
+            this.$store.dispatch("editArticleAction", this.article);
         },
         newTag() {
             this.$store.dispatch("addTagAction", this.tagName);
