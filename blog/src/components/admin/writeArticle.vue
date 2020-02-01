@@ -1,6 +1,9 @@
 <template>
     <adminFrame>
-        <adminTitle title="写文章"></adminTitle>
+        <adminTitle v-if="isEdit"
+                    :title="'编辑文章　'+article.title"></adminTitle>
+        <adminTitle v-else
+                    title="写文章"></adminTitle>
         <section class="content-main">
             <el-input placeholder="标题"
                       v-model="article.title"></el-input>
