@@ -2,7 +2,7 @@
     <adminFrame v-loading="loading"
                 element-loading-text="数据获取中">
         <adminTitle v-if="isEdit"
-                    :title="'编辑文章　'+article.title"></adminTitle>
+                    :title="'编辑文章　'+showTitle"></adminTitle>
         <adminTitle v-else
                     title="写文章"></adminTitle>
         <section class="content-main">
@@ -99,6 +99,7 @@ export default {
                 title: "",
                 allow_comment: true
             },
+            showTitle: "",
             loading: true,
             isEdit: false,
             tagName: "",
@@ -138,6 +139,7 @@ export default {
     watch: {
         "$store.state.article.article": function() {
             this.article = this.$store.state.article.article;
+            this.showTitle = this.$store.state.article.article.title;
             this.loading = false;
         }
     },
