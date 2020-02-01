@@ -82,4 +82,7 @@ class Meta extends Model
         }
         return $message;
     }
+    public function getMetaList()
+    {
+    }
 }

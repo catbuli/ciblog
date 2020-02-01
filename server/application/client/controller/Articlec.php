@@ -16,20 +16,32 @@ class Articlec extends Controller
     }
     public function edit($data)
     {
-        // $article = new Article();
-        // $categoryList = [];
-        // $article->data([
-        //     // 'categoryList' => $data->categoryList,
-        //     // 'tagList' => $data->categoryList,
-        //     'html' => $data["html"],
-        //     'title' => $data["title"],
-        //     'text' => $data["text"],
-        //     'cover_url' => $data["coverurl"],
-        //     'create_date' => $data['createDate'],
-        //     'allow_comment' => $data['allow_comment'] == true ? 1 : 0,
-        // ]);
-        // return $article->editArticle();
-        return 1;
+        $message = json([
+            'code' => "200",
+            'message' => "文章发布成功！"
+        ]);
+        try {
+            $article = Article::get($data["aid"]);
+            $article->html = $data["html"];
+            $article->title = $data["title"];
+            $article->text = $data["text"];
+            $article->cover_url = $data["cover_url"];
+            $article->create_date = $data["create_date"];
+            $article->allow_comment = $data["allow_comment"];
+            $article->modify_date = date('Y-m-d H:i:s');
+            $article->editArticle();
+            ArticleMeta::delAllMetaByArticle($article->aid, "category");
+            ArticleMeta::addMetaList($data['categoryList'], $article->aid, "category");
+            ArticleMeta::delAllMetaByArticle($article->aid, "tag");
+            ArticleMeta::addMetaList($data['tagList'], $article->aid, "tag");
+        } catch (Exception $e) {
+            $message = json([
+                'code' => "400",
+                'message' => $e->getMessage()
+            ]);
+        }
+        return $message;
+        return $article->editArticle();
     }
     public function add($data)
     {
@@ -46,25 +58,13 @@ class Articlec extends Controller
                 'cover_url' => $data["cover_url"],
                 'create_date' => $data['create_date'],
                 'allow_comment' => $data['allow_comment'] == true ? 1 : 0,
+                'author_id' => 1,
+                'modify_date' => $data['create_date']
             ]);
             $article->addArticle();
             $aid = $article->getLastInsID();
-            foreach ($data['categoryList'] as $value) {
-                $ArticleMeta = new ArticleMeta([
-                    'aid'  =>  $aid,
-                    'mid' =>  $value,
-                    'type' => "category"
-                ]);
-                $ArticleMeta->addArticleMeta();
-            };
-            foreach ($data['tagList'] as $value) {
-                $ArticleMeta = new ArticleMeta([
-                    'aid'  =>  $aid,
-                    'mid' =>  $value,
-                    'type' => "tag"
-                ]);
-                $ArticleMeta->addArticleMeta();
-            };
+            ArticleMeta::addMetaList($data['categoryList'], $aid, "category");
+            ArticleMeta::addMetaList($data['tagList'], $aid, "tag");
         } catch (Exception $e) {
             $message = json([
                 'code' => "400",
@@ -79,23 +79,22 @@ class Articlec extends Controller
 
         return $article->delArticle($aid);
     }
+    public function getMetaIdList($aid, $type)
+    {
+        $list = [];
+        foreach (ArticleMeta::getMetaByArticle($aid, $type) as $value) {
+            array_push($list, $value->mid);
+        }
+        return $list;
+    }
     public function byid($aid)
     {
         try {
             $article = new Article();
             $article = $article->getArticleById($aid);
             $article->allow_comment = $article->allow_comment == 0 ? false : true;
-            $categoryList = [];
-            $tagList = [];
-            foreach ($article->getArticleMeta($aid, "category") as $value) {
-                array_push($categoryList, $value->mid);
-            }
-            $article->categoryList = $categoryList;
-            foreach ($article->getArticleMeta($aid, "tag") as $value) {
-                array_push($tagList, $value->mid);
-            }
-            $article->tagList = $tagList;
-
+            $article->tagList = self::getMetaIdList($aid, "tag");
+            $article->categoryList = self::getMetaIdList($aid, "category");
             $message = json([
                 'code' => "200",
                 'message' => "文章信息获取成功",

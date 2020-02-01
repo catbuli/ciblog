@@ -5,39 +5,34 @@ namespace app\client\model;
 use think\Model;
 use think\Db;
 use think\Exception;
-use app\client\model\ArticleMeta;
 
-class Article extends Model
+class Comment extends Model
 {
-    public function getArticleList()
+    public function getCommentList()
     {
-        return Article::all();
+        return Comment::all();
     }
-    public function getArticleById($aid)
+    public function getCommentById($aid)
     {
-        return Article::get($aid);
+        return Comment::get($aid);
     }
-    public function getArticleMeta($aid, $type)
-    {
-        return ArticleMeta::all(['aid' => $aid, 'type' => $type]);
-    }
-    public function editArticle()
+    public function editComment()
     {
         return $this->save();
     }
-    public function addArticle()
+    public function addComment()
     {
         return $this->save();
     }
 
-    public function delArticle($aid)
+    public function delComment($aid)
     {
         $message = json([
             'code' => "200",
             'message' => "文章删除成功！",
         ]);
         try {
-            Article::destroy($aid);
+            Comment::destroy($aid);
         } catch (Exception $e) {
             $message = json([
                 'code' => "400",
