@@ -7,6 +7,7 @@ import Axios from 'axios'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import "./assets/styles/iconfont/iconfont.css"
+// import "./assets/styles/markdown.css"
 // use
 // import JQuery from '@/commonFunction/jquery.min.js'
 // import viewClickAnimation from '@/commonFunction/viewClickAnimation.js'

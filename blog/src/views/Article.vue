@@ -4,15 +4,18 @@
         <article>
             <div class="article-header">
                 <h2 class="article-title"
-                    v-text="this.$route.params.id"></h2>
+                    v-text="$store.state.article.article.title"></h2>
                 <div class="article-meta">
-                    <span class="article-meta-label iconfont iconpushpin">480次阅读</span>
-                    <span class="article-meta-label iconfont iconpushpin"><a href="http://www.zhangyifei.top/index.php/category/%E6%95%99%E7%A8%8B%E6%96%87%E7%AB%A0/">教程文章</a></span>
-                    <span class="article-meta-label iconfont iconpushpin">2019-07-19</span>
+                    <span class="article-meta-label iconfont iconpushpin">{{$store.state.article.article.pv}}次阅读</span>
+                    <span class="article-meta-label iconfont iconpushpin"></span>
+                    <span class="article-meta-label iconfont iconpushpin">{{$store.state.article.article.create_date}}</span>
                 </div>
             </div>
             <div class="article-body">
-                <div class="article-content"></div>
+                <div class="article-content"
+                     v-html="$store.state.article.article.html">
+
+                </div>
                 <div class="article-other"></div>
                 <div class="article-update"></div>
             </div>
@@ -43,14 +46,21 @@ export default {
     },
     data() {
         return {
-            articleLists: ""
+            articleLists: "",
+            loading: true
         };
     },
+    "$store.state.article.article": function() {
+        this.article = this.$store.state.article.article;
+        this.loading = false;
+    },
     methods: {
-        getMessage(id) {}
+        getArticleData(aid) {
+            this.$store.dispatch("getArticleDataAction", aid);
+        }
     },
     mounted() {
-        this.getMessage(this.$route.params.id);
+        this.getArticleData(this.$route.params.id);
     }
 };
 </script>
@@ -78,6 +88,7 @@ article {
     margin: 0 15px;
 }
 .article-content {
+    text-align: left;
     font-size: 105%;
     line-height: 1.5rem;
     word-wrap: break-word;

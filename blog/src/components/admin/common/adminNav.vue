@@ -29,7 +29,8 @@
                 <el-menu-item index="3-2">评论</el-menu-item>
                 <el-menu-item index="3-3">阅读</el-menu-item>
             </el-submenu>
-            <el-menu-item index="/">网站</el-menu-item>
+            <el-menu-item><a href="http://localhost:8080/"
+                   target="_blank">网站</a></el-menu-item>
             <!-- <el-menu-item index="6"
                           style="right:0;position:absolute">登出</el-menu-item> -->
         </el-menu>
