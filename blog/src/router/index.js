@@ -34,37 +34,38 @@ const routes = [{
         name: 'admin',
         component: Admin,
         children: [{
-                path: '/admin',
-                name: 'index',
-                component: index,
-            }, {
-                path: '/admin/personal_settings',
-                name: 'personal_settings',
-                component: personalSettings,
-            }, {
-                path: '/admin/write_article',
-                name: 'write_article',
-                component: writeArticle,
-            }, {
-                path: '/admin/manage_category',
-                name: 'manage_category',
-                component: manageCategory,
-            }, {
-                path: '/admin/add_category',
-                name: 'add_category',
-                component: addCategory,
-            },
-            {
-                path: '/admin/manage_tag',
-                name: 'manage_tag',
-                component: manageTag,
-            },
-            {
-                path: '/admin/manage_article',
-                name: 'manage_article',
-                component: manageArticle,
-            }
-        ]
+            path: '/admin',
+            name: 'index',
+            component: index,
+        }, {
+            path: '/admin/personal_settings',
+            name: 'personal_settings',
+            component: personalSettings,
+        }, {
+            path: '/admin/write_article',
+            name: 'write_article',
+            component: writeArticle,
+        }, {
+            path: '/admin/write_article/:aid',
+            name: 'edit_article',
+            component: writeArticle,
+        }, {
+            path: '/admin/manage_category',
+            name: 'manage_category',
+            component: manageCategory,
+        }, {
+            path: '/admin/add_category',
+            name: 'add_category',
+            component: addCategory,
+        }, {
+            path: '/admin/manage_tag',
+            name: 'manage_tag',
+            component: manageTag,
+        }, {
+            path: '/admin/manage_article',
+            name: 'manage_article',
+            component: manageArticle,
+        }]
     }
 ]
 

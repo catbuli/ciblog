@@ -7,14 +7,30 @@ import {
 
 export default {
     state: {
-        articleList: []
+        articleList: [],
+        article: {}
     },
     mutations: {
         setArticleList(state, data) {
             state.articleList = data;
+        },
+        setArticle(state, data) {
+            state.article = data;
         }
     },
     actions: {
+        getArticleDataAction(context, data) {
+            axios
+                .post("/api/api/client/articlec/byid", {
+                    aid: data
+                })
+                .then(res => {
+                    context.commit('setArticle', res.data.data);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        },
         getArticleListAction(context) {
             axios
                 .post("/api/api/client/articlec")

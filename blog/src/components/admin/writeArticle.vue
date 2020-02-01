@@ -26,7 +26,7 @@
                 </el-col>
                 <el-col :span='12'>
                     <h4>发布日期</h4>
-                    <el-date-picker v-model="article.createDate"
+                    <el-date-picker v-model="article.create_date"
                                     type="datetime"
                                     placeholder="选择日期时间"
                                     align="right"
@@ -35,7 +35,7 @@
                     </el-date-picker>
                     <h4 style="margin-top:20px">封面链接</h4>
                     <el-input placeholder="封面链接"
-                              v-model="article.coverurl"></el-input>
+                              v-model="article.cover_url"></el-input>
                 </el-col>
             </el-row>
             <el-row class="setting-row">
@@ -81,15 +81,17 @@ export default {
     data() {
         return {
             article: {
+                id: null,
                 categoryList: [],
                 tagList: [],
                 html: "",
                 text: "",
-                coverurl: "",
-                createDate: "",
+                cover_url: "",
+                create_date: "",
                 title: "",
                 allow_comment: true
             },
+            isEdit: false,
             tagName: "",
             pickerOptions: {
                 shortcuts: [
@@ -120,16 +122,35 @@ export default {
         };
     },
     mounted() {
+        this.checkEdit();
         this.getCategoryList();
         this.getTagList();
     },
-    watch: {},
+    watch: {
+        "$store.state.article.article": function() {
+            this.article = this.$store.state.article.article;
+        }
+    },
     methods: {
         getCategoryList() {
             this.$store.dispatch("getCategoryListAction");
         },
         getTagList() {
             this.$store.dispatch("getTagListAction");
+        },
+        checkEdit() {
+            if (Number(this.$route.params.aid)) {
+                this.isEdit = true;
+                this.getArticleData(this.$route.params.aid);
+            } else {
+                this.isEdit = false;
+            }
+        },
+        getArticleData(aid) {
+            if (this.isEdit) {
+                this.$store.dispatch("getArticleDataAction", aid);
+            } else {
+            }
         },
         change(value, render) {
             this.article.html = render;

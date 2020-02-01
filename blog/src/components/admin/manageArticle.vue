@@ -39,6 +39,14 @@
                              align="center"
                              label="标题">
             </el-table-column>
+            <el-table-column align="center"
+                             width="80px"
+                             label="编辑">
+                <template slot-scope="scope">
+                    <i class="el-icon-edit edit-button"
+                       @click="editArticle(scope.row.aid)"></i>
+                </template>
+            </el-table-column>
             <el-table-column prop="author_id"
                              align="center"
                              width="80px"
@@ -99,6 +107,11 @@ export default {
                     .catch(() => {});
             }
         },
+        editArticle(aid) {
+            this.$router.push({
+                path: `/admin/write_article/${aid}`
+            });
+        },
         handleSelectionChange(rows) {
             let flag = [];
             if (rows) {
@@ -116,5 +129,9 @@ export default {
 .article-table {
     width: 100%;
     margin: 20px auto;
+}
+.edit-button {
+    cursor: pointer;
+    font-size: 20px;
 }
 </style>
