@@ -53,6 +53,9 @@
                               @keyup.enter.native="newTag"></el-input>
                 </el-col>
                 <el-col :span='12'>
+                    <h4>是否允许评论</h4>
+                    <el-switch v-model="article.allow_comment">
+                    </el-switch>
                 </el-col>
             </el-row>
             <el-row class="setting-row">
@@ -84,7 +87,8 @@ export default {
                 text: "",
                 coverurl: "",
                 createDate: "",
-                title: ""
+                title: "",
+                allow_comment: true
             },
             tagName: "",
             pickerOptions: {
