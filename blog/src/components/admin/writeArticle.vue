@@ -156,6 +156,7 @@ export default {
                 this.getArticleData(this.$route.params.aid);
             } else {
                 this.isEdit = false;
+                this.loading = false;
             }
         },
         getArticleData(aid) {

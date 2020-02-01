@@ -35,7 +35,7 @@ export default {
             axios
                 .post("/api/api/client/commentc")
                 .then(res => {
-                    context.commit('setCommentList', res.data);
+                    context.commit('setCommentList', res.data.data);
                 })
                 .catch(err => {
                     console.log(err);

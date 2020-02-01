@@ -1,5 +1,7 @@
 <template>
-    <adminFrame title="个人设置">
+    <adminFrame title="个人设置"
+                v-loading="loading"
+                element-loading-text="数据获取中">
         <section>
             <ul>
                 <li>
@@ -68,7 +70,8 @@ export default {
     },
     data() {
         return {
-            personalData: {}
+            personalData: {},
+            loading: true
         };
     },
     mounted() {
@@ -77,6 +80,7 @@ export default {
     watch: {
         "$store.state.global.personalData": function() {
             this.personalData = this.$store.state.global.personalData;
+            this.loading = false;
         }
     },
     methods: {

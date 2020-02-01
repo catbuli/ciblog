@@ -10,19 +10,22 @@
                   v-loading="loading"
                   @selection-change="handleSelectionChange">
             <el-table-column type="selection"
-                             align="center">
-            </el-table-column>
-            <el-table-column prop="name"
                              align="center"
-                             label="名称">
+                             width="100px">
             </el-table-column>
-            <el-table-column prop="description"
-                             align="center"
-                             label="分类描述">
+            <el-table-column width="200px"
+                             label="作者">
+                <template slot-scope="scope">
+                    <p v-text="scope.row.nickname"></p>
+                    <p v-text="scope.row.email"></p>
+                    <p v-text="scope.row.ip"></p>
+                </template>
             </el-table-column>
-            <el-table-column prop="count"
-                             align="center"
-                             label="文章数">
+            <el-table-column label="内容">
+                <template slot-scope="scope">
+                    <p v-text="scope.row.content"></p>
+                    <a href="">ddd</a>
+                </template>
             </el-table-column>
         </el-table>
     </adminFrame>
