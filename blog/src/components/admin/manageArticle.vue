@@ -55,6 +55,12 @@
             <el-table-column prop=""
                              align="center"
                              label="分类">
+                <template slot-scope="scope">
+                    <span v-for="item in scope.row.category"
+                          :key="item.cid"
+                          v-text="item.name"
+                          class="article-table-category"></span>
+                </template>
             </el-table-column>
             <el-table-column prop="create_date"
                              align="center"
@@ -133,5 +139,8 @@ export default {
 .edit-button {
     cursor: pointer;
     font-size: 20px;
+}
+.article-table-category + .article-table-category::before {
+    content: " • ";
 }
 </style>
