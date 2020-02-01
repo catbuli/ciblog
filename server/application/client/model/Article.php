@@ -16,21 +16,13 @@ class Article extends Model
     {
         return Article::get($aid);
     }
+    public function editArticle()
+    {
+        return $this->save();
+    }
     public function addArticle()
     {
-        $message = json([
-            'code' => "200",
-            'message' => "文章发布成功！"
-        ]);
-        try {
-            $this->save();
-        } catch (Exception $e) {
-            $message = json([
-                'code' => "400",
-                'message' => $e->getMessage()
-            ]);
-        }
-        return $message;
+        return $this->save();
     }
 
     public function delArticle($aid)
