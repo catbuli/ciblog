@@ -12,7 +12,12 @@ class Articlec extends Controller
     public function index()
     {
         $article = new Article();
-        return $article->getArticleList();
+        $list = $article->getArticleList();
+        foreach ($list as $value) {
+            $value->category = ArticleMeta::getMetaByArticle($value->aid, "category", true);
+            $value->tag = ArticleMeta::getMetaByArticle($value->aid, "tag", true);
+        }
+        return $list;
     }
     public function edit($data)
     {
@@ -82,7 +87,7 @@ class Articlec extends Controller
     public function getMetaIdList($aid, $type)
     {
         $list = [];
-        foreach (ArticleMeta::getMetaByArticle($aid, $type) as $value) {
+        foreach (ArticleMeta::getMetaByArticle($aid, $type, false) as $value) {
             array_push($list, $value->mid);
         }
         return $list;
@@ -95,6 +100,7 @@ class Articlec extends Controller
             $article->allow_comment = $article->allow_comment == 0 ? false : true;
             $article->tagList = self::getMetaIdList($aid, "tag");
             $article->categoryList = self::getMetaIdList($aid, "category");
+            // $article->categoryDetail = ArticleMeta::getMetaByArticle($aid, "category", true);
             $message = json([
                 'code' => "200",
                 'message' => "文章信息获取成功",

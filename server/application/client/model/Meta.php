@@ -18,6 +18,11 @@ class Meta extends Model
         return json(Meta::all(['type' => 'tag']));
     }
 
+    public static function getMeta($mid)
+    {
+        return Meta::get($mid);
+    }
+
     public function addCategory()
     {
         $message = json([

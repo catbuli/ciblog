@@ -4,6 +4,7 @@ namespace app\client\controller;
 
 use think\Controller;
 use app\client\model\Meta;
+use app\client\model\ArticleMeta;
 use think\Exception;
 
 class Category extends Controller
@@ -27,5 +28,22 @@ class Category extends Controller
     {
         $meta = new Meta();
         return $meta->delCategory($mid);
+    }
+    public function byid($aid)
+    {
+        try {
+            $list = ArticleMeta::getMetaByArticle($aid, "category", true);
+            $message = json([
+                'code' => "200",
+                'message' => "文章信息获取成功",
+                'data' => $list
+            ]);
+        } catch (Exception $e) {
+            $message = json([
+                'code' => "400",
+                'message' => $e->getMessage()
+            ]);
+        }
+        return $message;
     }
 }
