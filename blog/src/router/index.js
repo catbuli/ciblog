@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import ArticleList from '../views/ArticleList.vue'
 import Article from '../views/Article.vue'
+import Login from '../views/Login.vue'
 import Admin from '../views/Admin.vue'
 import personalSettings from '../components/admin/personalSettings.vue'
 import writeArticle from '../components/admin/writeArticle.vue'
@@ -19,6 +20,11 @@ const routes = [{
         path: '/',
         name: 'home',
         component: Home
+    },
+    {
+        path: '/login',
+        name: 'login',
+        component: Login
     },
     {
         path: '/articleList',

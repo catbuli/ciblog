@@ -23,8 +23,14 @@ export default {
     data() {
         return {};
     },
-    methods: {},
-    mounted() {}
+    methods: {
+        checkLogin() {
+            this.$router.push("/login");
+        }
+    },
+    mounted() {
+        this.checkLogin();
+    }
 };
 </script>
 

@@ -5,7 +5,8 @@ import {
 
 export default {
     state: {
-        personalData: {}
+        personalData: {},
+        isShowLeftNav: false,
     },
     mutations: {
         setPersonalData(state, data) {
