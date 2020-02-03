@@ -6,7 +6,7 @@
             <div class="login-top">
                 <input type="text"
                        placeholder="name"
-                       v-model="username"
+                       v-model="name"
                        name="username">
                 <input type="password"
                        placeholder="password"
@@ -28,18 +28,25 @@ export default {
     components: {},
     data() {
         return {
-            username: "",
+            name: "",
             password: ""
         };
     },
     methods: {
         login() {
-            var login = this.$refs.login;
-            login.addEventListener("animationend", function() {
-                login.style = "";
-                console.log("删除style");
+            this.$store.dispatch("loginAction", {
+                name: this.name,
+                password: this.password
             });
-            login.style.animation = "error 0.8s ease 0s 1";
+            if (this.$store.state.global.isLogin) {
+                this.$router.push("/admin");
+            } else {
+                var login = this.$refs.login;
+                login.addEventListener("animationend", function() {
+                    login.style = "";
+                });
+                login.style.animation = "error 0.8s ease 0s 1";
+            }
         }
     },
     mounted() {}
