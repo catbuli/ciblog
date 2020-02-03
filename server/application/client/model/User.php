@@ -11,4 +11,8 @@ class User extends Model
     {
         return json(User::get($id));
     }
+    public static function login($name, $password)
+    {
+        return User::get(['name' => $name, 'password' => $password]);
+    }
 }
