@@ -93,6 +93,13 @@ body {
 a {
     text-decoration: none;
 }
+a:visited {
+    color: #ff7b00;
+    text-decoration: none;
+}
+a:link {
+    color: #ff7b00;
+}
 body,
 ul,
 li,

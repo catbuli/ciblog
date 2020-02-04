@@ -4,7 +4,7 @@
                  mode="horizontal"
                  background-color="#545c64"
                  text-color="#fff"
-                 active-text-color="#ffd04b"
+                 active-text-color="#ff8819"
                  router>
             <el-submenu index="1">
                 <template slot="title">控制台</template>
