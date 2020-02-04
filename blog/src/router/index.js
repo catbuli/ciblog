@@ -1,3 +1,7 @@
+import axios from 'axios'
+import {
+    Notification
+} from 'element-ui';
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
@@ -85,5 +89,38 @@ const router = new VueRouter({
     base: process.env.BASE_URL,
     routes
 })
+
+router.beforeEach((to, from, next) => {
+    if (to.path === '/login') {
+        next();
+    } else if (from.path === '/login') {
+        next();
+    } else {
+        axios
+            .post("/api/api/client/login/check", {
+                uid: localStorage.getItem('uid'),
+            }, {
+                headers: {
+                    "Accept": "application/json",
+                    'token': localStorage.getItem('token')
+                },
+            })
+            .then(res => {
+                if (res.data.code == 200) {
+                    next();
+                } else {
+                    next('/login');
+                    Notification({
+                        title: "登陆失效",
+                        message: "请重新登陆！",
+                        type: "error"
+                    });
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+});
 
 export default router
