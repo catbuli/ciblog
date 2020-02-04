@@ -1,7 +1,6 @@
 <template>
     <adminFrame title="标签管理"
-                height="500px"
-                width="60%">
+                width="70%">
         <el-row v-loading="loading"
                 element-loading-text="标签列表加载中">
             <el-col :span="15">
