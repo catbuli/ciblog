@@ -76,12 +76,12 @@ export default {
                 })
                 .then(res => {
                     if (res.data.code == 200) {
-                        router.push("/admin");
                         context.commit('setLoginStatus', {
                             isLogin: true,
                             uid: res.data.data.uid,
                             token: res.data.data.token,
                         });
+                        router.push("/admin");
                         Notification({
                             title: "欢迎",
                             message: "管理员-" + res.data.data.name,
@@ -100,42 +100,58 @@ export default {
                     console.log(err);
                 });
         },
-        loginCheckAction() {
+        logoutAction(context, data) {
             axios
-                .post("/api/api/client/login/check", {
-                    uid: localStorage.getItem['uid'],
-                }, {
-                    headers: {
-                        "Accept": "application/json",
-                        'token': localStorage.getItem['token']
-                    },
-                })
+                .post("/api/api/client/login/logout")
                 .then(res => {
                     if (res.data.code == 200) {
-                        // router.push("/admin");
+                        router.push("/login");
                         context.commit('setLoginStatus', {
-                            isLogin: true,
-                            uid: res.data.data.uid,
-                            token: res.data.data.token,
-                        });
-                        Notification({
-                            title: "欢迎",
-                            message: "管理员-" + res.data.data.name,
-                            type: "success"
+                            isLogin: false
                         });
                     }
-                    // else {
-                    //     Notification({
-                    //         title: "失败",
-                    //         message: res.data.message,
-                    //         type: "error"
-                    //     });
-                    // }
                 })
                 .catch(err => {
                     console.log(err);
                 });
-        }
+        },
+        // loginCheckAction() {
+        //     axios
+        //         .post("/api/api/client/login/check", {
+        //             uid: localStorage.getItem['uid'],
+        //         }, {
+        //             headers: {
+        //                 "Accept": "application/json",
+        //                 'token': localStorage.getItem['token']
+        //             },
+        //         })
+        //         .then(res => {
+        //             if (res.data.code == 200) {
+        //                 // router.push("/admin");
+        //                 context.commit('setLoginStatus', {
+        //                     isLogin: true,
+        //                     uid: res.data.data.uid,
+        //                     token: res.data.data.token,
+        //                 });
+        //                 Notification({
+        //                     title: "欢迎",
+        //                     message: "管理员-" + res.data.data.name,
+        //                     type: "success"
+        //                 });
+        //             }
+        //             // else {
+        //             //     Notification({
+        //             //         title: "失败",
+        //             //         message: res.data.message,
+        //             //         type: "error"
+        //             //     });
+        //             // }
+        //         })
+        //         .catch(err => {
+        //             console.log(err);
+        //         });
+        // },
+
     },
     modules: {}
 }

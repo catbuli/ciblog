@@ -44,8 +44,6 @@ export default {
                     login.style = "";
                 });
                 login.style.animation = "error 0.8s ease 0s 1";
-            } else {
-                this.$router.push("/admin");
             }
         }
     },

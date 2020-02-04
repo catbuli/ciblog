@@ -31,8 +31,8 @@
             </el-submenu>
             <el-menu-item><a href="http://localhost:8080/"
                    target="_blank">网站</a></el-menu-item>
-            <!-- <el-menu-item index="6"
-                          style="right:0;position:absolute">登出</el-menu-item> -->
+            <el-menu-item style="right:0;position:absolute"
+                          @click="logout">登出</el-menu-item>
         </el-menu>
     </nav>
 </template>
@@ -48,18 +48,8 @@ export default {
     mounted() {},
     watch: {},
     methods: {
-        getMessage() {
-            Axios.post("/api/api/client")
-                .then(res => {
-                    this.name = res.data.name;
-                    this.imgURL = res.data.imgURL;
-                    this.bilibili = res.data.bilibili;
-                    this.github = res.data.github;
-                    this.email = res.data.email;
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+        logout() {
+            this.$store.dispatch("logoutAction");
         }
     }
 };
