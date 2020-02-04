@@ -8,12 +8,19 @@ import {
 export default {
     state: {
         personalData: {},
+        isAdmin: false,
         isShowLeftNav: false,
         isLogin: false,
         uid: localStorage.getItem('uid') ? localStorage.getItem('uid') : '',
         token: localStorage.getItem('token') ? localStorage.getItem('token') : '',
     },
     mutations: {
+        isAdmin(state, data) {
+            state.isAdmin = data;
+        },
+        handleLeftNav(state, data) {
+            state.isShowLeftNav = data;
+        },
         setPersonalData(state, data) {
             state.personalData = data;
         },

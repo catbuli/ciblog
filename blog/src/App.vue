@@ -1,9 +1,9 @@
 <template>
     <div id="app">
-        <navEle v-if="isAdmin"
-                @handleWeight="handleWeight"></navEle>
+        <navEle v-if="$store.state.global.isAdmin"></navEle>
+        <adminNav v-else></adminNav>
         <div id="mian"
-             :class="[isShow ? '' : 'handle-main']">
+             :class="[$store.state.global.isShowLeftNav ? '' : 'handle-main']">
             <transition name="fade"
                         mode="out-in">
                 <router-view />
@@ -13,45 +13,48 @@
 </template>
 
 <script>
+import adminNav from "@/components/admin/common/adminNav.vue";
 import navEle from "@/components/nav/navEle.vue";
 export default {
     name: "app",
     data() {
-        return {
-            isShow: true,
-            isAdmin: true
-        };
+        return {};
     },
     watch: {
         $route: function(to, from) {
             scrollTo(0, 0);
             let router_path = to.path;
-            console.log(router_path);
+            console.log(router_path.indexOf("/admin"));
             if (router_path.indexOf("/admin") != -1) {
-                this.isAdmin = false;
-                this.isShow = false;
+                this.$store.commit("isAdmin", false);
+                this.$store.commit("handleLeftNav", false);
             } else if (router_path.indexOf("/login") != -1) {
-                this.isShow = false;
-                this.isAdmin = false;
+                this.$store.commit("isAdmin", false);
+                this.$store.commit("handleLeftNav", false);
+            } else {
+                this.$store.commit("isAdmin", true);
+                this.$store.commit("handleLeftNav", true);
             }
         },
-        "$store.state.global.showLeftNav": function() {}
+        "$store.state.global.isShowLeftNav": function() {}
     },
     components: {
-        navEle
+        navEle,
+        adminNav
     },
     methods: {
-        handleWeight(params) {
-            this.isShow = params;
-        },
         checkRouter() {
             let router_path = this.$route.path;
+            console.log(router_path.indexOf("/admin"));
             if (router_path.indexOf("/admin") != -1) {
-                this.isAdmin = false;
-                this.isShow = false;
+                this.$store.commit("isAdmin", false);
+                this.$store.commit("handleLeftNav", false);
             } else if (router_path.indexOf("/login") != -1) {
-                this.isShow = false;
-                this.isAdmin = false;
+                this.$store.commit("isAdmin", false);
+                this.$store.commit("handleLeftNav", false);
+            } else {
+                this.$store.commit("isAdmin", true);
+                this.$store.commit("handleLeftNav", true);
             }
         }
     },
@@ -123,33 +126,37 @@ li {
     left: 0 !important;
     transition: all 0.5s ease;
 }
-
 .fade-enter {
     opacity: 0;
-    /* transform:translateX(500px); */
-    -webkit-transform: rotateY(180deg);
-    -moz-transform: rotateY(180deg);
-    -ms-transform: rotateY(180deg);
-    -o-transform: rotateY(180deg);
     transform: rotateY(180deg);
-    /* transform-origin: center top; */
 }
 
 .fade-leave {
     opacity: 1;
-    -webkit-transform: rotateY(0deg);
-    -moz-transform: rotateY(0deg);
-    -ms-transform: rotateY(0deg);
-    -o-transform: rotateY(0deg);
     transform: rotateY(0deg);
-    /* transform:translateX(0px); */
-    /* transform: rotate(0deg); */
 }
 
 .fade-enter-active {
     transition: all 0.9s ease;
 }
 
+.nav-enter {
+    width: 0%;
+}
+.nav-enter-to {
+    width: 100%;
+}
+
+.nav-leave {
+    width: 100%;
+}
+.nav-leave-to {
+    width: 0%;
+}
+
+.nav-enter-active {
+    transition: all 0.5s ease;
+}
 /* .fade-leave-active {
 } */
 </style>

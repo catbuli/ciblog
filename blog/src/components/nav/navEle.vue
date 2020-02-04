@@ -1,7 +1,7 @@
 <template>
     <nav id="nav"
-         :class="[isShow ? '' : 'hidden-nav']">
-        <svg @click="handeNav(!isShow)"
+         :class="[$store.state.global.isShowLeftNav ? '' : 'hidden-nav']">
+        <svg @click="$store.commit('handleLeftNav', !$store.state.global.isShowLeftNav);"
              id="button-nav"
              class="button-nav ham hamRotate180 ham5 active"
              viewBox="0 0 100 100"
@@ -50,8 +50,7 @@ export default {
             imgURL: String,
             bilibili: String,
             github: String,
-            email: String,
-            isShow: true
+            email: String
         };
     },
     components: {
@@ -64,7 +63,7 @@ export default {
         window.addEventListener("scroll", this.handleScroll, true);
     },
     watch: {
-        isShow: function(val) {
+        "$store.state.global.isShowLeftNav": function() {
             var backTopEl = document.getElementById("button-nav");
             backTopEl.classList.toggle("active");
         }
@@ -73,13 +72,12 @@ export default {
         getData() {
             this.$store.dispatch("getPersonalDataAction");
         },
-        handeNav(flag) {
-            this.isShow = flag;
-            this.$emit("handleWeight", flag);
-        },
         handleMouse(e) {
-            if (e.clientX <= 5 && this.isShow == false) {
-                this.handeNav(true);
+            if (
+                e.clientX <= 5 &&
+                this.$store.state.global.isShowLeftNav == false
+            ) {
+                this.$store.commit("handleLeftNav", true);
             }
         },
         handleScroll(e) {
@@ -87,11 +85,15 @@ export default {
             var scrollTop =
                 document.documentElement.scrollTop || document.body.scrollTop;
             if (scrollTop >= 400) {
-                this.handeNav(false);
+                this.$store.commit("handleLeftNav", false);
             } else if (scrollTop === 0) {
-                this.handeNav(true);
+                this.$store.commit("handleLeftNav", true);
             }
         }
+    },
+    destroyed() {
+        window.removeEventListener("mousemove", this.handleMouse, true);
+        window.removeEventListener("scroll", this.handleMouse, true);
     }
 };
 </script>

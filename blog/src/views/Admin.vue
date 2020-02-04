@@ -1,6 +1,5 @@
 <template>
     <div id="Admin">
-        <adminNav></adminNav>
         <div class="admin-main">
             <router-view></router-view>
         </div>
@@ -10,14 +9,13 @@
 
 <script>
 // @ is an alias to /src
-import adminNav from "@/components/admin/common/adminNav.vue";
+
 import footEle from "@/components/footer/footEle.vue";
 import Axios from "axios";
 
 export default {
     name: "admin",
     components: {
-        adminNav,
         footEle
     },
     data() {
