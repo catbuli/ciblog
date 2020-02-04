@@ -13,6 +13,10 @@ class Article extends Model
     {
         return Article::all();
     }
+    public static function getCount()
+    {
+        return count(Article::all());
+    }
     public function getArticleById($aid)
     {
         return Article::get($aid);

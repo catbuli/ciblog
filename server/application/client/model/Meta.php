@@ -17,7 +17,14 @@ class Meta extends Model
     {
         return json(Meta::all(['type' => 'tag']));
     }
-
+    public static function getCategoryCount()
+    {
+        return count(Meta::all(['type' => 'category']));
+    }
+    public static function getTagCount()
+    {
+        return count(Meta::all(['type' => 'tag']));
+    }
     public static function getMeta($mid)
     {
         return Meta::get($mid);

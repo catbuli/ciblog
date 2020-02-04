@@ -16,6 +16,10 @@ class Comment extends Model
     {
         return Comment::get($aid);
     }
+    public static function getCount()
+    {
+        return count(Comment::all());
+    }
     public function editComment()
     {
         return $this->save();
