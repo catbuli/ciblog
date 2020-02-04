@@ -25,7 +25,7 @@
             </el-submenu>
             <el-submenu index="4">
                 <template slot="title">设置</template>
-                <el-menu-item index="3-1">基本</el-menu-item>
+                <el-menu-item index="/admin/system_settings">系统设置</el-menu-item>
                 <el-menu-item index="3-2">评论</el-menu-item>
                 <el-menu-item index="3-3">阅读</el-menu-item>
             </el-submenu>

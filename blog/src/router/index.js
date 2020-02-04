@@ -17,6 +17,7 @@ import addCategory from '../components/admin/addCategory.vue'
 import manageTag from '../components/admin/manageTag.vue'
 import index from '../components/admin/index.vue'
 import manageComment from '../components/admin/manageComment.vue'
+import systemSettings from '../components/admin/systemSettings.vue'
 
 Vue.use(VueRouter)
 
@@ -80,6 +81,10 @@ const routes = [{
             path: '/admin/manage_comment',
             name: 'manage_comment',
             component: manageComment,
+        }, {
+            path: '/admin/system_settings',
+            name: 'system_settings',
+            component: systemSettings,
         }]
     }
 ]

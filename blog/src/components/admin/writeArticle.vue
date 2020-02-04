@@ -223,7 +223,8 @@ li {
     margin: 0px;
 }
 .markdown {
-    max-height: 700px;
+    /* max-height: 700px; */
+    overflow-x: scroll;
     overflow: auto;
 }
 .el-checkbox {

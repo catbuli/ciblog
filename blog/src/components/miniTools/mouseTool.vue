@@ -176,6 +176,9 @@ export default {
     cursor: url("http://ued.taobao.com/blog/wp-content/themes/taobaoued/images/cursor.ico"),
         default;
 } */
+#mouse-tool {
+    text-align: center;
+}
 .mouse-tool-button i {
     font-size: 35px;
     line-height: 60px;
