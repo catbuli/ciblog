@@ -94,11 +94,11 @@ router.beforeEach((to, from, next) => {
     if (to.path.indexOf("/admin") == 0) {
         axios
             .post("/api/api/client/login/check", {
-                uid: localStorage.getItem('uid'),
+                uid: localStorage.getItem('uid') ? localStorage.getItem('uid') : ''
             }, {
                 headers: {
                     "Accept": "application/json",
-                    'token': localStorage.getItem('token')
+                    'token': localStorage.getItem('token') ? localStorage.getItem('token') : ''
                 },
             })
             .then(res => {
