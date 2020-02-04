@@ -93,7 +93,7 @@ export default {
     },
     destroyed() {
         window.removeEventListener("mousemove", this.handleMouse, true);
-        window.removeEventListener("scroll", this.handleMouse, true);
+        window.removeEventListener("scroll", this.handleScroll, true);
     }
 };
 </script>

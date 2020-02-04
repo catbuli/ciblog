@@ -25,6 +25,7 @@ export default {
     margin: 20px auto;
     width: 100%;
     color: black;
+    text-align: center;
 }
 .footEle .footer-info {
     color: #444;

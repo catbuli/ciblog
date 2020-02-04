@@ -1,23 +1,21 @@
 <template>
     <div id="Admin">
         <div class="admin-main">
-            <router-view></router-view>
+            <transition name="card">
+                <router-view />
+            </transition>
         </div>
-        <footEle></footEle>
     </div>
 </template>
 
 <script>
 // @ is an alias to /src
 
-import footEle from "@/components/footer/footEle.vue";
 import Axios from "axios";
 
 export default {
     name: "admin",
-    components: {
-        footEle
-    },
+    components: {},
     data() {
         return {};
     },
@@ -33,7 +31,39 @@ export default {
 </script>
 
 <style scoped>
+#admin {
+    position: relative;
+}
 .admin-main {
     width: 100%;
+}
+
+.card-enter {
+    transform: translateX(-80%);
+    /* transform: scale(0.3); */
+    opacity: 0.3;
+}
+.card-enter-active {
+    transition: all 1s ease;
+}
+.card-enter-to {
+    transform: translateX(0);
+    /* transform: scale(1); */
+    opacity: 1;
+}
+
+.card-leave {
+    transform: translateX(0);
+    /* transform: scale(1); */
+    opacity: 1;
+}
+.card-leave-active {
+    transition: all 1s ease;
+    /* animation: card-out 1s ease; */
+}
+.card-leave-to {
+    transform: translateX(150%);
+    /* transform: scale(0.3); */
+    opacity: 0.3;
 }
 </style>
