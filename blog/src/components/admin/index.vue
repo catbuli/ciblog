@@ -1,6 +1,6 @@
 <template>
     <adminFrame title="总览">
-
+        <h1>一共篇<span class="sign">{{$store.state.global.countList.articleCount}}</span>文章,<span class="sign">{{$store.state.global.countList.categoryCount}}</span>种分类,<span class="sign">{{$store.state.global.countList.commentCount}}</span>条评论</h1>
     </adminFrame>
 </template>
 
@@ -19,11 +19,15 @@ export default {
     },
     methods: {
         getData() {
-            this.$store.dispatch("getPersonalDataAction");
+            this.$store.dispatch("getCountAction");
         }
     }
 };
 </script>
 
 <style scoped>
+.sign {
+    font-size: 60px;
+    color: dimgrey;
+}
 </style>

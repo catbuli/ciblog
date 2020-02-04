@@ -13,6 +13,11 @@ export default {
         isLogin: false,
         uid: localStorage.getItem('uid') ? localStorage.getItem('uid') : '',
         token: localStorage.getItem('token') ? localStorage.getItem('token') : '',
+        countList: {
+            articleCount: "",
+            CategoryCount: "",
+            commentCount: ""
+        }
     },
     mutations: {
         isAdmin(state, data) {
@@ -38,6 +43,9 @@ export default {
                 localStorage.removeItem('uid');
                 localStorage.removeItem('token');
             }
+        },
+        setCountList(state, data) {
+            state.countList = data;
         }
     },
     actions: {
@@ -122,6 +130,24 @@ export default {
                     console.log(err);
                 });
         },
+        getCountAction(context, data) {
+            axios
+                .post("/api/api/client/count")
+                .then(res => {
+                    if (res.data.code == 200) {
+                        context.commit('setCountList', res.data.data);
+                    } else {
+                        Notification({
+                            title: "失败",
+                            message: res.data.message,
+                            type: "error"
+                        });
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        }
         // loginCheckAction() {
         //     axios
         //         .post("/api/api/client/login/check", {
