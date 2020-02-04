@@ -112,7 +112,7 @@ export default {
                 })
                 .then(res => {
                     if (res.data.code == 200) {
-                        router.push("/admin");
+                        // router.push("/admin");
                         context.commit('setLoginStatus', {
                             isLogin: true,
                             uid: res.data.data.uid,

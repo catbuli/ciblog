@@ -25,7 +25,17 @@ export default {
     watch: {
         $route: function(to, from) {
             scrollTo(0, 0);
-        }
+            let router_path = to.path;
+            console.log(router_path);
+            if (router_path.indexOf("/admin") != -1) {
+                this.isAdmin = false;
+                this.isShow = false;
+            } else if (router_path.indexOf("/login") != -1) {
+                this.isShow = false;
+                this.isAdmin = false;
+            }
+        },
+        "$store.state.global.showLeftNav": function() {}
     },
     components: {
         navEle
@@ -36,7 +46,6 @@ export default {
         },
         checkRouter() {
             let router_path = this.$route.path;
-            console.log(router_path);
             if (router_path.indexOf("/admin") != -1) {
                 this.isAdmin = false;
                 this.isShow = false;
