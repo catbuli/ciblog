@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '../../http/index'
 import router from '@/router'
 import {
     Message,
@@ -117,13 +117,7 @@ export default {
         },
         alterPassAction(context, data) {
             axios
-                .post("/api/api/client/login/alterpass", data, {
-                    headers: {
-                        "Accept": "application/json",
-                        'token': localStorage.getItem('token') ? localStorage.getItem('token') : '',
-                        'uid': localStorage.getItem('uid') ? localStorage.getItem('uid') : 0,
-                    },
-                })
+                .post("/api/api/client/login/alterpass", data)
                 .then(res => {
                     if (res.data.code == 200) {
                         Notification({

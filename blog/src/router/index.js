@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '../http/index'
 import {
     Notification
 } from 'element-ui';
@@ -120,13 +120,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
     if (to.path.indexOf("/admin") == 0) {
         axios
-            .post("/api/api/client/login/check", {}, {
-                headers: {
-                    "Accept": "application/json",
-                    'token': localStorage.getItem('token') ? localStorage.getItem('token') : '',
-                    'uid': localStorage.getItem('uid') ? localStorage.getItem('uid') : 0,
-                },
-            })
+            .post("/api/api/client/login/check", {})
             .then(res => {
                 if (res.data.code == 200) {
                     next();
