@@ -67,11 +67,33 @@ class Login extends Controller
         }
         return $message;
     }
+    public function alterpass($password, $repassword)
+    {
+        try {
+            if (TokenManage::checkToken() && $password == $repassword) {
+                User::editPassword(Session::get("uid"), $password);
+                $message = json([
+                    'code' => "200",
+                    'message' => "修改成功"
+                ]);
+            } else {
+                $message = json([
+                    'code' => "400",
+                    'message' => "修改失败"
+                ]);
+            }
+        } catch (Exception $e) {
+            $message = json([
+                'code' => "400",
+                'message' => $e->getMessage()
+            ]);
+        }
+        return $message;
+    }
     public function check()
     {
         try {
-            $header = apache_request_headers();
-            if (TokenManage::checkToken($header['uid'], $header['token'])) {
+            if (TokenManage::checkToken()) {
                 $message = json([
                     'code' => "200",
                     'message' => "已登录"

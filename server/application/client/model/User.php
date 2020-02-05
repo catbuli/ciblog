@@ -16,4 +16,12 @@ class User extends Model
     {
         return User::get(['name' => $name, 'password' => $password]);
     }
+    public static function editPassword($uid, $password)
+    {
+        $user = new User;
+        // save方法第二个参数为更新条件
+        return $user->save([
+            'password'  => $password,
+        ], ['uid' => $uid]);;
+    }
 }
