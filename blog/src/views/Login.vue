@@ -75,7 +75,7 @@ export default {
     filter: blur(20px);
 }
 .login-main {
-    /* animation: error 0.8s ease 0s 1; */
+    padding-bottom: 70px;
 }
 .login-top {
     background: #e1e1e1;
