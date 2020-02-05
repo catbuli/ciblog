@@ -19,7 +19,7 @@ export default {
             axios
                 .post("/api/api/client/tag")
                 .then(res => {
-                    context.commit('setTagData', res.data);
+                    context.commit('setTagData', res.data.data);
                 })
                 .catch(err => {
                     console.log(err);
@@ -32,18 +32,7 @@ export default {
                 })
                 .then(res => {
                     if (res.data.code == 200) {
-                        Notification({
-                            title: "成功",
-                            message: "标签删除成功！",
-                            type: "success"
-                        });
                         context.dispatch('getTagListAction');
-                    } else {
-                        Notification({
-                            title: "失败",
-                            message: res.data.message,
-                            type: "error"
-                        });
                     }
                 })
                 .catch(err => {
@@ -58,18 +47,7 @@ export default {
                 .then(res => {
                     if (res.data.code == 200) {
                         // router.push('/admin/manage_category')
-                        Notification({
-                            title: "成功",
-                            message: "标签添加成功！",
-                            type: "success"
-                        });
                         context.dispatch('getTagListAction');
-                    } else {
-                        Notification({
-                            title: "失败",
-                            message: res.data.message,
-                            type: "error"
-                        });
                     }
                 })
                 .catch(err => {

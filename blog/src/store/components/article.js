@@ -49,18 +49,7 @@ export default {
                 .then(res => {
                     if (res.data.code == 200) {
                         router.push('/admin/manage_article')
-                        Notification({
-                            title: "成功",
-                            message: "文章发布成功！",
-                            type: "success"
-                        });
                         context.dispatch('getArticleListAction');
-                    } else {
-                        Notification({
-                            title: "失败",
-                            message: res.data.message,
-                            type: "error"
-                        });
                     }
                 })
                 .catch(err => {
@@ -75,18 +64,7 @@ export default {
                 .then(res => {
                     if (res.data.code == 200) {
                         router.push('/admin/manage_article')
-                        Notification({
-                            title: "成功",
-                            message: "文章发布成功！",
-                            type: "success"
-                        });
                         context.dispatch('getArticleListAction');
-                    } else {
-                        Notification({
-                            title: "失败",
-                            message: res.data.message,
-                            type: "error"
-                        });
                     }
                 })
                 .catch(err => {
@@ -100,18 +78,7 @@ export default {
                 })
                 .then(res => {
                     if (res.data.code == 200) {
-                        Notification({
-                            title: "成功",
-                            message: "文章删除成功！",
-                            type: "success"
-                        });
                         context.dispatch('getArticleListAction');
-                    } else {
-                        Notification({
-                            title: "失败",
-                            message: res.data.message,
-                            type: "error"
-                        });
                     }
                 })
                 .catch(err => {

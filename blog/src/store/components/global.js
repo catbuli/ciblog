@@ -53,7 +53,7 @@ export default {
             axios
                 .post("/api/api/client/personal")
                 .then(res => {
-                    context.commit('setPersonalData', res.data);
+                    context.commit('setPersonalData', res.data.data);
                 })
                 .catch(err => {
                     console.log(err);
@@ -66,17 +66,7 @@ export default {
                 })
                 .then(res => {
                     if (res.data.code == 200) {
-                        Message({
-                            message: "个人信息更新成功！",
-                            type: "success"
-                        });
                         context.dispatch('getPersonalDataAction');
-                    } else {
-                        Notification({
-                            title: "失败",
-                            message: res.data.message,
-                            type: "error"
-                        });
                     }
                 })
                 .catch(err => {
@@ -96,7 +86,6 @@ export default {
                             uid: res.data.data.uid,
                             token: res.data.data.token,
                         });
-                        console.log('tag', '')
                         router.push("/admin");
                     }
                 })
@@ -107,21 +96,7 @@ export default {
         alterPassAction(context, data) {
             axios
                 .post("/api/api/client/login/alterpass", data)
-                .then(res => {
-                    if (res.data.code == 200) {
-                        Notification({
-                            title: "成功",
-                            message: "密码修改成功",
-                            type: "success"
-                        });
-                    } else {
-                        Notification({
-                            title: "失败",
-                            message: res.data.message,
-                            type: "error"
-                        });
-                    }
-                })
+                .then(res => {})
                 .catch(err => {
                     console.log(err);
                 });
@@ -145,15 +120,7 @@ export default {
             axios
                 .post("/api/api/client/count")
                 .then(res => {
-                    if (res.data.code == 200) {
-                        context.commit('setCountList', res.data.data);
-                    } else {
-                        Notification({
-                            title: "失败",
-                            message: res.data.message,
-                            type: "error"
-                        });
-                    }
+                    context.commit('setCountList', res.data.data);
                 })
                 .catch(err => {
                     console.log(err);

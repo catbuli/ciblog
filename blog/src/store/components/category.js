@@ -19,7 +19,7 @@ export default {
             axios
                 .post("/api/api/client/category")
                 .then(res => {
-                    context.commit('setCategoryList', res.data);
+                    context.commit('setCategoryList', res.data.data);
                 })
                 .catch(err => {
                     console.log(err);
@@ -84,18 +84,7 @@ export default {
                 })
                 .then(res => {
                     if (res.data.code == 200) {
-                        Notification({
-                            title: "成功",
-                            message: "分类删除成功！",
-                            type: "success"
-                        });
                         context.dispatch('getCategoryListAction');
-                    } else {
-                        Notification({
-                            title: "失败",
-                            message: res.data.message,
-                            type: "error"
-                        });
                     }
                 })
                 .catch(err => {
