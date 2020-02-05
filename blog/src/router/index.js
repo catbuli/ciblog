@@ -1,4 +1,4 @@
-import axios from '../http/index'
+import axios from '@/http'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
@@ -119,7 +119,7 @@ router.beforeEach((to, from, next) => {
         axios
             .post("/api/api/client/login/check", {})
             .then(res => {
-                if (res.data.code == 200) {
+                if (res.data.code == 201) {
                     next();
                 } else {
                     next('/login');
@@ -133,7 +133,6 @@ router.beforeEach((to, from, next) => {
     } else {
         next();
     }
-
 });
 
 export default router

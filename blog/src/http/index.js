@@ -23,22 +23,36 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
     response => {
+        console.log(response.data)
         switch (response.data.code) {
-            case '401': {
+            case 200: {
                 Notification({
-                    title: "登陆失效",
-                    message: "请重新登陆！",
+                    title: response.data.title,
+                    message: response.data.message,
+                    type: "success"
+                });
+                break;
+            }
+            case 201: {
+                break;
+            }
+            case 400: {
+                Notification({
+                    title: response.data.title,
+                    message: response.data.message,
                     type: "error"
                 });
                 break;
             }
-            case '400': {
+            case 401: {
                 Notification({
-                    title: "失败",
+                    title: response.data.title,
                     message: response.data.message,
                     type: "error"
                 });
+                break;
             }
+
         }
         return response;
     },

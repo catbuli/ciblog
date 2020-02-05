@@ -96,12 +96,8 @@ export default {
                             uid: res.data.data.uid,
                             token: res.data.data.token,
                         });
+                        console.log('tag', '')
                         router.push("/admin");
-                        Notification({
-                            title: "欢迎",
-                            message: "管理员-" + res.data.data.name,
-                            type: "success"
-                        });
                     }
                 })
                 .catch(err => {

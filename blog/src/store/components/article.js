@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '@/http'
 import router from '@/router'
 
 import {
@@ -35,7 +35,7 @@ export default {
             axios
                 .post("/api/api/client/articlec")
                 .then(res => {
-                    context.commit('setArticleList', res.data);
+                    context.commit('setArticleList', res.data.data);
                 })
                 .catch(err => {
                     console.log(err);
