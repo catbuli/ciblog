@@ -67,11 +67,11 @@ class Login extends Controller
         }
         return $message;
     }
-    public function check($uid)
+    public function check()
     {
         try {
             $header = apache_request_headers();
-            if (TokenManage::checkToken($uid, $header['token'])) {
+            if (TokenManage::checkToken($header['uid'], $header['token'])) {
                 $message = json([
                     'code' => "200",
                     'message' => "已登录"

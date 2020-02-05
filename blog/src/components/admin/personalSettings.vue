@@ -45,16 +45,19 @@
             <ul>
                 <li>
                     <h4>密码</h4>
-                    <el-input placeholder="请输入内容"></el-input>
+                    <el-input placeholder="请输入内容"
+                              v-model="password"></el-input>
                     <span class="input-hint">新的后台登陆密码.</span>
                 </li>
                 <li>
                     <h4>确认密码</h4>
-                    <el-input placeholder="请输入内容"></el-input>
+                    <el-input placeholder="请输入内容"
+                              v-model="repassword"></el-input>
                     <span class="input-hint">确认你的密码.</span>
                 </li>
                 <li class="input-button">
-                    <el-button type="primary">修改密码</el-button>
+                    <el-button type="primary"
+                               @click="alterPass">修改密码</el-button>
                 </li>
             </ul>
         </section>
@@ -71,7 +74,9 @@ export default {
     data() {
         return {
             personalData: {},
-            loading: true
+            loading: true,
+            password: "",
+            repassword: ""
         };
     },
     mounted() {
@@ -89,6 +94,14 @@ export default {
         },
         submit() {
             this.$store.dispatch("updatePersonalDataAction", this.personalData);
+        },
+        alterPass() {
+            this.$store.dispatch("alterPassAction", {
+                password: this.password,
+                repassword: this.repassword
+            });
+            this.password = "";
+            this.repassword = "";
         }
     }
 };

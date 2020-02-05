@@ -115,6 +115,34 @@ export default {
                     console.log(err);
                 });
         },
+        alterPassAction(context, data) {
+            axios
+                .post("/api/api/client/login/alterpass", data, {
+                    headers: {
+                        "Accept": "application/json",
+                        'token': localStorage.getItem('token') ? localStorage.getItem('token') : '',
+                        'uid': localStorage.getItem('uid') ? localStorage.getItem('uid') : 0,
+                    },
+                })
+                .then(res => {
+                    if (res.data.code == 200) {
+                        Notification({
+                            title: "成功",
+                            message: "密码修改成功",
+                            type: "success"
+                        });
+                    } else {
+                        Notification({
+                            title: "失败",
+                            message: res.data.message,
+                            type: "error"
+                        });
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        },
         logoutAction(context, data) {
             axios
                 .post("/api/api/client/login/logout")

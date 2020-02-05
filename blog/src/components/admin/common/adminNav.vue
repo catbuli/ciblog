@@ -9,12 +9,10 @@
             <el-submenu index="1">
                 <template slot="title">控制台</template>
                 <el-menu-item index="/admin">总览</el-menu-item>
-                <el-menu-item index="/admin/personal_settings">个人设置</el-menu-item>
+                <el-menu-item index="/admin/personal_settings">个人</el-menu-item>
                 <el-menu-item index="/admin/backups">备份</el-menu-item>
             </el-submenu>
-            <el-menu-item index="/admin/write_article">
-                写文章
-            </el-menu-item>
+            <el-menu-item index="/admin/write_article">写文章</el-menu-item>
             <el-submenu index="3">
                 <template slot="title">管理</template>
                 <el-menu-item index="/admin/manage_article">文章</el-menu-item>
