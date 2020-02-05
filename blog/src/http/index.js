@@ -17,8 +17,38 @@ instance.interceptors.request.use(
         return config;
     },
     error => {
-        return Promise.reject(err);
+        return Promise.reject(error);
     }
 );
+
+instance.interceptors.response.use(
+    response => {
+        switch (response.data.code) {
+            case '401': {
+                Notification({
+                    title: "登陆失效",
+                    message: "请重新登陆！",
+                    type: "error"
+                });
+                break;
+            }
+            case '400': {
+                Notification({
+                    title: "失败",
+                    message: response.data.message,
+                    type: "error"
+                });
+            }
+        }
+        return response;
+    },
+    config => {
+        return config;
+    },
+    error => {
+        return Promise.reject(error);
+    }
+
+)
 
 export default instance;

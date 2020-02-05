@@ -24,7 +24,6 @@ export default {
         $route: function(to, from) {
             scrollTo(0, 0);
             let router_path = to.path;
-            console.log(router_path.indexOf("/admin"));
             if (router_path.indexOf("/admin") != -1) {
                 this.$store.commit("isAdmin", false);
                 this.$store.commit("handleLeftNav", false);
@@ -45,7 +44,6 @@ export default {
     methods: {
         checkRouter() {
             let router_path = this.$route.path;
-            console.log(router_path.indexOf("/admin"));
             if (router_path.indexOf("/admin") != -1) {
                 this.$store.commit("isAdmin", false);
                 this.$store.commit("handleLeftNav", false);

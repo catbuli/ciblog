@@ -1,7 +1,4 @@
 import axios from '../http/index'
-import {
-    Notification
-} from 'element-ui';
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
@@ -126,11 +123,6 @@ router.beforeEach((to, from, next) => {
                     next();
                 } else {
                     next('/login');
-                    Notification({
-                        title: "登陆失效",
-                        message: "请重新登陆！",
-                        type: "error"
-                    });
                 }
             })
             .catch(err => {

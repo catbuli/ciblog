@@ -103,13 +103,6 @@ export default {
                             type: "success"
                         });
                     }
-                    // else {
-                    //     Notification({
-                    //         title: "失败",
-                    //         message: res.data.message,
-                    //         type: "error"
-                    //     });
-                    // }
                 })
                 .catch(err => {
                     console.log(err);
