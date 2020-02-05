@@ -6,25 +6,37 @@ use think\Controller;
 use app\client\model\Article;
 use app\client\model\ArticleMeta;
 use think\Exception;
+use app\common\Response;
 
 class Articlec extends Controller
 {
+    /**
+     * 控制器默认方法 获取文章列表
+     *
+     * @return json
+     */
     public function index()
     {
-        $article = new Article();
-        $list = $article->getArticleList();
-        foreach ($list as $value) {
-            $value->category = ArticleMeta::getMetaByArticle($value->aid, "category", true);
-            $value->tag = ArticleMeta::getMetaByArticle($value->aid, "tag", true);
+        try {
+            $article = new Article();
+            $list = $article->getArticleList();
+            foreach ($list as $value) {
+                $value->category = ArticleMeta::getMetaByArticle($value->aid, "category", true);
+                $value->tag = ArticleMeta::getMetaByArticle($value->aid, "tag", true);
+            }
+            return Response::result(201, "成功", "数据获取成功!", $list);
+        } catch (Exception $e) {
+            return Response::result(400, "请求失败!", $e->getMessage());
         }
-        return $list;
     }
+    /**
+     * 修改文章内容
+     *
+     * @param object $data 文章内容
+     * @return json
+     */
     public function edit($data)
     {
-        $message = json([
-            'code' => "200",
-            'message' => "文章发布成功！"
-        ]);
         try {
             $article = Article::get($data["aid"]);
             $article->html = $data["html"];
@@ -39,21 +51,19 @@ class Articlec extends Controller
             ArticleMeta::addMetaList($data['categoryList'], $article->aid, "category");
             ArticleMeta::delAllMetaByArticle($article->aid, "tag");
             ArticleMeta::addMetaList($data['tagList'], $article->aid, "tag");
+            return Response::result(200, "成功", "文章发布成功!");
         } catch (Exception $e) {
-            $message = json([
-                'code' => "400",
-                'message' => $e->getMessage()
-            ]);
+            return Response::result(400, "请求失败!", $e->getMessage());
         }
-        return $message;
-        return $article->editArticle();
     }
+    /**
+     * 新增文章
+     *
+     * @param object $data 文章内容
+     * @return json
+     */
     public function add($data)
     {
-        $message = json([
-            'code' => "200",
-            'message' => "文章发布成功！"
-        ]);
         try {
             $article = new Article();
             $article->data([
@@ -70,21 +80,35 @@ class Articlec extends Controller
             $aid = $article->getLastInsID();
             ArticleMeta::addMetaList($data['categoryList'], $aid, "category");
             ArticleMeta::addMetaList($data['tagList'], $aid, "tag");
+            return Response::result(200, "成功", "文章发布成功!");
         } catch (Exception $e) {
-            $message = json([
-                'code' => "400",
-                'message' => $e->getMessage()
-            ]);
+            return Response::result(400, "请求失败!", $e->getMessage());
         }
-        return $message;
     }
+    /**
+     * 删除文章
+     *
+     * @param array $aid 文章id 或者 文章id数组 
+     * @return json
+     */
     public function del($aid)
     {
-        $article = new Article();
-
-        return $article->delArticle($aid);
+        try {
+            $article = new Article();
+            $article->delArticle($aid);
+            return Response::result(200, "成功", "文章删除成功!");
+        } catch (Exception $e) {
+            return Response::result(400, "请求失败!", $e->getMessage());
+        }
     }
-    public function getMetaIdList($aid, $type)
+    /**
+     * 获取某种类型标签mid列表
+     *
+     * @param int $aid 文章id
+     * @param string $type 标签类型
+     * @return json
+     */
+    private function getMetaIdList($aid, $type)
     {
         $list = [];
         foreach (ArticleMeta::getMetaByArticle($aid, $type, false) as $value) {
@@ -92,6 +116,12 @@ class Articlec extends Controller
         }
         return $list;
     }
+    /**
+     * 根据id获取文章内容
+     *
+     * @param int $aid 文章id
+     * @return json
+     */
     public function byid($aid)
     {
         try {
@@ -100,18 +130,9 @@ class Articlec extends Controller
             $article->allow_comment = $article->allow_comment == 0 ? false : true;
             $article->tagList = self::getMetaIdList($aid, "tag");
             $article->categoryList = self::getMetaIdList($aid, "category");
-            // $article->categoryDetail = ArticleMeta::getMetaByArticle($aid, "category", true);
-            $message = json([
-                'code' => "200",
-                'message' => "文章信息获取成功",
-                'data' => $article
-            ]);
+            return Response::result(201, "成功", "文章信息获取成功!", $article);
         } catch (Exception $e) {
-            $message = json([
-                'code' => "400",
-                'message' => $e->getMessage()
-            ]);
+            return Response::result(400, "请求失败!", $e->getMessage());
         }
-        return $message;
     }
 }

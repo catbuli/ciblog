@@ -10,7 +10,7 @@ class User extends Model
 {
     public function getUserById($id)
     {
-        return json(User::get($id));
+        return User::get($id);
     }
     public static function login($name, $password)
     {

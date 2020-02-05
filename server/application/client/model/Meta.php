@@ -8,14 +8,9 @@ use think\Exception;
 
 class Meta extends Model
 {
-    public function getCategoryList()
+    public function getMetaList($type)
     {
-        return json(Meta::all(['type' => 'category']));
-    }
-
-    public function getTagList()
-    {
-        return json(Meta::all(['type' => 'tag']));
+        return Meta::all(['type' => $type]);
     }
     public static function getCategoryCount()
     {
@@ -29,72 +24,12 @@ class Meta extends Model
     {
         return Meta::get($mid);
     }
-
-    public function addCategory()
+    public function addMeta()
     {
-        $message = json([
-            'code' => "200",
-            'message' => "分类添加成功！"
-        ]);
-        try {
-            $this->save();
-        } catch (Exception $e) {
-            $message = json([
-                'code' => "400",
-                'message' => $e->getMessage()
-            ]);
-        }
-        return $message;
+        return $this->save();
     }
-    public function addTag()
+    public function delMeta($mid)
     {
-        $message = json([
-            'code' => "200",
-            'message' => "标签添加成功！"
-        ]);
-        try {
-            $this->save();
-        } catch (Exception $e) {
-            $message = json([
-                'code' => "400",
-                'message' => $e->getMessage()
-            ]);
-        }
-        return $message;
-    }
-    public function delTag($mid)
-    {
-        $message = json([
-            'code' => "200",
-            'message' => "标签删除成功！"
-        ]);
-        try {
-            Meta::destroy($mid);
-        } catch (Exception $e) {
-            $message = json([
-                'code' => "400",
-                'message' => $e->getMessage()
-            ]);
-        }
-        return $message;
-    }
-    public function delCategory($mid)
-    {
-        $message = json([
-            'code' => "200",
-            'message' => "分类删除成功！",
-        ]);
-        try {
-            Meta::destroy($mid);
-        } catch (Exception $e) {
-            $message = json([
-                'code' => "400",
-                'message' => $e->getMessage()
-            ]);
-        }
-        return $message;
-    }
-    public function getMetaList()
-    {
+        return Meta::destroy($mid);
     }
 }

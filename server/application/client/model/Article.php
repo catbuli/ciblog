@@ -33,21 +33,8 @@ class Article extends Model
     {
         return $this->save();
     }
-
     public function delArticle($aid)
     {
-        $message = json([
-            'code' => "200",
-            'message' => "文章删除成功！",
-        ]);
-        try {
-            Article::destroy($aid);
-        } catch (Exception $e) {
-            $message = json([
-                'code' => "400",
-                'message' => $e->getMessage()
-            ]);
-        }
-        return $message;
+        return Article::destroy($aid);
     }
 }

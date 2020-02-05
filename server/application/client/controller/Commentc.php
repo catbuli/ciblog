@@ -5,50 +5,23 @@ namespace app\client\controller;
 use think\Controller;
 use app\client\model\Comment;
 use think\Exception;
+use app\common\Response;
 
 class Commentc extends Controller
 {
+    /**
+     * 控制器默认方法 获取评论列表
+     *
+     * @return json
+     */
     public function index()
     {
         try {
             $comment = new Comment();
             $data = $comment->getCommentList();
-            $message = json([
-                'code' => "200",
-                'message' => "评论列表获取成功",
-                'data' => $data
-            ]);
+            return Response::result(201, "成功", "数据获取成功!", $data);
         } catch (Exception $e) {
-            $message = json([
-                'code' => "400",
-                'message' => $e->getMessage()
-            ]);
+            return Response::result(400, "请求失败", $e->getMessage());
         }
-        return $message;
-    }
-
-    public function update($data)
-    {
-        $comment = new Comment;
-        $message = json([
-            'code' => "200",
-            'message' => "信息更新成功"
-        ]);
-        try {
-            $comment->save([
-                'mail'  => $data['mail'],
-                'bilibili'  => $data['bilibili'],
-                'github'  => $data['github'],
-                'nickname'  => $data['nickname'],
-                'indexurl'  => $data['indexurl'],
-            ], ['uid' => 1]);
-        } catch (Exception $e) {
-
-            $message = json([
-                'code' => "400",
-                'message' => $e->getMessage()
-            ]);
-        }
-        return $message;
     }
 }

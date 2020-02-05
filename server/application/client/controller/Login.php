@@ -7,11 +7,12 @@ use app\client\model\User;
 use think\Exception;
 use app\common\TokenManage;
 use app\common\Session;
+use app\common\Response;
 
 class Login extends Controller
 {
     /**
-     * login默认接口
+     * 控制器默认方法  后台登陆
      *
      * @param String $name 用户名
      * @param String $password 密码
@@ -22,127 +23,74 @@ class Login extends Controller
         try {
             $data =  User::login($name, $password);
             if ($data) {
-                $message = json([
-                    'code' => "200",
-                    'message' => "登陆成功",
-                    'data' => [
-                        'uid' => $data->uid,
-                        'name' => $data->nickname,
-                        'token' => TokenManage::setAppLoginToken($data->uid),
-                    ]
+                return Response::result(200, "欢迎", "管理员-" . $data->nickname, [
+                    'uid' => $data->uid,
+                    'name' => $data->nickname,
+                    'token' => TokenManage::setAppLoginToken($data->uid),
                 ]);
             } else {
-                $message = json([
-                    'code' => "400",
-                    'message' => "账号或密码错误"
-                ]);
+                return Response::result(400, "错误", "账号或密码错误");
             }
         } catch (Exception $e) {
-            $message = json([
-                'code' => "400",
-                'message' => $e->getMessage()
-            ]);
+            return Response::result(400, "请求失败", $e->getMessage());
         }
-        return $message;
     }
     /**
      * 注销登陆
      *
-     * @return String $message 返回的json信息
+     * @return json $message 返回的json信息
      */
     public function logout()
     {
         try {
             Session::clear('uid');
             Session::clear('token');
-            $message = json([
-                'code' => "200",
-                'message' => "注销成功"
-            ]);
+            return Response::result(200, "成功", "注销成功");
         } catch (Exception $e) {
-            $message = json([
-                'code' => "400",
-                'message' => $e->getMessage()
-            ]);
+            return Response::result(400, "请求失败", $e->getMessage());
         }
-        return $message;
     }
+    /**
+     * 修改密码
+     *
+     * @param string $password 密码
+     * @param string $repassword 重复密码
+     * @return json
+     */
     public function alterpass($password, $repassword)
     {
         try {
             if (TokenManage::checkToken() && $password == $repassword) {
                 User::editPassword(Session::get("uid"), $password);
-                $message = json([
-                    'code' => "200",
-                    'message' => "修改成功"
-                ]);
+                return Response::result(200, "成功", "修改成功");
             } else {
-                $message = json([
-                    'code' => "400",
-                    'message' => "修改失败"
-                ]);
+                return Response::result(400, "失败", "修改失败");
             }
         } catch (Exception $e) {
-            $message = json([
-                'code' => "400",
-                'message' => $e->getMessage()
-            ]);
+            return Response::result(400, "请求失败", $e->getMessage());
         }
-        return $message;
     }
+
+    /**
+     * 登陆状态检查
+     *
+     * @return json
+     */
     public function check()
     {
         try {
             if (TokenManage::checkToken()) {
-                $message = json([
-                    'code' => "200",
-                    'message' => "已登录"
-                ]);
+                return Response::result(201, "成功", "当前已登录");
             } else {
-                $message = json([
-                    'code' => "401",
-                    'message' => "请登录",
-                ]);
+                return Response::result(400, "登录失效", "请重新登陆");
             }
         } catch (Exception $e) {
-            $message = json([
-                'code' => "400",
-                'message' => $e->getMessage()
-            ]);
+            return Response::result(400, "请求失败", $e->getMessage());
         }
-        return $message;
     }
     public function a()
     {
-        // $header = apache_request_headers();
-        // foreach ($header as $headers => $value) {
-        //     echo "$headers: $value <br />\n";
-        // }
         echo Session::get("uid");
         echo Session::get("token");
     }
-    // public function update($data)
-    // {
-    //     $user = new User;
-    //     $message = json([
-    //         'code' => "200",
-    //         'message' => "信息更新成功"
-    //     ]);
-    //     try {
-    //         $user->save([
-    //             'mail'  => $data['mail'],
-    //             'bilibili'  => $data['bilibili'],
-    //             'github'  => $data['github'],
-    //             'nickname'  => $data['nickname'],
-    //             'indexurl'  => $data['indexurl'],
-    //         ], ['uid' => 1]);
-    //     } catch (Exception $e) {
-
-    //         $message = json([
-    //             'code' => "400",
-    //             'message' => $e->getMessage()
-    //         ]);
-    //     }
-    //     return $message;
-    // }
 }
