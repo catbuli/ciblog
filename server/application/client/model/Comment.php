@@ -28,21 +28,15 @@ class Comment extends Model
     {
         return $this->save();
     }
-
-    public function delComment($aid)
+    public function editStutas($cid, $status)
     {
-        $message = json([
-            'code' => "200",
-            'message' => "文章删除成功！",
-        ]);
-        try {
-            Comment::destroy($aid);
-        } catch (Exception $e) {
-            $message = json([
-                'code' => "400",
-                'message' => $e->getMessage()
-            ]);
-        }
-        return $message;
+        return $this->save([
+            'status'  => $status,
+        ], ['cid' => $cid]);
+    }
+
+    public function delComment($cid)
+    {
+        return Comment::destroy($cid);
     }
 }
