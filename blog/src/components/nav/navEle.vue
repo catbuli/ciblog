@@ -106,9 +106,7 @@ export default {
     height: 100%;
     width: 15%;
     position: fixed;
-    left: 0;
-    z-index: 100;
-    transition: all 0.5s ease;
+    z-index: 50;
     background: -webkit-linear-gradient(
         145deg,
         #fc354c,
@@ -207,7 +205,6 @@ export default {
 }
 .show-nav {
     animation: show-nav ease-in-out 0.5s;
-    transform: translateX(0);
     transition: all ease 0.5s;
 }
 @keyframes show-nav {

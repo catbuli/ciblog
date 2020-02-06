@@ -4,19 +4,16 @@
              @click="handleSearchView">
             <i class="el-icon-search"></i>
         </div>
-        <div id="search-view"
+        <div class="search-view"
              :class="classObj"
              @touchmove.prevent
              @mousewheel.prevent>
             <div class="search-bar">
-                <form action=""
-                      method="get">
-                    <input id="search-input"
-                           type="text"
-                           placeholder="想要搜什么!">
-                    <button id="search-button"
-                            @click="search"></button>
-                </form>
+                <input id="search-input"
+                       type="text"
+                       placeholder="想要搜什么!">
+                <button id="search-button"
+                        @click="search"></button>
             </div>
             <div class="close"
                  @click="handleSearchView"><i class="iconfont iconclose-circle"></i></div>
@@ -82,7 +79,7 @@ export default {
     font-size: 35px;
     line-height: 60px;
 }
-#search-view {
+.search-view {
     width: 100%;
     height: 100%;
     position: fixed;
@@ -91,7 +88,7 @@ export default {
     right: 0;
     left: 0;
     bottom: 0;
-    z-index: 101;
+    z-index: 100;
 }
 
 .inint_class {
