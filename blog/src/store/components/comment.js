@@ -49,18 +49,7 @@ export default {
                 .then(res => {
                     if (res.data.code == 200) {
                         router.push('/admin/manage_comment')
-                        Notification({
-                            title: "成功",
-                            message: "文章发布成功！",
-                            type: "success"
-                        });
                         context.dispatch('getCommentListAction');
-                    } else {
-                        Notification({
-                            title: "失败",
-                            message: res.data.message,
-                            type: "error"
-                        });
                     }
                 })
                 .catch(err => {
@@ -75,19 +64,21 @@ export default {
                 .then(res => {
                     if (res.data.code == 200) {
                         router.push('/admin/manage_comment')
-                        Notification({
-                            title: "成功",
-                            message: "文章发布成功！",
-                            type: "success"
-                        });
                         context.dispatch('getCommentListAction');
-                    } else {
-                        Notification({
-                            title: "失败",
-                            message: res.data.message,
-                            type: "error"
-                        });
                     }
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        },
+        editCommentStatusAction(context, data) {
+            axios
+                .post("/api/api/client/commentc/editstatus", {
+                    cid: data.cid,
+                    status: data.status
+                })
+                .then(res => {
+                    context.dispatch('getCommentListAction');
                 })
                 .catch(err => {
                     console.log(err);
@@ -100,18 +91,7 @@ export default {
                 })
                 .then(res => {
                     if (res.data.code == 200) {
-                        Notification({
-                            title: "成功",
-                            message: "文章删除成功！",
-                            type: "success"
-                        });
                         context.dispatch('getCommentListAction');
-                    } else {
-                        Notification({
-                            title: "失败",
-                            message: res.data.message,
-                            type: "error"
-                        });
                     }
                 })
                 .catch(err => {

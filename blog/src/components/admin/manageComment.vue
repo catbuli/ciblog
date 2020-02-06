@@ -11,7 +11,7 @@
                   @selection-change="handleSelectionChange">
             <el-table-column type="selection"
                              align="center"
-                             width="100px">
+                             width="50px">
             </el-table-column>
             <el-table-column width="200px"
                              label="作者">
@@ -26,13 +26,29 @@
                     <p class="content-table-top">{{scope.row.create_date}}　评论于　<a :href="'/article/'+scope.row.aid">{{scope.row.title}}</a> </p>
                     <p class="content-table-middle"
                        v-text="scope.row.content"></p>
-                    <p class="content-table-bottom">
-                        <span class="select">通过</span>
-                        <span>待审核</span>
-                        <span>垃圾</span>
-                        <span>编辑</span>
+                    <p class="content-table-bottom"
+                       v-if="scope.row.status===0">
+                        <span @click="editCommentStatus(scope.row.cid,1)">通过</span>
+                        <span class="select">待审核</span>
+                        <span @click="editCommentStatus(scope.row.cid,2)">垃圾</span>
+                        <span @click="editComment()">编辑</span>
                         <span>回复</span>
-                        <span>删除</span>
+                    </p>
+                    <p class="content-table-bottom"
+                       v-else-if="scope.row.status===1">
+                        <span class="select">通过</span>
+                        <span @click="editCommentStatus(scope.row.cid,0)">待审核</span>
+                        <span @click="editCommentStatus(scope.row.cid,2)">垃圾</span>
+                        <span @click="editComment()">编辑</span>
+                        <span>回复</span>
+                    </p>
+                    <p class="content-table-bottom"
+                       v-else>
+                        <span @click="editCommentStatus(scope.row.cid,1)">通过</span>
+                        <span @click="editCommentStatus(scope.row.cid,0)">待审核</span>
+                        <span class="select">垃圾</span>
+                        <span @click="editComment()">编辑</span>
+                        <span>回复</span>
                     </p>
                 </template>
             </el-table-column>
@@ -90,6 +106,12 @@ export default {
                 });
             }
             this.selectRows = flag;
+        },
+        editCommentStatus(cid, status) {
+            this.$store.dispatch("editCommentStatusAction", {
+                cid: cid,
+                status: status
+            });
         }
     }
 };
@@ -101,7 +123,7 @@ export default {
     margin: 20px auto;
 }
 .content-table-middle {
-    margin: 5px auto;
+    margin: 10px auto;
 }
 .content-table-bottom span {
     margin-right: 10px;
@@ -127,5 +149,6 @@ export default {
 .select {
     border: 2px dashed #ff7b00;
     padding: 2px;
+    cursor: default !important;
 }
 </style>

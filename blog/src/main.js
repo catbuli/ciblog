@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 // import Mock from '@/mock'
-import Axios from './http'
+import Axios from '@/http'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import "./assets/styles/iconfont/iconfont.css"
@@ -16,7 +16,6 @@ Vue.config.productionTip = false
 Vue.use(ElementUI);
 
 Vue.prototype.$http = Axios;
-
 
 new Vue({
     // Mock,
