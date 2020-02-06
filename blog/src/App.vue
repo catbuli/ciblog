@@ -149,24 +149,4 @@ li {
 .fade-enter-active {
     transition: all 0.9s ease;
 }
-
-.nav-enter {
-    width: 0%;
-}
-.nav-enter-to {
-    width: 100%;
-}
-
-.nav-leave {
-    width: 100%;
-}
-.nav-leave-to {
-    width: 0%;
-}
-
-.nav-enter-active {
-    transition: all 0.5s ease;
-}
-/* .fade-leave-active {
-} */
 </style>

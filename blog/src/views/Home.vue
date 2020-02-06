@@ -1,6 +1,6 @@
 <template>
     <div id="ArticleList">
-        <headEle></headEle>
+        <!-- <headEle></headEle> -->
         <articleItem :list-data="$store.state.article.articleList"></articleItem>
         <footEle></footEle>
         <backTop></backTop>

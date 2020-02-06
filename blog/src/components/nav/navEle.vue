@@ -1,6 +1,6 @@
 <template>
     <nav id="nav"
-         :class="[$store.state.global.isShowLeftNav ? '' : 'hidden-nav']">
+         :class="[$store.state.global.isShowLeftNav ? 'show-nav' : 'hidden-nav']">
         <svg @click="$store.commit('handleLeftNav', !$store.state.global.isShowLeftNav);"
              id="button-nav"
              class="button-nav ham hamRotate180 ham5 active"
@@ -201,7 +201,42 @@ export default {
 }
 
 .hidden-nav {
+    animation: hidden-nav ease-in-out 0.5s;
     transform: translateX(-100%);
-    transition: all 0.5s ease;
+    transition: all ease 0.5s;
+}
+.show-nav {
+    animation: show-nav ease-in-out 0.5s;
+    transform: translateX(0);
+    transition: all ease 0.5s;
+}
+@keyframes show-nav {
+    0% {
+        border-radius: 0 100% 100% 0;
+        opacity: 0;
+    }
+    100% {
+        border-radius: 0;
+        opacity: 1;
+    }
+}
+@keyframes hidden-nav {
+    0% {
+        border-radius: 0;
+        opacity: 1;
+    }
+    /* 10% {}
+    20% {}
+    30% {}
+    40% {}
+    50% {}
+    60% {}
+    70% {}
+    80% {}
+    90% {} */
+    100% {
+        border-radius: 0 100% 100% 0;
+        opacity: 0;
+    }
 }
 </style>

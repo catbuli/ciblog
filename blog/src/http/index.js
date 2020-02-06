@@ -23,7 +23,6 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
     response => {
-        console.log(response.data)
         switch (response.data.code) {
             case 200: {
                 Notification({
