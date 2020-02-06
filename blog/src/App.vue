@@ -1,7 +1,9 @@
 <template>
     <div id="app">
-        <navEle v-if="$store.state.global.isAdmin"></navEle>
-        <adminNav v-else></adminNav>
+        <navEle v-if="$store.state.global.isAdmin"
+                v-cloak></navEle>
+        <adminNav v-else
+                  v-cloak></adminNav>
         <div id="mian"
              :class="[$store.state.global.isShowLeftNav ? '' : 'handle-main']">
             <transition name="fade"
@@ -63,13 +65,9 @@ export default {
 </script>
 
 <style>
-/* ::-webkit-scrollbar {
-    width: 0 !important;
+[v-cloak] {
+    display: none;
 }
-::-webkit-scrollbar {
-    width: 0 !important;
-    height: 0;
-} */
 h1,
 h2,
 h3,

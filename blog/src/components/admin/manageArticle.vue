@@ -81,7 +81,12 @@ export default {
     data() {
         return {
             loading: true,
-            selectRows: []
+            selectRows: [],
+            filters: [
+                { text: "未审核", value: "0" },
+                { text: "通过", value: "1" },
+                { text: "垃圾", value: "2" }
+            ]
         };
     },
     watch: {

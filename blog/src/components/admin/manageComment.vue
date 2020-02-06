@@ -21,7 +21,12 @@
                     <p v-text="scope.row.ip"></p>
                 </template>
             </el-table-column>
-            <el-table-column label="内容">
+            <el-table-column label="内容"
+                             :filters="filters"
+                             :filter-method="filterHandler"
+                             :filter-multiple=false
+                             filter-placement="bottom-start"
+                             prop="status">
                 <template slot-scope="scope">
                     <p class="content-table-top">{{scope.row.create_date}}　评论于　<a :href="'/article/'+scope.row.aid">{{scope.row.title}}</a> </p>
                     <p class="content-table-middle"
@@ -69,7 +74,12 @@ export default {
     data() {
         return {
             loading: true,
-            selectRows: []
+            selectRows: [],
+            filters: [
+                { text: "未审核", value: 0 },
+                { text: "通过", value: 1 },
+                { text: "垃圾", value: 2 }
+            ]
         };
     },
     watch: {
@@ -118,6 +128,9 @@ export default {
                 cid: cid,
                 status: status
             });
+        },
+        filterHandler(value, row, column) {
+            return row.status === value;
         }
     }
 };
