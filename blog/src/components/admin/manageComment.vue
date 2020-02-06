@@ -23,8 +23,17 @@
             </el-table-column>
             <el-table-column label="内容">
                 <template slot-scope="scope">
-                    <p v-text="scope.row.content"></p>
-                    <a href="">ddd</a>
+                    <p class="content-table-top">{{scope.row.create_date}}　评论于　<a :href="'/article/'+scope.row.aid">{{scope.row.title}}</a> </p>
+                    <p class="content-table-middle"
+                       v-text="scope.row.content"></p>
+                    <p class="content-table-bottom">
+                        <span class="select">通过</span>
+                        <span>待审核</span>
+                        <span>垃圾</span>
+                        <span>编辑</span>
+                        <span>回复</span>
+                        <span>删除</span>
+                    </p>
                 </template>
             </el-table-column>
         </el-table>
@@ -90,5 +99,33 @@ export default {
 .comment-table {
     width: 100%;
     margin: 20px auto;
+}
+.content-table-middle {
+    margin: 5px auto;
+}
+.content-table-bottom span {
+    margin-right: 10px;
+    cursor: pointer;
+}
+.content-table-bottom
+    span:nth-of-type(1)
+    .content-table-bottom
+    span:nth-of-type(2)
+    .content-table-bottom
+    span:nth-of-type(3) {
+    color: rgb(59, 59, 59);
+}
+.content-table-bottom span:nth-of-type(4) {
+    color: green;
+}
+.content-table-bottom span:nth-of-type(5) {
+    color: black;
+}
+.content-table-bottom span:nth-of-type(6) {
+    color: red;
+}
+.select {
+    border: 2px dashed #ff7b00;
+    padding: 2px;
 }
 </style>

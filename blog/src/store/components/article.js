@@ -1,9 +1,6 @@
 import axios from '@/http'
 import router from '@/router'
 
-import {
-    Notification
-} from 'element-ui';
 
 export default {
     state: {
