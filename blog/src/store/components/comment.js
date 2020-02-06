@@ -87,7 +87,7 @@ export default {
         delCommentAction(context, data) {
             axios
                 .post("/api/api/client/commentc/del", {
-                    aid: data
+                    cid: data
                 })
                 .then(res => {
                     if (res.data.code == 200) {

@@ -33,6 +33,7 @@
                         <span @click="editCommentStatus(scope.row.cid,2)">垃圾</span>
                         <span @click="editComment()">编辑</span>
                         <span>回复</span>
+                        <span @click="delComment2(scope.row.cid)">删除</span>
                     </p>
                     <p class="content-table-bottom"
                        v-else-if="scope.row.status===1">
@@ -41,6 +42,7 @@
                         <span @click="editCommentStatus(scope.row.cid,2)">垃圾</span>
                         <span @click="editComment()">编辑</span>
                         <span>回复</span>
+                        <span @click="delComment2(scope.row.cid)">删除</span>
                     </p>
                     <p class="content-table-bottom"
                        v-else>
@@ -49,6 +51,7 @@
                         <span class="select">垃圾</span>
                         <span @click="editComment()">编辑</span>
                         <span>回复</span>
+                        <span @click="delComment2(scope.row.cid)">删除</span>
                     </p>
                 </template>
             </el-table-column>
@@ -98,11 +101,14 @@ export default {
                     .catch(() => {});
             }
         },
+        delComment2(cid) {
+            this.$store.dispatch("delCommentAction", cid);
+        },
         handleSelectionChange(rows) {
             let flag = [];
             if (rows) {
                 rows.forEach(row => {
-                    flag.push(row.mid);
+                    flag.push(row.cid);
                 });
             }
             this.selectRows = flag;
