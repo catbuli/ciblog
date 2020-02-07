@@ -11,7 +11,8 @@
                 <span class="card-top-categories"
                       v-for="category in item.category"
                       :key="category.cid">{{category.name}}</span>
-                <i class="iconfont icontime-circle"></i>
+                <i class="iconfont icontime-circle"
+                   style="margin-left:10px"></i>
                 <span class="card-top-date"
                       v-text="item.create_date"></span>
             </div>
@@ -33,6 +34,7 @@
                     <i class="iconfont iconcomment"
                        v-text="item.comment_count"></i>
                     <i class="iconfont iconeye"
+                       style="margin-left:10px"
                        v-text="item.pv"></i>
                 </span>
             </div>
@@ -75,10 +77,10 @@ export default {
 .card-top {
     margin: 10px 0px;
 }
-
-.card-top-categories {
+.card-top span {
+    vertical-align: text-bottom;
 }
-.card-top-categories::after {
+.card-top-categories + .card-top-categories::before {
     content: " • ";
 }
 .card-bottom-right {

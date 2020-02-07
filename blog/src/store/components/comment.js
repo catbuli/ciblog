@@ -48,8 +48,7 @@ export default {
                 })
                 .then(res => {
                     if (res.data.code == 200) {
-                        router.push('/admin/manage_comment')
-                        context.dispatch('getCommentListAction');
+                        context.dispatch('getCommentDataAction', data.aid);
                     }
                 })
                 .catch(err => {
