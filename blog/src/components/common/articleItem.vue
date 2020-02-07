@@ -9,7 +9,8 @@
             <div class="card-top">
                 <i class="iconfont iconflag"></i>
                 <span class="card-top-categories"
-                      v-text="item.category"></span>
+                      v-for="category in item.category"
+                      :key="category.cid">{{category.name}}</span>
                 <i class="iconfont icontime-circle"></i>
                 <span class="card-top-date"
                       v-text="item.create_date"></span>

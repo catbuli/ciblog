@@ -36,7 +36,7 @@
                         <span @click="editCommentStatus(scope.row.cid,1)">通过</span>
                         <span class="select">待审核</span>
                         <span @click="editCommentStatus(scope.row.cid,2)">垃圾</span>
-                        <span @click="editComment()">编辑</span>
+                        <span @click="editComment(scope.row.cid)">编辑</span>
                         <span>回复</span>
                         <span @click="delComment2(scope.row.cid)">删除</span>
                     </p>
@@ -45,7 +45,7 @@
                         <span class="select">通过</span>
                         <span @click="editCommentStatus(scope.row.cid,0)">待审核</span>
                         <span @click="editCommentStatus(scope.row.cid,2)">垃圾</span>
-                        <span @click="editComment()">编辑</span>
+                        <span @click="editComment(scope.row.cid)">编辑</span>
                         <span>回复</span>
                         <span @click="delComment2(scope.row.cid)">删除</span>
                     </p>
@@ -54,7 +54,7 @@
                         <span @click="editCommentStatus(scope.row.cid,1)">通过</span>
                         <span @click="editCommentStatus(scope.row.cid,0)">待审核</span>
                         <span class="select">垃圾</span>
-                        <span @click="editComment()">编辑</span>
+                        <span @click="editComment(scope.row.cid)">编辑</span>
                         <span>回复</span>
                         <span @click="delComment2(scope.row.cid)">删除</span>
                     </p>
@@ -75,6 +75,8 @@ export default {
         return {
             loading: true,
             selectRows: [],
+            isEdit: false,
+            content: "",
             filters: [
                 { text: "未审核", value: 0 },
                 { text: "通过", value: 1 },
@@ -129,6 +131,9 @@ export default {
                 status: status
             });
         },
+        editComment(cid) {
+            // this.isEdit = true;
+        },
         filterHandler(value, row, column) {
             return row.status === value;
         }
@@ -143,6 +148,8 @@ export default {
 }
 .content-table-middle {
     margin: 10px auto;
+}
+.content-table-edit {
 }
 .content-table-bottom span {
     margin-right: 10px;
