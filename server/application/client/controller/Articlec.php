@@ -5,8 +5,10 @@ namespace app\client\controller;
 use think\Controller;
 use app\client\model\Article;
 use app\client\model\ArticleMeta;
+use app\client\model\Comment;
 use think\Exception;
 use app\common\Response;
+use think\Db;
 
 class Articlec extends Controller
 {
@@ -19,6 +21,10 @@ class Articlec extends Controller
     {
         try {
             $article = new Article();
+            $list = $article->getArticleList();
+            foreach ($list as $value) {
+                Db::table('ciblog_article')->where('aid', $value->aid)->update(['comment_count' => count(Comment::getCommentById($value->aid))]);
+            }
             $list = $article->getArticleList();
             foreach ($list as $value) {
                 $value->category = ArticleMeta::getMetaByArticle($value->aid, "category", true);
@@ -130,6 +136,8 @@ class Articlec extends Controller
             $article->allow_comment = $article->allow_comment == 0 ? false : true;
             $article->tagList = self::getMetaIdList($aid, "tag");
             $article->categoryList = self::getMetaIdList($aid, "category");
+            $article->category = ArticleMeta::getMetaByArticle($aid, "category", true);
+            $article->tag = ArticleMeta::getMetaByArticle($aid, "tag", true);
             return Response::result(201, "成功", "文章信息获取成功!", $article);
         } catch (Exception $e) {
             return Response::result(400, "请求失败!", $e->getMessage());

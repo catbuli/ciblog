@@ -7,6 +7,7 @@ use app\client\model\Comment;
 use app\client\model\Article;
 use think\Exception;
 use app\common\Response;
+use think\Db;
 
 class Commentc extends Controller
 {
@@ -59,6 +60,47 @@ class Commentc extends Controller
             $comment = new Comment();
             $comment->delComment($cid);
             return Response::result(200, "成功", "评论删除成功!");
+        } catch (Exception $e) {
+            return Response::result(400, "请求失败!", $e->getMessage());
+        }
+    }
+    /**
+     * 根据id获取评论内容
+     *
+     * @param int $aid 文章id
+     * @return json
+     */
+    public function byid($aid)
+    {
+        try {
+            $comment = new Comment();
+            $list = $comment->getCommentById($aid);
+            return Response::result(201, "成功", "评论信息获取成功!", $list);
+        } catch (Exception $e) {
+            return Response::result(400, "请求失败!", $e->getMessage());
+        }
+    }
+    /**
+     * 新增评论
+     *
+     * @param object $data 文章内容
+     * @return json
+     */
+    public function add($data)
+    {
+        try {
+            $comment = new Comment();
+            $comment->data([
+                'aid' => $data["aid"],
+                'content' => $data["content"],
+                'nickname' => $data["nickname"],
+                'email' => $data["email"],
+                'create_date' => date('Y-m-d H:i:s'),
+                'status' => 0,
+                'ip' => $_SERVER['REMOTE_ADDR'],
+            ]);
+            $comment->addComment();
+            return Response::result(200, "成功", "评论成功!");
         } catch (Exception $e) {
             return Response::result(400, "请求失败!", $e->getMessage());
         }

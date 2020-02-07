@@ -12,10 +12,6 @@ class Comment extends Model
     {
         return Comment::all();
     }
-    public function getCommentById($aid)
-    {
-        return Comment::get($aid);
-    }
     public static function getCount()
     {
         return count(Comment::all());
@@ -34,9 +30,18 @@ class Comment extends Model
             'status'  => $status,
         ], ['cid' => $cid]);
     }
-
     public function delComment($cid)
     {
         return Comment::destroy($cid);
+    }
+
+    public static function getCommentById($aid)
+    {
+        return Comment::all(['aid' => $aid]);
+    }
+
+    public static function getCountByAid($aid)
+    {
+        return count(Comment::all(["aid" => $aid]));
     }
 }
