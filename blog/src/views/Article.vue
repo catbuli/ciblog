@@ -77,9 +77,16 @@ export default {
             }
         };
     },
-    "$store.state.article.article": function() {
-        this.article = this.$store.state.article.article;
-        this.loading = false;
+    watch: {
+        "$store.state.article.article": function() {
+            this.loading = false;
+        },
+        "$store.state.comment.comment": function() {
+            this.commentData.content = "";
+            this.commentData.nickname = "";
+            this.commentData.email = "";
+            this.loading = false;
+        }
     },
     methods: {
         getArticleData(aid) {
