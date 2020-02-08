@@ -15,7 +15,7 @@ import "./assets/styles/iconfont/iconfont.css"
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 
-Vue.prototype.$http = Axios;
+Vue.prototype.$axios = Axios;
 
 new Vue({
     // Mock,

@@ -37,7 +37,7 @@ class Comment extends Model
 
     public static function getCommentById($aid)
     {
-        return Comment::all(['aid' => $aid]);
+        return Comment::all(['aid' => $aid, 'status' => 1]);
     }
 
     public static function getCountByAid($aid)

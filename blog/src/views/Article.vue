@@ -4,26 +4,26 @@
         <article>
             <div class="article-header">
                 <h2 class="article-title"
-                    v-text="$store.state.article.article.title"></h2>
+                    v-text="article.title"></h2>
                 <div class="article-meta">
-                    <span class="article-meta-label iconfont iconpushpin">{{$store.state.article.article.pv}}次阅读</span>
+                    <span class="article-meta-label iconfont iconpushpin">{{article.pv}}次阅读</span>
                     <span class="article-meta-label iconfont iconpushpin">
                         <a href=""
                            class="category"
-                           v-for="category in $store.state.article.article.category"
+                           v-for="category in article.category"
                            :key="category.cid">{{category.name}}</a></span>
-                    <span class="article-meta-label iconfont iconpushpin">{{$store.state.article.article.create_date}}</span>
+                    <span class="article-meta-label iconfont iconpushpin">{{article.create_date}}</span>
                 </div>
             </div>
             <div class="article-body">
                 <div class="article-content"
-                     v-html="$store.state.article.article.html">
+                     v-html="article.html">
                 </div>
                 <div class="article-other"></div>
                 <div class="article-update"></div>
             </div>
             <div class="article-tags">
-                <span v-for="item in $store.state.article.article.tag"
+                <span v-for="item in article.tag"
                       :key="item.cid"><i class="el-icon-collection-tag">{{item.name}}</i></span>
             </div>
             <div class="article-footer">
@@ -33,7 +33,7 @@
         </article>
         <div class="comments">
             <ul>
-                <li v-for="item in $store.state.comment.comment"
+                <li v-for="item in commentList"
                     :key="item.cid">
                     <p>{{item.content}}</p>
                     <p>by{{item.nickname}}at{{item.create_date}}</p>
@@ -71,7 +71,8 @@ export default {
     },
     data() {
         return {
-            articleLists: "",
+            article: {},
+            commentList: [],
             loading: true,
             commentData: {
                 content: "",
@@ -82,9 +83,11 @@ export default {
     },
     watch: {
         "$store.state.article.article": function() {
+            this.article = this.$store.state.article.article;
             this.loading = false;
         },
         "$store.state.comment.comment": function() {
+            this.commentList = this.$store.state.comment.comment;
             this.commentData.content = "";
             this.commentData.nickname = "";
             this.commentData.email = "";
@@ -103,6 +106,7 @@ export default {
             this.$store.dispatch("addCommentAction", this.commentData);
         }
     },
+    computed: {},
     mounted() {
         this.getArticleData(this.$route.params.id);
         this.getCommentData(this.$route.params.id);
