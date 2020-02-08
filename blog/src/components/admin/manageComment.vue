@@ -44,6 +44,7 @@
                         <el-radio-group v-model="scope.row.status"
                                         size="mini"
                                         @change="(label)=>{editCommentStatus(label,scope.row.cid)}">
+                            <!-- 博客 ↑ -->
                             <el-radio-button label=1>通过</el-radio-button>
                             <el-radio-button label=0>待审核</el-radio-button>
                             <el-radio-button label=2>垃圾</el-radio-button>

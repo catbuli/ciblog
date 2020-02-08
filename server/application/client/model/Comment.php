@@ -11,17 +11,24 @@ class Comment extends Model
     public function getCommentList($paging)
     {
         if ($paging['type'] == -1) {
-            return $this->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->select();
+            return $this->order('create_date desc')->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->select();
         } else {
-            return $this->where("status", $paging['type'])->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->select();
+            return $this->where("status", $paging['type'])->order('create_date desc')->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->select();
         }
     }
-    public static function Count($field, $value = 0)
+    public static function Count($field, $value = -1)
     {
         $count = 0;
         switch ($field) {
             case 'status':
-                $count = count(Comment::all([$field => $value]));
+                if ($value == -1) {
+                    $count = count(Comment::all());
+                } else {
+                    $count = count(Comment::all([$field => $value]));
+                }
+                break;
+            case 'aid':
+                $count = count(Comment::all(["aid" => $value]));
                 break;
             default:
                 $count = count(Comment::all());
@@ -55,10 +62,5 @@ class Comment extends Model
     public static function getCommentById($aid)
     {
         return Comment::all(['aid' => $aid, 'status' => 1]);
-    }
-
-    public static function getCountByAid($aid)
-    {
-        return count(Comment::all(["aid" => $aid]));
     }
 }
