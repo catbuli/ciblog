@@ -39,7 +39,6 @@ export default {
                 });
         },
         getCommentListAction(context, data) {
-            console.log(data)
             axios
                 .post("/api/api/client/commentc", {
                     paging: data

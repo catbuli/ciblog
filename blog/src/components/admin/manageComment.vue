@@ -4,6 +4,12 @@
                    icon="el-icon-delete"
                    @click="delComment">
         </el-button>
+        <el-radio-group v-model="radio1">
+            <el-radio-button label="是"></el-radio-button>
+            <el-radio-button label="北京"></el-radio-button>
+            <el-radio-button label="广州"></el-radio-button>
+            <el-radio-button label="深圳"></el-radio-button>
+        </el-radio-group>
         <el-table class="comment-table"
                   :highlight-current-row="true"
                   :data="commentList"
@@ -155,6 +161,7 @@ export default {
             // this.isEdit = true;
         },
         filterHandler(value, row, column) {
+            console.log(value, row, column);
             return row.status === value;
         },
         currentChange(e) {

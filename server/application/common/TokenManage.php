@@ -3,17 +3,34 @@
 namespace app\common;
 
 use app\client\model\Token;
+use app\common\Session;
 
 class TokenManage
 {
+    /**
+     * 签发app token
+     * 
+     * @param Int $uid
+     * @return String token令牌
+     */
     public static function setAppLoginToken($uid)
     {
         $str = md5(microtime(true));
         $str = sha1($uid . $str);
-        Token::add($uid, $str);
+        Session::set('uid', $uid, 18000);
+        Session::set('token', $str, 18000);
         return $str;
     }
-    public static function checkToken($uid)
+
+    public static function checkToken()
     {
+        $header = apache_request_headers();
+        $uid = $header['uid'];
+        $token = $header['token'];
+        if (Session::get('uid') === (int) $uid && Session::get('token') === $token) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -16,17 +16,18 @@ class Commentc extends Controller
      *
      * @return json
      */
-    public function index()
+    public function index($paging)
     {
         try {
             $comment = new Comment();
-            $data = $comment->getCommentList();
+            $data = $comment->getCommentList($paging);
             foreach ($data as $value) {
                 $article = new Article;
                 $title = $article->getArticleById($value['aid'])['title'];
                 $value['title'] = $title;
             }
-            return Response::result(201, "成功", "数据获取成功!", $data);
+            $paging['total'] = Comment::Count('all');
+            return Response::result(201, "成功", "数据获取成功!", $data, $paging);
         } catch (Exception $e) {
             return Response::result(400, "请求失败", $e->getMessage());
         }
@@ -96,7 +97,7 @@ class Commentc extends Controller
                 'nickname' => $data["nickname"],
                 'email' => $data["email"],
                 'create_date' => date('Y-m-d H:i:s'),
-                'status' => 0,
+                'status' => 1,
                 'ip' => $_SERVER['REMOTE_ADDR'],
             ]);
             $comment->addComment();

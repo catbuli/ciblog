@@ -8,9 +8,26 @@ use think\Exception;
 
 class Comment extends Model
 {
-    public function getCommentList()
+    public function getCommentList($paging)
     {
-        return Comment::all();
+        if ($paging['type'] == -1) {
+            return $this->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->select();
+        } else {
+            return $this->where("status", $paging['type'])->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->select();
+        }
+    }
+    public static function Count($field, $value = 0)
+    {
+        $count = 0;
+        switch ($field) {
+            case 'status':
+                $count = count(Comment::all([$field => $value]));
+                break;
+            default:
+                $count = count(Comment::all());
+                break;
+        }
+        return $count;
     }
     public static function getCount()
     {
