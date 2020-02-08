@@ -32,8 +32,8 @@
                target="_blank"><img src='../../assets/images/iconemail.png'
                      alt=""> </a> -->
         </div>
-        <toolContainer :isShowSearch="true"
-                       :isShowMouse="true"></toolContainer>
+        <!-- <toolContainer :isShowSearch="true"
+                       :isShowMouse="true"></toolContainer> -->
         <menuEle></menuEle>
     </nav>
 </template>

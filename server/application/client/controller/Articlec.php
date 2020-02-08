@@ -80,7 +80,7 @@ class Articlec extends Controller
                 'create_date' => $data['create_date'],
                 'allow_comment' => $data['allow_comment'] == true ? 1 : 0,
                 'author_id' => 1,
-                'modify_date' => $data['create_date']
+                'modify_date' => $data['create_date'],
             ]);
             $article->addArticle();
             $aid = $article->getLastInsID();
@@ -131,6 +131,7 @@ class Articlec extends Controller
     public function byid($aid)
     {
         try {
+            Db::table('ciblog_article')->where('aid', $aid)->setInc('pv');
             $article = new Article();
             $article = $article->getArticleById($aid);
             $article->allow_comment = $article->allow_comment == 0 ? false : true;
