@@ -7,14 +7,17 @@
                     v-text="$store.state.article.article.title"></h2>
                 <div class="article-meta">
                     <span class="article-meta-label iconfont iconpushpin">{{$store.state.article.article.pv}}次阅读</span>
-                    <span class="article-meta-label iconfont iconpushpin"></span>
+                    <span class="article-meta-label iconfont iconpushpin">
+                        <a href=""
+                           class="category"
+                           v-for="category in $store.state.article.article.category"
+                           :key="category.cid">{{category.name}}</a></span>
                     <span class="article-meta-label iconfont iconpushpin">{{$store.state.article.article.create_date}}</span>
                 </div>
             </div>
             <div class="article-body">
                 <div class="article-content"
                      v-html="$store.state.article.article.html">
-
                 </div>
                 <div class="article-other"></div>
                 <div class="article-update"></div>
@@ -182,5 +185,11 @@ article {
     margin: 0 auto;
     width: 700px;
     padding: 15px;
+}
+.category {
+    color: #2c3e50;
+}
+.category + .category::before {
+    content: " • ";
 }
 </style>
