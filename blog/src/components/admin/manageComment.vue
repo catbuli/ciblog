@@ -6,7 +6,7 @@
         </el-button>
         <el-table class="comment-table"
                   :highlight-current-row="true"
-                  :data="this.$store.state.comment.commentList"
+                  :data="commentList"
                   v-loading="loading"
                   @selection-change="handleSelectionChange">
             <el-table-column type="selection"
@@ -61,6 +61,13 @@
                 </template>
             </el-table-column>
         </el-table>
+        <el-pagination background
+                       layout="jumper,prev,pager,next,total"
+                       :total="paging.total"
+                       :page-size="paging.pageSize"
+                       style="text-align:right"
+                       @current-change="currentChange">
+        </el-pagination>
     </adminFrame>
 </template>
 
@@ -73,6 +80,7 @@ export default {
     },
     data() {
         return {
+            commentList: [],
             loading: true,
             selectRows: [],
             isEdit: false,
@@ -81,11 +89,22 @@ export default {
                 { text: "未审核", value: 0 },
                 { text: "通过", value: 1 },
                 { text: "垃圾", value: 2 }
-            ]
+            ],
+            paging: {
+                pageSize: 10,
+                currentPage: 1,
+                type: -1,
+                total: 0
+            }
         };
     },
     watch: {
         "$store.state.comment.commentList": function() {
+            this.commentList = this.$store.state.comment.commentList;
+            this.loading = false;
+        },
+        "$store.state.comment.paging": function() {
+            this.paging = this.$store.state.comment.paging;
             this.loading = false;
         }
     },
@@ -94,7 +113,8 @@ export default {
     },
     methods: {
         getCommentList() {
-            this.$store.dispatch("getCommentListAction");
+            this.loading = true;
+            this.$store.dispatch("getCommentListAction", this.paging);
         },
         delComment() {
             if (this.selectRows.length > 0) {
@@ -136,6 +156,10 @@ export default {
         },
         filterHandler(value, row, column) {
             return row.status === value;
+        },
+        currentChange(e) {
+            this.paging.currentPage = e;
+            this.getCommentList();
         }
     }
 };

@@ -11,7 +11,7 @@
         </el-button>
         <el-table class="article-table"
                   :highlight-current-row="true"
-                  :data="this.$store.state.article.articleList"
+                  :data="articleList"
                   v-loading="loading"
                   @selection-change="handleSelectionChange">
             <el-table-column type="selection"
@@ -41,20 +41,21 @@
             </el-table-column>
             <el-table-column align="center"
                              width="80px"
-                             label="编辑">
+                             label="操作">
                 <template slot-scope="scope">
-                    <i class="el-icon-edit edit-button"
+                    <i class="el-icon-edit operating-button"
                        @click="editArticle(scope.row.aid)"></i>
+                    <!-- <i class="el-icon-delete operating-button"
+                       @click="delArticle(scope.row.aid)"></i> -->
                 </template>
-            </el-table-column>
-            <el-table-column prop="author_id"
-                             align="center"
-                             width="80px"
-                             label="作者">
             </el-table-column>
             <el-table-column prop=""
                              align="center"
-                             label="分类">
+                             label="分类"
+                             :filters="filters"
+                             :filter-method="filterHandler"
+                             :filter-multiple=false
+                             filter-placement="bottom-start">
                 <template slot-scope="scope">
                     <span v-for="item in scope.row.category"
                           :key="item.cid"
@@ -80,6 +81,7 @@ export default {
     },
     data() {
         return {
+            articleList: [],
             loading: true,
             selectRows: [],
             filters: [
@@ -91,6 +93,7 @@ export default {
     },
     watch: {
         "$store.state.article.articleList": function() {
+            this.articleList = this.$store.state.article.articleList;
             this.loading = false;
         }
     },
@@ -131,6 +134,9 @@ export default {
                 });
             }
             this.selectRows = flag;
+        },
+        filterHandler(value, row, column) {
+            return row.status === value;
         }
     }
 };
@@ -141,9 +147,12 @@ export default {
     width: 100%;
     margin: 20px auto;
 }
-.edit-button {
+.operating-button {
     cursor: pointer;
     font-size: 20px;
+}
+.operating-button + .operating-button {
+    margin-left: 5px;
 }
 .article-table-category + .article-table-category::before {
     content: " • ";

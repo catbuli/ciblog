@@ -17,7 +17,7 @@ export default {
             articleCount: "",
             CategoryCount: "",
             commentCount: ""
-        }
+        },
     },
     mutations: {
         isAdmin(state, data) {

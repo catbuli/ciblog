@@ -32,6 +32,11 @@
             </div>
         </article>
         <div class="comments">
+            <span class="response">
+                <p>
+                    <i class="el-icon-chat-line-square"> {{commentList.length}} 条评论 </i>
+                </p>
+            </span>
             <ul>
                 <li v-for="item in commentList"
                     :key="item.cid">
@@ -106,7 +111,6 @@ export default {
             this.$store.dispatch("addCommentAction", this.commentData);
         }
     },
-    computed: {},
     mounted() {
         this.getArticleData(this.$route.params.id);
         this.getCommentData(this.$route.params.id);
@@ -115,14 +119,15 @@ export default {
 </script>
 
 <style scoped>
-#Article {
-}
+/* #Article {
+} */
 article {
     border-radius: 10px;
     margin: 0 auto;
     width: 700px;
     background: #ffffff;
     padding: 15px;
+    margin-bottom: 30px;
 }
 .article-titile {
     text-align: center;
@@ -195,5 +200,21 @@ article {
 }
 .category + .category::before {
     content: " • ";
+}
+.response {
+    padding: 20px 0;
+    display: block;
+    border-top: 1px solid #8e8d8d;
+    position: relative;
+}
+.response p {
+    font-size: 30px;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+    padding: 0 40px;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    background-color: #f2f2f2;
 }
 </style>

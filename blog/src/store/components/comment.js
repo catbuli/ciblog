@@ -1,14 +1,18 @@
 import axios from '@/http'
 import router from '@/router'
 
-import {
-    Notification
-} from 'element-ui';
 
 export default {
     state: {
         commentList: [],
-        comment: {}
+        comment: {},
+        paging: {
+            pageSize: 10,
+            currentPage: 1,
+            type: -1,
+            total: 0,
+            typeName: "",
+        }
     },
     mutations: {
         setCommentList(state, data) {
@@ -16,6 +20,9 @@ export default {
         },
         setComment(state, data) {
             state.comment = data;
+        },
+        setPaging(state, data) {
+            state.paging = data;
         }
     },
     actions: {
@@ -31,11 +38,15 @@ export default {
                     console.log(err);
                 });
         },
-        getCommentListAction(context) {
+        getCommentListAction(context, data) {
+            console.log(data)
             axios
-                .post("/api/api/client/commentc")
+                .post("/api/api/client/commentc", {
+                    paging: data
+                })
                 .then(res => {
                     context.commit('setCommentList', res.data.data);
+                    context.commit('setPaging', res.data.paging);
                 })
                 .catch(err => {
                     console.log(err);
@@ -70,27 +81,33 @@ export default {
                     console.log(err);
                 });
         },
-        editCommentStatusAction(context, data) {
+        editCommentStatusAction({
+            rootState,
+            dispatch
+        }, data) {
             axios
                 .post("/api/api/client/commentc/editstatus", {
                     cid: data.cid,
                     status: data.status
                 })
                 .then(res => {
-                    context.dispatch('getCommentListAction');
+                    dispatch('getCommentListAction', rootState.comment.paging);
                 })
                 .catch(err => {
                     console.log(err);
                 });
         },
-        delCommentAction(context, data) {
+        delCommentAction({
+            rootState,
+            dispatch
+        }, data) {
             axios
                 .post("/api/api/client/commentc/del", {
                     cid: data
                 })
                 .then(res => {
                     if (res.data.code == 200) {
-                        context.dispatch('getCommentListAction');
+                        dispatch('getCommentListAction', rootState.comment.paging);
                     }
                 })
                 .catch(err => {
