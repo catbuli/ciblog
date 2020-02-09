@@ -137,14 +137,18 @@ class Articlec extends Controller
             Db::table('ciblog_article')->where('aid', $aid)->setInc('pv');
             $article = new Article();
             $article = $article->getArticleById($aid);
-            $article->allow_comment = $article->allow_comment == 0 ? false : true;
-            $article->tagList = self::getMetaIdList($aid, "tag");
-            $article->categoryList = self::getMetaIdList($aid, "category");
-            $article->category = ArticleMeta::getMetaByArticle($aid, "category", true);
-            $article->tag = ArticleMeta::getMetaByArticle($aid, "tag", true);
-            return Response::result(201, "成功", "文章信息获取成功!", $article);
+            if ($article) {
+                $article->allow_comment = $article->allow_comment == 0 ? false : true;
+                $article->tagList = self::getMetaIdList($aid, "tag");
+                $article->categoryList = self::getMetaIdList($aid, "category");
+                $article->category = ArticleMeta::getMetaByArticle($aid, "category", true);
+                $article->tag = ArticleMeta::getMetaByArticle($aid, "tag", true);
+                return Response::result(201, "成功", "文章信息获取成功!", $article);
+            } else {
+                return Response::result(404, "失败", "文章没有找到，或已被删除!");
+            }
         } catch (Exception $e) {
-            return Response::result(400, "请求失败!", $e->getMessage());
+            return Response::result(400, "请求失败!", $e);
         }
     }
 }

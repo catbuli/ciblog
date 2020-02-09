@@ -99,6 +99,7 @@ class Commentc extends Controller
                 'create_date' => date('Y-m-d H:i:s'),
                 'status' => 1,
                 'ip' => $_SERVER['REMOTE_ADDR'],
+                'avatar_url' => $data['avatar_url']
             ]);
             $comment->addComment();
             return Response::result(200, "成功", "评论成功!");
