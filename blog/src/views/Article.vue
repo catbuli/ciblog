@@ -46,39 +46,43 @@
             </ul>
         </div>
         <div class="add-comment">
-            <el-row>
-                <el-col :span=24>
-                    <i class="el-icon-edit-outline title">留言</i>
-                </el-col>
-            </el-row>
-            <el-row align="middle">
-                <el-col :span=10>
-                    <el-input v-model="commentData.nickname"
-                              label="用户名"
-                              prefix-icon="el-icon-user"
-                              placeholder="姓名（必须）"></el-input>
-                </el-col>
-                <el-col :span=4>
-                    maomao
-                </el-col>
-                <el-col :span=10>
-                    <el-input v-model="commentData.email"
-                              label="邮箱"
-                              placeholder="邮箱（必须）"
-                              prefix-icon="el-icon-message"></el-input>
-                </el-col>
-            </el-row>
-            <el-row>
-                <el-input v-model="commentData.content"
-                          resize="none"
-                          type="textarea"
-                          placeholder="文明留言哦!"
-                          maxlength="30"
-                          :rows=5></el-input>
-            </el-row>
-            <el-row>
-                <el-button @click="addComment">发送</el-button>
-            </el-row>
+            <el-form ref="form"
+                     :model="commentData"
+                     :rules="rules"
+                     status-icon>
+                <el-row>
+                    <el-col :span=10>
+                        <el-form-item prop="nickname">
+                            <el-input v-model="commentData.nickname"
+                                      label="用户名"
+                                      prefix-icon="el-icon-user"
+                                      placeholder="姓名（必须）"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span=4>
+                        maomao
+                    </el-col>
+                    <el-col :span=10>
+                        <el-form-item prop="email">
+                            <el-input v-model="commentData.email"
+                                      label="邮箱"
+                                      placeholder="邮箱（必须）"
+                                      prefix-icon="el-icon-message"></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-form-item prop="content">
+                    <el-input v-model="commentData.content"
+                              resize="none"
+                              type="textarea"
+                              placeholder="文明留言哦!"
+                              maxlength="30"
+                              :rows=5></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button @click="addComment('form')">发送</el-button>
+                </el-form-item>
+            </el-form>
         </div>
         <footEle></footEle>
         <backTop></backTop>
@@ -108,6 +112,35 @@ export default {
                 content: "",
                 nickname: "",
                 email: ""
+            },
+            rules: {
+                nickname: [
+                    {
+                        required: true,
+                        message: "请输入姓名！",
+                        trigger: "blur"
+                    },
+                    {
+                        min: 2,
+                        max: 15,
+                        message: "姓名长度2到10个字符!"
+                    }
+                ],
+                email: [
+                    {
+                        required: true,
+                        message: "请输入邮箱！",
+                        trigger: "blur"
+                    },
+                    { type: "email", message: "邮箱格式错误!" }
+                ],
+                content: [
+                    {
+                        required: true,
+                        message: "请输入评论内容！",
+                        trigger: "blur"
+                    }
+                ]
             }
         };
     },
@@ -131,9 +164,15 @@ export default {
         getCommentData(aid) {
             this.$store.dispatch("getCommentDataAction", aid);
         },
-        addComment() {
-            this.commentData.aid = this.$route.params.id;
-            this.$store.dispatch("addCommentAction", this.commentData);
+        addComment(form) {
+            this.$refs[form].validate(valid => {
+                if (valid) {
+                    this.commentData.aid = this.$route.params.id;
+                    this.$store.dispatch("addCommentAction", this.commentData);
+                } else {
+                    return false;
+                }
+            });
         }
     },
     mounted() {
@@ -224,9 +263,6 @@ article {
 .add-comment .title {
     font-size: 25px;
     font-weight: 500;
-    margin-bottom: 20px;
-}
-.add-comment .el-row {
     margin-bottom: 20px;
 }
 .add-comment p {
