@@ -38,11 +38,13 @@
                 </p>
             </span>
             <ul>
-                <li v-for="item in commentList"
-                    :key="item.cid">
-                    <p>{{item.content}}</p>
-                    <p>by{{item.nickname}}at{{item.create_date}}</p>
-                </li>
+                <transition-group name="comment">
+                    <li v-for="item in commentList"
+                        :key="item.cid">
+                        <p>{{item.content}}</p>
+                        <p>by{{item.nickname}}at{{item.create_date}}</p>
+                    </li>
+                </transition-group>
             </ul>
         </div>
         <div class="add-comment">
@@ -290,5 +292,18 @@ article {
     left: 50%;
     top: 0;
     background-color: #f2f2f2;
+}
+.comment-enter {
+    transform: translateX(100%);
+    /* transform: scale(0.3); */
+    opacity: 0.3;
+}
+.comment-enter-active {
+    transition: all 1s ease;
+}
+.comment-enter-to {
+    transform: translateX(0);
+    /* transform: scale(1); */
+    opacity: 1;
 }
 </style>
