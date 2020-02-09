@@ -26,8 +26,16 @@
                              align="center"
                              width="50px">
             </el-table-column>
-            <el-table-column width="200px"
+            <el-table-column width="50px"
                              label="作者">
+                <template slot-scope="scope">
+                    <el-avatar class="comment-avatar"
+                               shape="square"
+                               size="large"
+                               :src='scope.row.avatar_url'></el-avatar>
+                </template>
+            </el-table-column>
+            <el-table-column width="200px">
                 <template slot-scope="scope">
                     <p v-text="scope.row.nickname"></p>
                     <p v-text="scope.row.email"></p>
