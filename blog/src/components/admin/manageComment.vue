@@ -21,7 +21,9 @@
                   :highlight-current-row="true"
                   :data="commentList"
                   v-loading="loading"
-                  @selection-change="handleSelectionChange">
+                  @selection-change="handleSelectionChange"
+                  @row-click="clickSelect"
+                  ref="table">
             <el-table-column type="selection"
                              align="center"
                              width="50px">
@@ -167,6 +169,9 @@ export default {
         currentChange(e) {
             this.paging.currentPage = e;
             this.getCommentList();
+        },
+        clickSelect(row, column, event) {
+            this.$refs.table.toggleRowSelection(row);
         }
     }
 };
