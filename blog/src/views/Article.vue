@@ -19,8 +19,8 @@
                 <div class="article-content"
                      v-html="article.html">
                 </div>
-                <div class="article-other"></div>
-                <div class="article-update"></div>
+                <div class="article-other">other</div>
+                <div class="article-update">update</div>
             </div>
             <div class="article-tags">
                 <span v-for="item in article.tag"
@@ -41,13 +41,26 @@
                 <transition-group name="comment">
                     <li v-for="item in commentList"
                         :key="item.cid">
-                        <p>{{item.content}}</p>
-                        <p>by{{item.nickname}}at{{item.create_date}}</p>
+                        <div class="comment-left">
+                            <el-avatar class="comment-avatar"
+                                       shape="square"
+                                       size="large"
+                                       :src='item.avatar_url'
+                                       @click.native="changeAvatar"></el-avatar>
+                        </div>
+                        <div class="comment-content">
+                            <div class="comment-text">{{item.content}}</div>
+                            <p class="comment-meta">
+                                By <span v-text="item.nickname"></span>
+                                at <span v-text="item.create_date"></span>
+                            </p>
+                        </div>
                     </li>
                 </transition-group>
             </ul>
         </div>
         <div class="add-comment">
+            <i class="el-icon-edit-outline title">新增评论</i>
             <el-form ref="form"
                      :model="commentData"
                      :rules="rules"
@@ -61,8 +74,13 @@
                                       placeholder="姓名（必须）"></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :span=4>
-                        maomao
+                    <el-col :span=4
+                            align="center">
+                        <el-avatar class="avatar"
+                                   shape="square"
+                                   :src='commentData.avatar_url'
+                                   @click.native="changeAvatar"
+                                   :size="50"></el-avatar>
                     </el-col>
                     <el-col :span=10>
                         <el-form-item prop="email">
@@ -78,7 +96,8 @@
                               resize="none"
                               type="textarea"
                               placeholder="文明留言哦!"
-                              maxlength="30"
+                              maxlength="200"
+                              show-word-limit
                               :rows=5></el-input>
                 </el-form-item>
                 <el-form-item>
@@ -113,7 +132,8 @@ export default {
             commentData: {
                 content: "",
                 nickname: "",
-                email: ""
+                email: "",
+                avatar_url: ""
             },
             rules: {
                 nickname: [
@@ -175,6 +195,10 @@ export default {
                     return false;
                 }
             });
+        },
+        changeAvatar() {
+            this.commentData.avatar_url =
+                "https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png";
         }
     },
     mounted() {
@@ -187,6 +211,7 @@ export default {
 <style scoped>
 /* #Article {
 } */
+/* 文章主体 */
 article {
     border-radius: 10px;
     margin: 0 auto;
@@ -195,11 +220,13 @@ article {
     padding: 15px;
     margin-bottom: 30px;
 }
+/* 文章标题 */
 .article-titile {
     text-align: center;
     font-size: 1.5rem;
     margin: 20px auto;
 }
+/* 文章信息 */
 .article-meta {
     text-align: center;
 }
@@ -207,6 +234,7 @@ article {
     font-size: 16px;
     margin: 0 15px;
 }
+/* 文章正文 */
 .article-content {
     text-align: left;
     font-size: 105%;
@@ -217,9 +245,11 @@ article {
     padding: 20px 0;
     margin-top: 25px;
 }
+/* 文章更新时间 */
 .article-update {
     border-bottom: 1px dashed #dadada;
 }
+/* 文章标签 */
 .article-tags {
     height: 50px;
     border-bottom: 1px dashed #dadada;
@@ -233,6 +263,7 @@ article {
     content: " • ";
     margin-left: 5px;
 }
+/* 文章翻页 */
 .article-footer {
     display: flex;
     margin-top: 20px;
@@ -247,36 +278,7 @@ article {
 .article-next {
     background-color: rgb(226, 4, 255);
 }
-.comments {
-    padding: 15px;
-    margin: 0 auto;
-    text-align: left;
-    width: 700px;
-}
-.comments ul li {
-    margin-bottom: 20px;
-}
-.add-comment {
-    margin: 0 auto;
-    width: 700px;
-    padding: 15px;
-    text-align: left;
-}
-.add-comment .title {
-    font-size: 25px;
-    font-weight: 500;
-    margin-bottom: 20px;
-}
-.add-comment p {
-    line-height: 40px;
-    text-align: right;
-}
-.category {
-    color: #2c3e50;
-}
-.category + .category::before {
-    content: " • ";
-}
+/* 评论列表 */
 .response {
     padding: 20px 0;
     display: block;
@@ -293,6 +295,87 @@ article {
     top: 0;
     background-color: #f2f2f2;
 }
+.comments {
+    padding: 15px;
+    margin: 0 auto;
+    text-align: left;
+    width: 700px;
+}
+.comments ul li {
+    margin-bottom: 20px;
+    display: flex;
+}
+.comment-left {
+    width: 15%;
+}
+.comment-content {
+    /* position: relative; */
+    width: 80%;
+    /* right: 0; */
+}
+.comment-text {
+    padding: 10px;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    background: #fff;
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 10px;
+    position: relative;
+}
+.comment-text:before {
+    content: "";
+    position: absolute;
+    top: 13px;
+    left: -6px;
+    width: 10px;
+    height: 10px;
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    background-color: #fff;
+    border-color: #e5e5e5;
+    transform: rotate(45deg);
+}
+.comment-meta span:first-child {
+    background-color: #dfdddd;
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 5px;
+}
+.comment-avatar {
+    position: relative;
+    left: 40px;
+}
+
+/* 添加评论 */
+.add-comment {
+    margin: 0 auto;
+    width: 700px;
+    padding: 15px;
+    text-align: left;
+}
+.add-comment .title {
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+.add-comment p {
+    line-height: 40px;
+    text-align: right;
+}
+.add-comment .avatar {
+    position: relative;
+    top: -10px;
+    cursor: pointer;
+}
+/* 分类信息 */
+.category {
+    color: #2c3e50;
+}
+.category + .category::before {
+    content: " • ";
+}
+/* 评论新增动画 */
 .comment-enter {
     transform: translateX(100%);
     /* transform: scale(0.3); */

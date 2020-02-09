@@ -172,8 +172,8 @@ export default {
 .content-table-middle {
     margin: 10px auto;
 }
-.content-table-edit {
-}
+/* .content-table-edit {
+} */
 .content-table-bottom span {
     margin-right: 10px;
     cursor: pointer;
