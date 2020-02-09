@@ -46,14 +46,39 @@
             </ul>
         </div>
         <div class="add-comment">
-            <el-input v-model="commentData.nickname"></el-input>
-            <el-input v-model="commentData.email"></el-input>
-            <el-input v-model="commentData.content"
-                      type="textarea"
-                      placeholder="请输入内容"
-                      maxlength="30"
-                      :rows=5></el-input>
-            <el-button @click="addComment">添加</el-button>
+            <el-row>
+                <el-col :span=24>
+                    <i class="el-icon-edit-outline title">留言</i>
+                </el-col>
+            </el-row>
+            <el-row align="middle">
+                <el-col :span=10>
+                    <el-input v-model="commentData.nickname"
+                              label="用户名"
+                              prefix-icon="el-icon-user"
+                              placeholder="姓名（必须）"></el-input>
+                </el-col>
+                <el-col :span=4>
+                    maomao
+                </el-col>
+                <el-col :span=10>
+                    <el-input v-model="commentData.email"
+                              label="邮箱"
+                              placeholder="邮箱（必须）"
+                              prefix-icon="el-icon-message"></el-input>
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-input v-model="commentData.content"
+                          resize="none"
+                          type="textarea"
+                          placeholder="文明留言哦!"
+                          maxlength="30"
+                          :rows=5></el-input>
+            </el-row>
+            <el-row>
+                <el-button @click="addComment">发送</el-button>
+            </el-row>
         </div>
         <footEle></footEle>
         <backTop></backTop>
@@ -194,6 +219,19 @@ article {
     margin: 0 auto;
     width: 700px;
     padding: 15px;
+    text-align: left;
+}
+.add-comment .title {
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+.add-comment .el-row {
+    margin-bottom: 20px;
+}
+.add-comment p {
+    line-height: 40px;
+    text-align: right;
 }
 .category {
     color: #2c3e50;
