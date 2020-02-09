@@ -1,4 +1,5 @@
 import axios from 'axios';
+import router from '@/router'
 import {
     Notification
 } from 'element-ui';
@@ -51,7 +52,16 @@ instance.interceptors.response.use(
                 });
                 break;
             }
-
+            case 404: {
+                Notification({
+                    title: response.data.title,
+                    message: response.data.message,
+                    type: "error"
+                });
+            }
+            default: {
+                router.push('/404')
+            }
         }
         return response;
     },
