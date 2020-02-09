@@ -102,9 +102,12 @@ class Articlec extends Controller
         try {
             $article = new Article();
             $article->delArticle($aid);
+            foreach ($aid as $value) {
+                Comment::where("aid", $value)->delete();
+            }
             return Response::result(200, "成功", "文章删除成功!");
         } catch (Exception $e) {
-            return Response::result(400, "请求失败!", $e->getMessage());
+            return Response::result(400, "请求失败!", $e);
         }
     }
     /**

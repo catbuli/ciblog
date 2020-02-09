@@ -43,7 +43,15 @@ export default {
         adminFrame
     },
     data() {
-        return {};
+        return {
+            paging: {
+                pageSize: 10,
+                currentPage: 1,
+                type: -1,
+                typeName: "status",
+                total: 0
+            }
+        };
     },
     mounted() {
         this.getData();
@@ -58,7 +66,7 @@ export default {
             this.$store.dispatch("getArticleListAction");
         },
         getCommentList() {
-            this.$store.dispatch("getCommentListAction");
+            this.$store.dispatch("getCommentListAction", this.paging);
         }
     }
 };

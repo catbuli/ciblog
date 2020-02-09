@@ -101,7 +101,6 @@ export default {
         },
         "$store.state.comment.paging": function() {
             this.paging = this.$store.state.comment.paging;
-            this.loading = false;
         }
     },
     mounted() {
@@ -109,6 +108,7 @@ export default {
     },
     methods: {
         selectChange(value) {
+            this.loading = true;
             this.paging.currentPage = 1;
             this.paging.type = value;
             this.$store.dispatch("getCommentListAction", this.paging);
@@ -186,6 +186,9 @@ export default {
 }
 .content-table-bottom span:nth-of-type(3) {
     color: red;
+}
+.content-table-bottom .el-radio-group {
+    margin-right: 20px;
 }
 .select {
     border: 2px dashed #ff7b00;
