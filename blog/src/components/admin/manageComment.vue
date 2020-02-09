@@ -28,7 +28,8 @@
                              align="center"
                              width="50px">
             </el-table-column>
-            <el-table-column width="50px"
+            <el-table-column width="60px"
+                             align="center"
                              label="作者">
                 <template slot-scope="scope">
                     <el-avatar class="comment-avatar"
@@ -157,7 +158,6 @@ export default {
             this.selectRows = flag;
         },
         editCommentStatus(label, cid) {
-            console.log(label, cid);
             this.$store.dispatch("editCommentStatusAction", {
                 cid: cid,
                 status: label
@@ -170,6 +170,7 @@ export default {
             this.paging.currentPage = e;
             this.getCommentList();
         },
+        // 博客↓
         clickSelect(row, column, event) {
             this.$refs.table.toggleRowSelection(row);
         }
