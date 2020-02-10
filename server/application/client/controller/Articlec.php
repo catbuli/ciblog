@@ -52,6 +52,7 @@ class Articlec extends Controller
             $article->create_date = $data["create_date"];
             $article->allow_comment = $data["allow_comment"];
             $article->modify_date = date('Y-m-d H:i:s');
+            $article->description = $data['description'];
             $article->editArticle();
             ArticleMeta::delAllMetaByArticle($article->aid, "category");
             ArticleMeta::addMetaList($data['categoryList'], $article->aid, "category");
@@ -81,6 +82,7 @@ class Articlec extends Controller
                 'allow_comment' => $data['allow_comment'] == true ? 1 : 0,
                 'author_id' => 1,
                 'modify_date' => $data['create_date'],
+                'description' => $data['description']
             ]);
             $article->addArticle();
             $aid = $article->getLastInsID();

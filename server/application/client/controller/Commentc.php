@@ -90,19 +90,24 @@ class Commentc extends Controller
     public function add($data)
     {
         try {
-            $comment = new Comment();
-            $comment->data([
-                'aid' => $data["aid"],
-                'content' => $data["content"],
-                'nickname' => $data["nickname"],
-                'email' => $data["email"],
-                'create_date' => date('Y-m-d H:i:s'),
-                'status' => 1,
-                'ip' => $_SERVER['REMOTE_ADDR'],
-                'avatar_url' => $data['avatar_url']
-            ]);
-            $comment->addComment();
-            return Response::result(200, "成功", "评论成功!");
+            $article = new Article();
+            $article = $article->getArticleById($data["aid"]);
+            if ($article->allow_comment === 1) {
+                $comment = new Comment();
+                $comment->data([
+                    'aid' => $data["aid"],
+                    'content' => $data["content"],
+                    'nickname' => $data["nickname"],
+                    'email' => $data["email"],
+                    'create_date' => date('Y-m-d H:i:s'),
+                    'status' => 1,
+                    'ip' => $_SERVER['REMOTE_ADDR'],
+                    'avatar_url' => $data['avatar_url']
+                ]);
+                $comment->addComment();
+                return Response::result(200, "成功", "评论成功!");
+            }
+            return Response::result(400, "失败", "该文章已关闭评论!");
         } catch (Exception $e) {
             return Response::result(400, "请求失败!", $e->getMessage());
         }
