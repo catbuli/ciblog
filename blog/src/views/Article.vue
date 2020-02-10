@@ -207,10 +207,8 @@ export default {
 </script>
 
 <style scoped>
-/* #Article {
-} */
 /* 文章主体 */
-article {
+#Article article {
     border-radius: 10px;
     margin: 0 auto;
     width: 700px;
@@ -228,6 +226,9 @@ article {
 .article-meta {
     text-align: center;
 }
+.article-meta a {
+    color: #2c3e50;
+}
 .article-meta-label {
     font-size: 16px;
     margin: 0 15px;
@@ -240,8 +241,19 @@ article {
     word-wrap: break-word;
     word-break: break-all;
     border-top: 1px dashed #dadada;
-    padding: 20px 0;
+    padding: 20px;
     margin-top: 25px;
+}
+.article-content >>> h1 {
+}
+.article-content >>> .hljs-center {
+    text-align: center;
+}
+.article-content >>> .hljs-left {
+    text-align: left;
+}
+.article-content >>> .hljs-right {
+    text-align: right;
 }
 /* 文章更新时间 */
 .article-update {
@@ -340,7 +352,7 @@ article {
     padding: 3px 8px;
     border-radius: 5px;
 }
-.comment-avatar {
+.comment .comment-avatar {
     position: relative;
     left: 40px;
 }

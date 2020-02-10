@@ -136,6 +136,8 @@ li {
     left: 0 !important;
     transition: all 0.5s ease;
 }
+
+/* 路由切换动画 */
 .fade-enter {
     opacity: 0;
     transform: rotateY(180deg);
