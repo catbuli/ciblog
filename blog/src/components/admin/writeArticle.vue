@@ -97,7 +97,8 @@ export default {
                 cover_url: "",
                 create_date: "",
                 title: "",
-                allow_comment: true
+                allow_comment: true,
+                description: ""
             },
             showTitle: "",
             loading: true,
@@ -166,6 +167,9 @@ export default {
             }
         },
         change(value, render) {
+            var reg = /[\\\`\*\_\[\]\#\+\-\!\>\=\:\~]/g;
+            var description = value.replace(reg, "");
+            this.article.description = description.substring(0, 100);
             this.article.html = render;
         },
         add() {

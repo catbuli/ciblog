@@ -20,7 +20,7 @@
                  :src="item.cover_url"
                  @click="jump(item.aid)">
             <p class="article-content"
-               v-text="item.text"></p>
+               v-text="item.description"></p>
             <div class='card-line'></div>
             <div class="card-bottom">
                 <span class="card-bottom-left">

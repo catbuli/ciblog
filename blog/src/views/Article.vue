@@ -1,6 +1,6 @@
 <template>
     <div id="Article">
-        <headEle></headEle>
+        <!-- <headEle></headEle> -->
         <article>
             <div class="article-header">
                 <h2 class="article-title"
@@ -174,8 +174,6 @@ export default {
         "$store.state.comment.comment": function() {
             this.commentList = this.$store.state.comment.comment;
             this.commentData.content = "";
-            this.commentData.nickname = "";
-            this.commentData.email = "";
             this.loading = false;
         }
     },

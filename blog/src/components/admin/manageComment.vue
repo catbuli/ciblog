@@ -99,7 +99,7 @@ export default {
             paging: {
                 pageSize: 10,
                 currentPage: 1,
-                type: -1,
+                type: 0,
                 typeName: "status",
                 total: 0
             }
