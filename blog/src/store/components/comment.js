@@ -28,7 +28,7 @@ export default {
     actions: {
         getCommentDataAction(context, data) {
             axios
-                .post("/api/api/client/commentc/byid", {
+                .post("/api/commentc/byid", {
                     aid: data
                 })
                 .then(res => {
@@ -40,7 +40,7 @@ export default {
         },
         getCommentListAction(context, data) {
             axios
-                .post("/api/api/client/commentc", {
+                .post("/api/commentc", {
                     paging: data
                 })
                 .then(res => {
@@ -53,7 +53,7 @@ export default {
         },
         addCommentAction(context, data) {
             axios
-                .post("/api/api/client/commentc/add", {
+                .post("/api/commentc/add", {
                     data
                 })
                 .then(res => {
@@ -67,7 +67,7 @@ export default {
         },
         editCommentAction(context, data) {
             axios
-                .post("/api/api/client/commentc/edit", {
+                .post("/api/commentc/edit", {
                     data
                 })
                 .then(res => {
@@ -85,7 +85,7 @@ export default {
             dispatch
         }, data) {
             axios
-                .post("/api/api/client/commentc/editstatus", {
+                .post("/api/commentc/editstatus", {
                     cid: data.cid,
                     status: data.status
                 })
@@ -101,7 +101,7 @@ export default {
             dispatch
         }, data) {
             axios
-                .post("/api/api/client/commentc/del", {
+                .post("/api/commentc/del", {
                     cid: data
                 })
                 .then(res => {

@@ -17,7 +17,7 @@ export default {
     actions: {
         getTagListAction(context) {
             axios
-                .post("/api/api/client/tag")
+                .post("/api/tag")
                 .then(res => {
                     context.commit('setTagData', res.data.data);
                 })
@@ -27,7 +27,7 @@ export default {
         },
         delTagAction(context, data) {
             axios
-                .post("/api/api/client/tag/del", {
+                .post("/api/tag/del", {
                     mid: data,
                 })
                 .then(res => {
@@ -41,7 +41,7 @@ export default {
         },
         addTagAction(context, data) {
             axios
-                .post("/api/api/client/tag/add", {
+                .post("/api/tag/add", {
                     name: data,
                 })
                 .then(res => {

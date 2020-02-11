@@ -18,7 +18,6 @@ Vue.use(ElementUI);
 Vue.prototype.$axios = Axios;
 
 new Vue({
-    // Mock,
     router,
     store,
     render: h => h(App)

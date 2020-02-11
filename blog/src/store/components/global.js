@@ -51,7 +51,7 @@ export default {
     actions: {
         getPersonalDataAction(context) {
             axios
-                .post("/api/api/client/personal")
+                .post("/api/personal")
                 .then(res => {
                     context.commit('setPersonalData', res.data.data);
                 })
@@ -61,7 +61,7 @@ export default {
         },
         updatePersonalDataAction(context, data) {
             axios
-                .post("/api/api/client/personal/update", {
+                .post("/api/personal/update", {
                     data: data
                 })
                 .then(res => {
@@ -75,7 +75,7 @@ export default {
         },
         loginAction(context, data) {
             axios
-                .post("/api/api/client/login", {
+                .post("/api/login", {
                     name: data.name,
                     password: data.password
                 })
@@ -95,7 +95,7 @@ export default {
         },
         alterPassAction(context, data) {
             axios
-                .post("/api/api/client/login/alterpass", data)
+                .post("/api/login/alterpass", data)
                 .then(res => {})
                 .catch(err => {
                     console.log(err);
@@ -103,7 +103,7 @@ export default {
         },
         logoutAction(context, data) {
             axios
-                .post("/api/api/client/login/logout")
+                .post("/api/login/logout")
                 .then(res => {
                     if (res.data.code == 200) {
                         router.push("/login");
@@ -118,7 +118,7 @@ export default {
         },
         getCountAction(context, data) {
             axios
-                .post("/api/api/client/count")
+                .post("/api/count")
                 .then(res => {
                     context.commit('setCountList', res.data.data);
                 })
@@ -128,7 +128,7 @@ export default {
         }
         // loginCheckAction() {
         //     axios
-        //         .post("/api/api/client/login/check", {
+        //         .post("/api/login/check", {
         //             uid: localStorage.getItem['uid'],
         //         }, {
         //             headers: {

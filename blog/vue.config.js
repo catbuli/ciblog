@@ -6,7 +6,7 @@ module.exports = {
         hotOnly: false,
         proxy: {
             '/api/': {
-                target: 'http://127.0.0.1:80/', //API服务器的地址
+                target: 'http://127.0.0.1:80/api/client', //API服务器的地址
                 // ws: true, //代理websockets
                 changeOrigin: true, // 虚拟的站点需要更管origin
                 pathRewrite: {
