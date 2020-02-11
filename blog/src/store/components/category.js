@@ -17,7 +17,7 @@ export default {
     actions: {
         getCategoryListAction(context) {
             axios
-                .post("/api/category")
+                .post("/category")
                 .then(res => {
                     context.commit('setCategoryList', res.data.data);
                 })
@@ -27,7 +27,7 @@ export default {
         },
         addCategoryAction(context, data) {
             axios
-                .post("/api/category/add", {
+                .post("/category/add", {
                     name: data.name,
                     description: data.description
                 })
@@ -53,7 +53,7 @@ export default {
         },
         editCategoryAction(context, data) {
             axios
-                .post("/api/category/add", {
+                .post("/category/add", {
                     name: data.name,
                     description: data.description
                 })
@@ -79,7 +79,7 @@ export default {
         },
         delCategoryAction(context, data) {
             axios
-                .post("/api/category/del", {
+                .post("/category/del", {
                     mid: data
                 })
                 .then(res => {

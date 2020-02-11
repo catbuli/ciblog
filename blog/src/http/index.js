@@ -5,6 +5,16 @@ import {
 } from 'element-ui';
 
 let instance = axios.create();
+let baseUrl = '';
+
+if (process.env.NODE_ENV == 'development') {
+    baseUrl = '/api';
+} else if (process.env.NODE_ENV == 'production') {
+    baseUrl = process.env.VUE_APP_URL;
+}
+
+instance.defaults.timeout = 10000; //设置请求时间
+instance.defaults.baseURL = baseUrl; //设置默认接口地址
 
 instance.interceptors.request.use(
     config => {

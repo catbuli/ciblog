@@ -51,7 +51,7 @@ export default {
     actions: {
         getPersonalDataAction(context) {
             axios
-                .post("/api/personal")
+                .post("/personal")
                 .then(res => {
                     context.commit('setPersonalData', res.data.data);
                 })
@@ -61,7 +61,7 @@ export default {
         },
         updatePersonalDataAction(context, data) {
             axios
-                .post("/api/personal/update", {
+                .post("/personal/update", {
                     data: data
                 })
                 .then(res => {
@@ -75,7 +75,7 @@ export default {
         },
         loginAction(context, data) {
             axios
-                .post("/api/login", {
+                .post("/login", {
                     name: data.name,
                     password: data.password
                 })
@@ -95,7 +95,7 @@ export default {
         },
         alterPassAction(context, data) {
             axios
-                .post("/api/login/alterpass", data)
+                .post("/login/alterpass", data)
                 .then(res => {})
                 .catch(err => {
                     console.log(err);
@@ -103,7 +103,7 @@ export default {
         },
         logoutAction(context, data) {
             axios
-                .post("/api/login/logout")
+                .post("/login/logout")
                 .then(res => {
                     if (res.data.code == 200) {
                         router.push("/login");
@@ -118,7 +118,7 @@ export default {
         },
         getCountAction(context, data) {
             axios
-                .post("/api/count")
+                .post("/count")
                 .then(res => {
                     context.commit('setCountList', res.data.data);
                 })
@@ -128,7 +128,7 @@ export default {
         }
         // loginCheckAction() {
         //     axios
-        //         .post("/api/login/check", {
+        //         .post("/login/check", {
         //             uid: localStorage.getItem['uid'],
         //         }, {
         //             headers: {

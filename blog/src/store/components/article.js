@@ -18,7 +18,7 @@ export default {
     actions: {
         getArticleDataAction(context, data) {
             axios
-                .post("/api/articlec/byid", {
+                .post("/articlec/byid", {
                     aid: data
                 })
                 .then(res => {
@@ -30,7 +30,7 @@ export default {
         },
         getArticleListAction(context) {
             axios
-                .post("/api/articlec")
+                .post("/articlec")
                 .then(res => {
                     context.commit('setArticleList', res.data.data);
                 })
@@ -40,7 +40,7 @@ export default {
         },
         addArticleAction(context, data) {
             axios
-                .post("/api/articlec/add", {
+                .post("/articlec/add", {
                     data
                 })
                 .then(res => {
@@ -55,7 +55,7 @@ export default {
         },
         editArticleAction(context, data) {
             axios
-                .post("/api/articlec/edit", {
+                .post("/articlec/edit", {
                     data
                 })
                 .then(res => {
@@ -70,7 +70,7 @@ export default {
         },
         delArticleAction(context, data) {
             axios
-                .post("/api/articlec/del", {
+                .post("/articlec/del", {
                     aid: data
                 })
                 .then(res => {

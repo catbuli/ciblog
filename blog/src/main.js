@@ -16,7 +16,8 @@ Vue.config.productionTip = false
 Vue.use(ElementUI);
 
 Vue.prototype.$axios = Axios;
-
+console.log(process.env.VUE_APP_URL);
+console.log(process.env.VUE_APP_MESSAGE);
 new Vue({
     router,
     store,

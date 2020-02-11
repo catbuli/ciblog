@@ -122,7 +122,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
     if (to.path.indexOf("/admin") == 0) {
         axios
-            .post("/api/login/check", {})
+            .post("/login/check", {})
             .then(res => {
                 if (res.data.code == 201) {
                     next();
