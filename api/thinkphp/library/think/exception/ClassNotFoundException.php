@@ -1,21 +1,32 @@
 <?php
 // +----------------------------------------------------------------------
-// | ThinkPHP [ WE CAN DO IT JUST THINK ]
+// | ThinkPHP [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
 // | Copyright (c) 2006-2016 http://thinkphp.cn All rights reserved.
 // +----------------------------------------------------------------------
 // | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
 // +----------------------------------------------------------------------
-// | Author: liu21st <liu21st@gmail.com>
+// | Author: yunwuxin <448901948@qq.com>
 // +----------------------------------------------------------------------
 
-// [ 应用入口文件 ]
-header('Access-Control-Allow-Origin: *');
-header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
-header('Access-Control-Allow-Methods: GET,POST');
-header('Access-Control-Allow-Origin:http://127.0.0.1:80');
-session_start();
-// 定义应用目录
-define('APP_PATH', __DIR__ . '/application/');
-// 加载框架引导文件
-require __DIR__ . '/thinkphp/start.php';
+namespace think\exception;
+
+class ClassNotFoundException extends \RuntimeException
+{
+    protected $class;
+    public function __construct($message, $class = '')
+    {
+        $this->message = $message;
+        $this->class   = $class;
+    }
+
+    /**
+     * 获取类名
+     * @access public
+     * @return string
+     */
+    public function getClass()
+    {
+        return $this->class;
+    }
+}
