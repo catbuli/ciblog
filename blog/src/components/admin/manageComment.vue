@@ -110,8 +110,8 @@ export default {
             this.commentList = this.$store.state.comment.commentList;
             this.loading = false;
         },
-        "$store.state.comment.paging": function() {
-            this.paging = this.$store.state.comment.paging;
+        "$store.state.global.paging": function() {
+            this.paging = this.$store.state.global.paging;
         }
     },
     mounted() {

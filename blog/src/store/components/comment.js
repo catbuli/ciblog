@@ -6,13 +6,6 @@ export default {
     state: {
         commentList: [],
         comment: {},
-        paging: {
-            pageSize: 10,
-            currentPage: 1,
-            type: -1,
-            total: 0,
-            typeName: "",
-        }
     },
     mutations: {
         setCommentList(state, data) {
@@ -21,8 +14,10 @@ export default {
         setComment(state, data) {
             state.comment = data;
         },
-        setPaging(state, data) {
-            state.paging = data;
+    },
+    watch: {
+        "$store.state.global.paging": function () {
+            this.paging = this.$store.state.global.paging;
         }
     },
     actions: {
@@ -90,7 +85,7 @@ export default {
                     status: data.status
                 })
                 .then(res => {
-                    dispatch('getCommentListAction', rootState.comment.paging);
+                    dispatch('getCommentListAction', rootState.global.paging);
                 })
                 .catch(err => {
                     console.log(err);
@@ -106,7 +101,7 @@ export default {
                 })
                 .then(res => {
                     if (res.data.code == 200) {
-                        dispatch('getCommentListAction', rootState.comment.paging);
+                        dispatch('getCommentListAction', rootState.global.paging);
                     }
                 })
                 .catch(err => {

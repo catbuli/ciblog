@@ -18,6 +18,13 @@ export default {
             CategoryCount: "",
             commentCount: ""
         },
+        paging: {
+            pageSize: 10,
+            currentPage: 1,
+            type: -1,
+            total: 0,
+            typeName: "",
+        }
     },
     mutations: {
         isAdmin(state, data) {
@@ -46,6 +53,9 @@ export default {
         },
         setCountList(state, data) {
             state.countList = data;
+        },
+        setPaging(state, data) {
+            state.paging = data;
         }
     },
     actions: {

@@ -32,11 +32,14 @@ export default {
                     console.log(err);
                 });
         },
-        getArticleListAction(context) {
+        getArticleListAction(context, data) {
             axios
-                .post("/articlec")
+                .post("/articlec", {
+                    paging: data
+                })
                 .then(res => {
                     context.commit('setArticleList', res.data.data);
+                    context.commit('setPaging', res.data.paging);
                 })
                 .catch(err => {
                     console.log(err);
