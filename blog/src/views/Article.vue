@@ -19,8 +19,10 @@
                 <div class="markdown-body"
                      v-html="article.html">
                 </div>
-                <div class="article-other">other</div>
-                <div class="article-update">update</div>
+                <div class="article-other"></div>
+                <div class="article-update">
+                    <i class="el-icon-time">最后更新于：{{article.modify_date}}</i>
+                </div>
             </div>
             <div class="article-tags">
                 <span v-for="item in article.tag"
@@ -31,14 +33,14 @@
                      v-if="previous">
                     <a :href="'/article/'+ previous.aid">
                         <img :src="previous.cover_url"
-                             alt="">
+                             alt="上一篇">
                     </a>
                 </div>
                 <div class="article-next"
                      v-if="next">
                     <a :href="'/article/'+ next.aid">
                         <img :src="next.cover_url"
-                             alt="">
+                             alt="下一篇">
                     </a>
                 </div>
             </div>
@@ -185,8 +187,7 @@ export default {
             this.article = this.$store.state.article.article;
             this.previous = this.$store.state.article.previous;
             this.next = this.$store.state.article.next;
-            console.log(this.next);
-            console.log(this.previous);
+            this.article.modify_date = this.article.modify_date.split(" ")[0];
             this.loading = false;
         },
         "$store.state.comment.comment": function() {
@@ -271,6 +272,12 @@ export default {
 /* 文章更新时间 */
 .article-update {
     border-bottom: 1px dashed #dadada;
+    text-align: right;
+    line-height: 20px;
+}
+.article-update i {
+    color: #727272;
+    margin-bottom: 10px;
 }
 /* 文章标签 */
 .article-tags {
