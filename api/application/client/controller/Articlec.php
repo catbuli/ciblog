@@ -145,7 +145,11 @@ class Articlec extends Controller
                 $article->categoryList = self::getMetaIdList($aid, "category");
                 $article->category = ArticleMeta::getMetaByArticle($aid, "category", true);
                 $article->tag = ArticleMeta::getMetaByArticle($aid, "tag", true);
-                return Response::result(201, "成功", "文章信息获取成功!", $article);
+                $list = [];
+                $list["next"] = Db::name('article')->where('aid', '>', $aid)->order("aid asc")->find();
+                $list["present"] = $article;
+                $list["previous"] = Db::name('article')->where('aid', '<', $aid)->order("aid desc")->find();
+                return Response::result(201, "成功", "文章信息获取成功!", $list);
             } else {
                 return Response::result(404, "失败", "文章没有找到，或已被删除!");
             }
