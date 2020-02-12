@@ -9,9 +9,11 @@ use app\client\model\ArticleMeta;
 
 class Article extends Model
 {
-    public function getArticleList()
+    public function getArticleList($paging)
     {
-        return Article::all();
+        if ($paging['type'] == -1) {
+            return $this->order('create_date desc')->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->select();
+        }
     }
     public static function getCount()
     {
@@ -36,5 +38,28 @@ class Article extends Model
     public function delArticle($aid)
     {
         return Article::destroy($aid);
+    }
+    public static function Count($field, $value = -1)
+    {
+        $count = 0;
+        switch ($field) {
+            case 'status':
+                if ($value == -1) {
+                    $count = count(Article::all());
+                } else {
+                    $count = count(Article::all([$field => $value]));
+                }
+                break;
+            case 'aid':
+                $count = count(Article::all(["aid" => $value]));
+                break;
+            case 'all':
+                $count = count(Article::all(["aid" => $value]));
+                break;
+            default:
+                $count = count(Article::all());
+                break;
+        }
+        return $count;
     }
 }

@@ -17,20 +17,21 @@ class Articlec extends Controller
      *
      * @return json
      */
-    public function index()
+    public function index($paging)
     {
         try {
             $article = new Article();
-            $list = $article->getArticleList();
+            $list = $article->getArticleList($paging);
             foreach ($list as $value) {
                 Db::table('ciblog_article')->where('aid', $value->aid)->update(['comment_count' => count(Comment::getCommentById($value->aid))]);
             }
-            $list = $article->getArticleList();
+            $list = $article->getArticleList($paging);
             foreach ($list as $value) {
                 $value->category = ArticleMeta::getMetaByArticle($value->aid, "category", true);
                 $value->tag = ArticleMeta::getMetaByArticle($value->aid, "tag", true);
             }
-            return Response::result(201, "成功", "数据获取成功!", $list);
+            $paging['total'] = Article::Count($paging['typeName'], $paging['type']);
+            return Response::result(201, "成功", "数据获取成功!", $list, $paging);
         } catch (Exception $e) {
             return Response::result(400, "请求失败!", $e->getMessage());
         }
