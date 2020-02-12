@@ -67,22 +67,18 @@
                 </template>
             </el-table-column>
         </el-table>
-        <el-pagination background
-                       layout="jumper,prev,pager,next,total"
-                       :total="paging.total"
-                       :page-size="paging.pageSize"
-                       style="text-align:right"
-                       @current-change="currentChange">
-        </el-pagination>
+        <paging action="getCommentListAction"></paging>
     </adminFrame>
 </template>
 
 <script>
 import adminFrame from "@/components/admin/common/adminFrame.vue";
+import paging from "@/components/common/paging.vue";
 export default {
     name: "manageComment",
     components: {
-        adminFrame
+        adminFrame,
+        paging
     },
     data() {
         return {
@@ -165,10 +161,6 @@ export default {
         },
         editComment(cid) {
             // this.isEdit = true;
-        },
-        currentChange(e) {
-            this.paging.currentPage = e;
-            this.getCommentList();
         },
         // 博客↓
         clickSelect(row, column, event) {
