@@ -16,20 +16,20 @@ class Response
     public static function result(int $code, string $title = "", string $message = "", $data = [], $paging = [])
     {
         if ($paging) {
-            return json([
+            return [
                 'code' => $code,
                 'title' => $title,
                 'message' => $message,
                 'data' => $data,
                 'paging' => $paging
-            ]);
+            ];
         } else {
-            return json([
+            return [
                 'code' => $code,
                 'title' => $title,
                 'message' => $message,
                 'data' => $data
-            ]);
+            ];
         }
     }
 }

@@ -81,7 +81,7 @@ class File extends Driver
         $dir      = dirname($filename);
 
         if ($auto && !is_dir($dir)) {
-            mkdir($dir, 0755, true);
+            mkdir($dir, 0777, true);
         }
         return $filename;
     }
@@ -156,113 +156,112 @@ class File extends Driver
             $data = gzcompress($data, 3);
         }
         $data   = "<?php\n//" . sprintf('%012d', $expire) . "\n exit();?>\n" . $data;
-        $result = file_put_contents($filename, $data);
-        if ($result) {
-            isset($first) && $this->setTagItem($filename);
-            clearstatcache();
-            return true;
-        } else {
-            return false;
-        }
-    }
+$result = file_put_contents($filename, $data);
+if ($result) {
+isset($first) && $this->setTagItem($filename);
+clearstatcache();
+return true;
+} else {
+return false;
+}
+}
 
-    /**
-     * 自增缓存（针对数值缓存）
-     * @access public
-     * @param string    $name 缓存变量名
-     * @param int       $step 步长
-     * @return false|int
-     */
-    public function inc($name, $step = 1)
-    {
-        if ($this->has($name)) {
-            $value  = $this->get($name) + $step;
-            $expire = $this->expire;
-        } else {
-            $value  = $step;
-            $expire = 0;
-        }
+/**
+* 自增缓存（针对数值缓存）
+* @access public
+* @param string $name 缓存变量名
+* @param int $step 步长
+* @return false|int
+*/
+public function inc($name, $step = 1)
+{
+if ($this->has($name)) {
+$value = $this->get($name) + $step;
+$expire = $this->expire;
+} else {
+$value = $step;
+$expire = 0;
+}
 
-        return $this->set($name, $value, $expire) ? $value : false;
-    }
+return $this->set($name, $value, $expire) ? $value : false;
+}
 
-    /**
-     * 自减缓存（针对数值缓存）
-     * @access public
-     * @param string    $name 缓存变量名
-     * @param int       $step 步长
-     * @return false|int
-     */
-    public function dec($name, $step = 1)
-    {
-        if ($this->has($name)) {
-            $value  = $this->get($name) - $step;
-            $expire = $this->expire;
-        } else {
-            $value  = -$step;
-            $expire = 0;
-        }
+/**
+* 自减缓存（针对数值缓存）
+* @access public
+* @param string $name 缓存变量名
+* @param int $step 步长
+* @return false|int
+*/
+public function dec($name, $step = 1)
+{
+if ($this->has($name)) {
+$value = $this->get($name) - $step;
+$expire = $this->expire;
+} else {
+$value = -$step;
+$expire = 0;
+}
 
-        return $this->set($name, $value, $expire) ? $value : false;
-    }
+return $this->set($name, $value, $expire) ? $value : false;
+}
 
-    /**
-     * 删除缓存
-     * @access public
-     * @param string $name 缓存变量名
-     * @return boolean
-     */
-    public function rm($name)
-    {
-        $filename = $this->getCacheKey($name);
-        try {
-            return $this->unlink($filename);
-        } catch (\Exception $e) {
-        }
-    }
+/**
+* 删除缓存
+* @access public
+* @param string $name 缓存变量名
+* @return boolean
+*/
+public function rm($name)
+{
+$filename = $this->getCacheKey($name);
+try {
+return $this->unlink($filename);
+} catch (\Exception $e) {
+}
+}
 
-    /**
-     * 清除缓存
-     * @access public
-     * @param string $tag 标签名
-     * @return boolean
-     */
-    public function clear($tag = null)
-    {
-        if ($tag) {
-            // 指定标签清除
-            $keys = $this->getTagItem($tag);
-            foreach ($keys as $key) {
-                $this->unlink($key);
-            }
-            $this->rm('tag_' . md5($tag));
-            return true;
-        }
-        $files = (array) glob($this->options['path'] . ($this->options['prefix'] ? $this->options['prefix'] . DS : '') . '*');
-        foreach ($files as $path) {
-            if (is_dir($path)) {
-                $matches = glob($path . '/*.php');
-                if (is_array($matches)) {
-                    array_map('unlink', $matches);
-                }
-                rmdir($path);
-            } else {
-                unlink($path);
-            }
-        }
-        return true;
-    }
+/**
+* 清除缓存
+* @access public
+* @param string $tag 标签名
+* @return boolean
+*/
+public function clear($tag = null)
+{
+if ($tag) {
+// 指定标签清除
+$keys = $this->getTagItem($tag);
+foreach ($keys as $key) {
+$this->unlink($key);
+}
+$this->rm('tag_' . md5($tag));
+return true;
+}
+$files = (array) glob($this->options['path'] . ($this->options['prefix'] ? $this->options['prefix'] . DS : '') . '*');
+foreach ($files as $path) {
+if (is_dir($path)) {
+$matches = glob($path . '/*.php');
+if (is_array($matches)) {
+array_map('unlink', $matches);
+}
+rmdir($path);
+} else {
+unlink($path);
+}
+}
+return true;
+}
 
-    /**
-     * 判断文件是否存在后，删除
-     * @param $path
-     * @return bool
-     * @author byron sampson <xiaobo.sun@qq.com>
-     * @return boolean
-     */
+/**
+* 判断文件是否存在后，删除
+* @param $path
+* @return bool
+* @author byron sampson <xiaobo.sun@qq.com>
+    * @return boolean
+    */
     private function unlink($path)
     {
-        return is_file($path) && unlink($path);
+    return is_file($path) && unlink($path);
     }
-
-}
+    }
