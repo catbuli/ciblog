@@ -101,6 +101,7 @@ export default {
 <style scoped>
 /* 侧边栏 */
 #nav {
+    /* overflow: hidden; */
     padding: 0px;
     min-width: 200px;
     height: 100%;
@@ -185,11 +186,11 @@ export default {
 
 .head-portrait {
     position: relative;
-    top: 20%;
+    top: 25%;
 }
 .head-portrait img {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     transition: all 1s ease 0s;
 }
@@ -199,27 +200,48 @@ export default {
 }
 
 .hidden-nav {
-    animation: hidden-nav ease-in-out 0.5s;
+    animation: hidden-nav ease 0.5s;
     transform: translateX(-100%);
     transition: all ease 0.5s;
 }
 .show-nav {
-    animation: show-nav ease-in-out 0.5s;
+    animation: show-nav ease 0.5s;
     transition: all ease 0.5s;
 }
 @keyframes show-nav {
     0% {
-        border-radius: 0 100% 100% 0;
-        opacity: 0;
+        border-radius: 0 100% 100% 0/0 50% 50% 0;
     }
+    60% {
+        border-radius: 0 100% 100% 0/0 50% 50% 0;
+    }
+    /* 65% {
+        border-radius: 0 94% 94% 0/0 47% 47% 0;
+    }
+    70% {
+        border-radius: 0 100% 100% 0/0 50% 50% 0;
+    }
+    75% {
+        border-radius: 0 100% 100% 0/0 50% 50% 0;
+    }
+    80% {
+        border-radius: 0 100% 100% 0/0 50% 50% 0;
+    }
+    85% {
+        border-radius: 0 100% 100% 0/0 50% 50% 0;
+    }
+    90% {
+    }
+    95% {
+    } */
     100% {
         border-radius: 0;
-        opacity: 1;
+        /* opacity: 1; */
     }
 }
 @keyframes hidden-nav {
     0% {
-        border-radius: 0;
+        /* border-radius: 0; */
         opacity: 1;
     }
     /* 10% {}
@@ -232,7 +254,7 @@ export default {
     80% {}
     90% {} */
     100% {
-        border-radius: 0 100% 100% 0;
+        /* border-radius: 0 100% 100% 0; */
         opacity: 0;
     }
 }

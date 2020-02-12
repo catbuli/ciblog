@@ -27,8 +27,20 @@
                       :key="item.cid"><i class="el-icon-collection-tag">{{item.name}}</i></span>
             </div>
             <div class="article-footer">
-                <div class="article-previous">ssss</div>
-                <div class="article-next">aaaa</div>
+                <div class="article-previous"
+                     v-if="previous">
+                    <a :href="'/article/'+ previous.aid">
+                        <img :src="previous.cover_url"
+                             alt="">
+                    </a>
+                </div>
+                <div class="article-next"
+                     v-if="next">
+                    <a :href="'/article/'+ next.aid">
+                        <img :src="next.cover_url"
+                             alt="">
+                    </a>
+                </div>
             </div>
         </article>
         <div class="comments">
@@ -135,6 +147,8 @@ export default {
                 email: "",
                 avatar_url: ""
             },
+            previous: {},
+            next: {},
             rules: {
                 nickname: [
                     {
@@ -169,6 +183,10 @@ export default {
     watch: {
         "$store.state.article.article": function() {
             this.article = this.$store.state.article.article;
+            this.previous = this.$store.state.article.previous;
+            this.next = this.$store.state.article.next;
+            console.log(this.next);
+            console.log(this.previous);
             this.loading = false;
         },
         "$store.state.comment.comment": function() {
@@ -274,14 +292,21 @@ export default {
     margin-top: 20px;
 }
 .article-footer div {
-    height: 100px;
+    height: 150px;
     flex: 1;
 }
+.article-footer div img {
+    width: 100%;
+    height: 100%;
+    filter: brightness(0.3);
+    transition: all ease 1s;
+}
+.article-footer div img:hover {
+    filter: brightness(1);
+}
 .article-previous {
-    background-color: aquamarine;
 }
 .article-next {
-    background-color: rgb(226, 4, 255);
 }
 /* 评论列表 */
 .response {

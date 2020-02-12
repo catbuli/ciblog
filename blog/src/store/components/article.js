@@ -5,14 +5,18 @@ import router from '@/router'
 export default {
     state: {
         articleList: [],
-        article: {}
+        article: {},
+        previous: {},
+        next: {}
     },
     mutations: {
         setArticleList(state, data) {
             state.articleList = data;
         },
         setArticle(state, data) {
-            state.article = data;
+            state.article = data.present;
+            state.previous = data.previous;
+            state.next = data.next;
         }
     },
     actions: {

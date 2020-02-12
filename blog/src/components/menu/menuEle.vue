@@ -14,6 +14,7 @@ export default {
 
 <style scoped>
 #menu {
+    overflow: hidden;
     width: 100%;
 }
 #menu a {
