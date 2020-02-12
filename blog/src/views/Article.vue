@@ -32,6 +32,7 @@
                 <div class="article-previous"
                      v-if="previous">
                     <a :href="'/article/'+ previous.aid">
+                        <span>{{previous.title}}</span>
                         <img :src="previous.cover_url"
                              alt="上一篇">
                     </a>
@@ -39,6 +40,7 @@
                 <div class="article-next"
                      v-if="next">
                     <a :href="'/article/'+ next.aid">
+                        <span>{{next.title}}</span>
                         <img :src="next.cover_url"
                              alt="下一篇">
                     </a>
@@ -262,6 +264,7 @@ export default {
     border-top: 1px dashed #dadada;
     padding: 20px;
     margin-top: 25px;
+    margin-bottom: 40px;
 }
 .markdown-body >>> ul li {
     list-style: decimal;
@@ -301,12 +304,24 @@ export default {
 .article-footer div {
     height: 150px;
     flex: 1;
+    position: relative;
 }
 .article-footer div img {
     width: 100%;
     height: 100%;
-    filter: brightness(0.3);
-    transition: all ease 1s;
+    filter: brightness(0.2);
+    /* opacity: 0.3; */
+    transition: all ease 0.3s;
+    object-fit: cover;
+}
+.article-footer div span {
+    width: 70%;
+    left: 15%;
+    top: 50px;
+    display: inline-block;
+    position: absolute;
+    z-index: 20;
+    color: #fff;
 }
 .article-footer div img:hover {
     filter: brightness(1);
