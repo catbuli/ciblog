@@ -23,7 +23,6 @@ export default {
     },
     actions: {
         getArticleListAction(context, data) {
-            console.log(data)
             post("/articlec", {
                 paging: data
             }, (data) => {

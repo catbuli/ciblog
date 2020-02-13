@@ -54,6 +54,4 @@ export default {
 </script>
 
 <style scoped>
-#paging {
-}
 </style>

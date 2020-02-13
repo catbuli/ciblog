@@ -76,15 +76,16 @@ export default {
             }, (data) => {
                 context.commit('setLoginStatus', {
                     isLogin: true,
-                    uid: res.data.data.uid,
-                    token: res.data.data.token,
+                    uid: data.data.uid,
+                    token: data.data.token,
                 });
                 router.push("/admin");
             });
         },
         alterPassAction(context, data) {
             post("/login/alterpass", {
-                data
+                password: data.password,
+                repassword: data.repassword,
             }, (data) => {});
         },
         logoutAction(context, data) {
