@@ -2,7 +2,6 @@ import axios from '@/http'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import ArticleList from '../views/ArticleList.vue'
 import Article from '../views/Article.vue'
 import Login from '../views/Login.vue'
 import Admin from '../views/Admin.vue'
@@ -35,11 +34,6 @@ const routes = [{
         path: '/login',
         name: 'login',
         component: Login
-    },
-    {
-        path: '/articleList',
-        name: 'articleList',
-        component: ArticleList,
     },
     {
         path: '/article/:id',

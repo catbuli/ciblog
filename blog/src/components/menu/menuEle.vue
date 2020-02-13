@@ -1,7 +1,6 @@
 <template>
     <menu id="menu">
         <router-link to="/">Home</router-link>
-        <router-link to="/articleList">articleList</router-link>
     </menu>
 </template>
 
