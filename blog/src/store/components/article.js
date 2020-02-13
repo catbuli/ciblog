@@ -45,7 +45,10 @@ export default {
                     console.log(err);
                 });
         },
-        addArticleAction(context, data) {
+        addArticleAction({
+            rootState,
+            dispatch
+        }, data) {
             axios
                 .post("/articlec/add", {
                     data
@@ -53,7 +56,7 @@ export default {
                 .then(res => {
                     if (res.data.code == 200) {
                         router.push('/admin/manage_article')
-                        context.dispatch('getArticleListAction');
+                        dispatch('getArticleListAction', rootState.global.paging);
                     }
                 })
                 .catch(err => {
@@ -75,14 +78,17 @@ export default {
                     console.log(err);
                 });
         },
-        delArticleAction(context, data) {
+        delArticleAction({
+            rootState,
+            dispatch
+        }, data) {
             axios
                 .post("/articlec/del", {
                     aid: data
                 })
                 .then(res => {
                     if (res.data.code == 200) {
-                        context.dispatch('getArticleListAction');
+                        dispatch('getArticleListAction', rootState.global.paging);
                     }
                 })
                 .catch(err => {

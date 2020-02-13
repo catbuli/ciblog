@@ -69,15 +69,20 @@
                              label="发布日期">
             </el-table-column>
         </el-table>
+        <paging action="getArticleListAction"
+                align="right"
+                @function="handlePage"></paging>
     </adminFrame>
 </template>
 
 <script>
 import adminFrame from "@/components/admin/common/adminFrame.vue";
+import paging from "@/components/common/paging.vue";
 export default {
     name: "manageArticle",
     components: {
-        adminFrame
+        adminFrame,
+        paging
     },
     data() {
         return {
@@ -88,7 +93,14 @@ export default {
                 { text: "未审核", value: "0" },
                 { text: "通过", value: "1" },
                 { text: "垃圾", value: "2" }
-            ]
+            ],
+            paging: {
+                pageSize: 10,
+                currentPage: 1,
+                type: -1,
+                typeName: "none",
+                total: 0
+            }
         };
     },
     watch: {
@@ -102,7 +114,7 @@ export default {
     },
     methods: {
         getArticleList() {
-            this.$store.dispatch("getArticleListAction");
+            this.$store.dispatch("getArticleListAction", this.paging);
         },
         delArticle() {
             if (this.selectRows.length > 0) {
@@ -137,6 +149,9 @@ export default {
         },
         filterHandler(value, row, column) {
             return row.status === value;
+        },
+        handlePage() {
+            this.loading = true;
         }
     }
 };

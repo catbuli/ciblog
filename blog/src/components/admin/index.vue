@@ -48,7 +48,7 @@ export default {
                 pageSize: 10,
                 currentPage: 1,
                 type: -1,
-                typeName: "status",
+                typeName: "none",
                 total: 0
             }
         };
@@ -63,7 +63,7 @@ export default {
             this.$store.dispatch("getCountAction");
         },
         getArticleList() {
-            this.$store.dispatch("getArticleListAction");
+            this.$store.dispatch("getArticleListAction", this.paging);
         },
         getCommentList() {
             this.$store.dispatch("getCommentListAction", this.paging);
