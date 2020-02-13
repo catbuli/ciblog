@@ -93,6 +93,9 @@ export default {
     font-size: 15px;
     margin: 0 10px;
 }
+section ul {
+    padding-left: 40px;
+}
 section ul li {
     margin-bottom: 5px;
 }

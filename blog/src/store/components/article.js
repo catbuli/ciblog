@@ -22,77 +22,49 @@ export default {
         }
     },
     actions: {
-        getArticleDataAction(context, data) {
-            axios
-                .post("/articlec/byid", {
-                    aid: data
-                })
-                .then(res => {
-                    context.commit('setArticle', res.data.data);
-                })
-                .catch(err => {
-                    console.log(err);
-                });
-        },
         getArticleListAction(context, data) {
             post("/articlec", {
                 paging: data
             }, (data) => {
-                console.log(data)
                 context.commit('setArticleList', data.data);
-                context.commit('setPaging', data.data);
+                context.commit('setPaging', data.paging);
             });
         },
-
+        getArticleDataAction(context, data) {
+            post("/articlec/byid", {
+                aid: data
+            }, (data) => {
+                context.commit('setArticle', data.data);
+            });
+        },
         addArticleAction({
             rootState,
             dispatch
         }, data) {
-            axios
-                .post("/articlec/add", {
-                    data
-                })
-                .then(res => {
-                    if (res.data.code == 200) {
-                        router.push('/admin/manage_article')
-                        dispatch('getArticleListAction', rootState.global.paging);
-                    }
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+            post("/articlec/add", {
+                data
+            }, (data) => {
+                router.push('/admin/manage_article')
+                dispatch('getArticleListAction', rootState.global.paging);
+            });
         },
         editArticleAction(context, data) {
-            axios
-                .post("/articlec/edit", {
-                    data
-                })
-                .then(res => {
-                    if (res.data.code == 200) {
-                        router.push('/admin/manage_article')
-                        context.dispatch('getArticleListAction');
-                    }
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+            post("/articlec/edit", {
+                data
+            }, (data) => {
+                router.push('/admin/manage_article')
+                context.dispatch('getArticleListAction');
+            });
         },
         delArticleAction({
             rootState,
             dispatch
         }, data) {
-            axios
-                .post("/articlec/del", {
-                    aid: data
-                })
-                .then(res => {
-                    if (res.data.code == 200) {
-                        dispatch('getArticleListAction', rootState.global.paging);
-                    }
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+            post("/articlec/del", {
+                aid: data
+            }, (data) => {
+                dispatch('getArticleListAction', rootState.global.paging);
+            });
         }
     },
     modules: {}

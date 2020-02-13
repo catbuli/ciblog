@@ -2,13 +2,9 @@
     <div id="ArticleList">
         <!-- <headEle></headEle> -->
         <articleItem :list-data="$store.state.article.articleList"></articleItem>
-        <el-pagination background
-                       layout="jumper,prev,pager,next,total"
-                       :total="paging.total"
-                       :page-size="paging.pageSize"
-                       style="text-align:center"
-                       @current-change="currentChange">
-        </el-pagination>
+        <paging action="getArticleListAction"
+                align="center"
+                @function="handlePage"></paging>
         <footEle></footEle>
         <backTop></backTop>
     </div>
@@ -20,7 +16,7 @@ import footEle from "@/components/footer/footEle.vue";
 import headEle from "@/components/header/headEle.vue";
 import articleItem from "@/components/common/articleItem.vue";
 import backTop from "@/components/common/backTop.vue";
-import Axios from "axios";
+import paging from "@/components/common/paging.vue";
 
 export default {
     name: "home",
@@ -28,10 +24,12 @@ export default {
         headEle,
         footEle,
         articleItem,
-        backTop
+        backTop,
+        paging
     },
     data() {
         return {
+            loading: true,
             paging: {
                 pageSize: 5,
                 currentPage: 1,
@@ -46,17 +44,10 @@ export default {
             this.paging = this.$store.state.global.paging;
         }
     },
-    mounted() {
-        this.getArticleList();
-    },
+    mounted() {},
     methods: {
-        getArticleList() {
-            this.$store.dispatch("getArticleListAction", this.paging);
-        },
-        currentChange(e) {
-            this.paging.currentPage = e;
-            this.getArticleList();
-            scrollTo(0, 0);
+        handlePage() {
+            this.loading = true;
         }
     }
 };

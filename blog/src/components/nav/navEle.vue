@@ -15,7 +15,7 @@
         </svg>
         <div class="intro">
             <div class="head-portrait">
-                <a href="articleList">
+                <a href="/">
                     <img :src="this.$store.state.global.personalData.imgurl"
                          alt />
                     <p>{{this.$store.state.global.personalData.nickname}}</p>
@@ -34,7 +34,7 @@
         </div>
         <!-- <toolContainer :isShowSearch="true"
                        :isShowMouse="true"></toolContainer> -->
-        <menuEle></menuEle>
+        <!-- <menuEle></menuEle> -->
     </nav>
 </template>
 

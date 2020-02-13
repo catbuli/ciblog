@@ -60,6 +60,7 @@ export default {
     },
     actions: {
         getPersonalDataAction(context) {
+
             axios
                 .post("/personal")
                 .then(res => {

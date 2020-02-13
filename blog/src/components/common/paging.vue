@@ -33,6 +33,7 @@ export default {
     },
     watch: {
         "$store.state.global.paging": function() {
+            scrollTo(0, 0);
             this.paging = this.$store.state.global.paging;
         }
     },

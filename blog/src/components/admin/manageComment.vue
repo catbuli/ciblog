@@ -112,18 +112,12 @@ export default {
             this.paging = this.$store.state.global.paging;
         }
     },
-    mounted() {
-        this.getCommentList();
-    },
+    mounted() {},
     methods: {
         selectChange(value) {
             this.loading = true;
             this.paging.currentPage = 1;
             this.paging.type = value;
-            this.$store.dispatch("getCommentListAction", this.paging);
-        },
-        getCommentList() {
-            this.loading = true;
             this.$store.dispatch("getCommentListAction", this.paging);
         },
         delComment() {
