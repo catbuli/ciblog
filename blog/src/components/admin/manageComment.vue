@@ -67,7 +67,9 @@
                 </template>
             </el-table-column>
         </el-table>
-        <paging action="getCommentListAction"></paging>
+        <paging action="getCommentListAction"
+                align="right"
+                @function="handlePage"></paging>
     </adminFrame>
 </template>
 
@@ -165,6 +167,9 @@ export default {
         // 博客↓
         clickSelect(row, column, event) {
             this.$refs.table.toggleRowSelection(row);
+        },
+        handlePage() {
+            this.loading = true;
         }
     }
 };

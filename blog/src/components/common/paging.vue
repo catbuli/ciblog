@@ -4,7 +4,7 @@
                        layout="jumper,prev,pager,next,total"
                        :total="paging.total"
                        :page-size="paging.pageSize"
-                       style="text-align:right"
+                       :style="{textAlign:align}"
                        @current-change="currentChange">
         </el-pagination>
     </div>
@@ -14,7 +14,11 @@
 export default {
     name: "paging",
     props: {
-        action: String
+        action: String,
+        align: {
+            type: String,
+            default: "center"
+        }
     },
     data() {
         return {
@@ -38,6 +42,7 @@ export default {
     methods: {
         currentChange(e) {
             this.paging.currentPage = e;
+            this.$emit("function");
             this.getList();
         },
         getList() {
