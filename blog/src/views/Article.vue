@@ -31,7 +31,7 @@
             <div class="article-footer">
                 <div class="article-previous"
                      v-if="previous">
-                    <a :href="'/article/'+ previous.aid">
+                    <a @click="jump(previous.aid)">
                         <span>{{previous.title}}</span>
                         <img :src="previous.cover_url"
                              alt="上一篇">
@@ -39,7 +39,7 @@
                 </div>
                 <div class="article-next"
                      v-if="next">
-                    <a :href="'/article/'+ next.aid">
+                    <a @click="jump(next.aid)">
                         <span>{{next.title}}</span>
                         <img :src="next.cover_url"
                              alt="下一篇">
@@ -191,6 +191,7 @@ export default {
             this.next = this.$store.state.article.next;
             this.article.modify_date = this.article.modify_date.split(" ")[0];
             this.loading = false;
+            scrollTo(0, 0);
         },
         "$store.state.comment.comment": function() {
             this.commentList = this.$store.state.comment.comment;
@@ -218,6 +219,11 @@ export default {
         changeAvatar() {
             this.commentData.avatar_url =
                 "https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png";
+        },
+        jump(aid) {
+            this.$router.push({
+                path: `/article/${aid}`
+            });
         }
     },
     mounted() {
@@ -229,6 +235,10 @@ export default {
 
 <style scoped>
 /* 文章主体 */
+#Article {
+    position: absolute;
+    width: 100%;
+}
 #Article article {
     border-radius: 10px;
     margin: 0 auto;
@@ -300,6 +310,7 @@ export default {
 .article-footer {
     display: flex;
     margin-top: 20px;
+    cursor: pointer;
 }
 .article-footer div {
     height: 150px;

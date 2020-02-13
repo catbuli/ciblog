@@ -1,6 +1,6 @@
 <template>
     <div id="home">
-        <!-- <headEle></headEle> -->
+        <headEle></headEle>
         <articleItem :list-data="$store.state.article.articleList"></articleItem>
         <paging action="getArticleListAction"
                 align="center"
@@ -56,6 +56,8 @@ export default {
 <style>
 #home {
     height: 100%;
+    width: 100%;
+    position: absolute;
 }
 .articleItem {
     margin-top: 30px;

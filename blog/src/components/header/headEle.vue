@@ -1,5 +1,5 @@
 <template>
-    <div class="head"></div>
+    <div id="head"></div>
 </template>
 
 <script>
@@ -9,12 +9,15 @@ export default {
 </script>
 
 <style scoped>
-.head {
-    height: 700px;
+#head {
+    height: 100%;
     width: 100%;
     color: black;
-    background: url(../../assets/images/backgroud/background3.png) no-repeat;
-    background-size: 100% 100%;
+    background: url(https://xiaochengxuimg.oss-cn-beijing.aliyuncs.com/Blog/bg/bg4.jpg)
+        center center no-repeat;
+    background-size: cover;
+    z-index: -1;
+    position: relative;
     margin-bottom: 50px;
 }
 </style>

@@ -11,6 +11,7 @@
             <div class="search-bar">
                 <input id="search-input"
                        type="text"
+                       @keyup.enter="search"
                        placeholder="想要搜什么!">
                 <button id="search-button"
                         @click="search"></button>
@@ -62,7 +63,9 @@ export default {
         handleScroll(e) {
             this.isShow = false;
         },
-        search() {}
+        search() {
+            console.log("tag", "");
+        }
     }
 };
 </script>

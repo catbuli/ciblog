@@ -86,9 +86,10 @@ export default {
                 document.documentElement.scrollTop || document.body.scrollTop;
             if (scrollTop >= 400) {
                 this.$store.commit("handleLeftNav", false);
-            } else if (scrollTop === 0) {
-                this.$store.commit("handleLeftNav", true);
             }
+            // else if (scrollTop === 0) {
+            //     this.$store.commit("handleLeftNav", true);
+            // }
         }
     },
     destroyed() {
@@ -212,7 +213,7 @@ export default {
     0% {
         border-radius: 0 100% 100% 0/0 50% 50% 0;
     }
-    60% {
+    70% {
         border-radius: 0 100% 100% 0/0 50% 50% 0;
     }
     /* 65% {
@@ -242,7 +243,7 @@ export default {
 @keyframes hidden-nav {
     0% {
         /* border-radius: 0; */
-        opacity: 1;
+        /* opacity: 1; */
     }
     /* 10% {}
     20% {}
@@ -255,7 +256,7 @@ export default {
     90% {} */
     100% {
         /* border-radius: 0 100% 100% 0; */
-        opacity: 0;
+        /* opacity: 0; */
     }
 }
 </style>

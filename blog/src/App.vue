@@ -6,8 +6,8 @@
                   v-cloak></adminNav>
         <div id="mian"
              :class="[$store.state.global.isShowLeftNav ? '' : 'handle-main']">
-            <transition name="fade"
-                        mode="out-in">
+            <transition name="fade">
+                <!-- mode="out-in"> -->
                 <router-view />
             </transition>
         </div>
@@ -24,7 +24,7 @@ export default {
     },
     watch: {
         $route: function(to, from) {
-            scrollTo(0, 0);
+            // scrollTo(0, 0);
             let router_path = to.path;
             if (router_path.indexOf("/admin") != -1) {
                 this.$store.commit("isAdmin", false);
@@ -34,7 +34,7 @@ export default {
                 this.$store.commit("handleLeftNav", false);
             } else {
                 this.$store.commit("isAdmin", true);
-                this.$store.commit("handleLeftNav", true);
+                this.$store.commit("handleLeftNav", false);
             }
         },
         "$store.state.global.isShowLeftNav": function() {}
@@ -54,7 +54,7 @@ export default {
                 this.$store.commit("handleLeftNav", false);
             } else {
                 this.$store.commit("isAdmin", true);
-                this.$store.commit("handleLeftNav", true);
+                this.$store.commit("handleLeftNav", false);
             }
         }
     },
@@ -122,9 +122,11 @@ li {
     text-align: center;
     color: #2c3e50;
     width: 100%;
+    height: 100%;
 }
 
 #mian {
+    height: 100%;
     position: absolute;
     width: 85%;
     left: 15%;
@@ -139,16 +141,31 @@ li {
 
 /* 路由切换动画 */
 .fade-enter {
-    opacity: 0;
-    transform: rotateY(180deg);
+    transform: translateY(100%);
+    /* transform: scale(0.3); */
+    opacity: 0.3;
+}
+.fade-enter-active {
+    transition: all 1s ease;
+}
+.fade-enter-to {
+    transform: translateY(0);
+    /* transform: scale(1); */
+    opacity: 1;
 }
 
 .fade-leave {
+    transform: translateY(0);
+    /* transform: scale(1); */
     opacity: 1;
-    transform: rotateY(0deg);
 }
-
-.fade-enter-active {
-    transition: all 0.9s ease;
+.fade-leave-active {
+    transition: all 1s ease;
+    /* animation: card-out 1s ease; */
+}
+.fade-leave-to {
+    transform: translateY(-200%);
+    /* transform: scale(0.3); */
+    opacity: 0;
 }
 </style>

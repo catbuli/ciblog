@@ -6,8 +6,8 @@ import router from '@/router'
 export default {
     state: {
         personalData: {},
-        isAdmin: false,
-        isShowLeftNav: false,
+        isAdmin: true,
+        isShowLeftNav: true,
         isLogin: false,
         uid: localStorage.getItem('uid') ? localStorage.getItem('uid') : '',
         token: localStorage.getItem('token') ? localStorage.getItem('token') : '',
