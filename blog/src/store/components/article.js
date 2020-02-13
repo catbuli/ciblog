@@ -1,4 +1,6 @@
-import axios from '@/http'
+import {
+    post
+} from '@/http'
 import router from '@/router'
 
 
@@ -33,18 +35,15 @@ export default {
                 });
         },
         getArticleListAction(context, data) {
-            axios
-                .post("/articlec", {
-                    paging: data
-                })
-                .then(res => {
-                    context.commit('setArticleList', res.data.data);
-                    context.commit('setPaging', res.data.paging);
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+            post("/articlec", {
+                paging: data
+            }, (data) => {
+                console.log(data)
+                context.commit('setArticleList', data.data);
+                context.commit('setPaging', data.data);
+            });
         },
+
         addArticleAction({
             rootState,
             dispatch

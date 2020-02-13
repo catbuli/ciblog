@@ -32,6 +32,28 @@ instance.interceptors.request.use(
     }
 );
 
+/**
+ * 封装post请求
+ * @param url 请求url
+ * @param data 请求参数
+ * @param fn 回调函数
+ * @returns {Promise}
+ */
+
+export function post(url, data = {}, fn) {
+    return new Promise((resolve, reject) => {
+        instance.post(url, data)
+            .then(response => {
+                // resolve(response.data);
+                fn(response.data);
+            }, err => {
+                // reject(err)
+                console.log(err)
+            })
+    })
+}
+
+
 instance.interceptors.response.use(
     response => {
         switch (response.data.code) {
