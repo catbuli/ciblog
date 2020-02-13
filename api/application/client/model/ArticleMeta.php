@@ -36,6 +36,10 @@ class ArticleMeta extends Model
             return $list;
         }
     }
+    public static function delMetaByArticle($mid)
+    {
+        ArticleMeta::destroy(['mid' => $mid]);
+    }
     public static function delAllMetaByArticle($aid, $type)
     {
         ArticleMeta::destroy(['aid' => $aid, 'type' => $type]);

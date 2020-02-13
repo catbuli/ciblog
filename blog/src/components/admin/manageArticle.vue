@@ -109,13 +109,8 @@ export default {
             this.loading = false;
         }
     },
-    mounted() {
-        this.getArticleList();
-    },
+    mounted() {},
     methods: {
-        getArticleList() {
-            this.$store.dispatch("getArticleListAction", this.paging);
-        },
         delArticle() {
             if (this.selectRows.length > 0) {
                 this.$confirm("此操作将永久删除所选文章, 是否继续?", "提示", {

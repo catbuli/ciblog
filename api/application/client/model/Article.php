@@ -11,8 +11,12 @@ class Article extends Model
 {
     public function getArticleList($paging)
     {
-        if ($paging['type'] == -1) {
-            return $this->order('create_date desc')->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->select();
+        if ($paging) {
+            if ($paging['type'] == -1) {
+                return $this->order('create_date desc')->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->select();
+            }
+        } else {
+            return Article::all();
         }
     }
     public static function getCount()

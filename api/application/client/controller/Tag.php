@@ -2,6 +2,7 @@
 
 namespace app\client\controller;
 
+use app\client\model\ArticleMeta;
 use think\Controller;
 use app\client\model\Meta;
 use think\Exception;
@@ -57,6 +58,7 @@ class Tag extends Controller
         try {
             $meta = new Meta();
             $meta->delMeta($mid);
+            ArticleMeta::delMetaByArticle($mid);
             return Response::result(200, "成功", "标签删除成功!");
         } catch (Exception $e) {
             return Response::result(400, "请求失败!", $e->getMessage());
