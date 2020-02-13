@@ -1,5 +1,5 @@
 <template>
-    <div id="ArticleList">
+    <div id="home">
         <!-- <headEle></headEle> -->
         <articleItem :list-data="$store.state.article.articleList"></articleItem>
         <paging action="getArticleListAction"
@@ -54,7 +54,10 @@ export default {
 </script>
 
 <style>
-#ArticleList {
+#home {
     height: 100%;
+}
+.articleItem {
+    margin-top: 30px;
 }
 </style>

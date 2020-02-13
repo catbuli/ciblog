@@ -23,88 +23,83 @@ import manageFile from '../components/admin/manageFile.vue'
 Vue.use(VueRouter)
 
 const routes = [{
-        path: '/',
-        name: 'home',
-        component: Home
-    }, {
-        path: '/404',
-        name: '404',
-        component: errorPage
-    }, {
-        path: '/login',
-        name: 'login',
-        component: Login
-    },
-    {
-        path: '/article/:id',
-        name: 'article',
-        component: Article
-    },
-    {
+    path: '/',
+    name: 'home',
+    component: Home
+}, {
+    path: '/404',
+    name: '404',
+    component: errorPage
+}, {
+    path: '/login',
+    name: 'login',
+    component: Login
+}, {
+    path: '/article/:id',
+    name: 'article',
+    component: Article
+}, {
+    path: '/admin',
+    name: 'admin',
+    component: Admin,
+    children: [{
         path: '/admin',
-        name: 'admin',
-        component: Admin,
-        children: [{
-                path: '/admin',
-                name: 'index',
-                component: index,
-            }, {
-                path: '/admin/personal_settings',
-                name: 'personal_settings',
-                component: personalSettings,
-            }, {
-                path: '/admin/write_article',
-                name: 'write_article',
-                component: writeArticle,
-            }, {
-                path: '/admin/write_article/:aid',
-                name: 'edit_article',
-                component: writeArticle,
-            }, {
-                path: '/admin/manage_category',
-                name: 'manage_category',
-                component: manageCategory,
-            }, {
-                path: '/admin/add_category',
-                name: 'add_category',
-                component: addCategory,
-            }, {
-                path: '/admin/manage_tag',
-                name: 'manage_tag',
-                component: manageTag,
-            }, {
-                path: '/admin/manage_article',
-                name: 'manage_article',
-                component: manageArticle,
-            }, {
-                path: '/admin/manage_comment',
-                name: 'manage_comment',
-                component: manageComment,
-            },
-            {
-                path: '/admin/system_settings',
-                name: 'system_settings',
-                component: systemSettings,
-            }, {
-                path: '/admin/read_settings',
-                name: 'read_settings',
-                component: readSettings,
-            }, {
-                path: '/admin/backups',
-                name: 'backups',
-                component: backups,
-            }, {
-                path: '/admin/comment_settings',
-                name: 'comment_settings',
-                component: commentSettings,
-            }, {
-                path: '/admin/manage_file',
-                name: 'manage_file',
-                component: manageFile,
-            }
-        ]
-    }
-]
+        name: 'index',
+        component: index,
+    }, {
+        path: '/admin/personal_settings',
+        name: 'personal_settings',
+        component: personalSettings,
+    }, {
+        path: '/admin/write_article',
+        name: 'write_article',
+        component: writeArticle,
+    }, {
+        path: '/admin/write_article/:aid',
+        name: 'edit_article',
+        component: writeArticle,
+    }, {
+        path: '/admin/manage_category',
+        name: 'manage_category',
+        component: manageCategory,
+    }, {
+        path: '/admin/add_category',
+        name: 'add_category',
+        component: addCategory,
+    }, {
+        path: '/admin/manage_tag',
+        name: 'manage_tag',
+        component: manageTag,
+    }, {
+        path: '/admin/manage_article',
+        name: 'manage_article',
+        component: manageArticle,
+    }, {
+        path: '/admin/manage_comment',
+        name: 'manage_comment',
+        component: manageComment,
+    }, {
+        path: '/admin/system_settings',
+        name: 'system_settings',
+        component: systemSettings,
+    }, {
+        path: '/admin/read_settings',
+        name: 'read_settings',
+        component: readSettings,
+    }, {
+        path: '/admin/backups',
+        name: 'backups',
+        component: backups,
+    }, {
+        path: '/admin/comment_settings',
+        name: 'comment_settings',
+        component: commentSettings,
+    }, {
+        path: '/admin/manage_file',
+        name: 'manage_file',
+        component: manageFile,
+    }]
+}]
 
 const router = new VueRouter({
     // mode: 'history',

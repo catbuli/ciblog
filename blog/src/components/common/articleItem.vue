@@ -1,6 +1,7 @@
 <template>
     <ul id="articleItem">
         <li v-for="item in listData"
+            class="card"
             :key="item.aid">
             <a class="article-title"
                v-text="item.title"
@@ -65,6 +66,9 @@ export default {
 </script>
 
 <style scoped>
+#articleItem {
+    margin-top: 50px;
+}
 .card-line {
     width: 100%;
     height: 2px;
