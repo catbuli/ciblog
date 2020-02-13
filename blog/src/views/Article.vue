@@ -1,5 +1,6 @@
 <template>
-    <div id="Article">
+    <div id="Article"
+         :key="$route.params.id">
         <!-- <headEle></headEle> -->
         <article>
             <div class="article-header">
@@ -197,6 +198,10 @@ export default {
             this.commentList = this.$store.state.comment.comment;
             this.commentData.content = "";
             this.loading = false;
+        },
+        $route: function(to, from) {
+            this.getArticleData(to.params.id);
+            this.getCommentData(to.params.id);
         }
     },
     methods: {
@@ -227,6 +232,7 @@ export default {
         }
     },
     mounted() {
+        console.log(this.$route.params.id);
         this.getArticleData(this.$route.params.id);
         this.getCommentData(this.$route.params.id);
     }
