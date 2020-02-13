@@ -1,9 +1,7 @@
-import axios from '@/http'
-import router from '@/router'
 import {
-    Message,
-    Notification
-} from 'element-ui';
+    post
+} from '@/http'
+import router from '@/router'
 
 export default {
     state: {
@@ -60,120 +58,48 @@ export default {
     },
     actions: {
         getPersonalDataAction(context) {
-
-            axios
-                .post("/personal")
-                .then(res => {
-                    context.commit('setPersonalData', res.data.data);
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+            post("/personal", {}, (data) => {
+                context.commit('setPersonalData', data.data);
+            });
         },
         updatePersonalDataAction(context, data) {
-            axios
-                .post("/personal/update", {
-                    data: data
-                })
-                .then(res => {
-                    if (res.data.code == 200) {
-                        context.dispatch('getPersonalDataAction');
-                    }
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+            post("/personal/update", {
+                data: data
+            }, (data) => {
+                context.dispatch('getPersonalDataAction');
+            });
         },
         loginAction(context, data) {
-            axios
-                .post("/login", {
-                    name: data.name,
-                    password: data.password
-                })
-                .then(res => {
-                    if (res.data.code == 200) {
-                        context.commit('setLoginStatus', {
-                            isLogin: true,
-                            uid: res.data.data.uid,
-                            token: res.data.data.token,
-                        });
-                        router.push("/admin");
-                    }
-                })
-                .catch(err => {
-                    console.log(err);
+            post("/login", {
+                name: data.name,
+                password: data.password
+            }, (data) => {
+                context.commit('setLoginStatus', {
+                    isLogin: true,
+                    uid: res.data.data.uid,
+                    token: res.data.data.token,
                 });
+                router.push("/admin");
+            });
         },
         alterPassAction(context, data) {
-            axios
-                .post("/login/alterpass", data)
-                .then(res => {})
-                .catch(err => {
-                    console.log(err);
-                });
+            post("/login/alterpass", {
+                data
+            }, (data) => {});
         },
         logoutAction(context, data) {
-            axios
-                .post("/login/logout")
-                .then(res => {
-                    if (res.data.code == 200) {
-                        router.push("/login");
-                        context.commit('setLoginStatus', {
-                            isLogin: false
-                        });
-                    }
-                })
-                .catch(err => {
-                    console.log(err);
+            post("/login/logout", {}, (data) => {
+                router.push("/login");
+                context.commit('setLoginStatus', {
+                    isLogin: false
                 });
+            });
         },
         getCountAction(context, data) {
-            axios
-                .post("/count")
-                .then(res => {
-                    context.commit('setCountList', res.data.data);
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+            post("/count", {}, (data) => {
+                context.commit('setCountList', data.data);
+            });
         }
-        // loginCheckAction() {
-        //     axios
-        //         .post("/login/check", {
-        //             uid: localStorage.getItem['uid'],
-        //         }, {
-        //             headers: {
-        //                 "Accept": "application/json",
-        //                 'token': localStorage.getItem['token']
-        //             },
-        //         })
-        //         .then(res => {
-        //             if (res.data.code == 200) {
-        //                 // router.push("/admin");
-        //                 context.commit('setLoginStatus', {
-        //                     isLogin: true,
-        //                     uid: res.data.data.uid,
-        //                     token: res.data.data.token,
-        //                 });
-        //                 Notification({
-        //                     title: "欢迎",
-        //                     message: "管理员-" + res.data.data.name,
-        //                     type: "success"
-        //                 });
-        //             }
-        //             // else {
-        //             //     Notification({
-        //             //         title: "失败",
-        //             //         message: res.data.message,
-        //             //         type: "error"
-        //             //     });
-        //             // }
-        //         })
-        //         .catch(err => {
-        //             console.log(err);
-        //         });
-        // },
-
     },
     modules: {}
 }

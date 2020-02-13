@@ -1,9 +1,7 @@
-import axios from '@/http'
-import router from '@/router'
-
 import {
-    Notification
-} from 'element-ui';
+    post
+} from '@/http'
+import router from '@/router'
 
 export default {
     state: {
@@ -16,80 +14,28 @@ export default {
     },
     actions: {
         getCategoryListAction(context) {
-            axios
-                .post("/category")
-                .then(res => {
-                    context.commit('setCategoryList', res.data.data);
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+            post("/category", {}, (data) => {
+                context.commit('setCategoryList', data.data);
+            });
         },
         addCategoryAction(context, data) {
-            axios
-                .post("/category/add", {
-                    name: data.name,
-                    description: data.description
-                })
-                .then(res => {
-                    if (res.data.code == 200) {
-                        router.push('/admin/manage_category')
-                        Notification({
-                            title: "成功",
-                            message: "分类添加成功！",
-                            type: "success"
-                        });
-                        context.dispatch('getCategoryListAction');
-                    } else {
-                        Message({
-                            message: res.data.message,
-                            type: "error"
-                        });
-                    }
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+            post("/category/add", {
+                name: data.name,
+                description: data.description
+            }, (data) => {
+                router.push('/admin/manage_category')
+                context.dispatch('getCategoryListAction');
+            });
         },
         editCategoryAction(context, data) {
-            axios
-                .post("/category/add", {
-                    name: data.name,
-                    description: data.description
-                })
-                .then(res => {
-                    if (res.data.code == 200) {
-                        router.push('/admin/manage_category')
-                        Notification({
-                            title: "成功",
-                            message: "分类添加成功！",
-                            type: "success"
-                        });
-                        context.dispatch('getCategoryListAction');
-                    } else {
-                        Message({
-                            message: res.data.message,
-                            type: "error"
-                        });
-                    }
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+            console.log('editCategoryAction')
         },
         delCategoryAction(context, data) {
-            axios
-                .post("/category/del", {
-                    mid: data
-                })
-                .then(res => {
-                    if (res.data.code == 200) {
-                        context.dispatch('getCategoryListAction');
-                    }
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+            post("/category/del", {
+                mid: data
+            }, (data) => {
+                context.dispatch('getCategoryListAction');
+            });
         }
     },
     modules: {}

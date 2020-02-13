@@ -1,4 +1,6 @@
-import axios from '@/http'
+import {
+    post
+} from '@/http'
 import router from '@/router'
 
 
@@ -22,91 +24,55 @@ export default {
     },
     actions: {
         getCommentDataAction(context, data) {
-            axios
-                .post("/commentc/byid", {
-                    aid: data
-                })
-                .then(res => {
-                    context.commit('setComment', res.data.data);
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+            post("/commentc/byid", {
+                aid: data
+            }, (data) => {
+                context.commit('setComment', data.data);
+            });
         },
         getCommentListAction(context, data) {
-            axios
-                .post("/commentc", {
-                    paging: data
-                })
-                .then(res => {
-                    context.commit('setCommentList', res.data.data);
-                    context.commit('setPaging', res.data.paging);
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+            post("/commentc", {
+                paging: data
+            }, (data) => {
+                context.commit('setCommentList', data.data);
+                context.commit('setPaging', data.paging);
+            });
         },
         addCommentAction(context, data) {
-            axios
-                .post("/commentc/add", {
-                    data
-                })
-                .then(res => {
-                    if (res.data.code == 200) {
-                        context.dispatch('getCommentDataAction', data.aid);
-                    }
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+            post("/commentc/add", {
+                paging: data
+            }, (data) => {
+                context.dispatch('getCommentDataAction', data.aid);
+            });
         },
         editCommentAction(context, data) {
-            axios
-                .post("/commentc/edit", {
-                    data
-                })
-                .then(res => {
-                    if (res.data.code == 200) {
-                        router.push('/admin/manage_comment')
-                        context.dispatch('getCommentListAction');
-                    }
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+            post("/commentc/edit", {
+                data
+            }, (data) => {
+                router.push('/admin/manage_comment')
+                context.dispatch('getCommentListAction');
+            });
         },
         editCommentStatusAction({
             rootState,
             dispatch
         }, data) {
-            axios
-                .post("/commentc/editstatus", {
-                    cid: data.cid,
-                    status: data.status
-                })
-                .then(res => {
-                    dispatch('getCommentListAction', rootState.global.paging);
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+            post("/commentc/editstatus", {
+                cid: data.cid,
+                status: data.status
+            }, (data) => {
+                dispatch('getCommentListAction', rootState.global.paging);
+            });
         },
         delCommentAction({
             rootState,
             dispatch
         }, data) {
-            axios
-                .post("/commentc/del", {
-                    cid: data
-                })
-                .then(res => {
-                    if (res.data.code == 200) {
-                        dispatch('getCommentListAction', rootState.global.paging);
-                    }
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+            post("/commentc/del", {
+                cid: data
+            }, (data) => {
+                dispatch('getCommentListAction', rootState.global.paging);
+            });
         }
     },
     modules: {}

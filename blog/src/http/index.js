@@ -39,7 +39,6 @@ instance.interceptors.request.use(
  * @param fn 回调函数
  * @returns {Promise}
  */
-
 export function post(url, data = {}, fn) {
     return new Promise((resolve, reject) => {
         instance.post(url, data)
