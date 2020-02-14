@@ -1,6 +1,6 @@
 <template>
     <div id="Article">
-        <!-- <headEle></headEle> -->
+        <headEle height="60%"></headEle>
         <article>
             <div class="article-header">
                 <h2 class="article-title"
@@ -240,6 +240,7 @@ export default {
 <style scoped>
 /* 文章主体 */
 #Article {
+    height: 100%;
     position: absolute;
     width: 100%;
 }

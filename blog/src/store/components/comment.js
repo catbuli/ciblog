@@ -32,7 +32,7 @@ export default {
         },
         getCommentListAction(context, data) {
             post("/commentc", {
-                paging: data
+                aid: data
             }, (data) => {
                 context.commit('setCommentList', data.data);
                 context.commit('setPaging', data.paging);
@@ -40,8 +40,8 @@ export default {
         },
         addCommentAction(context, data) {
             post("/commentc/add", {
-                paging: data
-            }, (data) => {
+                data: data
+            }, () => {
                 context.dispatch('getCommentDataAction', data.aid);
             });
         },

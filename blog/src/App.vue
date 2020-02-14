@@ -7,7 +7,9 @@
         <div id="mian"
              :class="[$store.state.global.isShowLeftNav ? '' : 'handle-main']"
              :style="{height:$store.state.global.isAdmin?'100%':''}">
-            <transition name="fade">
+            <transition name="fade"
+                        @enter="beforeEnter">
+                <!-- @before-leave="beforeEnter"> -->
                 <!-- mode="out-in"> -->
                 <router-view :key="$store.state.global.refresh" />
                 <!-- 博客 ↑ :key="$route.path" -->
@@ -59,8 +61,8 @@ export default {
                 this.$store.commit("handleLeftNav", false);
             }
         },
-        afterLeave(el) {
-            console.log("tag", "");
+        beforeEnter(el) {
+            scrollTo(0, 0);
         }
     },
     mounted() {
@@ -145,7 +147,7 @@ li {
 
 /* 路由切换动画 */
 .fade-enter {
-    transform: translateY(100%);
+    transform: translateX(100%);
     /* transform: scale(0.3); */
     opacity: 0.3;
 }
@@ -164,11 +166,11 @@ li {
     opacity: 1;
 }
 .fade-leave-active {
-    transition: all 1.5s ease;
+    transition: all 0.5s ease;
     /* animation: card-out 1s ease; */
 }
 .fade-leave-to {
-    transform: translateY(-100%);
+    transform: translateX(-100%);
     /* transform: scale(0.3); */
     opacity: 0;
 }

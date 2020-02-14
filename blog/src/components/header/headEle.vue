@@ -1,10 +1,17 @@
 <template>
-    <div id="head"></div>
+    <div id="head"
+         :style="{height:height}"></div>
 </template>
 
 <script>
 export default {
-    name: "headEle"
+    name: "headEle",
+    props: {
+        height: {
+            type: String,
+            default: "100%"
+        }
+    }
 };
 </script>
 
