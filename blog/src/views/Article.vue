@@ -1,6 +1,7 @@
 <template>
     <div id="Article">
-        <headEle height="60%"></headEle>
+        <headEle height="60%"
+                 :isShowInfo="false"></headEle>
         <article>
             <div class="article-header">
                 <h2 class="article-title"
@@ -44,8 +45,8 @@
                         <img :src="next.cover_url"
                              alt="下一篇">
                     </a>
-                </div>
-            </div>
+</template>
+            </template>
         </article>
         <div class="comments">
             <span class="response">
@@ -123,7 +124,7 @@
         </div>
         <footEle></footEle>
         <backTop></backTop>
-    </div>
+    </template>
 </template>
 
 <script>
