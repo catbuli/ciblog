@@ -1,7 +1,8 @@
 <template>
     <div id="Article">
         <headEle height="60%"
-                 :isShowInfo="false"></headEle>
+                 :isShowInfo="false"
+                 :backgroundImage="'url('+article.cover_url+')'"></headEle>
         <article>
             <div class="article-header">
                 <h2 class="article-title"

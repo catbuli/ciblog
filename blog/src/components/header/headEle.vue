@@ -1,5 +1,5 @@
 <template>
-    <header :style="{height:height}">
+    <header :style="{height:height,backgroundImage:backgroundImage}">
         <div class="information one"
              ref="original"
              v-if="isShowInfo">
@@ -30,22 +30,33 @@ export default {
         isShowInfo: {
             type: Boolean,
             default: true
+        },
+        backgroundImage: {
+            type: String,
+            default:
+                "url('https://xiaochengxuimg.oss-cn-beijing.aliyuncs.com/Blog/bg/bg4.jpg')"
         }
     },
     methods: {
         handleAnimation() {
-            var original = this.$refs.original;
-            var copy = this.$refs.copy;
-            original.addEventListener("animationend", function() {
-                original.classList.remove("one");
-            });
-            copy.addEventListener("animationend", function() {
-                copy.remove();
-            });
-            // 博客↑
+            if (this.isShowInfo) {
+                var original = this.$refs.original;
+                var copy = this.$refs.copy;
+                original.addEventListener("animationend", function() {
+                    original.classList.remove("one");
+                });
+                copy.addEventListener("animationend", function() {
+                    copy.remove();
+                });
+                // 博客↑
+            } else {
+                return;
+            }
         }
     },
+    computed: {},
     mounted() {
+        console.log(this.backgroundImage);
         this.handleAnimation();
     }
 };
@@ -56,14 +67,14 @@ header {
     height: 100%;
     width: 100%;
     color: black;
-    background: url(https://xiaochengxuimg.oss-cn-beijing.aliyuncs.com/Blog/bg/bg4.jpg)
-        center center no-repeat;
     background-size: cover;
     z-index: -1;
     position: relative;
     margin-bottom: 50px;
     animation: show 1s 1;
     display: flex;
+    background-position: center center;
+    background-repeat: no-repeat;
     justify-content: center; /* 水平居中 */
     align-items: center;
 }
