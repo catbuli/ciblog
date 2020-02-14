@@ -72,6 +72,12 @@ export default {
 </script>
 
 <style>
+/* 公共样式设置 */
+::selection {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+}
+
 [v-cloak] {
     display: none;
 }
