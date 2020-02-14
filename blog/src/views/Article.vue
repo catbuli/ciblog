@@ -225,6 +225,7 @@ export default {
             this.$router.push({
                 path: `/article/${aid}`
             });
+            this.$store.commit("REFRESH", this.$route.path);
         }
     },
     mounted() {

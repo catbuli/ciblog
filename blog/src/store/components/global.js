@@ -23,11 +23,15 @@ export default {
             type: -1,
             total: 0,
             typeName: "",
-        }
+        },
+        refresh: "main"
     },
     mutations: {
         isAdmin(state, data) {
             state.isAdmin = data;
+        },
+        REFRESH(state, data) {
+            state.refresh = data;
         },
         // handleAdminNav(state, data) {
         //     state.showAdminNav = data;

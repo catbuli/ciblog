@@ -9,7 +9,7 @@
              :style="{height:$store.state.global.isAdmin?'100%':''}">
             <transition name="fade">
                 <!-- mode="out-in"> -->
-                <router-view />
+                <router-view :key="$store.state.global.refresh" />
                 <!-- 博客 ↑ :key="$route.path" -->
             </transition>
         </div>
