@@ -1,6 +1,15 @@
 <template>
     <header :style="{height:height}">
-        <div class="information"
+        <div class="information one"
+             ref="original"
+             v-if="isShowInfo">
+            <h1 class="name-info"
+                v-html="$store.state.global.personalData.nickname"></h1>
+            <h2 class="description-info"
+                v-html="$store.state.global.personalData.description"></h2>
+        </div>
+        <div class="information two"
+             ref="copy"
              v-if="isShowInfo">
             <h1 class="name-info"
                 v-html="$store.state.global.personalData.nickname"></h1>
@@ -22,6 +31,22 @@ export default {
             type: Boolean,
             default: true
         }
+    },
+    methods: {
+        handleAnimation() {
+            var original = this.$refs.original;
+            var copy = this.$refs.copy;
+            original.addEventListener("animationend", function() {
+                original.classList.remove("one");
+            });
+            copy.addEventListener("animationend", function() {
+                copy.remove();
+            });
+            // 博客↑
+        }
+    },
+    mounted() {
+        this.handleAnimation();
     }
 };
 </script>
@@ -55,11 +80,41 @@ header {
 }
 /* 信息显示 */
 .information {
-    transform: translateY(-20%);
+    top: 35%;
     color: white;
     position: absolute;
     margin: 0 auto;
     text-shadow: 0 0 5px #c3c3c3;
+}
+.one {
+    clip-path: polygon(0 0, 75% 0, 25% 100%, 0% 100%);
+    transform: translateX(-200%) translateY(100%);
+    animation: information 1s ease 1s 1;
+    animation-fill-mode: forwards;
+    z-index: 10;
+}
+.two {
+    clip-path: polygon(100% 0, 75% 0, 25% 100%, 100% 100%);
+    transform: translateX(200%) translateY(-100%);
+    animation: information2 1s ease 1s 1;
+    animation-fill-mode: forwards;
+    z-index: 5;
+}
+@keyframes information {
+    0% {
+        transform: translateX(-200%) translateY(100%);
+    }
+    100% {
+        transform: translateX(0) translateY(0);
+    }
+}
+@keyframes information2 {
+    0% {
+        transform: translateX(200%) translateY(-100%);
+    }
+    100% {
+        transform: translateX(0) translateY(0);
+    }
 }
 .name-info {
     font-weight: 300;

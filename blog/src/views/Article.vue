@@ -45,8 +45,8 @@
                         <img :src="next.cover_url"
                              alt="下一篇">
                     </a>
-</template>
-            </template>
+                </div>
+            </div>
         </article>
         <div class="comments">
             <span class="response">
@@ -124,7 +124,7 @@
         </div>
         <footEle></footEle>
         <backTop></backTop>
-    </template>
+    </div>
 </template>
 
 <script>
