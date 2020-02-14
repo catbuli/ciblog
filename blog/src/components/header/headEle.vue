@@ -1,6 +1,7 @@
 <template>
     <header :style="{height:height}">
-        <div class="information">
+        <div class="information"
+             v-if="isShowInfo">
             <h1 class="name-info"
                 v-html="$store.state.global.personalData.nickname"></h1>
             <h2 class="description-info"
@@ -16,6 +17,10 @@ export default {
         height: {
             type: String,
             default: "100%"
+        },
+        isShowInfo: {
+            type: Boolean,
+            default: true
         }
     }
 };
@@ -54,6 +59,7 @@ header {
     color: white;
     position: absolute;
     margin: 0 auto;
+    text-shadow: 0 0 5px #c3c3c3;
 }
 .name-info {
     font-weight: 300;
