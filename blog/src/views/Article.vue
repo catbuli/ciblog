@@ -198,6 +198,9 @@ export default {
             this.commentList = this.$store.state.comment.comment;
             this.commentData.content = "";
             this.loading = false;
+        },
+        $route: function(to, form) {
+            this.$store.commit("REFRESH", to.path);
         }
     },
     methods: {
@@ -225,7 +228,6 @@ export default {
             this.$router.push({
                 path: `/article/${aid}`
             });
-            this.$store.commit("REFRESH", this.$route.path);
         }
     },
     mounted() {
