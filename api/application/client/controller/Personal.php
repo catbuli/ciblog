@@ -39,6 +39,7 @@ class Personal extends Controller
                 'github'  => $data['github'],
                 'nickname'  => $data['nickname'],
                 'indexurl'  => $data['indexurl'],
+                'description' => $data['description'],
             ], ['uid' => 1]);
             return Response::result(200, "成功", "数据更新成功!");
         } catch (Exception $e) {
