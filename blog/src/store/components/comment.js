@@ -32,7 +32,7 @@ export default {
         },
         getCommentListAction(context, data) {
             post("/commentc", {
-                aid: data
+                paging: data
             }, (data) => {
                 context.commit('setCommentList', data.data);
                 context.commit('setPaging', data.paging);
