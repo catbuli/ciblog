@@ -48,7 +48,7 @@ export default {
         editCommentAction(context, data) {
             post("/commentc/edit", {
                 data
-            }, (data) => {
+            }, () => {
                 router.push('/admin/manage_comment')
                 context.dispatch('getCommentListAction');
             });
@@ -60,7 +60,7 @@ export default {
             post("/commentc/editstatus", {
                 cid: data.cid,
                 status: data.status
-            }, (data) => {
+            }, () => {
                 dispatch('getCommentListAction', rootState.global.paging);
             });
         },
@@ -70,7 +70,7 @@ export default {
         }, data) {
             post("/commentc/del", {
                 cid: data
-            }, (data) => {
+            }, () => {
                 dispatch('getCommentListAction', rootState.global.paging);
             });
         }

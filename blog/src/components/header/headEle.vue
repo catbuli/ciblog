@@ -1,6 +1,12 @@
 <template>
-    <div id="head"
-         :style="{height:height}"></div>
+    <header :style="{height:height}">
+        <div class="information">
+            <h1 class="name-info"
+                v-html="$store.state.global.personalData.nickname"></h1>
+            <h2 class="description-info"
+                v-html="$store.state.global.personalData.description"></h2>
+        </div>
+    </header>
 </template>
 
 <script>
@@ -16,7 +22,7 @@ export default {
 </script>
 
 <style scoped>
-#head {
+header {
     height: 100%;
     width: 100%;
     color: black;
@@ -26,5 +32,36 @@ export default {
     z-index: -1;
     position: relative;
     margin-bottom: 50px;
+    animation: show 1s 1;
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center;
+}
+/* 页头动画 */
+@keyframes show {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}
+/* 信息显示 */
+.information {
+    transform: translateY(-20%);
+    color: white;
+    position: absolute;
+    margin: 0 auto;
+}
+.name-info {
+    font-weight: 300;
+    margin: 10px 0;
+    font-size: 5rem;
+}
+.description-info {
+    margin: 10px 0;
+    font-size: 1.5rem;
 }
 </style>
