@@ -1,4 +1,6 @@
-import axios from '@/http'
+import {
+    post
+} from '@/http'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
@@ -110,18 +112,13 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     if (to.path.indexOf("/admin") == 0) {
-        axios
-            .post("/login/check", {})
-            .then(res => {
-                if (res.data.code == 201) {
-                    next();
-                } else {
-                    next('/login');
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            });
+        post("/login/check", {}, (data) => {
+            if (data.code == 201) {
+                next();
+            } else {
+                next('/login');
+            }
+        })
     } else if (from.path === '/login') {
         next();
     } else {

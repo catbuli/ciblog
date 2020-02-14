@@ -5,10 +5,12 @@
         <adminNav v-else
                   v-cloak></adminNav>
         <div id="mian"
-             :class="[$store.state.global.isShowLeftNav ? '' : 'handle-main']">
+             :class="[$store.state.global.isShowLeftNav ? '' : 'handle-main']"
+             :style="{height:$store.state.global.isAdmin?'100%':''}">
             <transition name="fade">
                 <!-- mode="out-in"> -->
                 <router-view />
+                <!-- 博客 ↑ :key="$route.path" -->
             </transition>
         </div>
     </div>
@@ -56,6 +58,9 @@ export default {
                 this.$store.commit("isAdmin", true);
                 this.$store.commit("handleLeftNav", false);
             }
+        },
+        afterLeave(el) {
+            console.log("tag", "");
         }
     },
     mounted() {
@@ -126,7 +131,6 @@ li {
 }
 
 #mian {
-    height: 100%;
     position: absolute;
     width: 85%;
     left: 15%;
@@ -146,7 +150,7 @@ li {
     opacity: 0.3;
 }
 .fade-enter-active {
-    transition: all 1s ease;
+    transition: all 1.5s ease;
 }
 .fade-enter-to {
     transform: translateY(0);
@@ -160,11 +164,11 @@ li {
     opacity: 1;
 }
 .fade-leave-active {
-    transition: all 1s ease;
+    transition: all 1.5s ease;
     /* animation: card-out 1s ease; */
 }
 .fade-leave-to {
-    transform: translateY(-200%);
+    transform: translateY(-100%);
     /* transform: scale(0.3); */
     opacity: 0;
 }

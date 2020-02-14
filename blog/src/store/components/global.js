@@ -9,6 +9,7 @@ export default {
         isAdmin: true,
         isShowLeftNav: true,
         isLogin: false,
+        // showAdminNav: false,
         uid: localStorage.getItem('uid') ? localStorage.getItem('uid') : '',
         token: localStorage.getItem('token') ? localStorage.getItem('token') : '',
         countList: {
@@ -28,6 +29,9 @@ export default {
         isAdmin(state, data) {
             state.isAdmin = data;
         },
+        // handleAdminNav(state, data) {
+        //     state.showAdminNav = data;
+        // },
         handleLeftNav(state, data) {
             state.isShowLeftNav = data;
         },
@@ -74,12 +78,15 @@ export default {
                 name: data.name,
                 password: data.password
             }, (data) => {
-                context.commit('setLoginStatus', {
-                    isLogin: true,
-                    uid: data.data.uid,
-                    token: data.data.token,
-                });
-                router.push("/admin");
+                if (data.code == 200) {
+                    context.commit('setLoginStatus', {
+                        isLogin: true,
+                        uid: data.data.uid,
+                        token: data.data.token,
+                    });
+                    router.push("/admin");
+                }
+
             });
         },
         alterPassAction(context, data) {

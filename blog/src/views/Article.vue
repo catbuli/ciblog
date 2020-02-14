@@ -1,6 +1,5 @@
 <template>
-    <div id="Article"
-         :key="$route.params.id">
+    <div id="Article">
         <!-- <headEle></headEle> -->
         <article>
             <div class="article-header">
@@ -182,7 +181,8 @@ export default {
                         trigger: "blur"
                     }
                 ]
-            }
+            },
+            test: true
         };
     },
     watch: {
@@ -192,16 +192,12 @@ export default {
             this.next = this.$store.state.article.next;
             this.article.modify_date = this.article.modify_date.split(" ")[0];
             this.loading = false;
-            scrollTo(0, 0);
+            this.test = true;
         },
         "$store.state.comment.comment": function() {
             this.commentList = this.$store.state.comment.comment;
             this.commentData.content = "";
             this.loading = false;
-        },
-        $route: function(to, from) {
-            this.getArticleData(to.params.id);
-            this.getCommentData(to.params.id);
         }
     },
     methods: {
@@ -232,7 +228,6 @@ export default {
         }
     },
     mounted() {
-        console.log(this.$route.params.id);
         this.getArticleData(this.$route.params.id);
         this.getCommentData(this.$route.params.id);
     }
