@@ -56,7 +56,6 @@ export default {
     },
     computed: {},
     mounted() {
-        console.log(this.backgroundImage);
         this.handleAnimation();
     }
 };

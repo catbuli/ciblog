@@ -1,6 +1,10 @@
 <template>
     <div id="search">
         <headEle height="70%"></headEle>
+        <div class="search-message">
+            <p v-html="searchMessage"></p>
+            <p v-html="searchDescription"></p>
+        </div>
         <articleItem :list-data="$store.state.article.articleList"></articleItem>
         <paging action="getArticleListAction"
                 align="center"
@@ -31,6 +35,8 @@ export default {
     data() {
         return {
             loading: true,
+            searchMessage: "",
+            searchDescription: "",
             paging: {
                 pageSize: 5,
                 currentPage: 1,
@@ -53,6 +59,15 @@ export default {
     },
     methods: {
         search() {
+            switch (this.$route.query.typeName) {
+                case "keyword":
+                    this.searchMessage =
+                        "包含关键字 " + this.$route.query.type + " 的文章";
+                    this.searchDescription = this.$store.state.global.personalData.description;
+                    break;
+                default:
+                    break;
+            }
             this.paging.typeName = this.$route.query.typeName;
             this.paging.type = this.$route.query.type;
         },
@@ -69,7 +84,12 @@ export default {
     width: 100%;
     position: absolute;
 }
-.articleItem {
-    margin-top: 30px;
+.search-message {
+    text-align: left;
+    background-color: #ffffff;
+    width: 700px;
+    margin: 0 auto;
+    border-radius: 8px;
+    padding: 17px;
 }
 </style>
