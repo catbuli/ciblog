@@ -12,6 +12,7 @@
                 <input id="search-input"
                        type="text"
                        @keyup.enter="search"
+                       v-model="input"
                        placeholder="想要搜什么!">
                 <button id="search-button"
                         @click="search"></button>
@@ -64,7 +65,15 @@ export default {
             this.isShow = false;
         },
         search() {
-            console.log("tag", "");
+            this.isShow = false;
+            this.$router.push({
+                path: "/search",
+                query: {
+                    typeName: "keyword",
+                    type: this.input
+                }
+            });
+            this.input = "";
         }
     }
 };

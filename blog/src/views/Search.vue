@@ -1,6 +1,6 @@
 <template>
-    <div id="home">
-        <headEle></headEle>
+    <div id="search">
+        <headEle height="70%"></headEle>
         <articleItem :list-data="$store.state.article.articleList"></articleItem>
         <paging action="getArticleListAction"
                 align="center"
@@ -20,7 +20,7 @@ import backTop from "@/components/common/backTop.vue";
 import paging from "@/components/common/paging.vue";
 
 export default {
-    name: "home",
+    name: "search",
     components: {
         headEle,
         footEle,
@@ -41,12 +41,21 @@ export default {
         };
     },
     watch: {
-        "$store.state.global.paging": function() {
-            this.paging = this.$store.state.global.paging;
+        // "$store.state.global.paging": function() {
+        //     this.paging = this.$store.state.global.paging;
+        // }
+        $route: function(to, form) {
+            this.$store.commit("REFRESH", to.fullPath);
         }
     },
-    mounted() {},
+    mounted() {
+        this.search();
+    },
     methods: {
+        search() {
+            this.paging.typeName = this.$route.query.typeName;
+            this.paging.type = this.$route.query.type;
+        },
         handlePage() {
             this.loading = true;
         }
@@ -55,7 +64,7 @@ export default {
 </script>
 
 <style>
-#home {
+#search {
     height: 100%;
     width: 100%;
     position: absolute;

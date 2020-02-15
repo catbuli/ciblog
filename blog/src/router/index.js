@@ -8,6 +8,7 @@ import Article from '../views/Article.vue'
 import Login from '../views/Login.vue'
 import Admin from '../views/Admin.vue'
 import errorPage from '../views/404.vue'
+import Search from '../views/Search.vue'
 import personalSettings from '../components/admin/personalSettings.vue'
 import writeArticle from '../components/admin/writeArticle.vue'
 import manageArticle from '../components/admin/manageArticle.vue'
@@ -32,6 +33,10 @@ const routes = [{
     path: '/404',
     name: '404',
     component: errorPage
+}, {
+    path: '/search',
+    name: 'search',
+    component: Search
 }, {
     path: '/login',
     name: 'login',

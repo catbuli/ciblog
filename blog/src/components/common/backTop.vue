@@ -32,9 +32,9 @@ export default {
                     document.documentElement.scrollTop -= speed;
                 }
             }, 10);
-            backTop.addEventListener("animationend", function() {
-                backTop.classList.remove("backtop");
-            });
+            // backTop.addEventListener("animationend", function() {
+            //     backTop.classList.remove("backtop");
+            // });
         },
         handleScroll(e) {
             // var backTopEl = document.getElementById('back-top');

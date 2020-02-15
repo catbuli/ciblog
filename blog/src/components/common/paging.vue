@@ -18,23 +18,24 @@ export default {
         align: {
             type: String,
             default: "center"
-        }
-    },
-    data() {
-        return {
-            paging: {
+        },
+        paging: {
+            type: Object,
+            default: {
                 pageSize: 10,
                 currentPage: 1,
                 type: -1,
                 typeName: "status",
                 total: 0
             }
-        };
+        }
+    },
+    data() {
+        return {};
     },
     watch: {
         "$store.state.global.paging": function() {
             scrollTo(0, 0);
-            this.paging = this.$store.state.global.paging;
         }
     },
     mounted() {
@@ -43,7 +44,7 @@ export default {
     methods: {
         currentChange(e) {
             this.paging.currentPage = e;
-            this.$emit("function");
+            this.$emit("function", e);
             this.getList();
         },
         getList() {
