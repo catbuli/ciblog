@@ -7,7 +7,7 @@ use app\client\model\ArticleMeta;
 
 class Article extends Model
 {
-    /** select * from ciblog_article where title LIKE '%测试%' OR text LIKE '%测试%';
+    /**
      * 根据条件返回文章列表
      *
      * @param Array $paging pageSize-每页数量 currentPage-当前页码 type-文章类型value typeName-文章类型名称 total-文章总数
@@ -27,6 +27,38 @@ class Article extends Model
             default:
                 return Article::all();
         }
+    }
+    /**
+     * 根据条件获取文章数量
+     *
+     * @param string $typeName-类型名称
+     * @param string $type-类型value
+     * @return Array
+     */
+    public static function Count($typeName = "all", $type = "")
+    {
+        $count = 0;
+        $article = new Article();
+        switch ($typeName) {
+            case 'all':
+                $count = count(Article::all());
+                break;
+            case 'keyword':
+                $count = count($article->where('title', 'like', '%' . $type . '%')
+                    ->whereOr('text', 'like', '%' . $type . '%')
+                    ->select());
+                break;
+            case 'status':
+                // if ($value == -1) {
+                //     $count = count(Article::all());
+                // } else {
+                //     $count = count(Article::all([$field => $value]));
+                // }
+                break;
+            default:
+                return count(Article::all());
+        }
+        return $count;
     }
     public static function getCount()
     {
@@ -51,28 +83,5 @@ class Article extends Model
     public function delArticle($aid)
     {
         return Article::destroy($aid);
-    }
-    public static function Count($field, $value = -1)
-    {
-        $count = 0;
-        switch ($field) {
-            case 'status':
-                if ($value == -1) {
-                    $count = count(Article::all());
-                } else {
-                    $count = count(Article::all([$field => $value]));
-                }
-                break;
-            case 'aid':
-                $count = count(Article::all(["aid" => $value]));
-                break;
-            case 'all':
-                $count = count(Article::all(["aid" => $value]));
-                break;
-            default:
-                $count = count(Article::all());
-                break;
-        }
-        return $count;
     }
 }

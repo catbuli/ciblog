@@ -30,7 +30,7 @@ class Articlec extends Controller
                 $value->category = ArticleMeta::getMetaByArticle($value->aid, "category", true);
                 $value->tag = ArticleMeta::getMetaByArticle($value->aid, "tag", true);
             }
-            $paging['total'] = Count($list);
+            $paging['total'] = Article::Count($paging['typeName'], $paging['type']);
             return Response::result(201, "成功", "数据获取成功!", $list, $paging);
         } catch (Exception $e) {
             return Response::result(400, "请求失败!", $e->getMessage());
