@@ -3,20 +3,29 @@
 namespace app\client\model;
 
 use think\Model;
-use think\Db;
-use think\Exception;
 use app\client\model\ArticleMeta;
 
 class Article extends Model
 {
+    /** select * from ciblog_article where title LIKE '%测试%' OR text LIKE '%测试%';
+     * 根据条件返回文章列表
+     *
+     * @param Array $paging pageSize-每页数量 currentPage-当前页码 type-文章类型value typeName-文章类型名称 total-文章总数
+     * @return Array 返回的文章列表
+     */
     public function getArticleList($paging)
     {
-        if ($paging) {
-            if ($paging['type'] == -1) {
+        switch ($paging['typeName']) {
+            case 'all':
                 return $this->order('create_date desc')->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->select();
-            }
-        } else {
-            return Article::all();
+            case 'keyword':
+                return $this->order('create_date desc')
+                    ->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])
+                    ->where('title', 'like', '%' . $paging['type'] . '%')
+                    ->whereOr('text', 'like', '%' . $paging['type'] . '%')
+                    ->select();
+            default:
+                return Article::all();
         }
     }
     public static function getCount()
