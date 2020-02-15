@@ -5,6 +5,7 @@
                        :total="page.total"
                        :page-size="page.pageSize"
                        :style="{textAlign:align}"
+                       :hide-on-single-page="true"
                        @current-change="currentChange">
         </el-pagination>
     </div>
