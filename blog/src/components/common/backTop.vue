@@ -1,5 +1,6 @@
 <template>
     <div id="back-top"
+         ref="backTop"
          @click="back"
          :class="[isShow ? 'show' : 'hidden']">
     </div>
@@ -18,8 +19,8 @@ export default {
     },
     methods: {
         back() {
-            var backTopEl = document.getElementById("back-top");
-            backTopEl.classList.add("hidden-animation");
+            let backTop = this.$refs.backTop;
+            backTop.classList.add("backtop");
             var backTopTimer = setInterval(function() {
                 var scrollTop =
                     document.documentElement.scrollTop ||
@@ -31,9 +32,9 @@ export default {
                     document.documentElement.scrollTop -= speed;
                 }
             }, 10);
-            var showAnimationTimer = setTimeout(function() {
-                backTopEl.classList.remove("hidden-animation");
-            }, 1500);
+            backTop.addEventListener("animationend", function() {
+                backTop.classList.remove("backtop");
+            });
         },
         handleScroll(e) {
             // var backTopEl = document.getElementById('back-top');
@@ -64,15 +65,16 @@ export default {
 }
 
 .show {
+    transform: translateX(0);
     opacity: 1;
     cursor: pointer;
 }
 .hidden {
+    transform: translateX(200%);
     opacity: 0;
-    cursor: Default;
 }
 
-.hidden-animation {
+.backtop {
     animation: backtop 0.5s 1;
 }
 
@@ -94,11 +96,9 @@ export default {
         transform: translateX(-2px);
     }
     50% {
-        opacity: 1;
         transform: translateX(2px);
     }
     100% {
-        opacity: 0;
         transform: translateY(-1000px);
     }
 }
