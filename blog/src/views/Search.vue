@@ -41,15 +41,15 @@ export default {
                 pageSize: 5,
                 currentPage: 1,
                 type: -1,
-                typeName: "status",
+                typeName: "all",
                 total: 0
             }
         };
     },
     watch: {
-        // "$store.state.global.paging": function() {
-        //     this.paging = this.$store.state.global.paging;
-        // }
+        "$store.state.global.personalData.description": function() {
+            this.searchDescription = this.$store.state.global.personalData.description;
+        },
         $route: function(to, form) {
             this.$store.commit("REFRESH", to.fullPath);
         }

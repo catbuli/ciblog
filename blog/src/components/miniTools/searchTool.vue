@@ -142,7 +142,7 @@ export default {
 }
 .search-bar {
     /* height: 100px; */
-    width: 50%;
+    width: 100%;
     top: 50%;
     position: relative;
     margin: 0 auto;

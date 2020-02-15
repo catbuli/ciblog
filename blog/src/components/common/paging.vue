@@ -22,12 +22,14 @@ export default {
         },
         paging: {
             type: Object,
-            default: {
-                pageSize: 10,
-                currentPage: 1,
-                type: -1,
-                typeName: "all",
-                total: 0
+            default: () => {
+                return {
+                    pageSize: 10,
+                    currentPage: 1,
+                    type: -1,
+                    typeName: "all",
+                    total: 0
+                };
             }
         }
     },

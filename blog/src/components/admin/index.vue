@@ -48,7 +48,7 @@ export default {
                 pageSize: 10,
                 currentPage: 1,
                 type: -1,
-                typeName: "none",
+                typeName: "all",
                 total: 0
             }
         };

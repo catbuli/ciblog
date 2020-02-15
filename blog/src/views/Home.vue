@@ -35,7 +35,7 @@ export default {
                 pageSize: 5,
                 currentPage: 1,
                 type: -1,
-                typeName: "status",
+                typeName: "all",
                 total: 0
             }
         };
