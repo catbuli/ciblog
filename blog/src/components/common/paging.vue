@@ -2,8 +2,8 @@
     <div id="paging">
         <el-pagination background
                        layout="jumper,prev,pager,next,total"
-                       :total="paging.total"
-                       :page-size="paging.pageSize"
+                       :total="page.total"
+                       :page-size="page.pageSize"
                        :style="{textAlign:align}"
                        @current-change="currentChange">
         </el-pagination>
@@ -25,16 +25,19 @@ export default {
                 pageSize: 10,
                 currentPage: 1,
                 type: -1,
-                typeName: "status",
+                typeName: "all",
                 total: 0
             }
         }
     },
     data() {
-        return {};
+        return {
+            page: this.paging
+        };
     },
     watch: {
         "$store.state.global.paging": function() {
+            this.page = this.$store.state.global.paging;
             scrollTo(0, 0);
         }
     },
@@ -43,12 +46,12 @@ export default {
     },
     methods: {
         currentChange(e) {
-            this.paging.currentPage = e;
+            this.page.currentPage = e;
             this.$emit("function", e);
             this.getList();
         },
         getList() {
-            this.$store.dispatch(this.action, this.paging);
+            this.$store.dispatch(this.action, this.page);
         }
     }
 };
