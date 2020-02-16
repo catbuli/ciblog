@@ -63,6 +63,9 @@
                 </el-col>
             </el-row>
             <el-row class="setting-row">
+                <upload :aid=Number(this.$route.params.aid)></upload>
+            </el-row>
+            <el-row class="setting-row">
                 <el-button type="primary"
                            v-if="isEdit"
                            @click="edit">发布</el-button>
@@ -77,6 +80,8 @@
 <script>
 import adminTitle from "@/components/admin/common/adminTitle.vue";
 import adminFrame from "@/components/admin/common/adminFrame.vue";
+import upload from "@/components/admin/common/upload.vue";
+import { post } from "@/http";
 import { mavonEditor } from "mavon-editor";
 import "mavon-editor/dist/css/index.css";
 export default {
@@ -84,7 +89,8 @@ export default {
     components: {
         adminTitle,
         adminFrame,
-        mavonEditor
+        mavonEditor,
+        upload
     },
     data() {
         return {
