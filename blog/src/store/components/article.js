@@ -48,12 +48,15 @@ export default {
                 dispatch('getArticleListAction', rootState.global.paging);
             });
         },
-        editArticleAction(context, data) {
+        editArticleAction({
+            rootState,
+            dispatch
+        }, data) {
             post("/articlec/edit", {
                 data
             }, (data) => {
                 router.push('/admin/manage_article')
-                context.dispatch('getArticleListAction');
+                dispatch('getArticleListAction', rootState.global.paging);
             });
         },
         delArticleAction({
