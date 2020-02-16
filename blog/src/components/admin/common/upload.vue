@@ -20,7 +20,14 @@ export default {
     name: "upload",
     data() {
         return {
-            fileList: []
+            fileList: [],
+            paging: {
+                pageSize: 10,
+                currentPage: 1,
+                type: -1,
+                typeName: "id",
+                total: 0
+            }
         };
     },
     props: {
@@ -32,6 +39,12 @@ export default {
     mounted() {
         this.getList();
     },
+    watch: {
+        "$store.state.file.fileList": function() {
+            this.fileList = this.$store.state.file.fileList;
+            this.loading = false;
+        }
+    },
     methods: {
         /**
          * 覆盖组件
@@ -40,7 +53,7 @@ export default {
             let fd = new FormData();
             fd.append("file", val.file);
             fd.append("aid", this.aid);
-            post("/upload", fd, data => {
+            post("/upload/add", fd, data => {
                 // this.fileList = data.data.fileList;
                 this.fileList.push(data.data.file);
             });
@@ -55,12 +68,11 @@ export default {
             });
         },
         getList() {
-            post("/upload/getList", { aid: this.aid }, data => {
-                this.fileList = data.data;
-            });
+            this.paging.type = this.$route.params.aid;
+            this.$store.dispatch("getFileListAction", this.paging);
         },
         delFile(file) {
-            post("/upload/del", { fid: file.fid }, data => {});
+            this.$store.dispatch("delFileAction", file.fid);
         }
     }
 };

@@ -17,11 +17,6 @@ export default {
             state.comment = data;
         },
     },
-    watch: {
-        "$store.state.global.paging": function () {
-            this.paging = this.$store.state.global.paging;
-        }
-    },
     actions: {
         getCommentDataAction(context, data) {
             post("/commentc/byid", {

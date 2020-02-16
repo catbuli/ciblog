@@ -5,13 +5,12 @@ import category_store from '../store/components/category.js'
 import tag_store from '../store/components/tag.js'
 import article_store from '../store/components/article.js'
 import comment_store from '../store/components/comment.js'
+import file_store from '../store/components/file.js'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-    state: {
-        test: 'test data'
-    },
+    state: {},
     mutations: {},
     actions: {},
     modules: {
@@ -20,5 +19,6 @@ export default new Vuex.Store({
         tag: tag_store,
         article: article_store,
         comment: comment_store,
+        file: file_store,
     }
 })
