@@ -63,7 +63,9 @@
                 </el-col>
             </el-row>
             <el-row class="setting-row">
-                <upload :aid=Number(this.$route.params.aid)></upload>
+                <el-col :span='12'>
+                    <upload :aid=Number(this.$route.params.aid)></upload>
+                </el-col>
             </el-row>
             <el-row class="setting-row">
                 <el-button type="primary"

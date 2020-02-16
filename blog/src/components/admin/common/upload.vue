@@ -4,7 +4,8 @@
                    action="#"
                    :on-preview="selectFile"
                    :http-request="upload"
-                   :file-list="fileList">
+                   :file-list="fileList"
+                   :on-remove="delFile">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
             <div class="el-upload__tip"
@@ -41,7 +42,6 @@ export default {
             fd.append("aid", this.aid);
             post("/upload", fd, data => {
                 // this.fileList = data.data.fileList;
-                console.log(this.fileList[this.fileList.length - 1]);
                 this.fileList.push(data.data.file);
             });
         },
@@ -58,6 +58,9 @@ export default {
             post("/upload/getList", { aid: this.aid }, data => {
                 this.fileList = data.data;
             });
+        },
+        delFile(file) {
+            post("/upload/del", { fid: file.fid }, data => {});
         }
     }
 };
