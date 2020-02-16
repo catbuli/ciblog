@@ -28,6 +28,29 @@ class File extends Model
         }
     }
     /**
+     * 根据条件获取文件数量
+     *
+     * @param string $typeName-类型名称
+     * @param string $type-类型value
+     * @return Array
+     */
+    public static function Count($typeName = "all", $type = "")
+    {
+        $count = 0;
+        $file = new File();
+        switch ($typeName) {
+            case 'all':
+                $count = count(File::all());
+                break;
+            case 'id':
+                $count = count($file->where('aid', $type)->select());
+                break;
+            default:
+                return count(Article::all());
+        }
+        return $count;
+    }
+    /**
      * 添加文件信息
      *
      * @return 

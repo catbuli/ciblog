@@ -69,6 +69,7 @@
             </el-table-column> -->
         </el-table>
         <paging action="getFileListAction"
+                :paging="paging"
                 align="right"
                 @function="handlePage"></paging>
     </adminFrame>

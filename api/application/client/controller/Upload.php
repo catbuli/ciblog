@@ -14,7 +14,8 @@ class Upload extends Controller
         try {
             $file = new File();
             $fileList = $file->getList($paging);
-            return Response::result(201, "成功!", "文件列表获取成功!", $fileList);
+            $paging['total'] = File::Count($paging['typeName'], $paging['type']);
+            return Response::result(201, "成功!", "文件列表获取成功!", $fileList, $paging);
         } catch (Exception $e) {
             return Response::result(400, "请求失败!", $e->getMessage());
         }

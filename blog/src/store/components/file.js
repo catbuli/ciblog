@@ -17,6 +17,7 @@ export default {
                 paging: data
             }, (data) => {
                 context.commit('setFileList', data.data);
+                context.commit('setPaging', data.paging);
             });
         },
         delFileAction({

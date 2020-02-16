@@ -55,9 +55,7 @@ export default {
             if (this.$route.params.aid) {
                 fd.append("aid", this.$route.params.aid);
                 post("/upload/add", fd, data => {
-                    // this.fileList = data.data.fileList;
                     this.fileList.push(data.data.file);
-                    // this.$store.commit("setFileList", data.data.fileList);
                 });
             } else {
                 post("/upload/add", fd, data => {
