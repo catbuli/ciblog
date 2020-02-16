@@ -54,13 +54,15 @@
                 <li>
                     <h4>密码</h4>
                     <el-input placeholder="请输入内容"
-                              v-model="password"></el-input>
+                              v-model="password"
+                              ref="password"></el-input>
                     <span class="input-hint">新的后台登陆密码.</span>
                 </li>
                 <li>
                     <h4>确认密码</h4>
                     <el-input placeholder="请输入内容"
-                              v-model="repassword"></el-input>
+                              v-model="repassword"
+                              ref="repassword"></el-input>
                     <span class="input-hint">确认你的密码.</span>
                 </li>
                 <li class="input-button">
@@ -104,12 +106,30 @@ export default {
             this.$store.dispatch("updatePersonalDataAction", this.personalData);
         },
         alterPass() {
-            this.$store.dispatch("alterPassAction", {
-                password: this.password,
-                repassword: this.repassword
-            });
-            this.password = "";
-            this.repassword = "";
+            let password = this.$refs.password;
+            let repassword = this.$refs.repassword;
+            if (password.value && repassword.value) {
+                if (password.value !== repassword.value) {
+                    this.$notify({
+                        title: "修改失败",
+                        message: "两次密码输入不一致",
+                        type: "error"
+                    });
+                } else {
+                    this.$store.dispatch("alterPassAction", {
+                        password: this.password,
+                        repassword: this.repassword
+                    });
+                    this.password = "";
+                    this.repassword = "";
+                }
+            } else {
+                this.$notify({
+                    title: "修改失败",
+                    message: "密码或重复密码不能为空！",
+                    type: "error"
+                });
+            }
         }
     }
 };
