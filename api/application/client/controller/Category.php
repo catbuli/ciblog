@@ -57,7 +57,9 @@ class Category extends Controller
         try {
             $meta = new Meta();
             $meta->delMeta($mid);
-            ArticleMeta::delMetaByArticle($mid);
+            foreach ($mid as $value) {
+                ArticleMeta::delMetaByArticle($value);
+            }
             return Response::result(200, "成功", "分类删除成功!");
         } catch (Exception $e) {
             return Response::result(400, "请求失败!", $e->getMessage());

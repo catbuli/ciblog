@@ -21,7 +21,7 @@ class Login extends Controller
     public function index($name, $password)
     {
         try {
-            $data =  User::login($name, $password);
+            $data =  User::login($name, md5($password));
             if ($data) {
                 return Response::result(200, "欢迎", "管理员-" . $data->nickname, [
                     'uid' => $data->uid,
@@ -61,7 +61,7 @@ class Login extends Controller
     {
         try {
             if (TokenManage::checkToken() && $password == $repassword) {
-                User::editPassword(Session::get("uid"), $password);
+                User::editPassword(Session::get("uid"), md5($password));
                 return Response::result(200, "成功", "修改成功");
             } else {
                 return Response::result(400, "失败", "修改失败");
