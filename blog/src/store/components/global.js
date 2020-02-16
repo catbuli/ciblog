@@ -24,7 +24,8 @@ export default {
             total: 0,
             typeName: "",
         },
-        refresh: "main"
+        refresh: "main",
+        UPLOADPATH: process.env.VUE_APP_UPLOADPATH,
     },
     mutations: {
         isAdmin(state, data) {

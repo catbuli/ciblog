@@ -68,8 +68,10 @@ export default {
             });
         },
         getList() {
-            this.paging.type = this.$route.params.aid;
-            this.$store.dispatch("getFileListAction", this.paging);
+            if (this.$route.params.aid) {
+                this.paging.type = this.$route.params.aid;
+                this.$store.dispatch("getFileListAction", this.paging);
+            }
         },
         delFile(file) {
             this.$store.dispatch("delFileAction", file.fid);

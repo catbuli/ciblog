@@ -19,10 +19,15 @@ export default {
                 context.commit('setFileList', data.data);
             });
         },
-        delFileAction(context, data) {
+        delFileAction({
+            rootState,
+            dispatch
+        }, data) {
             post("/upload/del", {
                 fid: data
-            }, (data) => {});
+            }, (data) => {
+                dispatch('getFileListAction', rootState.global.paging);
+            });
         },
     },
     modules: {}
