@@ -52,11 +52,20 @@ export default {
         upload(val) {
             let fd = new FormData();
             fd.append("file", val.file);
-            fd.append("aid", this.aid);
-            post("/upload/add", fd, data => {
-                // this.fileList = data.data.fileList;
-                this.fileList.push(data.data.file);
-            });
+            if (this.$route.params.aid) {
+                fd.append("aid", this.$route.params.aid);
+                post("/upload/add", fd, data => {
+                    // this.fileList = data.data.fileList;
+                    this.fileList.push(data.data.file);
+                    // this.$store.commit("setFileList", data.data.fileList);
+                });
+            } else {
+                post("/upload/add", fd, data => {
+                    // this.fileList = data.data.fileList;
+                    // this.$store.dispatch("getFileListAction", this.paging);
+                    this.$store.commit("setFileList", data.data.fileList);
+                });
+            }
         },
         selectFile(file) {
             this.$message({
@@ -70,6 +79,9 @@ export default {
         getList() {
             if (this.$route.params.aid) {
                 this.paging.type = this.$route.params.aid;
+                this.$store.dispatch("getFileListAction", this.paging);
+            } else {
+                this.paging.type = -1;
                 this.$store.dispatch("getFileListAction", this.paging);
             }
         },

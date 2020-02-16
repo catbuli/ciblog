@@ -171,7 +171,6 @@ export default {
         getArticleData(aid) {
             if (this.isEdit) {
                 this.$store.dispatch("getArticleDataAction", aid);
-            } else {
             }
         },
         change(value, render) {
@@ -181,6 +180,7 @@ export default {
             this.article.html = render;
         },
         add() {
+            this.article.fileList = this.$store.state.file.fileList;
             this.$store.dispatch("addArticleAction", this.article);
         },
         edit() {

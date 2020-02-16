@@ -87,6 +87,11 @@ class Articlec extends Controller
             ]);
             $article->addArticle();
             $aid = $article->getLastInsID();
+            foreach ($data['fileList'] as $value) {
+                Db::name('file')
+                    ->where('aid', -1)
+                    ->update(['aid' => $aid]);
+            }
             ArticleMeta::addMetaList($data['categoryList'], $aid, "category");
             ArticleMeta::addMetaList($data['tagList'], $aid, "tag");
             return Response::result(200, "成功", "文章发布成功!");
