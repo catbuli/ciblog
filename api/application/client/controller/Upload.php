@@ -9,7 +9,17 @@ use app\client\model\File;
 
 class Upload extends Controller
 {
-    public function index($aid)
+    public function index($paging)
+    {
+        try {
+            $file = new File();
+            $fileList = $file->getList($paging);
+            return Response::result(201, "成功!", "文件列表获取成功!", $fileList);
+        } catch (Exception $e) {
+            return Response::result(400, "请求失败!", $e->getMessage());
+        }
+    }
+    public function add($aid = -1)
     {
         try {
             $files = request()->file();
@@ -28,7 +38,7 @@ class Upload extends Controller
                     $file->aid = $aid;
                     $file->url = $info->getSavename();
                     $file->add();
-                    $fileList = $file->getList("all", $aid);
+                    $fileList = $file->getList(['typeName' => 'id', 'type' => $aid]);
                     return Response::result(201, "成功!", "上传成功!", ['file' => $file, 'fileList' => $fileList]);
                 } else {
                     return Response::result(400, "失败!", $file->getError());
@@ -38,22 +48,12 @@ class Upload extends Controller
             return Response::result(400, "请求失败!", $e->getMessage());
         }
     }
-    public function getlist($aid)
-    {
-        try {
-            $file = new File();
-            $fileList = $file->getList("all", $aid);
-            return Response::result(201, "成功!", "上传成功!", $fileList);
-        } catch (Exception $e) {
-            return Response::result(400, "请求失败!", $e->getMessage());
-        }
-    }
     public function del($fid)
     {
         try {
             $file = new File();
             $file->del($fid);
-            return Response::result(201, "成功!", "删除成功!");
+            return Response::result(201, "成功!", "文件删除成功!");
         } catch (Exception $e) {
             return Response::result(400, "请求失败!", $e->getMessage());
         }
