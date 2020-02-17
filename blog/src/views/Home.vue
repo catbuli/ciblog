@@ -1,6 +1,6 @@
 <template>
     <div id="home">
-        <headEle :backgroundImage="'url('+backgroundImage+')'"></headEle>
+        <headEle :backgroundImage="'url('+$store.state.global.system.randomBanner+')'"></headEle>
         <articleItem :list-data="$store.state.article.articleList"></articleItem>
         <paging action="getArticleListAction"
                 align="center"
@@ -37,22 +37,17 @@ export default {
                 type: -1,
                 typeName: "all",
                 total: 0
-            },
-            backgroundImage: ""
+            }
         };
     },
     watch: {
         "$store.state.global.paging": function() {
             this.paging = this.$store.state.global.paging;
-        },
-        "$store.state.global.system": function() {
-            this.backgroundImage = this.$store.state.global.system.randomBanner;
         }
     },
     created() {
         this.$store.dispatch("getSystemAciton");
     },
-    mounted() {},
     methods: {
         handlePage() {
             this.loading = true;
