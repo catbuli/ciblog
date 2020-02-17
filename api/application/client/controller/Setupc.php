@@ -60,4 +60,22 @@ class Setupc extends Controller
             return Response::result(400, "请求失败", $e->getMessage());
         }
     }
+    /**
+     * 系统设置更新
+     *
+     * @param json $data 个人信息数据
+     * @return json 响应信息
+     */
+    public function updateSystem($data)
+    {
+        try {
+            $setup = new Setup;
+            $setup->save([
+                'banner'  => $data['banner'],
+            ], ['sid' => 1]);
+            return Response::result(200, "成功", "数据更新成功!");
+        } catch (Exception $e) {
+            return Response::result(400, "请求失败", $e->getMessage());
+        }
+    }
 }
