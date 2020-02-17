@@ -4,17 +4,18 @@ namespace app\client\controller;
 
 use think\Controller;
 use app\client\model\User;
+use app\client\model\Setup;
 use think\Exception;
 use app\common\Response;
 
-class Personal extends Controller
+class Setupc extends Controller
 {
     /**
      * 控制器默认方法 获取个人信息
      *
-     * @return json
+     * @return json 响应信息
      */
-    public function index()
+    public function personal()
     {
         try {
             $user = new User();
@@ -27,9 +28,9 @@ class Personal extends Controller
      * 个人信息更新
      *
      * @param json $data 个人信息数据
-     * @return json
+     * @return json 响应信息
      */
-    public function update($data)
+    public function updatePersonal($data)
     {
         try {
             $user = new User;
@@ -42,6 +43,19 @@ class Personal extends Controller
                 'description' => $data['description'],
             ], ['uid' => 1]);
             return Response::result(200, "成功", "数据更新成功!");
+        } catch (Exception $e) {
+            return Response::result(400, "请求失败", $e->getMessage());
+        }
+    }
+    /**
+     * 控制器默认方法 获取系统设置
+     *
+     * @return json 响应信息
+     */
+    public function system()
+    {
+        try {
+            return Response::result(201, "成功", "数据获取成功!", Setup::get(1));
         } catch (Exception $e) {
             return Response::result(400, "请求失败", $e->getMessage());
         }

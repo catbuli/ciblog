@@ -50,7 +50,7 @@ class Category extends Controller
      * 删除分类
      *
      * @param int $mid 分类mid
-     * @return json
+     * @return 响应信息
      */
     public function del($mid)
     {
@@ -69,7 +69,7 @@ class Category extends Controller
      * 根据文章aid获取分类列表
      *
      * @param int $aid 文章aid
-     * @return json
+     * @return 响应信息
      */
     public function byid($aid)
     {
