@@ -11,7 +11,9 @@
                 <i class="iconfont iconflag"></i>
                 <span class="card-top-categories"
                       v-for="category in item.category"
-                      :key="category.cid">{{category.name}}</span>
+                      :key="category.mid"
+                      style="cursor: pointer"
+                      @click="categoryJump(category.name,category.mid)">{{category.name}}</span>
                 <i class="iconfont icontime-circle"
                    style="margin-left:10px"></i>
                 <span class="card-top-date"
@@ -59,6 +61,16 @@ export default {
         jump(id) {
             this.$router.push({
                 path: `/article/${id}`
+            });
+        },
+        categoryJump(name, mid) {
+            this.$router.push({
+                path: "/search",
+                query: {
+                    typeName: "category",
+                    type: name,
+                    mid: mid
+                }
             });
         }
     }

@@ -29,7 +29,9 @@
             </div>
             <div class="article-tags">
                 <span v-for="item in article.tag"
-                      :key="item.cid"><i class="el-icon-collection-tag">{{item.name}}</i></span>
+                      :key="item.mid"
+                      style="cursor:pointer"
+                      @click="tagJump(item.name,item.mid)"><i class="el-icon-collection-tag">{{item.name}}</i></span>
             </div>
             <div class="article-footer">
                 <div class="article-previous"
@@ -237,6 +239,16 @@ export default {
                 path: "/search",
                 query: {
                     typeName: "category",
+                    type: name,
+                    mid: mid
+                }
+            });
+        },
+        tagJump(name, mid) {
+            this.$router.push({
+                path: "/search",
+                query: {
+                    typeName: "tag",
                     type: name,
                     mid: mid
                 }

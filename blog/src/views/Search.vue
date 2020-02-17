@@ -78,6 +78,13 @@ export default {
                     this.paging.typeName = this.$route.query.typeName;
                     this.paging.type = this.$route.query.mid;
                     break;
+                case "tag":
+                    this.searchMessage =
+                        "拥有 " + this.$route.query.type + " 标签的文章";
+                    this.searchDescription = this.$store.state.global.personalData.description;
+                    this.paging.typeName = this.$route.query.typeName;
+                    this.paging.type = this.$route.query.mid;
+                    break;
                 default:
                     break;
             }
