@@ -27,7 +27,14 @@ class Article extends Model
                     ->field('aid,title,create_date,pv,comment_count,cover_url,description')
                     ->select();
             case 'category':
-                $list = Db::name('article_meta')->where("mid", $paging['type'])->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->select();
+                $list = Db::name('article_meta')->where("mid", $paging['type'])->where("type", "category")->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->select();
+                $dataList = [];
+                foreach ($list as $value) {
+                    array_push($dataList, Db::name("article")->where('aid', $value['aid'])->field('aid,title,create_date,pv,comment_count,cover_url,description')->find());
+                }
+                return $dataList;
+            case 'tag':
+                $list = Db::name('article_meta')->where("mid", $paging['type'])->where("type", "tag")->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->select();
                 $dataList = [];
                 foreach ($list as $value) {
                     array_push($dataList, Db::name("article")->where('aid', $value['aid'])->field('aid,title,create_date,pv,comment_count,cover_url,description')->find());
