@@ -10,10 +10,11 @@
                 <div class="article-meta">
                     <span class="article-meta-label iconfont iconpushpin">{{article.pv}}次阅读</span>
                     <span class="article-meta-label iconfont iconpushpin">
-                        <a href=""
-                           class="category"
+                        <a class="category"
+                           style="cursor: pointer"
                            v-for="category in article.category"
-                           :key="category.cid">{{category.name}}</a></span>
+                           @click="categoryJump(category.name,category.mid)"
+                           :key="category.mid">{{category.name}}</a></span>
                     <span class="article-meta-label iconfont iconpushpin">{{article.create_date}}</span>
                 </div>
             </div>
@@ -229,6 +230,16 @@ export default {
         jump(aid) {
             this.$router.push({
                 path: `/article/${aid}`
+            });
+        },
+        categoryJump(name, mid) {
+            this.$router.push({
+                path: "/search",
+                query: {
+                    typeName: "category",
+                    type: name,
+                    mid: mid
+                }
             });
         }
     },

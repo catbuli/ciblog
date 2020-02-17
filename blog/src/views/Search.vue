@@ -68,12 +68,19 @@ export default {
                     this.searchMessage =
                         "包含关键字 " + this.$route.query.type + " 的文章";
                     this.searchDescription = this.$store.state.global.personalData.description;
+                    this.paging.typeName = this.$route.query.typeName;
+                    this.paging.type = this.$route.query.type;
+                    break;
+                case "category":
+                    this.searchMessage =
+                        "所属分类为 " + this.$route.query.type + " 的文章";
+                    this.searchDescription = this.$store.state.global.personalData.description;
+                    this.paging.typeName = this.$route.query.typeName;
+                    this.paging.type = this.$route.query.mid;
                     break;
                 default:
                     break;
             }
-            this.paging.typeName = this.$route.query.typeName;
-            this.paging.type = this.$route.query.type;
         },
         handlePage() {
             this.loading = true;

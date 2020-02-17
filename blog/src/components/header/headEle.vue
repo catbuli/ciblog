@@ -33,7 +33,8 @@ export default {
         },
         backgroundImage: {
             type: String,
-            default: ""
+            default:
+                "url('https://ciblog.oss-cn-shanghai.aliyuncs.com/images/bg4.jpg')"
             // "url('https://ciblog.oss-cn-shanghai.aliyuncs.com/images/bg4.jpg')"
         }
     },

@@ -3,7 +3,7 @@
         <section :loading="loading">
             <ul>
                 <li>
-                    <h4>头部图片</h4>
+                    <h4>banner图片</h4>
                     <el-input v-model="system.banner"
                               type="textarea"
                               show-word-limit
