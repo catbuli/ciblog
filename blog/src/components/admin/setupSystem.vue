@@ -70,9 +70,7 @@ export default {
             loading: true
         };
     },
-    mounted() {
-        this.$store.dispatch("getSystemAciton");
-    },
+    mounted() {},
     methods: {
         submit() {
             this.$store.dispatch("updateSystemAciton", this.system);

@@ -33,8 +33,8 @@ export default {
         },
         backgroundImage: {
             type: String,
-            default:
-                "url('https://ciblog.oss-cn-shanghai.aliyuncs.com/images/bg4.jpg')"
+            default: ""
+            // "url('https://ciblog.oss-cn-shanghai.aliyuncs.com/images/bg4.jpg')"
         }
     },
     methods: {
@@ -70,7 +70,7 @@ header {
     z-index: -1;
     position: relative;
     margin-bottom: 50px;
-    animation: show 1s 1;
+    animation: show ease-in 1s 1;
     display: flex;
     background-position: center center;
     background-repeat: no-repeat;

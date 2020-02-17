@@ -1,6 +1,7 @@
 <template>
     <div id="search">
-        <headEle height="70%"></headEle>
+        <headEle height="70%"
+                 :backgroundImage="'url('+backgroundImage+')'"></headEle>
         <div class="search-message">
             <p v-html="searchMessage"></p>
             <p v-html="searchDescription"></p>
@@ -43,7 +44,8 @@ export default {
                 type: -1,
                 typeName: "all",
                 total: 0
-            }
+            },
+            backgroundImage: ""
         };
     },
     watch: {
@@ -52,10 +54,16 @@ export default {
         },
         $route: function(to, form) {
             this.$store.commit("REFRESH", to.fullPath);
+        },
+        "$store.state.global.system": function() {
+            this.backgroundImage = this.$store.state.global.system.randomBanner;
         }
     },
     mounted() {
         this.search();
+    },
+    created() {
+        this.$store.dispatch("getSystemAciton");
     },
     methods: {
         search() {

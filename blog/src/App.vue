@@ -65,6 +65,10 @@ export default {
             scrollTo(0, 0);
         }
     },
+    created() {
+        this.$store.dispatch("getSystemAciton");
+        this.$store.dispatch("getPersonalDataAction");
+    },
     mounted() {
         this.checkRouter();
     }

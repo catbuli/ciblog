@@ -49,9 +49,10 @@ export default {
             this.backgroundImage = this.$store.state.global.system.randomBanner;
         }
     },
-    mounted() {
+    created() {
         this.$store.dispatch("getSystemAciton");
     },
+    mounted() {},
     methods: {
         handlePage() {
             this.loading = true;
