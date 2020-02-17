@@ -327,7 +327,7 @@ export default {
 .article-footer div img {
     width: 100%;
     height: 100%;
-    filter: brightness(0.2);
+    filter: brightness(0.5);
     /* opacity: 0.3; */
     transition: all ease 0.3s;
     object-fit: cover;
