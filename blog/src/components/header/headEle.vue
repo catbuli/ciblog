@@ -34,7 +34,7 @@ export default {
         backgroundImage: {
             type: String,
             default:
-                "url('https://xiaochengxuimg.oss-cn-beijing.aliyuncs.com/Blog/bg/bg4.jpg')"
+                "url('https://ciblog.oss-cn-shanghai.aliyuncs.com/images/bg4.jpg')"
         }
     },
     methods: {

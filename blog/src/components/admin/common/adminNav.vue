@@ -23,7 +23,7 @@
             </el-submenu>
             <el-submenu index="4">
                 <template slot="title">设置</template>
-                <el-menu-item index="/admin/system_settings">系统设置</el-menu-item>
+                <el-menu-item index="/admin/setup_system">系统设置</el-menu-item>
                 <el-menu-item index="/admin/comment_settings">评论设置</el-menu-item>
                 <el-menu-item index="/admin/read_settings">阅读设置</el-menu-item>
             </el-submenu>

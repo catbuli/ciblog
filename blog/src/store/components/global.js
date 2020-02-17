@@ -6,10 +6,10 @@ import router from '@/router'
 export default {
     state: {
         personalData: {},
+        system: {},
         isAdmin: true,
         isShowLeftNav: true,
         isLogin: false,
-        // showAdminNav: false,
         uid: localStorage.getItem('uid') ? localStorage.getItem('uid') : '',
         token: localStorage.getItem('token') ? localStorage.getItem('token') : '',
         countList: {
@@ -28,15 +28,16 @@ export default {
         UPLOADPATH: process.env.VUE_APP_UPLOADPATH,
     },
     mutations: {
+        setSystem(state, data) {
+            state.system = data;
+            state.system.banner = data.banner.split("\n");
+        },
         isAdmin(state, data) {
             state.isAdmin = data;
         },
         REFRESH(state, data) {
             state.refresh = data;
         },
-        // handleAdminNav(state, data) {
-        //     state.showAdminNav = data;
-        // },
         handleLeftNav(state, data) {
             state.isShowLeftNav = data;
         },
@@ -67,12 +68,12 @@ export default {
     },
     actions: {
         getPersonalDataAction(context) {
-            post("/personal", {}, (data) => {
+            post("/setupc/personal", {}, (data) => {
                 context.commit('setPersonalData', data.data);
             });
         },
         updatePersonalDataAction(context, data) {
-            post("/personal/update", {
+            post("/setupc/updatePersonal", {
                 data: data
             }, (data) => {
                 context.dispatch('getPersonalDataAction');
@@ -111,6 +112,11 @@ export default {
         getCountAction(context, data) {
             post("/count", {}, (data) => {
                 context.commit('setCountList', data.data);
+            });
+        },
+        getSystemAciton(context, data) {
+            post("/setupc/system", {}, data => {
+                context.commit('setSystem', data.data);
             });
         }
     },

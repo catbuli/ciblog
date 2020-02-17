@@ -17,7 +17,7 @@ import addCategory from '../components/admin/addCategory.vue'
 import manageTag from '../components/admin/manageTag.vue'
 import index from '../components/admin/index.vue'
 import manageComment from '../components/admin/manageComment.vue'
-import systemSettings from '../components/admin/systemSettings.vue'
+import setupSystem from '../components/admin/setupSystem.vue'
 import backups from '../components/admin/backups.vue'
 import readSettings from '../components/admin/readSettings.vue'
 import commentSettings from '../components/admin/commentSettings.vue'
@@ -86,9 +86,9 @@ const routes = [{
         name: 'manage_comment',
         component: manageComment,
     }, {
-        path: '/admin/system_settings',
-        name: 'system_settings',
-        component: systemSettings,
+        path: '/admin/setup_system',
+        name: 'setup_system',
+        component: setupSystem,
     }, {
         path: '/admin/read_settings',
         name: 'read_settings',
