@@ -1,6 +1,6 @@
 <template>
     <adminFrame title="系统设置">
-        <section>
+        <section :loading="loading">
             <ul>
                 <li>
                     <h4>头部图片</h4>
@@ -70,7 +70,9 @@ export default {
             loading: true
         };
     },
-    mounted() {},
+    created() {
+        this.$store.dispatch("getSystemAciton");
+    },
     methods: {
         submit() {
             this.$store.dispatch("updateSystemAciton", this.system);

@@ -85,6 +85,9 @@ export default {
 [v-cloak] {
     display: none;
 }
+img {
+    user-select: none;
+}
 h1,
 h2,
 h3,

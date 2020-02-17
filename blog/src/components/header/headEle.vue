@@ -70,7 +70,7 @@ header {
     z-index: -1;
     position: relative;
     margin-bottom: 50px;
-    animation: show ease-in 1s 1;
+    animation: show ease-out 1s 1;
     display: flex;
     background-position: center center;
     background-repeat: no-repeat;

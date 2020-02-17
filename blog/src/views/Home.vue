@@ -45,9 +45,6 @@ export default {
             this.paging = this.$store.state.global.paging;
         }
     },
-    created() {
-        this.$store.dispatch("getSystemAciton");
-    },
     methods: {
         handlePage() {
             this.loading = true;
