@@ -10,7 +10,7 @@
                               :rows=7></el-input>
                     <span class="input-hint">首页banner图片一行一个地址可设置多个,随机更换.</span>
                 </li>
-                <li>
+                <!-- <li>
                     <h4>主页描述</h4>
                     <el-input placeholder="请输入内容"
                               v-model="system.description"></el-input>
@@ -41,7 +41,7 @@
                     <el-input placeholder="请输入内容"
                               v-model="system.mail"></el-input>
                     <span class="input-hint">电子邮箱啦.</span>
-                </li>
+                </li> -->
                 <li class="input-button">
                     <el-button type="primary"
                                @click="submit">保存设置</el-button>
@@ -75,7 +75,7 @@ export default {
     },
     methods: {
         submit() {
-            console.log(this.setupList);
+            this.$store.dispatch("updateSystemAciton", this.system);
         }
     }
 };

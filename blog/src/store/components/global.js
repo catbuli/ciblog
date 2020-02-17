@@ -30,7 +30,12 @@ export default {
     mutations: {
         setSystem(state, data) {
             state.system = data;
-            state.system.banner = data.banner.split("\n");
+            state.system.randomBanner = data.banner.split("\n");
+            let num = Math.floor(
+                Math.random() *
+                state.system.randomBanner.length
+            );
+            state.system.randomBanner = state.system.randomBanner[num];
         },
         isAdmin(state, data) {
             state.isAdmin = data;
@@ -110,15 +115,22 @@ export default {
             });
         },
         getCountAction(context, data) {
-            post("/count", {}, (data) => {
-                context.commit('setCountList', data.data);
+            post("/count", {}, res => {
+                context.commit('setCountList', res.data);
             });
         },
         getSystemAciton(context, data) {
-            post("/setupc/system", {}, data => {
-                context.commit('setSystem', data.data);
+            post("/setupc/system", {}, res => {
+                context.commit('setSystem', res.data);
             });
-        }
+        },
+        updateSystemAciton(context, data) {
+            post("/setupc/updateSystem", {
+                data: data
+            }, res => {
+                context.dispatch('getSystemAciton');
+            });
+        },
     },
     modules: {}
 }

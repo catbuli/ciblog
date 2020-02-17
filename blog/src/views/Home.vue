@@ -46,10 +46,7 @@ export default {
             this.paging = this.$store.state.global.paging;
         },
         "$store.state.global.system": function() {
-            let num = Math.floor(
-                Math.random() * this.$store.state.global.system.banner.length
-            );
-            this.backgroundImage = this.$store.state.global.system.banner[num];
+            this.backgroundImage = this.$store.state.global.system.randomBanner;
         }
     },
     mounted() {
