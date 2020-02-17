@@ -1,6 +1,6 @@
 <?php
 
-namespace app\client\controller;
+namespace app\index\controller;
 
 use think\Controller;
 use think\Exception;

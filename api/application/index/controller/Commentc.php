@@ -1,10 +1,10 @@
 <?php
 
-namespace app\client\controller;
+namespace app\index\controller;
 
 use think\Controller;
-use app\client\model\Comment;
-use app\client\model\Article;
+use app\index\model\Comment;
+use app\index\model\Article;
 use think\Exception;
 use app\common\Response;
 use think\Db;

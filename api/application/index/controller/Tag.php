@@ -1,10 +1,10 @@
 <?php
 
-namespace app\client\controller;
+namespace app\index\controller;
 
-use app\client\model\ArticleMeta;
+use app\index\model\ArticleMeta;
 use think\Controller;
-use app\client\model\Meta;
+use app\index\model\Meta;
 use think\Exception;
 use app\common\Response;
 

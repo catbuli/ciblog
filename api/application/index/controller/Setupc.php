@@ -1,10 +1,10 @@
 <?php
 
-namespace app\client\controller;
+namespace app\index\controller;
 
 use think\Controller;
-use app\client\model\User;
-use app\client\model\Setup;
+use app\index\model\User;
+use app\index\model\Setup;
 use think\Exception;
 use app\common\Response;
 

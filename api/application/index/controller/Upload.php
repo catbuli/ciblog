@@ -1,11 +1,11 @@
 <?php
 
-namespace app\client\controller;
+namespace app\index\controller;
 
 use think\Controller;
 use app\common\Response;
 use think\Exception;
-use app\client\model\File;
+use app\index\model\File;
 
 class Upload extends Controller
 {

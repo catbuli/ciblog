@@ -1,9 +1,9 @@
 <?php
 
-namespace app\client\model;
+namespace app\index\model;
 
 use think\Model;
-use app\client\model\ArticleMeta;
+use app\index\model\ArticleMeta;
 use think\Db;
 
 class Article extends Model

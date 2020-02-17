@@ -415,7 +415,7 @@ class Request
                 foreach (Config::get('pathinfo_fetch') as $type) {
                     if (!empty($_SERVER[$type])) {
                         $_SERVER['PATH_INFO'] = (0 === strpos($_SERVER[$type], $_SERVER['SCRIPT_NAME'])) ?
-                        substr($_SERVER[$type], strlen($_SERVER['SCRIPT_NAME'])) : $_SERVER[$type];
+                            substr($_SERVER[$type], strlen($_SERVER['SCRIPT_NAME'])) : $_SERVER[$type];
                         break;
                     }
                 }
@@ -1137,23 +1137,23 @@ class Request
     private function typeCast(&$data, $type)
     {
         switch (strtolower($type)) {
-            // 数组
+                // 数组
             case 'a':
                 $data = (array) $data;
                 break;
-            // 数字
+                // 数字
             case 'd':
                 $data = (int) $data;
                 break;
-            // 浮点
+                // 浮点
             case 'f':
                 $data = (float) $data;
                 break;
-            // 布尔
+                // 布尔
             case 'b':
-                $data = (boolean) $data;
+                $data = (bool) $data;
                 break;
-            // 字符串
+                // 字符串
             case 's':
             default:
                 if (is_scalar($data)) {

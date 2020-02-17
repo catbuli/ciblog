@@ -1,9 +1,9 @@
 <?php
 
-namespace app\client\controller;
+namespace app\index\controller;
 
 use think\Controller;
-use app\client\model\User;
+use app\index\model\User;
 use think\Exception;
 use app\common\TokenManage;
 use app\common\Session;

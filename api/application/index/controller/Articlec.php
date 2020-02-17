@@ -1,11 +1,11 @@
 <?php
 
-namespace app\client\controller;
+namespace app\index\controller;
 
 use think\Controller;
-use app\client\model\Article;
-use app\client\model\ArticleMeta;
-use app\client\model\Comment;
+use app\index\model\Article;
+use app\index\model\ArticleMeta;
+use app\index\model\Comment;
 use think\Exception;
 use app\common\Response;
 use think\Db;
