@@ -90,7 +90,7 @@ h4 {
     font-weight: 900;
 }
 li {
-    width: 50%;
+    width: 60%;
     margin: 0 auto;
 }
 .input-button {

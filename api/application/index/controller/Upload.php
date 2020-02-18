@@ -53,8 +53,18 @@ class Upload extends Controller
     {
         try {
             $file = new File();
-            $file->del($fid);
-            return Response::result(201, "成功!", "文件删除成功!");
+            foreach ($fid as $value) {
+                $url = str_replace("\\", "/", File::get($value)->url);
+                $filename = '../api/public/uploads/' . $url;
+                $file->del($value);
+                if (file_exists($filename)) {
+                    unlink($filename);
+                    $info = Response::result(201, "成功!", "文件删除成功!");
+                } else {
+                    return Response::result(400, "成功!", "某个文件删除失败，请前往服务器目录清理!");
+                }
+            }
+            return $info;
         } catch (Exception $e) {
             return Response::result(400, "请求失败!", $e->getMessage());
         }

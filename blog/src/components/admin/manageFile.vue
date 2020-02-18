@@ -1,5 +1,6 @@
 <template>
-    <adminFrame title="文件管理">
+    <adminFrame title="文件管理"
+                width="70%">
         <el-row>
             <el-col :span=2>
                 <el-button type="primary"
@@ -39,7 +40,15 @@
             </el-table-column>
             <el-table-column prop="name"
                              align="center"
+                             width="100px"
                              label="文件名称">
+            </el-table-column>
+            <el-table-column prop="name"
+                             align="center"
+                             label="文件链接">
+                <template slot-scope="scope">
+                    <span>{{$store.state.global.UPLOADPATH+scope.row.url.replace('\\', '/')}}</span>
+                </template>
             </el-table-column>
             <el-table-column prop="aid"
                              width="100px"
@@ -53,16 +62,22 @@
             </el-table-column>
             <el-table-column prop="datetime"
                              align="center"
-                             label="上传时间">
+                             label="上传时间"
+                             width="100px">
             </el-table-column>
             <el-table-column prop="url"
                              align="center"
-                             width="100px"
-                             label="文件链接">
+                             width="139px"
+                             label="预览">
                 <template slot-scope="scope">
-                    <a :href="$store.state.global.UPLOADPATH +
+                    <!-- <a :href="$store.state.global.UPLOADPATH +
                     scope.row.url.replace('\\', '/')"
-                       target='_blank'>预览</a>
+                       target='_blank'> -->
+                    <el-image style="width: 100px; height: 70px"
+                              :src="$store.state.global.UPLOADPATH+scope.row.url.replace('\\', '/')"
+                              :preview-src-list="[$store.state.global.UPLOADPATH+scope.row.url.replace('\\', '/')]">
+                    </el-image>
+                    <!-- </a> -->
                 </template>
             </el-table-column>
             <!-- <el-table-column>
@@ -129,7 +144,7 @@ export default {
             }
         },
         clickSelect(row, column, event) {
-            this.$refs.table.toggleRowSelection(row);
+            // this.$refs.table.toggleRowSelection(row);
         },
         getList() {
             this.$store.dispatch("getFileListAction", this.paging);
@@ -138,7 +153,6 @@ export default {
             this.loading = true;
         },
         handleSelectionChange(rows) {
-            console.log(rows);
             let flag = [];
             if (rows) {
                 rows.forEach(row => {
