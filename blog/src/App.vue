@@ -77,9 +77,34 @@ export default {
 
 <style>
 /* 公共样式设置 */
+
 ::selection {
     background-color: rgba(0, 0, 0, 0.7);
     color: #fff;
+}
+/* 滚动条整体部分，可以设置宽度等 */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 7px;
+}
+/* 外层轨道 */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px #8a8a8a;
+    border-radius: 10px;
+    background-color: #8a8a8a;
+}
+/* 内层滚动槽 */
+::-webkit-scrollbar-track-piece {
+    background-color: #f8f8f8;
+}
+/* 滚动的滑块 */
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px #8a8a8a;
+    background-color: #8a8a8a;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #b4b4b4;
 }
 
 [v-cloak] {

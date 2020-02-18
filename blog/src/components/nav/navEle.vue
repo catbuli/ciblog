@@ -198,8 +198,8 @@ export default {
 
 .hidden-nav {
     animation: hidden-nav ease 0.5s;
-    transform: translateX(-100%);
-    transition: all ease 0.5s;
+    transform: translateX(-101%);
+    transition: all ease-in-out 0.5s;
 }
 .show-nav {
     animation: show-nav ease 0.5s;

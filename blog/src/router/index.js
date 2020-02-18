@@ -33,13 +33,6 @@ const routes = [{
         title: '首页'
     },
 }, {
-    path: '/404',
-    name: '404',
-    component: errorPage,
-    meta: {
-        title: '页面逃走了'
-    },
-}, {
     path: '/search',
     name: 'search',
     component: Search,
@@ -160,6 +153,13 @@ const routes = [{
             title: '文件管理'
         },
     }]
+}, {
+    path: '/404',
+    name: '404',
+    component: errorPage,
+    meta: {
+        title: '页面逃走了'
+    },
 }]
 
 const router = new VueRouter({
