@@ -42,9 +42,14 @@
                              label="文件名称">
             </el-table-column>
             <el-table-column prop="aid"
-                             width="50px"
+                             width="100px"
                              align="center"
-                             label="文章">
+                             label="文章所属">
+                <template slot-scope="scope">
+                    <span v-if="scope.row.aid==-2">公共文件</span>
+                    <span v-else-if="scope.row.aid==-1">临时文件</span>
+                    <span v-else>{scope.row.aid}</span>
+                </template>
             </el-table-column>
             <el-table-column prop="datetime"
                              align="center"

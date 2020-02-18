@@ -3,7 +3,7 @@
          :class="[$store.state.global.isShowLeftNav ? 'show-nav' : 'hidden-nav']">
         <svg @click="$store.commit('handleLeftNav', !$store.state.global.isShowLeftNav);"
              id="button-nav"
-             class="button-nav ham hamRotate180 ham5 active"
+             class="button-nav ham hamRotate180 ham5"
              viewBox="0 0 100 100"
              width="80">
             <path class="line top"

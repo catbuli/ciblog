@@ -66,12 +66,11 @@ export default {
         }
     },
     created() {
+        this.checkRouter();
         this.$store.dispatch("getSystemAciton");
         this.$store.dispatch("getPersonalDataAction");
     },
-    mounted() {
-        this.checkRouter();
-    }
+    mounted() {}
 };
 </script>
 
