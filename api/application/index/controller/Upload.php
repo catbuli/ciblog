@@ -37,7 +37,7 @@ class Upload extends Controller
                     $file->size = $info->getInfo()["size"];
                     $file->datetime = date('Y-m-d H:i:s');
                     $file->aid = $aid;
-                    $file->url = $info->getSavename();
+                    $file->url = str_replace("\\", "/", $info->getSavename());;
                     $file->add();
                     $fileList = $file->getList(['typeName' => 'id', 'type' => $aid]);
                     return Response::result(201, "成功!", "上传成功!", ['file' => $file, 'fileList' => $fileList]);
@@ -54,8 +54,7 @@ class Upload extends Controller
         try {
             $file = new File();
             foreach ($fid as $value) {
-                $url = str_replace("\\", "/", File::get($value)->url);
-                $filename = '../api/public/uploads/' . $url;
+                $filename = '../api/public/uploads/' . File::get($value)->url;
                 $file->del($value);
                 if (file_exists($filename)) {
                     unlink($filename);

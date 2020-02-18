@@ -47,7 +47,7 @@
                              align="center"
                              label="文件链接">
                 <template slot-scope="scope">
-                    <span>{{$store.state.global.UPLOADPATH+scope.row.url.replace('\\', '/')}}</span>
+                    <span>{{$store.state.global.UPLOADPATH+scope.row.url}}</span>
                 </template>
             </el-table-column>
             <el-table-column prop="aid"
@@ -74,8 +74,8 @@
                     scope.row.url.replace('\\', '/')"
                        target='_blank'> -->
                     <el-image style="width: 100px; height: 70px"
-                              :src="$store.state.global.UPLOADPATH+scope.row.url.replace('\\', '/')"
-                              :preview-src-list="[$store.state.global.UPLOADPATH+scope.row.url.replace('\\', '/')]">
+                              :src="$store.state.global.UPLOADPATH+scope.row.url"
+                              :preview-src-list="[$store.state.global.UPLOADPATH+scope.row.url]">
                     </el-image>
                     <!-- </a> -->
                 </template>
