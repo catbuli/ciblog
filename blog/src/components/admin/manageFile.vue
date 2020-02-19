@@ -8,6 +8,15 @@
                            @click="delComment">
                 </el-button>
             </el-col>
+            <el-col :span=12>
+                <el-radio-group v-model="paging.type"
+                                @change="selectChange">
+                    <el-radio-button label=-1>全部</el-radio-button>
+                    <el-radio-button label=0>归档文件</el-radio-button>
+                    <el-radio-button label=1>临时文件</el-radio-button>
+                    <el-radio-button label=2>全局文件</el-radio-button>
+                </el-radio-group>
+            </el-col>
         </el-row>
         <el-table class="file-table"
                   :highlight-current-row="true"
@@ -51,13 +60,18 @@
                 </template>
             </el-table-column>
             <el-table-column prop="aid"
-                             width="100px"
+                             width="50px"
                              align="center"
-                             label="文章所属">
+                             label="所属">
+            </el-table-column>
+            <el-table-column prop="status"
+                             width="50px"
+                             align="center"
+                             label="归档类型">
                 <template slot-scope="scope">
-                    <span v-if="scope.row.aid==-2">公共文件</span>
-                    <span v-else-if="scope.row.aid==-1">临时文件</span>
-                    <span v-else>{scope.row.aid}</span>
+                    <span v-if="scope.row.status==0">归档文件</span>
+                    <span v-else-if="scope.row.status==1">临时文件</span>
+                    <span v-else>全局文件</span>
                 </template>
             </el-table-column>
             <el-table-column prop="datetime"
@@ -110,10 +124,10 @@ export default {
             selectRows: [],
             fileList: [],
             paging: {
-                pageSize: 10,
+                pageSize: 5,
                 currentPage: 1,
                 type: -1,
-                typeName: "all",
+                typeName: "status",
                 total: 0
             },
             loading: true
@@ -129,6 +143,12 @@ export default {
         this.getList();
     },
     methods: {
+        selectChange(value) {
+            this.loading = true;
+            this.paging.currentPage = 1;
+            this.paging.type = value;
+            this.$store.dispatch("getFileListAction", this.paging);
+        },
         delComment() {
             if (this.selectRows.length > 0) {
                 this.$confirm("此操作将永久删除所选文件, 是否继续?", "提示", {

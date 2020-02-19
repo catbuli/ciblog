@@ -37,7 +37,14 @@ class Upload extends Controller
                     $file->size = $info->getInfo()["size"];
                     $file->datetime = date('Y-m-d H:i:s');
                     $file->aid = $aid;
-                    $file->url = str_replace("\\", "/", $info->getSavename());;
+                    if ($aid == -1) {
+                        $file->status = 1;
+                    } else if ($aid == -2) {
+                        $file->status = 2;
+                    } else {
+                        $file->status = 0;
+                    }
+                    $file->url = str_replace("\\", "/", $info->getSavename());
                     $file->add();
                     $fileList = $file->getList(['typeName' => 'id', 'type' => $aid]);
                     return Response::result(201, "成功!", "上传成功!", ['file' => $file, 'fileList' => $fileList]);

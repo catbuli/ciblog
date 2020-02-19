@@ -22,9 +22,15 @@ class File extends Model
                 return $this->order('datetime desc')->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->select();
                 // }
             case 'id':
-                return $this->order('datetime esc')->where("aid", $paging['type'])->select();
+                return $this->order('datetime desc')->where("aid", $paging['type'])->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->select();
+            case 'status':
+                if ($paging['type'] == -1) {
+                    return $this->order('datetime desc')->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->select();
+                } else {
+                    return $this->order('datetime desc')->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->where("status", $paging['type'])->select();
+                }
             default:
-                return $this->order('datetime desc')->select();
+                return $this->order('datetime desc')->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->select();
         }
     }
     /**
@@ -39,8 +45,12 @@ class File extends Model
         $count = 0;
         $file = new File();
         switch ($typeName) {
-            case 'all':
-                $count = count(File::all());
+            case 'status':
+                if ($type == -1) {
+                    $count = count(File::all());
+                } else {
+                    $count = count($file->where('status', $type)->select());
+                }
                 break;
             case 'id':
                 $count = count($file->where('aid', $type)->select());
