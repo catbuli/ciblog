@@ -69,10 +69,10 @@ class Articlec extends Controller
                     'title' => $data["title"],
                     'text' => $data["text"],
                     'cover_url' => $data["cover_url"],
-                    'create_date' => $data['create_date'],
+                    'create_date' => $data["create_date"] ? $data["create_date"] : date('Y-m-d H:i:s'),
                     'allow_comment' => $data['allow_comment'] == true ? 1 : 0,
                     'author_id' => 1,
-                    'modify_date' => $data['create_date'],
+                    'modify_date' => date('Y-m-d H:i:s'),
                     'description' => $data['description']
                 ]);
                 $article->addArticle();

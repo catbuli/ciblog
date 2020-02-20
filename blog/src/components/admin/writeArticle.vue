@@ -73,8 +73,8 @@
             <el-row class="setting-row">
                 <el-button type="primary"
                            @click="publish">发布</el-button>
-                <el-button type="info"
-                           @click="saveDraft">保存草稿</el-button>
+                <!-- <el-button type="info"
+                           @click="saveDraft">保存草稿</el-button> -->
             </el-row>
         </section>
     </adminFrame>

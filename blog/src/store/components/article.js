@@ -61,7 +61,7 @@ export default {
             post("/articlec/draft", {
                 data: data
             }, resp => {
-                context.dispatch('getArticleDataAction', resp.data.aid);
+                // context.dispatch('getArticleDataAction', resp.data.aid);
             });
         }
     },
