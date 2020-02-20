@@ -1,15 +1,15 @@
 <template>
     <div id="upload">
-        <el-upload drag
+        <el-upload multiple
                    action="#"
                    :on-preview="selectFile"
                    :http-request="upload"
                    :file-list="fileList"
                    :on-remove="delFile">
-            <i class="el-icon-upload"></i>
-            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-            <div class="el-upload__tip"
-                 slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+            <el-button size="small"
+                       type="primary">点击上传</el-button>
+            <div slot="tip"
+                 class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
         </el-upload>
     </div>
 </template>

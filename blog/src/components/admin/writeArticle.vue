@@ -1,82 +1,92 @@
 <template>
     <adminFrame v-loading="loading"
+                width='80%'
                 element-loading-text="数据获取中">
         <adminTitle v-if="isEdit"
                     :title="'编辑文章　'+showTitle"></adminTitle>
         <adminTitle v-else
                     title="写文章"></adminTitle>
-        <section class="content-main">
-            <el-input placeholder="标题"
-                      v-model="article.title"></el-input>
-            <p class="input-hint"></p>
-            <div class="markdown">
-                <mavonEditor v-model="article.text"
-                             :toolbars="markdownOption"
-                             ref="md"
-                             @change="change"
-                             @save="save"></mavonEditor>
-            </div>
-        </section>
-        <section class="content-settings">
-            <el-row class="setting-row">
-                <h3 class="setting-title">设置</h3>
-            </el-row>
-            <el-row class="setting-row">
-                <el-col :span='12'>
-                    <h4>文章分类</h4>
-                    <el-checkbox-group v-model="article.categoryList">
-                        <el-checkbox v-for="item in $store.state.category.categoryList"
-                                     :key="item.mid"
-                                     :label="item.mid"
-                                     border>{{item.name}}</el-checkbox>
-                    </el-checkbox-group>
-                </el-col>
-                <el-col :span='12'>
-                    <h4>发布日期</h4>
-                    <el-date-picker v-model="article.create_date"
-                                    type="datetime"
-                                    placeholder="选择日期时间"
-                                    align="right"
-                                    value-format="yyyy-MM-dd HH:ss:mm"
-                                    :picker-options="pickerOptions">
-                    </el-date-picker>
-                    <h4 style="margin-top:20px">封面链接</h4>
-                    <el-input placeholder="封面链接"
-                              v-model="article.cover_url"></el-input>
-                </el-col>
-            </el-row>
-            <el-row class="setting-row">
-                <el-col :span='12'>
-                    <h4>文章标签</h4>
-                    <el-checkbox-group v-model="article.tagList">
-                        <el-checkbox v-for="item in $store.state.tag.tagList"
-                                     :key="item.mid"
-                                     :label="item.mid"
-                                     border>{{item.name}}</el-checkbox>
-                    </el-checkbox-group>
-                    <el-input placeholder="新标签"
-                              v-model="tagName"
-                              class="new-tag"
-                              @keyup.enter.native="newTag"></el-input>
-                </el-col>
-                <el-col :span='12'>
-                    <h4>是否允许评论</h4>
-                    <el-switch v-model="article.allow_comment">
-                    </el-switch>
-                </el-col>
-            </el-row>
-            <el-row class="setting-row">
-                <el-col :span='12'>
-                    <upload :aid=Number(this.$route.params.aid)></upload>
-                </el-col>
-            </el-row>
-            <el-row class="setting-row">
-                <el-button type="primary"
-                           @click="publish">发布</el-button>
-                <!-- <el-button type="info"
+        <el-row>
+            <el-col :span="16">
+                <section class="content-main">
+                    <el-input placeholder="标题"
+                              v-model="article.title"></el-input>
+                    <p class="input-hint"></p>
+                    <div class="markdown">
+                        <mavonEditor v-model="article.text"
+                                     :toolbars="markdownOption"
+                                     ref="md"
+                                     @change="change"
+                                     @save="save"></mavonEditor>
+                    </div>
+                </section>
+                <section class="content-settings">
+                    <el-row class="setting-row">
+                        <h3 class="setting-title">设置</h3>
+                    </el-row>
+                    <el-row class="setting-row">
+                        <el-col :span='12'>
+                            <h4>发布日期</h4>
+                            <el-date-picker v-model="article.create_date"
+                                            type="datetime"
+                                            placeholder="选择日期时间"
+                                            align="right"
+                                            value-format="yyyy-MM-dd HH:ss:mm"
+                                            :picker-options="pickerOptions">
+                            </el-date-picker>
+                        </el-col>
+                        <el-col :span='12'>
+                            <h4>封面链接</h4>
+                            <el-input placeholder="封面链接"
+                                      v-model="article.cover_url"></el-input>
+                        </el-col>
+                    </el-row>
+                    <el-row class="setting-row">
+                        <el-col :span='12'>
+                            <h4>是否允许评论</h4>
+                            <el-switch v-model="article.allow_comment">
+                            </el-switch>
+                        </el-col>
+                    </el-row>
+                    <el-row class="setting-row">
+                        <el-button type="primary"
+                                   @click="publish">发布</el-button>
+                        <!-- <el-button type="info"
                            @click="saveDraft">保存草稿</el-button> -->
-            </el-row>
-        </section>
+                    </el-row>
+                </section>
+            </el-col>
+            <el-col :span="7"
+                    :offset="1">
+                <section class="content-settings">
+                    <el-row class="setting-row">
+                        <h4>文章分类</h4>
+                        <el-checkbox-group v-model="article.categoryList">
+                            <el-checkbox v-for="item in $store.state.category.categoryList"
+                                         :key="item.mid"
+                                         :label="item.mid"
+                                         border>{{item.name}}</el-checkbox>
+                        </el-checkbox-group>
+                    </el-row>
+                    <el-row class="setting-row">
+                        <h4>文章标签</h4>
+                        <el-checkbox-group v-model="article.tagList">
+                            <el-checkbox v-for="item in $store.state.tag.tagList"
+                                         :key="item.mid"
+                                         :label="item.mid"
+                                         border>{{item.name}}</el-checkbox>
+                        </el-checkbox-group>
+                        <el-input placeholder="新标签"
+                                  v-model="tagName"
+                                  class="new-tag"
+                                  @keyup.enter.native="newTag"></el-input>
+                    </el-row>
+                    <el-row class="setting-row">
+                        <upload :aid=Number(this.$route.params.aid)></upload>
+                    </el-row>
+                </section>
+            </el-col>
+        </el-row>
     </adminFrame>
 </template>
 
