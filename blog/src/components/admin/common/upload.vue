@@ -86,7 +86,9 @@ export default {
             }
         },
         delFile(file) {
-            this.$store.dispatch("delFileAction", file.fid);
+            let del = [];
+            del.push(file.fid);
+            this.$store.dispatch("delFileAction", del);
         }
     }
 };

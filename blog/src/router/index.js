@@ -73,7 +73,7 @@ const routes = [{
         name: 'write_article',
         component: writeArticle,
         meta: {
-            title: '编辑文章'
+            title: '写文章'
         },
     }, {
         path: '/admin/write_article/:aid',

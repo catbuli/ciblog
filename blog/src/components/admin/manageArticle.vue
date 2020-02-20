@@ -36,8 +36,15 @@
                 </template>
             </el-table-column>
             <el-table-column prop="title"
-                             align="center"
+                             align="left"
                              label="标题">
+                <template slot-scope="scope">
+                    <span>{{scope.row.title}}</span>
+                    <el-badge value="草稿"
+                              type="info"
+                              v-if="scope.row.status==1">
+                    </el-badge>
+                </template>
             </el-table-column>
             <el-table-column align="center"
                              width="80px"
@@ -51,11 +58,7 @@
             </el-table-column>
             <el-table-column prop=""
                              align="center"
-                             label="分类"
-                             :filters="filters"
-                             :filter-method="filterHandler"
-                             :filter-multiple=false
-                             filter-placement="bottom-start">
+                             label="分类">
                 <template slot-scope="scope">
                     <span v-for="item in scope.row.category"
                           :key="item.cid"
@@ -89,11 +92,6 @@ export default {
             articleList: [],
             loading: true,
             selectRows: [],
-            filters: [
-                { text: "未审核", value: "0" },
-                { text: "通过", value: "1" },
-                { text: "垃圾", value: "2" }
-            ],
             paging: {
                 pageSize: 10,
                 currentPage: 1,
@@ -141,9 +139,6 @@ export default {
                 });
             }
             this.selectRows = flag;
-        },
-        filterHandler(value, row, column) {
-            return row.status === value;
         },
         handlePage() {
             this.loading = true;

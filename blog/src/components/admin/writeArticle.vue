@@ -10,8 +10,11 @@
                       v-model="article.title"></el-input>
             <p class="input-hint"></p>
             <div class="markdown">
-                <mavonEditor @change="change"
-                             v-model="article.text"></mavonEditor>
+                <mavonEditor v-model="article.text"
+                             :toolbars="markdownOption"
+                             ref="md"
+                             @change="change"
+                             @save="save"></mavonEditor>
             </div>
         </section>
         <section class="content-settings">
@@ -69,11 +72,9 @@
             </el-row>
             <el-row class="setting-row">
                 <el-button type="primary"
-                           v-if="isEdit"
-                           @click="edit">发布</el-button>
-                <el-button type="primary"
-                           v-else
-                           @click="add">发布</el-button>
+                           @click="publish">发布</el-button>
+                <el-button type="info"
+                           @click="saveDraft">保存草稿</el-button>
             </el-row>
         </section>
     </adminFrame>
@@ -96,8 +97,43 @@ export default {
     },
     data() {
         return {
+            markdownOption: {
+                bold: true, // 粗体
+                italic: true, // 斜体
+                header: true, // 标题
+                underline: true, // 下划线
+                strikethrough: true, // 中划线
+                mark: true, // 标记
+                superscript: true, // 上角标
+                subscript: true, // 下角标
+                quote: true, // 引用
+                ol: true, // 有序列表
+                ul: true, // 无序列表
+                link: true, // 链接
+                imagelink: true, // 图片链接
+                code: true, // code
+                table: true, // 表格
+                fullscreen: true, // 全屏编辑
+                readmodel: true, // 沉浸式阅读
+                htmlcode: true, // 展示html源码
+                help: true, // 帮助
+                /* 1.3.5 */
+                undo: true, // 上一步
+                redo: true, // 下一步
+                trash: true, // 清空
+                save: true, // 保存（触发events中的save事件）
+                /* 1.4.2 */
+                navigation: false, // 导航目录
+                /* 2.1.8 */
+                alignleft: true, // 左对齐
+                aligncenter: true, // 居中
+                alignright: true, // 右对齐
+                /* 2.2.1 */
+                subfield: true, // 单双栏模式
+                preview: true // 预览
+            },
             article: {
-                id: null,
+                aid: null,
                 categoryList: [],
                 tagList: [],
                 html: "",
@@ -106,7 +142,8 @@ export default {
                 create_date: "",
                 title: "",
                 allow_comment: true,
-                description: ""
+                description: "",
+                status: 0
             },
             showTitle: "",
             loading: true,
@@ -140,11 +177,6 @@ export default {
             }
         };
     },
-    mounted() {
-        this.checkEdit();
-        this.getCategoryList();
-        this.getTagList();
-    },
     watch: {
         "$store.state.article.article": function() {
             this.article = this.$store.state.article.article;
@@ -152,11 +184,13 @@ export default {
             this.loading = false;
         }
     },
+    mounted() {
+        this.checkEdit();
+        this.getMetaList();
+    },
     methods: {
-        getCategoryList() {
+        getMetaList() {
             this.$store.dispatch("getCategoryListAction");
-        },
-        getTagList() {
             this.$store.dispatch("getTagListAction");
         },
         checkEdit() {
@@ -179,17 +213,43 @@ export default {
             this.article.description = description.substring(0, 100);
             this.article.html = render;
         },
-        add() {
-            this.article.fileList = this.$store.state.file.fileList;
-            this.$store.dispatch("addArticleAction", this.article);
+        // 富文本保存
+        save() {
+            console.log("save", "");
         },
-        edit() {
-            this.$store.dispatch("editArticleAction", this.article);
+        publish() {
+            this.article.fileList = this.$store.state.file.fileList;
+            this.$store.dispatch("publishArticleAction", this.article);
         },
         newTag() {
             this.$store.dispatch("addTagAction", this.tagName);
             this.tagName = "";
+        },
+        saveDraft() {
+            post("/articlec/draft", { data: this.article }, data => {
+                console.log(data);
+            });
         }
+        // imgAdd(filename, file) {
+        //     let fd = new FormData();
+        //     fd.append("file", file);
+        //     if (this.$route.params.aid) {
+        //         fd.append("aid", this.$route.params.aid);
+        //         post("/upload/add", fd, data => {
+        //             this.fileList.push(data.data.file);
+        //         });
+        //     } else {
+        //         post("/upload/add", fd, data => {
+        //             this.$refs.md.$img2Url(
+        //                 filename,
+        //                 process.env.VUE_APP_UPLOADPATH + data.data.file.url
+        //             );
+        //         });
+        //     }
+        // },
+        // imgDel(filename, file) {
+        //     console.log("imgDel", "");
+        // }
     }
 };
 </script>
@@ -235,7 +295,7 @@ li {
     margin: 0px;
 }
 .markdown {
-    /* max-height: 700px; */
+    max-height: 700px;
     overflow-x: scroll;
     overflow: auto;
 }
