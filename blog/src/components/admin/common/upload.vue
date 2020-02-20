@@ -24,8 +24,8 @@ export default {
             paging: {
                 pageSize: 10,
                 currentPage: 1,
-                type: -1,
-                typeName: "id",
+                type: 1,
+                typeName: "status",
                 total: 0
             }
         };
@@ -79,7 +79,7 @@ export default {
                 this.paging.type = this.$route.params.aid;
                 this.$store.dispatch("getFileListAction", this.paging);
             } else {
-                this.paging.type = -1;
+                this.paging.type = 1;
                 this.$store.dispatch("getFileListAction", this.paging);
             }
         },
