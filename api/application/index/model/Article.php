@@ -18,7 +18,7 @@ class Article extends Model
     {
         switch ($paging['typeName']) {
             case 'all':
-                return $this->order('create_date desc')->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->field('aid,title,create_date,pv,comment_count,cover_url,description')->select();
+                return $this->order('create_date desc')->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->field('aid,title,create_date,pv,comment_count,cover_url,description,status')->select();
             case 'keyword':
                 return $this->order('create_date desc')
                     ->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])
@@ -37,7 +37,7 @@ class Article extends Model
                 $list = Db::name('article_meta')->where("mid", $paging['type'])->where("type", "tag")->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->select();
                 $dataList = [];
                 foreach ($list as $value) {
-                    array_push($dataList, Db::name("article")->where('aid', $value['aid'])->field('aid,title,create_date,pv,comment_count,cover_url,description')->find());
+                    array_push($dataList, Db::name("article")->where('aid', $value['aid'])->field('aid,title,create_date,pv,comment_count,cover_url,description,status')->find());
                 }
                 return $dataList;
             default:

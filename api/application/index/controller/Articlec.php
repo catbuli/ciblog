@@ -37,66 +37,57 @@ class Articlec extends Controller
         }
     }
     /**
-     * 修改文章内容
+     * 发布文章
      *
      * @param object $data 文章内容
      * @return json
      */
-    public function edit($data)
+    public function publish($data)
     {
         try {
-            $article = Article::get($data["aid"]);
-            $article->html = $data["html"];
-            $article->title = $data["title"];
-            $article->text = $data["text"];
-            $article->cover_url = $data["cover_url"];
-            $article->create_date = $data["create_date"];
-            $article->allow_comment = $data["allow_comment"];
-            $article->modify_date = date('Y-m-d H:i:s');
-            $article->description = $data['description'];
-            $article->editArticle();
-            ArticleMeta::delAllMetaByArticle($article->aid, "category");
-            ArticleMeta::addMetaList($data['categoryList'], $article->aid, "category");
-            ArticleMeta::delAllMetaByArticle($article->aid, "tag");
-            ArticleMeta::addMetaList($data['tagList'], $article->aid, "tag");
-            return Response::result(200, "成功", "文章发布成功!");
-        } catch (Exception $e) {
-            return Response::result(400, "请求失败!", $e->getMessage());
-        }
-    }
-    /**
-     * 新增文章
-     *
-     * @param object $data 文章内容
-     * @return json
-     */
-    public function add($data)
-    {
-        try {
-            $article = new Article();
-            $article->data([
-                'html' => $data["html"],
-                'title' => $data["title"],
-                'text' => $data["text"],
-                'cover_url' => $data["cover_url"],
-                'create_date' => $data['create_date'],
-                'allow_comment' => $data['allow_comment'] == true ? 1 : 0,
-                'author_id' => 1,
-                'modify_date' => $data['create_date'],
-                'description' => $data['description']
-            ]);
-            $article->addArticle();
-            $aid = $article->getLastInsID();
-            foreach ($data['fileList'] as $value) {
-                Db::name('file')
-                    ->where('aid', -1)
-                    ->update(['aid' => $aid]);
+            if ($data['aid']) {
+                $article = new Article();
+                $article = Article::get($data["aid"]);
+                $article->html = $data["html"];
+                $article->title = $data["title"];
+                $article->text = $data["text"];
+                $article->cover_url = $data["cover_url"];
+                $article->create_date = $data["create_date"] ? $data["create_date"] : date('Y-m-d H:i:s');
+                $article->allow_comment = $data["allow_comment"];
+                $article->modify_date = date('Y-m-d H:i:s');
+                $article->description = $data['description'];
+                $article->editArticle();
+                ArticleMeta::delAllMetaByArticle($article->aid, "category");
+                ArticleMeta::addMetaList($data['categoryList'], $article->aid, "category");
+                ArticleMeta::delAllMetaByArticle($article->aid, "tag");
+                ArticleMeta::addMetaList($data['tagList'], $article->aid, "tag");
+                return Response::result(200, "成功", "文章发布成功!");
+            } else {
+                $article = new Article();
+                $article->data([
+                    'html' => $data["html"],
+                    'title' => $data["title"],
+                    'text' => $data["text"],
+                    'cover_url' => $data["cover_url"],
+                    'create_date' => $data['create_date'],
+                    'allow_comment' => $data['allow_comment'] == true ? 1 : 0,
+                    'author_id' => 1,
+                    'modify_date' => $data['create_date'],
+                    'description' => $data['description']
+                ]);
+                $article->addArticle();
+                $aid = $article->getLastInsID();
+                foreach ($data['fileList'] as $value) {
+                    Db::name('file')
+                        ->where('aid', -1)
+                        ->update(['aid' => $aid]);
+                }
+                ArticleMeta::addMetaList($data['categoryList'], $aid, "category");
+                ArticleMeta::addMetaList($data['tagList'], $aid, "tag");
+                return Response::result(200, "成功", "文章发布成功!");
             }
-            ArticleMeta::addMetaList($data['categoryList'], $aid, "category");
-            ArticleMeta::addMetaList($data['tagList'], $aid, "tag");
-            return Response::result(200, "成功", "文章发布成功!");
         } catch (Exception $e) {
-            return Response::result(400, "请求失败!", $e->getMessage());
+            return Response::result(400, "请求失败!", $e);
         }
     }
     /**
@@ -159,6 +150,44 @@ class Articlec extends Controller
             } else {
                 return Response::result(404, "失败", "文章没有找到，或已被删除!");
             }
+        } catch (Exception $e) {
+            return Response::result(400, "请求失败!", $e);
+        }
+    }
+
+    public function draft($data)
+    {
+        try {
+            Article::destroy(-1);
+            $article = new Article();
+            $article->data([
+                "aid" => -1,
+                'html' => $data["html"],
+                'title' => $data["title"],
+                'text' => $data["text"],
+                'cover_url' => $data["cover_url"],
+                'create_date' => date('Y-m-d H:i:s'),
+                'allow_comment' => $data['allow_comment'] == true ? 1 : 0,
+                'author_id' => 1,
+                'status' => 1,
+                'modify_date' => date('Y-m-d H:i:s'),
+                'description' => $data['description'],
+            ]);
+            if ($data['aid']) {
+                if ($data['aid'] == -1) {
+                    $article->draft = $data["draft"];
+                } else {
+                    $article->draft = $data["aid"];
+                }
+            } else {
+                $article->draft = -1;
+            }
+            $article->addArticle();
+            ArticleMeta::delAllMetaByArticle($article->aid, "category");
+            ArticleMeta::addMetaList($data['categoryList'], $article->aid, "category");
+            ArticleMeta::delAllMetaByArticle($article->aid, "tag");
+            ArticleMeta::addMetaList($data['tagList'], $article->aid, "tag");
+            return Response::result(200, "成功", "草稿保存成功!", $article);
         } catch (Exception $e) {
             return Response::result(400, "请求失败!", $e);
         }

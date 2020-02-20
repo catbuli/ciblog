@@ -60,11 +60,14 @@ class Login extends Controller
     public function alterpass($password, $repassword)
     {
         try {
-            if (TokenManage::checkToken() && $password == $repassword) {
-                User::editPassword(Session::get("uid"), md5($password));
-                return Response::result(200, "成功", "修改成功");
+            if (TokenManage::checkToken()) {
+                if ($password == $repassword) {
+                    User::editPassword(Session::get("uid"), md5($password));
+                    return Response::result(200, "成功", "修改成功！");
+                }
+                return Response::result(400, "失败", "修改失败！");
             } else {
-                return Response::result(400, "失败", "修改失败");
+                return Response::result(402, "失败", "账号登陆失效！");
             }
         } catch (Exception $e) {
             return Response::result(400, "请求失败", $e->getMessage());

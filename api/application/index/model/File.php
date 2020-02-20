@@ -17,12 +17,8 @@ class File extends Model
     public function getList($paging)
     {
         switch ($paging['typeName']) {
-            case 'all':
-                // if ($paging['type'] == -1) {
-                return $this->order('datetime desc')->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->select();
-                // }
             case 'id':
-                return $this->order('datetime desc')->where("aid", $paging['type'])->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->select();
+                return $this->order('datetime desc')->where("aid", $paging['type'])->select();
             case 'status':
                 if ($paging['type'] == -1) {
                     return $this->order('datetime desc')->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->select();

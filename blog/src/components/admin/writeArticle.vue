@@ -226,9 +226,7 @@ export default {
             this.tagName = "";
         },
         saveDraft() {
-            post("/articlec/draft", { data: this.article }, data => {
-                console.log(data);
-            });
+            this.$store.dispatch("draftAction", this.article);
         }
         // imgAdd(filename, file) {
         //     let fd = new FormData();

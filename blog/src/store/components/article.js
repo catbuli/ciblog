@@ -56,6 +56,13 @@ export default {
             }, (data) => {
                 dispatch('getArticleListAction', rootState.global.paging);
             });
+        },
+        draftAction(context, data) {
+            post("/articlec/draft", {
+                data: data
+            }, resp => {
+                context.dispatch('getArticleDataAction', resp.data.aid);
+            });
         }
     },
     modules: {}
