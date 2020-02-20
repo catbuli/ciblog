@@ -139,9 +139,7 @@ export default {
             this.loading = false;
         }
     },
-    mounted() {
-        this.getList();
-    },
+    mounted() {},
     methods: {
         selectChange(value) {
             this.loading = true;
@@ -165,9 +163,6 @@ export default {
         },
         clickSelect(row, column, event) {
             // this.$refs.table.toggleRowSelection(row);
-        },
-        getList() {
-            this.$store.dispatch("getFileListAction", this.paging);
         },
         handlePage() {
             this.loading = true;

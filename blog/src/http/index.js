@@ -56,6 +56,7 @@ export function post(url, data = {}, fn) {
 instance.interceptors.response.use(
     response => {
         switch (response.data.code) {
+            // 调用成功返回数据 弹出提示信息
             case 200: {
                 Notification({
                     title: response.data.title,
@@ -64,9 +65,11 @@ instance.interceptors.response.use(
                 });
                 break;
             }
+            // 调用成功返回数据 没有提示细腻
             case 201: {
                 break;
             }
+            // 接口出现错误 返回错误信息并提示
             case 400: {
                 Notification({
                     title: response.data.title,
@@ -83,12 +86,14 @@ instance.interceptors.response.use(
                 });
                 break;
             }
+            // 文章没找到  或者其他页面获取错误 返回404
             case 404: {
                 Notification({
                     title: response.data.title,
                     message: response.data.message,
                     type: "error"
                 });
+                router.push('/404')
             }
             default: {
                 router.push('/404')

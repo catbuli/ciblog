@@ -15,12 +15,12 @@
         </svg>
         <div class="intro">
             <div class="head-portrait">
-                <a href="/">
+                <router-link to="/">
                     <img :src="this.$store.state.global.personalData.imgurl"
                          alt />
                     <p>{{this.$store.state.global.personalData.nickname}}</p>
                     <p>个人博客</p>
-                </a>
+                </router-link>
             </div>
             <!-- <a :href="github"
                target="_blank"><img src='../../assets/images/icongithub.png'

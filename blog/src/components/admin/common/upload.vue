@@ -76,9 +76,11 @@ export default {
         },
         getList() {
             if (this.$route.params.aid) {
+                this.paging.typeName = "id";
                 this.paging.type = this.$route.params.aid;
                 this.$store.dispatch("getFileListAction", this.paging);
             } else {
+                this.paging.typeName = "status";
                 this.paging.type = 1;
                 this.$store.dispatch("getFileListAction", this.paging);
             }
