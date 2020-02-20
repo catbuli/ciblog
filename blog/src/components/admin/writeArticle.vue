@@ -1,6 +1,6 @@
 <template>
     <adminFrame v-loading="loading"
-                width='80%'
+                width='75%'
                 element-loading-text="数据获取中">
         <adminTitle v-if="isEdit"
                     :title="'编辑文章　'+showTitle"></adminTitle>

@@ -27,7 +27,7 @@ export default {
             post("/upload/del", {
                 fid: data
             }, (data) => {
-                // dispatch('getFileListAction', rootState.global.paging);
+                dispatch('getFileListAction', rootState.global.paging);
             });
         },
     },
