@@ -78,12 +78,15 @@ instance.interceptors.response.use(
                 });
                 break;
             }
-            case 401: {
+            // 登陆失效
+            case 402: {
                 Notification({
                     title: response.data.title,
                     message: response.data.message,
                     type: "error"
                 });
+                localStorage.removeItem('uid');
+                localStorage.removeItem('token');
                 break;
             }
             // 文章没找到  或者其他页面获取错误 返回404

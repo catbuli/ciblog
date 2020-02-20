@@ -1,6 +1,3 @@
-import {
-    post
-} from '@/http'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
@@ -22,6 +19,9 @@ import backups from '../components/admin/backups.vue'
 import readSettings from '../components/admin/readSettings.vue'
 import commentSettings from '../components/admin/commentSettings.vue'
 import manageFile from '../components/admin/manageFile.vue'
+import {
+    Notification
+} from 'element-ui';
 
 Vue.use(VueRouter)
 
@@ -174,13 +174,16 @@ router.beforeEach((to, from, next) => {
         document.title = to.meta.title;
     }
     if (to.path.indexOf("/admin") == 0) {
-        post("/login/check", {}, (data) => {
-            if (data.code == 201) {
-                next();
-            } else {
-                next('/login');
-            }
-        })
+        if (localStorage.getItem('uid') && localStorage.getItem('token')) {
+            next();
+        } else {
+            next('/login');
+            Notification({
+                title: "失败",
+                message: "账号登陆失效!",
+                type: "error"
+            });
+        }
     } else if (from.path === '/login') {
         next();
     } else {
