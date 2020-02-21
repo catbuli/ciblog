@@ -22,9 +22,6 @@ import manageFile from '../components/admin/manageFile.vue'
 import {
     post
 } from "@/http"
-import {
-    Notification
-} from 'element-ui';
 
 Vue.use(VueRouter)
 

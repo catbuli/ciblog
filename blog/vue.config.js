@@ -5,6 +5,7 @@ module.exports = {
         open: true, //是否自动弹出浏览器页面
         https: false,
         hotOnly: false,
+        port: '8020',
         proxy: {
             '/api': {
                 target: process.env.VUE_APP_URL, //API服务器的地址

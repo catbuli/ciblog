@@ -85,7 +85,7 @@ class Login extends Controller
             if (TokenManage::checkToken()) {
                 return Response::result(201, "成功", "当前已登录");
             } else {
-                return Response::result(400, "登录失效", "请重新登陆");
+                return Response::result(402, "登录失效", "请重新登陆");
             }
         } catch (Exception $e) {
             return Response::result(400, "请求失败", $e->getMessage());

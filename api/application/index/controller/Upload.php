@@ -44,7 +44,8 @@ class Upload extends Controller
                     } else {
                         $file->status = 0;
                     }
-                    $file->url = str_replace("\\", "/", $info->getSavename());
+                    $file->path = str_replace("\\", "/", $info->getSavename());
+                    $file->url = 'http://' . $_SERVER['SERVER_NAME'] . "/api/public/uploads/" . str_replace("\\", "/", $info->getSavename());
                     $file->add();
                     $fileList = $file->getList(['typeName' => 'id', 'type' => $aid]);
                     return Response::result(201, "成功!", "上传成功!", ['file' => $file, 'fileList' => $fileList]);
@@ -61,11 +62,11 @@ class Upload extends Controller
         try {
             $file = new File();
             foreach ($fid as $value) {
-                $filename = '../api/public/uploads/' . File::get($value)->url;
+                $filename = '../api/public/uploads/' . File::get($value)->path;
                 $file->del($value);
                 if (file_exists($filename)) {
                     unlink($filename);
-                    $info = Response::result(201, "成功!", "文件删除成功!");
+                    $info = Response::result(200, "成功!", "文件删除成功!");
                 } else {
                     return Response::result(400, "成功!", "某个文件删除失败，请前往服务器目录清理!");
                 }
