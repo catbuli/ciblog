@@ -18,30 +18,61 @@
                 <router-link to="/">
                     <img :src="this.$store.state.global.personalData.imgurl"
                          alt />
-                    <p>{{this.$store.state.global.personalData.nickname}}</p>
-                    <p>个人博客</p>
                 </router-link>
+                <p class="nickname">{{this.$store.state.global.personalData.nickname}}</p>
+                <p class="description">{{this.$store.state.global.personalData.description}}</p>
             </div>
-            <!-- <a :href="github"
-               target="_blank"><img src='../../assets/images/icongithub.png'
-                     alt=""></a>
-            <a :href="bilibili"
-               target="_blank"><img src='../../assets/images/iconbilibili.png'
-                     alt=""></a>
-            <a :href="email"
-               target="_blank"><img src='../../assets/images/iconemail.png'
-                     alt=""> </a> -->
+            <div class="count">
+                <ul>
+                    <li>
+                        <p v-html="$store.state.global.countList.articleCount"></p>
+                        <p>文章</p>
+                    </li>
+                    <li>
+                        <p v-html="$store.state.global.countList.categoryCount"></p>
+                        <p>分类</p>
+                    </li>
+                    <li>
+                        <p v-html="$store.state.global.countList.tagCount"></p>
+                        <p>标签</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="platform">
+                <ul>
+                    <li>
+                        <a :href="$store.state.global.personalData.github"
+                           target="_blank">github+</a>
+                    </li>
+                    <li>
+                        <a target="_blank"
+                           :href="$store.state.global.personalData.bilibili">bilibili+</a>
+                    </li>
+                    <li>
+                        <a :href="'mailto:'+$store.state.global.personalData.mail">email+</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="search">
+                <searchTool></searchTool>
+            </div>
+            <div class="new">
+                <ul>
+                    <a v-for="item in $store.state.article.articleList"
+                       :key="item.aid"
+                       @click="$router.push('/article/'+item.aid)">
+                        <li>{{item.title}}<span>{{item.create_date.split(' ')[0].split('-')[1]+'-'+item.create_date.split(' ')[0].split('-')[2]}}</span></li>
+                    </a>
+                </ul>
+            </div>
         </div>
-        <toolContainer :isShowSearch="true"
-                       :isShowMouse="true"></toolContainer>
-        <!-- <menuEle></menuEle> -->
     </nav>
 </template>
 
 <script>
 import Axios from "axios";
 import menuEle from "@/components/menu/menuEle.vue";
-import toolContainer from "@/components/miniTools/toolContainer.vue";
+import searchTool from "@/components/miniTools/searchTool.vue";
 export default {
     name: "navEle",
     data() {
@@ -50,12 +81,19 @@ export default {
             imgURL: String,
             bilibili: String,
             github: String,
-            email: String
+            email: String,
+            paging: {
+                pageSize: 5,
+                currentPage: 1,
+                type: -1,
+                typeName: "all",
+                total: 0
+            }
         };
     },
     components: {
         menuEle,
-        toolContainer
+        searchTool
     },
     mounted() {
         window.addEventListener("mousemove", this.handleMouse, true);
@@ -88,6 +126,12 @@ export default {
             // }
         }
     },
+    created() {
+        this.$store.dispatch("getCountAction");
+        this.$store.dispatch("getSystemAciton");
+        this.$store.dispatch("getArticleListAction", this.paging);
+        this.$store.dispatch("getPersonalDataAction");
+    },
     destroyed() {
         window.removeEventListener("mousemove", this.handleMouse, true);
         window.removeEventListener("scroll", this.handleScroll, true);
@@ -102,19 +146,22 @@ export default {
     padding: 0px;
     min-width: 200px;
     height: 100%;
-    width: 15%;
+    width: 17%;
     position: fixed;
     z-index: 50;
-    background: -webkit-linear-gradient(
+    background-color: rgb(53, 53, 53);
+    /* background: -webkit-linear-gradient(
         145deg,
         #fc354c,
         #0abfbc
-    ); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(
+    );  */
+    /* Chrome 10-25, Safari 5.1-6 */
+    /* background: linear-gradient(
         145deg,
         #fc354c,
         #0abfbc
-    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    );  */
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 /* 汉堡包动画 */
@@ -165,25 +212,35 @@ export default {
     left: 100%;
 }
 
+/* 信息栏 */
 .intro {
     width: 100%;
-    height: 50%;
+    margin-top: 100px;
 }
 
 .intro a {
     display: inline-block;
     text-decoration: none;
     color: white;
-    font-size: 22px;
 }
 
 .intro p {
     font-size: 18px;
 }
 
-.head-portrait {
+/* .head-portrait {
     position: relative;
-    top: 25%;
+    top: 30%;
+} */
+.head-portrait .nickname {
+    margin-top: 10px;
+    color: rgb(255, 255, 255);
+}
+.head-portrait .description {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 0.8rem;
+    color: rgb(180, 180, 180);
 }
 .head-portrait img {
     width: 80px;
@@ -195,7 +252,65 @@ export default {
 .head-portrait img:hover {
     transform: rotate(360deg);
 }
+/* 统计数据 */
+.count {
+    color: rgb(204, 204, 204);
+    width: 70%;
+    margin: 30px auto 0;
+}
 
+.count ul {
+    display: flex;
+}
+.count ul li {
+    font-size: 1rem;
+    flex: 1;
+}
+.count ul li + li {
+    border-left: 1px rgb(112, 112, 112) solid;
+}
+
+/* 平台 */
+.platform {
+    color: rgb(204, 204, 204);
+    width: 80%;
+    margin: 30px auto 0;
+}
+.platform a {
+    border: 1px rgb(87, 87, 87) solid;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 0.9rem;
+}
+.platform ul {
+    display: flex;
+}
+.platform ul li {
+    flex: 1;
+}
+
+/* 最新 */
+.new {
+    margin: 20px auto 0;
+    width: 75%;
+}
+.new ul a {
+    display: block;
+    margin-top: 5px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    color: white;
+    text-align: left;
+}
+.new ul a span {
+    float: right;
+    font-size: 0.8rem;
+    color: white;
+}
+
+/* 搜索 */
+.search {
+}
 .hidden-nav {
     animation: hidden-nav ease 0.5s;
     transform: translateX(-101%);
@@ -205,6 +320,7 @@ export default {
     animation: show-nav ease 0.5s;
     transition: all ease 0.5s;
 }
+
 @keyframes show-nav {
     0% {
         border-radius: 0 100% 100% 0/0 50% 50% 0;
@@ -212,25 +328,6 @@ export default {
     70% {
         border-radius: 0 100% 100% 0/0 50% 50% 0;
     }
-    /* 65% {
-        border-radius: 0 94% 94% 0/0 47% 47% 0;
-    }
-    70% {
-        border-radius: 0 100% 100% 0/0 50% 50% 0;
-    }
-    75% {
-        border-radius: 0 100% 100% 0/0 50% 50% 0;
-    }
-    80% {
-        border-radius: 0 100% 100% 0/0 50% 50% 0;
-    }
-    85% {
-        border-radius: 0 100% 100% 0/0 50% 50% 0;
-    }
-    90% {
-    }
-    95% {
-    } */
     100% {
         border-radius: 0;
         /* opacity: 1; */
@@ -241,15 +338,6 @@ export default {
         /* border-radius: 0; */
         /* opacity: 1; */
     }
-    /* 10% {}
-    20% {}
-    30% {}
-    40% {}
-    50% {}
-    60% {}
-    70% {}
-    80% {}
-    90% {} */
     100% {
         /* border-radius: 0 100% 100% 0; */
         /* opacity: 0; */

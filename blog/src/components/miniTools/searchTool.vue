@@ -2,7 +2,9 @@
     <div id="search-tool">
         <div class="open"
              @click="handleSearchView">
-            <i class="el-icon-search"></i>
+            <input type="text"
+                   placeholder="搜索文章"
+                   disabled>
         </div>
         <div class="search-view"
              :class="classObj"
@@ -80,13 +82,13 @@ export default {
 </script>
 
 <style scoped>
-#search-tool {
+/* #search-tool {
     width: 60px;
     height: 60px;
     margin: 0 auto;
     border-radius: 15%;
     background-color: rgb(255, 255, 255);
-}
+} */
 #search-tool i {
     font-size: 35px;
     line-height: 60px;
@@ -182,6 +184,21 @@ export default {
 }
 .open {
     cursor: pointer;
+    width: 75%;
+    margin: 20px auto 0;
+}
+.open input {
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    -webkit-box-shadow: 0 0 4px 0 #939090;
+    box-shadow: 0 0 4px 0 #939090;
+    text-align: center;
+    height: 30px;
+    outline: none;
+    border: none;
+    vertical-align: top;
 }
 
 /* #search-tool a {

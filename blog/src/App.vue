@@ -67,7 +67,6 @@ export default {
     },
     created() {
         this.checkRouter();
-        this.$store.dispatch("getSystemAciton");
         this.$store.dispatch("getPersonalDataAction");
     },
     mounted() {}
@@ -164,15 +163,14 @@ li {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;
     width: 100%;
     height: 100%;
 }
 
 #mian {
     position: absolute;
-    width: 85%;
-    left: 15%;
+    width: 83%;
+    left: 17%;
     transition: all 0.5s ease;
 }
 
