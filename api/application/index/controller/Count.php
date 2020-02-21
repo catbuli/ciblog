@@ -22,6 +22,7 @@ class Count extends Controller
             return Response::result(201, "成功", "数据获取成功!", [
                 'articleCount' => Article::getCount(),
                 'categoryCount' => Meta::getCategoryCount(),
+                'tagCount' => Meta::getTagCount(),
                 'commentCount' => Comment::getCount(),
             ]);
         } catch (Exception $e) {
