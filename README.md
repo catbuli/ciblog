@@ -1,11 +1,11 @@
 # CIblog（更新中暂时无法正常使用）
 基于tp5和vue.js（2.6.10）开发的博客平台
 
-#技术栈
+# 技术栈
 前端：vue2+vuex+vue-router+webpack+ES6/7+element-ui
 后端：tp5
 
-#主要功能
+# 主要功能
 - [ ] 前台
     - [x] 侧边导航栏
     - [x] banner随机轮换
@@ -71,7 +71,7 @@
         - [ ] 待完善
 
 
-#项目运行
+# 项目运行
 
 `git clone https://github.com/zhangyifei233/CIblog.git`
 
@@ -81,9 +81,9 @@
 
 `npm run serve`
 
-#效果演示
+# 效果演示
 
 新域名还在备案
 
-#项目结构（暂时）
+# 项目结构（暂时）
 
