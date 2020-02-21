@@ -229,6 +229,16 @@ export default {
         },
         publish() {
             this.article.fileList = this.$store.state.file.fileList;
+            if (!this.article.title) {
+                scrollTo(0, 0);
+                this.$notify({
+                    title: "错误",
+                    message: "标题不能为空",
+                    type: "error"
+                });
+            } else if (!this.article.cover_url) {
+                this.article.cover_url = this.$store.state.global.system.randomBanner;
+            }
             this.$store.dispatch("publishArticleAction", this.article);
         },
         newTag() {
