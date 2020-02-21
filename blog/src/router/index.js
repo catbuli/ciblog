@@ -20,6 +20,9 @@ import readSettings from '../components/admin/readSettings.vue'
 import commentSettings from '../components/admin/commentSettings.vue'
 import manageFile from '../components/admin/manageFile.vue'
 import {
+    post
+} from "@/http"
+import {
     Notification
 } from 'element-ui';
 
@@ -174,16 +177,13 @@ router.beforeEach((to, from, next) => {
         document.title = to.meta.title;
     }
     if (to.path.indexOf("/admin") == 0) {
-        if (localStorage.getItem('uid') && localStorage.getItem('token')) {
-            next();
-        } else {
-            next('/login');
-            Notification({
-                title: "失败",
-                message: "账号登陆失效!",
-                type: "error"
-            });
-        }
+        post("/login/check", {}, (data) => {
+            if (data.code == 201) {
+                next();
+            } else {
+                next('/login');
+            }
+        })
     } else if (from.path === '/login') {
         next();
     } else {
