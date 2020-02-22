@@ -187,7 +187,13 @@ export default {
                     }
                 ]
             },
-            test: true
+            paging: {
+                pageSize: 10,
+                currentPage: 1,
+                type: 0,
+                typeName: "aid",
+                total: 0
+            }
         };
     },
     watch: {
@@ -197,10 +203,9 @@ export default {
             this.next = this.$store.state.article.next;
             this.article.modify_date = this.article.modify_date.split(" ")[0];
             this.loading = false;
-            this.test = true;
         },
-        "$store.state.comment.comment": function() {
-            this.commentList = this.$store.state.comment.comment;
+        "$store.state.comment.commentList": function() {
+            this.commentList = this.$store.state.comment.commentList;
             this.commentData.content = "";
             this.loading = false;
         },
@@ -212,8 +217,9 @@ export default {
         getArticleData(aid) {
             this.$store.dispatch("getArticleDataAction", aid);
         },
-        getCommentData(aid) {
-            this.$store.dispatch("getCommentDataAction", aid);
+        getCommentList(aid) {
+            this.paging.type = aid;
+            this.$store.dispatch("getCommentListAction", this.paging);
         },
         addComment(form) {
             this.$refs[form].validate(valid => {
@@ -257,7 +263,7 @@ export default {
     },
     mounted() {
         this.getArticleData(this.$route.params.id);
-        this.getCommentData(this.$route.params.id);
+        this.getCommentList(this.$route.params.id);
     }
 };
 </script>

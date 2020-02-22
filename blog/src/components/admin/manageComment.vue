@@ -60,7 +60,7 @@
                             <el-radio-button label=0>待审核</el-radio-button>
                             <el-radio-button label=2>垃圾</el-radio-button>
                         </el-radio-group>
-                        <span @click="editComment(scope.row.cid)">编辑</span>
+                        <span @click="handleDialog(scope.row.cid)">编辑</span>
                         <span>回复</span>
                         <span @click="delComment2(scope.row.cid)">删除</span>
                     </p>
@@ -70,6 +70,22 @@
         <paging action="getCommentListAction"
                 align="right"
                 @function="handlePage"></paging>
+        <el-dialog title="编辑评论"
+                   :visible.sync="isEdit">
+            <el-input v-model="comment.content"
+                      resize="none"
+                      type="textarea"
+                      placeholder="文明留言哦!"
+                      maxlength="200"
+                      show-word-limit
+                      :rows=5></el-input>
+            <el-button type="primary"
+                       style="margin-top:10px"
+                       @click="editComment()">保存</el-button>
+            <el-button type="info"
+                       style="margin-top:10px"
+                       @click="isEdit = false">取消</el-button>
+        </el-dialog>
     </adminFrame>
 </template>
 
@@ -84,6 +100,7 @@ export default {
     },
     data() {
         return {
+            comment: {},
             commentList: [],
             loading: true,
             selectRows: [],
@@ -106,6 +123,10 @@ export default {
     watch: {
         "$store.state.comment.commentList": function() {
             this.commentList = this.$store.state.comment.commentList;
+            this.loading = false;
+        },
+        "$store.state.comment.comment": function() {
+            this.comment = this.$store.state.comment.comment;
             this.loading = false;
         },
         "$store.state.global.paging": function() {
@@ -155,8 +176,14 @@ export default {
                 status: label
             });
         },
+        handleDialog(cid) {
+            this.$store.dispatch("getCommentAction", cid);
+            this.isEdit = true;
+        },
         editComment(cid) {
-            // this.isEdit = true;
+            this.$store.dispatch("editCommentAction", this.comment);
+            this.isEdit = false;
+            this.loading = true;
         },
         // 博客↓
         clickSelect(row, column, event) {

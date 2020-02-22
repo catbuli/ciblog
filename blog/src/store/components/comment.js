@@ -18,9 +18,9 @@ export default {
         },
     },
     actions: {
-        getCommentDataAction(context, data) {
+        getCommentAction(context, data) {
             post("/commentc/byid", {
-                aid: data
+                cid: data
             }, (data) => {
                 context.commit('setComment', data.data);
             });
@@ -40,12 +40,15 @@ export default {
                 context.dispatch('getCommentDataAction', data.aid);
             });
         },
-        editCommentAction(context, data) {
+        editCommentAction({
+            rootState,
+            dispatch
+        }, data) {
             post("/commentc/edit", {
-                data
+                cid: data.cid,
+                content: data.content,
             }, () => {
-                router.push('/admin/manage_comment')
-                context.dispatch('getCommentListAction');
+                dispatch('getCommentListAction', rootState.global.paging);
             });
         },
         editCommentStatusAction({

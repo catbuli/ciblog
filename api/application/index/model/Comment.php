@@ -10,10 +10,13 @@ class Comment extends Model
 {
     public function getCommentList($paging)
     {
-        if ($paging['type'] == -1) {
-            return $this->order('create_date desc')->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->select();
-        } else {
-            return $this->where("status", $paging['type'])->order('create_date desc')->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->select();
+        switch ($paging['typeName']) {
+            case 'status':
+                return $this->where("status", $paging['type'])->order('create_date desc')->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->select();
+            case 'aid':
+                return $this->where('aid', $paging['type'])->where('status', 1)->order('create_date esc')->select();
+            default:
+                return Comment::all();
         }
     }
     public static function Count($field, $value = -1)

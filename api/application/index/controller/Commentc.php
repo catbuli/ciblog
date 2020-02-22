@@ -26,7 +26,7 @@ class Commentc extends Controller
                 $title = $article->getArticleById($value['aid'])['title'];
                 $value['title'] = $title;
             }
-            $paging['total'] = Comment::Count($paging['typeName'], $paging['type']);
+            // $paging['total'] = Comment::Count($paging['typeName'], $paging['type']);
             return Response::result(201, "成功", "数据获取成功!", $data, $paging);
         } catch (Exception $e) {
             return Response::result(400, "请求失败", $e->getMessage());
@@ -66,17 +66,33 @@ class Commentc extends Controller
         }
     }
     /**
-     * 根据id获取评论内容
+     * 编辑评论
      *
-     * @param int $aid 文章id
+     * @param array $cid 评论cid
      * @return json
      */
-    public function byid($aid)
+    public function edit($cid, $content)
     {
         try {
-            $comment = new Comment();
-            $list = $comment->getCommentById($aid);
-            return Response::result(201, "成功", "评论信息获取成功!", $list);
+            $comment = Comment::get($cid);
+            $comment->content = $content;
+            $comment->editComment();
+            return Response::result(200, "成功", "评论修改成功!");
+        } catch (Exception $e) {
+            return Response::result(400, "请求失败!", $e->getMessage());
+        }
+    }
+    /**
+     * 根据评论id获取内容
+     *
+     * @param int $cid 评论id
+     * @return json
+     */
+    public function byid($cid)
+    {
+        try {
+            $data = Comment::get($cid);
+            return Response::result(201, "成功", "评论信息获取成功!", $data);
         } catch (Exception $e) {
             return Response::result(400, "请求失败!", $e->getMessage());
         }
