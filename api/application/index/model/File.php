@@ -56,22 +56,4 @@ class File extends Model
         }
         return $count;
     }
-    /**
-     * 添加文件信息
-     *
-     * @return 
-     */
-    public function add()
-    {
-        return $this->save();
-    }
-    /**
-     * 删除文件信息
-     *
-     * @return 
-     */
-    public function del($fid)
-    {
-        return File::destroy($fid);
-    }
 }

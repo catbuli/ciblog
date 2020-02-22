@@ -115,7 +115,7 @@ export default {
             });
         },
         getCountAction(context, data) {
-            post("/count", {}, res => {
+            post("/setupc/count", {}, res => {
                 context.commit('setCountList', res.data);
             });
         },

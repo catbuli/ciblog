@@ -7,13 +7,16 @@ use app\index\model\User;
 use app\index\model\Setup;
 use think\Exception;
 use app\common\Response;
+use app\index\model\Article;
+use app\index\model\Comment;
+use app\index\model\Meta;
 
 class Setupc extends Controller
 {
     /**
      * 控制器默认方法 获取个人信息
      *
-     * @return json 响应信息
+     * @return JSON 响应信息
      */
     public function personal()
     {
@@ -28,7 +31,7 @@ class Setupc extends Controller
      * 个人信息更新
      *
      * @param json $data 个人信息数据
-     * @return json 响应信息
+     * @return JSON 响应信息
      */
     public function updatePersonal($data)
     {
@@ -50,7 +53,7 @@ class Setupc extends Controller
     /**
      * 控制器默认方法 获取系统设置
      *
-     * @return json 响应信息
+     * @return JSON 响应信息
      */
     public function system()
     {
@@ -64,7 +67,7 @@ class Setupc extends Controller
      * 系统设置更新
      *
      * @param json $data 个人信息数据
-     * @return json 响应信息
+     * @return JSON 响应信息
      */
     public function updateSystem($data)
     {
@@ -74,6 +77,25 @@ class Setupc extends Controller
                 'banner'  => $data['banner'],
             ], ['sid' => 1]);
             return Response::result(200, "成功", "数据更新成功!");
+        } catch (Exception $e) {
+            return Response::result(400, "请求失败", $e->getMessage());
+        }
+    }
+
+    /**
+     * 获取统计数据
+     *
+     * @return JSON
+     */
+    public function count()
+    {
+        try {
+            return Response::result(201, "成功", "数据获取成功!", [
+                'articleCount' => Article::count(),
+                'categoryCount' => Meta::count("category"),
+                'tagCount' => Meta::count("tag"),
+                'commentCount' => Comment::count(),
+            ]);
         } catch (Exception $e) {
             return Response::result(400, "请求失败", $e->getMessage());
         }

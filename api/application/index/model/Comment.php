@@ -12,14 +12,18 @@ class Comment extends Model
     {
         switch ($paging['typeName']) {
             case 'status':
-                return $this->where("status", $paging['type'])->order('create_date desc')->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->select();
+                if ($paging['type'] == -1) {
+                    return $this->order('create_date desc')->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->select();
+                } else {
+                    return $this->where("status", $paging['type'])->order('create_date desc')->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->select();
+                }
             case 'aid':
                 return $this->where('aid', $paging['type'])->where('status', 1)->order('create_date esc')->select();
             default:
                 return Comment::all();
         }
     }
-    public static function Count($field, $value = -1)
+    public static function count($field = '', $value = -1)
     {
         $count = 0;
         switch ($field) {
@@ -39,29 +43,12 @@ class Comment extends Model
         }
         return $count;
     }
-    public static function getCount()
-    {
-        return count(Comment::all());
-    }
-    public function editComment()
-    {
-        return $this->save();
-    }
-    public function addComment()
-    {
-        return $this->save();
-    }
     public function editStutas($cid, $status)
     {
         return $this->save([
             'status'  => $status,
         ], ['cid' => $cid]);
     }
-    public function delComment($cid)
-    {
-        return Comment::destroy($cid);
-    }
-
     public static function getCommentById($aid)
     {
         return Comment::all(['aid' => $aid, 'status' => 1]);

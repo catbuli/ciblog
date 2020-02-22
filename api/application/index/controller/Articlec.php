@@ -15,7 +15,7 @@ class Articlec extends Controller
     /**
      * 控制器默认方法 获取文章列表
      *
-     * @return json
+     * @return JSON 返回状态码 报错信息 数据
      */
     public function index($paging)
     {
@@ -40,7 +40,7 @@ class Articlec extends Controller
      * 发布文章
      *
      * @param object $data 文章内容
-     * @return json
+     * @return JSON 返回状态码 报错信息 数据
      */
     public function publish($data)
     {
@@ -94,7 +94,7 @@ class Articlec extends Controller
      * 删除文章
      *
      * @param array $aid 文章id 或者 文章id数组 
-     * @return json
+     * @return JSON 返回状态码 报错信息 数据
      */
     public function del($aid)
     {
@@ -114,7 +114,7 @@ class Articlec extends Controller
      *
      * @param int $aid 文章id
      * @param string $type 标签类型
-     * @return json
+     * @return JSON 返回状态码 报错信息 数据
      */
     private function getMetaIdList($aid, $type)
     {
@@ -128,14 +128,13 @@ class Articlec extends Controller
      * 根据id获取文章内容
      *
      * @param int $aid 文章id
-     * @return json
+     * @return JSON 返回状态码 报错信息 数据
      */
     public function byid($aid)
     {
         try {
             Db::table('ciblog_article')->where('aid', $aid)->setInc('pv');
-            $article = new Article();
-            $article = $article->getArticleById($aid);
+            $article = Article::get($aid);
             if ($article) {
                 $article->allow_comment = $article->allow_comment == 0 ? false : true;
                 $article->tagList = self::getMetaIdList($aid, "tag");
@@ -154,7 +153,12 @@ class Articlec extends Controller
             return Response::result(400, "请求失败!", $e);
         }
     }
-
+    /**
+     * 保存草稿功能
+     *
+     * @param JSON $data 保存草稿的文章信息
+     * @return void
+     */
     public function draft($data)
     {
         try {

@@ -10,9 +10,9 @@ use think\Db;
 class Backups extends Controller
 {
     /**
-     * 控制器默认方法 获取文章列表
+     * 控制器默认方法 备份
      *
-     * @return json
+     * @return JSON
      */
     public function index()
     {

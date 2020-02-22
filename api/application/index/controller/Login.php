@@ -16,7 +16,7 @@ class Login extends Controller
      *
      * @param String $name 用户名
      * @param String $password 密码
-     * @return String $message 返回的json信息
+     * @return JSON $message 返回的json信息
      */
     public function index($name, $password)
     {
@@ -38,7 +38,7 @@ class Login extends Controller
     /**
      * 注销登陆
      *
-     * @return json $message 返回的json信息
+     * @return JSON $message 返回的json信息
      */
     public function logout()
     {
@@ -55,7 +55,7 @@ class Login extends Controller
      *
      * @param string $password 密码
      * @param string $repassword 重复密码
-     * @return json
+     * @return JSON
      */
     public function alterpass($password, $repassword)
     {
@@ -77,7 +77,7 @@ class Login extends Controller
     /**
      * 登陆状态检查
      *
-     * @return json
+     * @return JSON
      */
     public function check()
     {
@@ -90,10 +90,5 @@ class Login extends Controller
         } catch (Exception $e) {
             return Response::result(400, "请求失败", $e->getMessage());
         }
-    }
-    public function a()
-    {
-        echo Session::get("uid");
-        echo Session::get("token");
     }
 }

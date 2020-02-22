@@ -13,15 +13,16 @@ class Category extends Controller
     /**
      * 控制器默认方法获取分类列表
      *
-     * @return json
+     * @return JSON
      */
     public function index()
     {
         try {
             $meta = new Meta();
-            return Response::result(201, "成功", "分类列表获取成功!", $meta->getMetaList('category'));
+            $meta = $meta->getMetaList('category');
+            return Response::result(201, "成功", "分类列表获取成功!", $meta);
         } catch (Exception $e) {
-            return Response::result(400, "请求失败!", $e->getMessage());
+            return Response::result(400, "请求失败!", $e);
         }
     }
     /**
@@ -29,7 +30,7 @@ class Category extends Controller
      *
      * @param string $name 分类名
      * @param string $description 分类描述
-     * @return json
+     * @return JSON
      */
     public function add($name, $description)
     {
@@ -40,7 +41,7 @@ class Category extends Controller
                 'description' =>  $description,
                 'type' => 'category'
             ]);
-            $meta->addMeta();
+            $meta->save();
             return Response::result(200, "成功", "分类添加成功!");
         } catch (Exception $e) {
             return Response::result(400, "请求失败!", $e->getMessage());
@@ -55,8 +56,7 @@ class Category extends Controller
     public function del($mid)
     {
         try {
-            $meta = new Meta();
-            $meta->delMeta($mid);
+            Meta::destroy($mid);
             foreach ($mid as $value) {
                 ArticleMeta::delMetaByArticle($value);
             }

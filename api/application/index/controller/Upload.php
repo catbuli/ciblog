@@ -9,6 +9,12 @@ use app\index\model\File;
 
 class Upload extends Controller
 {
+    /**
+     * 文件上传默认控制器 获取文件列表
+     *
+     * @param JSON $paging 分页信息
+     * @return JSON 
+     */
     public function index($paging)
     {
         try {
@@ -20,6 +26,12 @@ class Upload extends Controller
             return Response::result(400, "请求失败!", $e->getMessage());
         }
     }
+    /**
+     * 上传文件
+     *
+     * @param integer $aid 文章id 
+     * @return JSON
+     */
     public function add($aid = -1)
     {
         try {
@@ -46,7 +58,7 @@ class Upload extends Controller
                     }
                     $file->path = str_replace("\\", "/", $info->getSavename());
                     $file->url = 'http://' . $_SERVER['SERVER_NAME'] . "/api/public/uploads/" . str_replace("\\", "/", $info->getSavename());
-                    $file->add();
+                    $file->save();
                     $fileList = $file->getList(['typeName' => 'id', 'type' => $aid]);
                     return Response::result(201, "成功!", "上传成功!", ['file' => $file, 'fileList' => $fileList]);
                 } else {
@@ -57,13 +69,18 @@ class Upload extends Controller
             return Response::result(400, "请求失败!", $e->getMessage());
         }
     }
+    /**
+     * 文件删除接口
+     *
+     * @param int $fid 文件id数组
+     * @return JSON
+     */
     public function del($fid)
     {
         try {
-            $file = new File();
             foreach ($fid as $value) {
                 $filename = '../api/public/uploads/' . File::get($value)->path;
-                $file->del($value);
+                File::destroy($value);
                 if (file_exists($filename)) {
                     unlink($filename);
                     $info = Response::result(200, "成功!", "文件删除成功!");

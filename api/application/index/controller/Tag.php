@@ -13,7 +13,7 @@ class Tag extends Controller
     /**
      * 控制器默认方法获取标签列表
      *
-     * @return json
+     * @return JSON
      */
     public function index()
     {
@@ -28,7 +28,7 @@ class Tag extends Controller
      * 添加标签
      *
      * @param string $name 标签名
-     * @return json
+     * @return JSON
      */
     public function add($name)
     {
@@ -41,7 +41,7 @@ class Tag extends Controller
                 'order' => 0,
                 'parent' => 0,
             ]);
-            $meta->addMeta();
+            $meta->save();
             return Response::result(200, "成功", "标签添加成功!");
         } catch (Exception $e) {
             return Response::result(400, "请求失败!", $e->getMessage());
@@ -51,13 +51,12 @@ class Tag extends Controller
      * 删除标签
      *
      * @param int $mid 标签mid
-     * @return json
+     * @return JSON
      */
     public function del($mid)
     {
         try {
-            $meta = new Meta();
-            $meta->delMeta($mid);
+            Meta::destroy($mid);
             ArticleMeta::delMetaByArticle($mid);
             return Response::result(200, "成功", "标签删除成功!");
         } catch (Exception $e) {

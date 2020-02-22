@@ -14,7 +14,8 @@ class Commentc extends Controller
     /**
      * 控制器默认方法 获取评论列表
      *
-     * @return json
+     * @param JSON $paging 分页信息
+     * @return JSON 
      */
     public function index($paging)
     {
@@ -22,11 +23,9 @@ class Commentc extends Controller
             $comment = new Comment();
             $data = $comment->getCommentList($paging);
             foreach ($data as $value) {
-                $article = new Article;
-                $title = $article->getArticleById($value['aid'])['title'];
+                $title = Article::get($value['aid'])['title'];
                 $value['title'] = $title;
             }
-            // $paging['total'] = Comment::Count($paging['typeName'], $paging['type']);
             return Response::result(201, "成功", "数据获取成功!", $data, $paging);
         } catch (Exception $e) {
             return Response::result(400, "请求失败", $e->getMessage());
@@ -37,7 +36,7 @@ class Commentc extends Controller
      *
      * @param int $cid
      * @param int $status
-     * @return json
+     * @return JSON
      */
     public function editstatus($cid, $status)
     {
@@ -53,13 +52,12 @@ class Commentc extends Controller
      * 删除评论
      *
      * @param array $cid 评论id 或者 评论id数组 
-     * @return json
+     * @return JSON
      */
     public function del($cid)
     {
         try {
-            $comment = new Comment();
-            $comment->delComment($cid);
+            Comment::destroy($cid);
             return Response::result(200, "成功", "评论删除成功!");
         } catch (Exception $e) {
             return Response::result(400, "请求失败!", $e->getMessage());
@@ -69,14 +67,14 @@ class Commentc extends Controller
      * 编辑评论
      *
      * @param array $cid 评论cid
-     * @return json
+     * @return JSON
      */
     public function edit($cid, $content)
     {
         try {
             $comment = Comment::get($cid);
             $comment->content = $content;
-            $comment->editComment();
+            $comment->save();
             return Response::result(200, "成功", "评论修改成功!");
         } catch (Exception $e) {
             return Response::result(400, "请求失败!", $e->getMessage());
@@ -86,7 +84,7 @@ class Commentc extends Controller
      * 根据评论id获取内容
      *
      * @param int $cid 评论id
-     * @return json
+     * @return JSON
      */
     public function byid($cid)
     {
@@ -101,13 +99,12 @@ class Commentc extends Controller
      * 新增评论
      *
      * @param object $data 文章内容
-     * @return json
+     * @return JSON
      */
     public function add($data)
     {
         try {
-            $article = new Article();
-            $article = $article->getArticleById($data["aid"]);
+            $article = Article::get($data["aid"]);
             if ($article->allow_comment === 1) {
                 $comment = new Comment();
                 $comment->data([
@@ -120,7 +117,7 @@ class Commentc extends Controller
                     'ip' => $_SERVER['REMOTE_ADDR'],
                     'avatar_url' => $data['avatar_url']
                 ]);
-                $comment->addComment();
+                $comment->save();
                 return Response::result(200, "成功", "评论成功!");
             }
             return Response::result(400, "失败", "该文章已关闭评论!");

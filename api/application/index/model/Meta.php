@@ -12,24 +12,12 @@ class Meta extends Model
     {
         return Meta::all(['type' => $type]);
     }
-    public static function getCategoryCount()
+    public static function count($type)
     {
-        return count(Meta::all(['type' => 'category']));
-    }
-    public static function getTagCount()
-    {
-        return count(Meta::all(['type' => 'tag']));
+        return count(Meta::all(['type' => $type]));
     }
     public static function getMeta($mid)
     {
         return Meta::get($mid);
-    }
-    public function addMeta()
-    {
-        return $this->save();
-    }
-    public function delMeta($mid)
-    {
-        return Meta::destroy($mid);
     }
 }
