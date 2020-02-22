@@ -27,7 +27,7 @@
                 <el-menu-item index="/admin/comment_settings">评论设置</el-menu-item>
                 <el-menu-item index="/admin/read_settings">阅读设置</el-menu-item>
             </el-submenu>
-            <el-menu-item><a href="http://localhost:8080/"
+            <el-menu-item><a href="http://localhost:8020/"
                    target="_blank">网站</a></el-menu-item>
             <el-menu-item style="right:0;position:absolute"
                           @click="logout">登出</el-menu-item>

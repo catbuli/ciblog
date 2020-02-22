@@ -139,6 +139,7 @@ export default {
             this.loading = true;
             this.paging.currentPage = 1;
             this.paging.type = value;
+            this.paging.typeName = "status";
             this.$store.dispatch("getCommentListAction", this.paging);
         },
         delComment() {

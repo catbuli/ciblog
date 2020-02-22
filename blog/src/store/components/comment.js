@@ -33,11 +33,14 @@ export default {
                 context.commit('setPaging', data.paging);
             });
         },
-        addCommentAction(context, data) {
+        addCommentAction({
+            rootState,
+            dispatch
+        }, data) {
             post("/commentc/add", {
                 data: data
             }, () => {
-                context.dispatch('getCommentDataAction', data.aid);
+                dispatch('getCommentListAction', rootState.global.paging);
             });
         },
         editCommentAction({
