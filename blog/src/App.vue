@@ -20,7 +20,7 @@
 
 <script>
 import adminNav from "@/components/admin/common/adminNav.vue";
-import navEle from "@/components/nav/navEle.vue";
+import navEle from "@/components/common/navEle.vue";
 export default {
     name: "app",
     data() {

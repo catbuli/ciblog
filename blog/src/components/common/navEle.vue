@@ -71,7 +71,6 @@
 
 <script>
 import Axios from "axios";
-import menuEle from "@/components/menu/menuEle.vue";
 import searchTool from "@/components/miniTools/searchTool.vue";
 export default {
     name: "navEle",
@@ -92,7 +91,6 @@ export default {
         };
     },
     components: {
-        menuEle,
         searchTool
     },
     mounted() {

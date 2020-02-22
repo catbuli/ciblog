@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import footEle from "@/components/footer/footEle.vue";
+import footEle from "@/components/common/footEle.vue";
 import adminTitle from "@/components/admin/common/adminTitle.vue";
 export default {
     name: "adminFrame",

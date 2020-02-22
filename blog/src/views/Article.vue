@@ -133,8 +133,8 @@
 
 <script>
 // @ is an alias to /src
-import footEle from "@/components/footer/footEle.vue";
-import headEle from "@/components/header/headEle.vue";
+import footEle from "@/components/common/footEle.vue";
+import headEle from "@/components/common/headEle.vue";
 import backTop from "@/components/common/backTop.vue";
 import Axios from "axios";
 
