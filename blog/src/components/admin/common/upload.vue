@@ -14,6 +14,7 @@
         </el-upload>
         <el-dialog title="编辑评论"
                    width="30%"
+                   multiple
                    :visible.sync="isEdit">
             <el-input placeholder="链接地址"
                       ref="url"
@@ -61,7 +62,6 @@ export default {
          * 覆盖组件
          */
         upload(val) {
-            console.log(val);
             let fd = new FormData();
             fd.append("image", val.file);
             if (this.$route.params.aid) {

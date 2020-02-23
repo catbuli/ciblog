@@ -229,6 +229,9 @@ export default {
         },
         publish() {
             this.article.fileList = this.$store.state.file.fileList;
+            if (!this.article.cover_url) {
+                this.article.cover_url = this.$store.state.global.system.randomBanner;
+            }
             if (!this.article.title) {
                 scrollTo(0, 0);
                 this.$notify({
@@ -236,10 +239,9 @@ export default {
                     message: "标题不能为空",
                     type: "error"
                 });
-            } else if (!this.article.cover_url) {
-                this.article.cover_url = this.$store.state.global.system.randomBanner;
+            } else {
+                this.$store.dispatch("publishArticleAction", this.article);
             }
-            this.$store.dispatch("publishArticleAction", this.article);
         },
         newTag() {
             this.$store.dispatch("addTagAction", this.tagName);
