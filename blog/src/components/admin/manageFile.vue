@@ -8,7 +8,7 @@
                            @click="delComment">
                 </el-button>
             </el-col>
-            <el-col :span=12>
+            <el-col :span=9>
                 <el-radio-group v-model="paging.type"
                                 @change="selectChange">
                     <el-radio-button label=-1>全部</el-radio-button>
@@ -16,6 +16,18 @@
                     <el-radio-button label=1>临时文件</el-radio-button>
                     <el-radio-button label=2>全局文件</el-radio-button>
                 </el-radio-group>
+            </el-col>
+            <el-col :span=3
+                    :offset=10>
+                <el-upload multiple
+                           style="text-align:right"
+                           action="#"
+                           :http-request="upload"
+                           :file-list="fileList">
+                    <el-button type="primary">点击上传</el-button>
+                    <!-- <div slot="tip"
+                         class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div> -->
+                </el-upload>
             </el-col>
         </el-row>
         <el-table class="file-table"
@@ -141,6 +153,17 @@ export default {
     },
     mounted() {},
     methods: {
+        /**
+         * 覆盖组件
+         */
+        upload(val) {
+            let fd = new FormData();
+            fd.append("image", val.file);
+            fd.append("aid", -2);
+            this.$post("/upload/add", fd, data => {
+                this.$store.dispatch("getFileListAction", this.paging);
+            });
+        },
         selectChange(value) {
             this.loading = true;
             this.paging.currentPage = 1;
@@ -180,9 +203,12 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .file-table {
     width: 100%;
     margin: 20px auto;
+}
+.el-upload-list {
+    display: none;
 }
 </style>
