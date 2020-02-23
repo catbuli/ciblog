@@ -40,7 +40,8 @@ class Upload extends Controller
                 return Response::result(400, "失败!", "请上传文件!");
             }
             foreach ($files as $file) {
-                // 移动到框架应用根目录/public/uploads/ 目录下
+                // 移动到框架应用根目录/public/uploads/ 目录下, 'ext' => 'jpg,png,gif'
+                $file->validate(['size' => 130000]);
                 $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
                 if ($info) {
                     $file = new File();
@@ -60,11 +61,11 @@ class Upload extends Controller
                     $file->url = 'http://' . $_SERVER['SERVER_NAME'] . "/api/public/uploads/" . str_replace("\\", "/", $info->getSavename());
                     $file->save();
                     $fileList = $file->getList(['typeName' => 'id', 'type' => $aid]);
-                    return Response::result(201, "成功!", "上传成功!", ['file' => $file, 'fileList' => $fileList]);
                 } else {
                     return Response::result(400, "失败!", $file->getError());
                 }
             }
+            return Response::result(201, "成功!", "上传成功!", ['file' => $file, 'fileList' => $fileList]);
         } catch (Exception $e) {
             return Response::result(400, "请求失败!", $e->getMessage());
         }

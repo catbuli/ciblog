@@ -18,7 +18,7 @@ class File extends Model
     {
         switch ($paging['typeName']) {
             case 'id':
-                return $this->order('datetime desc')->where("aid", $paging['type'])->select();
+                return $this->order('datetime esc')->where("aid", $paging['type'])->select();
             case 'status':
                 if ($paging['type'] == -1) {
                     return $this->order('datetime desc')->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->select();
