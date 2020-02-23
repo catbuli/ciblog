@@ -72,9 +72,17 @@ export default {
                 .catch(() => {});
         },
         addTag() {
-            this.$store.dispatch("addTagAction", this.tagName);
-            this.tagName = "";
-            this.loading = true;
+            if (this.tagName) {
+                this.$store.dispatch("addTagAction", this.tagName);
+                this.tagName = "";
+                this.loading = true;
+            } else {
+                this.$notify({
+                    title: "失败",
+                    message: "标签名不能为空",
+                    type: "error"
+                });
+            }
         }
     }
 };

@@ -44,10 +44,18 @@ export default {
     },
     methods: {
         submit() {
-            this.$store.dispatch("addCategoryAction", {
-                name: this.name,
-                description: this.description
-            });
+            if (this.name) {
+                this.$store.dispatch("addCategoryAction", {
+                    name: this.name,
+                    description: this.description
+                });
+            } else {
+                this.$notify({
+                    title: "失败",
+                    message: "分类名不能为空",
+                    type: "error"
+                });
+            }
         }
     }
 };

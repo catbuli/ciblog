@@ -33,16 +33,20 @@ class Tag extends Controller
     public function add($name)
     {
         try {
-            $meta = new Meta();
-            $meta->data([
-                'name'  =>  $name,
-                'description' => null,
-                'type' => 'tag',
-                'order' => 0,
-                'parent' => 0,
-            ]);
-            $meta->save();
-            return Response::result(200, "成功", "标签添加成功!");
+            if (Meta::get(['name' => $name, 'type' => 'tag'])) {
+                return Response::result(400, "失败", "已存在同名标签!");
+            } else {
+                $meta = new Meta();
+                $meta->data([
+                    'name'  =>  $name,
+                    'description' => null,
+                    'type' => 'tag',
+                    'order' => 0,
+                    'parent' => 0,
+                ]);
+                $meta->save();
+                return Response::result(200, "成功", "标签添加成功!");
+            }
         } catch (Exception $e) {
             return Response::result(400, "请求失败!", $e->getMessage());
         }
