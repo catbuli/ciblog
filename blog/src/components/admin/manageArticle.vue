@@ -69,7 +69,7 @@
                     <span>{{scope.row.title}}</span>
                     <el-badge value="草稿"
                               type="info"
-                              v-if="scope.row.status==1">
+                              v-if="scope.row.status>0">
                     </el-badge>
                 </template>
             </el-table-column>
@@ -125,7 +125,7 @@ export default {
             paging: {
                 pageSize: 10,
                 currentPage: 1,
-                type: -1,
+                type: 1,
                 typeName: "none",
                 total: 0
             }

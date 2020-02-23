@@ -34,7 +34,7 @@ export default {
             paging: {
                 pageSize: 5,
                 currentPage: 1,
-                type: -1,
+                type: 0,
                 typeName: "all",
                 total: 0
             }

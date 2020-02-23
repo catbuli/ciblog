@@ -69,7 +69,10 @@ export default {
         this.checkRouter();
         this.$store.dispatch("getPersonalDataAction");
     },
-    mounted() {}
+    mounted() {
+        let loading = document.getElementById("loading");
+        loading.remove();
+    }
 };
 </script>
 
@@ -159,9 +162,6 @@ li {
 }
 
 #app {
-    font-family: "Avenir", Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     text-align: center;
     width: 100%;
     height: 100%;

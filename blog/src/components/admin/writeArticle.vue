@@ -51,8 +51,8 @@
                     <el-row class="setting-row">
                         <el-button type="primary"
                                    @click="publish">发布</el-button>
-                        <!-- <el-button type="info"
-                           @click="saveDraft">保存草稿</el-button> -->
+                        <el-button type="info"
+                                   @click="saveDraft">保存草稿</el-button>
                     </el-row>
                 </section>
             </el-col>
@@ -229,6 +229,13 @@ export default {
         },
         publish() {
             this.article.fileList = this.$store.state.file.fileList;
+            // if (this.article.status == 1) {
+            //     if (this.article.draft == -1) {
+            //         this.article.aid = null;
+            //     } else {
+            //         this.article.aid = this.article.draft;
+            //     }
+            // }
             if (!this.article.cover_url) {
                 this.article.cover_url = this.$store.state.global.system.randomBanner;
             }

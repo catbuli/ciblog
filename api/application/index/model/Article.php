@@ -19,7 +19,11 @@ class Article extends Model
         //根据分页 typeName type 进行数据获取
         switch ($paging['typeName']) {
             case 'all':
-                return $this->order('create_date desc')->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->field('aid,title,create_date,pv,comment_count,cover_url,description,status')->select();
+                if ($paging['type'] == 0) {
+                    return $this->order('create_date desc')->where('status', "<", 2)->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->field('aid,title,create_date,pv,comment_count,cover_url,description,status')->select();
+                } else {
+                    return $this->order('create_date desc')->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->field('aid,title,create_date,pv,comment_count,cover_url,description,status')->select();
+                }
                 // 关键字搜索
             case 'keyword':
                 return $this->order('create_date desc')

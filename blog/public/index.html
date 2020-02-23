@@ -1,17 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>vue_demo</title>
-  </head>
-  <body>
+    <style>
+        /* 加载动画 */
+        #loading {
+            z-index: 500;
+            position: fixed;
+            margin: 0 auto;
+            top: 50%;
+            left: 50%;
+            border-radius: 50%;
+            margin: 20px;
+            display: inline-block;
+            transform: translateX(-100%) translateY(-120%);
+            -webkit-transform: translateX(-100%) translateY(-120%);
+            height: 60px;
+            width: 60px;
+            background-color: #e0e0eb;
+        }
+
+        #loading:before {
+            position: absolute;
+            top: 30px;
+            left: 27.5px;
+            content: "";
+            height: 35px;
+            width: 5px;
+            background-color: #535657;
+            transform-origin: 50% 0%;
+            border-radius: 8px;
+            animation: clockmin 2s linear infinite;
+        }
+
+        #loading:after {
+            position: absolute;
+            content: "";
+            height: 35px;
+            width: 2px;
+            top: 30px;
+            left: 29px;
+            transform-origin: 50% 0%;
+            background-color: #d1462f;
+            border-radius: 2px;
+            animation: clocksec 0.5s linear infinite;
+        }
+
+        #loading span {
+            position: absolute;
+            top: 10px;
+            left: 27.5px;
+            height: 20px;
+            width: 5px;
+            border-radius: 2px;
+            background: #535657;
+            transform-origin: 50% 100%;
+            animation: clockhour 10s linear infinite;
+        }
+
+        @keyframes clockhour {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes clockmin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes clocksec {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
     <noscript>
-      <strong>We're sorry but vue_demo doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+        <strong>We're sorry but vue_demo doesn't work properly without JavaScript enabled. Please enable it to
+            continue.</strong>
     </noscript>
+    <div id="loading"><span></span></div>
     <div id="app"></div>
     <!-- built files will be auto injected -->
-  </body>
+</body>
+
 </html>
