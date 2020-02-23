@@ -35,7 +35,7 @@ class Category extends Controller
     public function add($name, $description)
     {
         try {
-            if (Meta::get(['name' => $name])) {
+            if (Meta::get(['name' => $name, 'type' => 'category'])) {
                 return Response::result(400, "失败", "已存在同名分类!");
             } else {
                 $meta = new Meta();
