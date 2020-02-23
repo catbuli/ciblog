@@ -35,14 +35,18 @@ class Category extends Controller
     public function add($name, $description)
     {
         try {
-            $meta = new Meta();
-            $meta->data([
-                'name'  =>  $name,
-                'description' =>  $description,
-                'type' => 'category'
-            ]);
-            $meta->save();
-            return Response::result(200, "成功", "分类添加成功!");
+            if (Meta::get(['name' => $name])) {
+                return Response::result(400, "失败", "已存在同名分类!");
+            } else {
+                $meta = new Meta();
+                $meta->data([
+                    'name'  =>  $name,
+                    'description' =>  $description,
+                    'type' => 'category'
+                ]);
+                $meta->save();
+                return Response::result(200, "成功", "分类添加成功!");
+            }
         } catch (Exception $e) {
             return Response::result(400, "请求失败!", $e->getMessage());
         }
