@@ -46,8 +46,7 @@ export function post(url, data = {}, fn) {
                 // resolve(response.data);
                 fn(response.data);
             }, err => {
-                // reject(err)
-                console.log(err)
+                reject(err)
             })
     })
 }
