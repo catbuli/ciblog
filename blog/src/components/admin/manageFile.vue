@@ -42,11 +42,6 @@
                              align="center"
                              width="50px">
             </el-table-column>
-            <el-table-column width="50px"
-                             prop="fid"
-                             align="center"
-                             label="编号">
-            </el-table-column>
             <el-table-column width="100px"
                              prop="type"
                              align="center"
@@ -62,14 +57,15 @@
             </el-table-column>
             <el-table-column prop="name"
                              align="center"
-                             width="100px"
                              label="文件名称">
             </el-table-column>
             <el-table-column prop="name"
                              align="center"
-                             label="文件链接">
+                             label="文件链接"
+                             width="100px">
                 <template slot-scope="scope">
-                    <span>{{scope.row.url}}</span>
+                    <a style="cursor: pointer;color: orange;"
+                       @click="selectFile(scope.row.url)">文件链接</a>
                 </template>
             </el-table-column>
             <el-table-column prop="aid"
@@ -78,7 +74,6 @@
                              label="所属">
             </el-table-column>
             <el-table-column prop="status"
-                             width="50px"
                              align="center"
                              label="归档类型">
                 <template slot-scope="scope">
@@ -115,6 +110,20 @@
                 </template>
             </el-table-column> -->
         </el-table>
+        <el-dialog title="编辑评论"
+                   width="30%"
+                   multiple
+                   :visible.sync="isEdit">
+            <el-input placeholder="链接地址"
+                      ref="url"
+                      v-model="url"></el-input>
+            <el-button type="primary"
+                       style="margin-top:10px"
+                       @click="copy">复制</el-button>
+            <el-button type="info"
+                       style="margin-top:10px"
+                       @click="isEdit = false">关闭</el-button>
+        </el-dialog>
         <paging action="getFileListAction"
                 :paging="paging"
                 align="right"
@@ -143,7 +152,9 @@ export default {
                 typeName: "status",
                 total: 0
             },
-            loading: true
+            loading: true,
+            isEdit: false,
+            url: ""
         };
     },
     watch: {
@@ -164,6 +175,21 @@ export default {
             this.$post("/upload/add", fd, data => {
                 this.$store.dispatch("getFileListAction", this.paging);
             });
+        },
+        selectFile(url) {
+            this.url = url;
+            this.isEdit = true;
+        },
+        copy() {
+            let url = this.$refs.url;
+            url.select();
+            document.execCommand("Copy");
+            this.$message({
+                type: "success",
+                message: "链接复制成功！",
+                effect: "dark"
+            });
+            this.isEdit = false;
         },
         selectChange(value) {
             this.loading = true;
