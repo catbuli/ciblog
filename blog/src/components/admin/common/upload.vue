@@ -12,6 +12,19 @@
             <div slot="tip"
                  class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
         </el-upload>
+        <el-dialog title="编辑评论"
+                   width="30%"
+                   :visible.sync="isEdit">
+            <el-input placeholder="链接地址"
+                      ref="url"
+                      v-model="url"></el-input>
+            <el-button type="primary"
+                       style="margin-top:10px"
+                       @click="copy">复制</el-button>
+            <el-button type="info"
+                       style="margin-top:10px"
+                       @click="isEdit = false">关闭</el-button>
+        </el-dialog>
     </div>
 </template>
 
@@ -29,7 +42,9 @@ export default {
                 typeName: "status",
                 total: 0
             },
-            loading: true
+            loading: true,
+            isEdit: false,
+            url: ""
         };
     },
     props: {
@@ -64,13 +79,19 @@ export default {
             this.fileList[this.fileList.length - 1] = this.file;
         },
         selectFile(file) {
+            this.url = file.url;
+            this.isEdit = true;
+        },
+        copy() {
+            let url = this.$refs.url;
+            url.select();
+            document.execCommand("Copy");
             this.$message({
                 type: "success",
-                message:
-                    process.env.VUE_APP_UPLOADPATH +
-                    file.url.replace("\\", "/"),
+                message: "链接复制成功！",
                 effect: "dark"
             });
+            this.isEdit = false;
         },
         getList() {
             if (this.$route.params.aid) {
