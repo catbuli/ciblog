@@ -1,14 +1,41 @@
 <template>
     <adminFrame title="文章管理"
                 width="65%">
-        <el-button type="primary"
-                   icon="el-icon-plus"
-                   @click="$router.push('/admin/write_article')">
-        </el-button>
-        <el-button type="primary"
-                   icon="el-icon-delete"
-                   @click="delArticle">
-        </el-button>
+        <el-row>
+            <el-col :span="2">
+                <el-button type="primary"
+                           icon="el-icon-plus"
+                           @click="$router.push('/admin/write_article')">
+                </el-button>
+            </el-col>
+            <el-col :span="2">
+                <el-button type="primary"
+                           icon="el-icon-delete"
+                           @click="delArticle">
+                </el-button>
+            </el-col>
+            <el-col :span="4">
+                <el-select v-model="category"
+                           clearable
+                           placeholder="分类筛选"
+                           @change="change"
+                           @clear="clear">
+                    <el-option v-for="item in categoryList"
+                               :key="item.mid"
+                               :label="item.name"
+                               :value="item.mid">
+                    </el-option>
+                </el-select>
+            </el-col>
+            <el-col :span="4"
+                    :offset=1>
+                <el-input clearable
+                          placeholder="关键字筛选"
+                          v-model="keyword"
+                          @keyup.enter.native="search"
+                          @clear='clear'></el-input>
+            </el-col>
+        </el-row>
         <el-table class="article-table"
                   :highlight-current-row="true"
                   :data="articleList"
@@ -92,6 +119,9 @@ export default {
             articleList: [],
             loading: true,
             selectRows: [],
+            categoryList: [],
+            category: [],
+            keyword: "",
             paging: {
                 pageSize: 10,
                 currentPage: 1,
@@ -102,13 +132,33 @@ export default {
         };
     },
     watch: {
+        "$store.state.category.categoryList": function() {
+            this.categoryList = this.$store.state.category.categoryList;
+        },
         "$store.state.article.articleList": function() {
             this.articleList = this.$store.state.article.articleList;
             this.loading = false;
         }
     },
-    mounted() {},
+    created() {
+        this.$store.dispatch("getCategoryListAction");
+    },
     methods: {
+        clear() {
+            this.paging.typeName = "all";
+            this.paging.type = -1;
+            this.$store.dispatch("getArticleListAction", this.paging);
+        },
+        search() {
+            this.paging.typeName = "keyword";
+            this.paging.type = this.keyword;
+            this.$store.dispatch("getArticleListAction", this.paging);
+        },
+        change(value) {
+            this.paging.typeName = "category";
+            this.paging.type = value;
+            this.$store.dispatch("getArticleListAction", this.paging);
+        },
         delArticle() {
             if (this.selectRows.length > 0) {
                 this.$confirm("此操作将永久删除所选文章, 是否继续?", "提示", {

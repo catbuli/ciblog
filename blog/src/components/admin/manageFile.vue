@@ -18,7 +18,8 @@
                 </el-radio-group>
             </el-col>
             <el-col :span=3
-                    :offset=10>
+                    :offset=10
+                    class="upload">
                 <el-upload multiple
                            style="text-align:right"
                            action="#"
@@ -203,12 +204,12 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .file-table {
     width: 100%;
     margin: 20px auto;
 }
-.el-upload-list {
+.upload >>> .el-upload-list {
     display: none;
 }
 </style>
