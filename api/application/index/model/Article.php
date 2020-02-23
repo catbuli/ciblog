@@ -22,7 +22,7 @@ class Article extends Model
                 if ($paging['type'] == 0) {
                     return $this->order('create_date desc')->where('status', "<", 2)->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->field('aid,title,create_date,pv,comment_count,cover_url,description,status')->select();
                 } else {
-                    return $this->order('create_date desc')->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->field('aid,title,create_date,pv,comment_count,cover_url,description,status')->select();
+                    return $this->order('create_date desc')->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->field('aid,title,create_date,pv,comment_count,cover_url,description,status,draft')->select();
                 }
                 // 关键字搜索
             case 'keyword':
@@ -63,7 +63,11 @@ class Article extends Model
         $article = new Article();
         switch ($typeName) {
             case 'all':
-                $count = count(Article::all());
+                if ($type == 0) {
+                    $count = count($article->order('create_date desc')->where('status', "<", 2)->select());
+                } else {
+                    $count = count(Article::all());
+                }
                 break;
             case 'keyword':
                 $count = count($article->where('title', 'like', '%' . $type . '%')

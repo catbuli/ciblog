@@ -166,7 +166,6 @@ class Articlec extends Controller
                     $data = json_decode($article->draft);
                     $data->aid = (int) $aid;
                     $list["present"] = $data;
-                    return Response::result(201, "成功", "草稿获取成功!", $list);
                 }
                 return Response::result(201, "成功", "文章信息获取成功!", $list);
             } else {
@@ -208,21 +207,10 @@ class Articlec extends Controller
                 ]);
                 $article->save();
             }
-            // if ($data['aid']) {
-            //     if ($data['aid'] == -1) {
-            //         $article->draft = $data["draft"];
-            //     } else {
-            //         $article->draft = $data["aid"];
-            //     }
-            // } else {
-            //     $article->draft = -1;
-            // }
-            $article->addArticle();
-            ArticleMeta::delAllMetaByArticle($article->aid, "category");
-            ArticleMeta::addMetaList($data['categoryList'], $article->aid, "category");
-            ArticleMeta::delAllMetaByArticle($article->aid, "tag");
-            ArticleMeta::addMetaList($data['tagList'], $article->aid, "tag");
-            return Response::result(200, "成功", "草稿保存成功!", $article);
+            $article->categoryList = $data['categoryList'];
+            $article->tagList = $data['tagList'];
+            $list["present"] = $article;
+            return Response::result(200, "成功", "草稿保存成功!", $list);
         } catch (Exception $e) {
             $message = $e->getMessage() . PHP_EOL . $e->getLine() . PHP_EOL . $e->getFile();
             return Response::result(400, "请求失败!", $message);

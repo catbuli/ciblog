@@ -14,11 +14,24 @@ export default {
     mutations: {
         setArticleList(state, data) {
             state.articleList = data;
+            data.forEach((element, index) => {
+                if (element.status > 0) {
+                    element = JSON.parse(element.draft);
+                    data[index].title = element.title;
+                }
+            });
         },
         setArticle(state, data) {
-            state.article = data.present;
-            state.previous = data.previous;
-            state.next = data.next;
+            if (data.present.status > 0) {
+                let value = JSON.parse(data.present.draft);
+                state.article = value;
+                state.article.aid = data.present.aid;
+                state.article.create_date = data.present.create_date;
+            } else {
+                state.article = data.present;
+                state.previous = data.previous;
+                state.next = data.next;
+            }
         }
     },
     actions: {
@@ -61,7 +74,7 @@ export default {
             post("/articlec/draft", {
                 data: data
             }, resp => {
-                // context.dispatch('getArticleDataAction', resp.data.aid);
+                context.commit('setArticle', resp.data);
             });
         }
     },
