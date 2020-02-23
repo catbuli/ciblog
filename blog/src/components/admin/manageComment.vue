@@ -206,8 +206,14 @@ export default {
 .content-table-middle {
     margin: 10px auto;
 }
-/* .content-table-edit {
-} */
+.el-table__row:hover .content-table-bottom {
+    /* visibility: visible; */
+    opacity: 1;
+}
+.content-table-bottom {
+    /* visibility: hidden; */
+    opacity: 0;
+}
 .content-table-bottom span {
     margin-right: 10px;
     cursor: pointer;
