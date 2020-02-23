@@ -66,6 +66,24 @@ class Category extends Controller
         }
     }
     /**
+     * 修改分类
+     *
+     * @param int $category 分类信息
+     * @return 响应信息
+     */
+    public function edit($category)
+    {
+        try {
+            $meta  = Meta::get($category['mid']);
+            $meta->name = $category['name'];
+            $meta->description = $category['description'];
+            $meta->save();
+            return Response::result(200, "成功", "分类修改成功!");
+        } catch (Exception $e) {
+            return Response::result(400, "请求失败!", $e->getMessage());
+        }
+    }
+    /**
      * 根据文章aid获取分类列表
      *
      * @param int $aid 文章aid
@@ -76,6 +94,21 @@ class Category extends Controller
         try {
             $list = ArticleMeta::getMetaByArticle($aid, "category", true);
             return Response::result(201, "成功", "分类信息获取成功!", $list);
+        } catch (Exception $e) {
+            return Response::result(400, "请求失败!", $e->getMessage());
+        }
+    }
+    /**
+     * 根据标签mid获取分类列表
+     *
+     * @param int $mid mateID
+     * @return 响应信息
+     */
+    public function bymid($mid)
+    {
+        try {
+            $data = Meta::get($mid);
+            return Response::result(201, "成功", "分类信息获取成功!", $data);
         } catch (Exception $e) {
             return Response::result(400, "请求失败!", $e->getMessage());
         }

@@ -69,6 +69,7 @@
         </el-table>
         <paging action="getCommentListAction"
                 align="right"
+                :paging="paging"
                 @function="handlePage"></paging>
         <el-dialog title="编辑评论"
                    :visible.sync="isEdit">
@@ -114,7 +115,7 @@ export default {
             paging: {
                 pageSize: 10,
                 currentPage: 1,
-                type: 0,
+                type: -1,
                 typeName: "status",
                 total: 0
             }

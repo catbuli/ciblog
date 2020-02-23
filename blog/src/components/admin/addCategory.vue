@@ -11,10 +11,13 @@
                 </li>
                 <li>
                     <h4>分类描述</h4>
-                    <el-input placeholder="请输入内容"
-                              v-model="description"
+                    <el-input v-model="description"
+                              resize="none"
                               type="textarea"
-                              :rows="4"></el-input>
+                              placeholder="分类描述!"
+                              maxlength="100"
+                              show-word-limit
+                              :rows=3></el-input>
                     <span class="input-hint">用来描述分类。</span>
                 </li>
                 <li class="input-button">

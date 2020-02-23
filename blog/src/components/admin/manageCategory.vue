@@ -24,11 +24,41 @@
                              align="center"
                              label="分类描述">
             </el-table-column>
+            <el-table-column align="center"
+                             width="80px"
+                             label="操作">
+                <template slot-scope="scope">
+                    <i class="el-icon-edit operating-button"
+                       style="cursor: pointer;font-size:20px"
+                       @click="handleDialog(scope.row.mid)"></i>
+                </template>
+            </el-table-column>
             <el-table-column prop="count"
                              align="center"
                              label="文章数">
             </el-table-column>
         </el-table>
+        <el-dialog title="编辑评论"
+                   :visible.sync="isEdit">
+            <el-input placeholder="请输入分类"
+                      v-loading="loading"
+                      v-model="category.name"></el-input>
+            <el-input v-model="category.description"
+                      style="margin-top:10px"
+                      v-loading="loading"
+                      resize="none"
+                      type="textarea"
+                      placeholder="分类描述!"
+                      maxlength="100"
+                      show-word-limit
+                      :rows=3></el-input>
+            <el-button type="primary"
+                       style="margin-top:10px"
+                       @click="editCategory">保存</el-button>
+            <el-button type="info"
+                       style="margin-top:10px"
+                       @click="isEdit = false">取消</el-button>
+        </el-dialog>
     </adminFrame>
 </template>
 
@@ -42,20 +72,42 @@ export default {
     data() {
         return {
             loading: true,
-            selectRows: []
+            selectRows: [],
+            isEdit: false,
+            category: {}
         };
     },
     watch: {
         "$store.state.category.categoryList": function() {
             this.loading = false;
+        },
+        category: function() {
+            this.loading = false;
         }
     },
-    mounted() {
+    created() {
         this.getCategoryList();
     },
     methods: {
         getCategoryList() {
             this.$store.dispatch("getCategoryListAction");
+        },
+        getCategory(mid) {
+            this.loading = true;
+            this.$post("/category/bymid", { mid: mid }, data => {
+                this.category = data.data;
+            });
+        },
+        editCategory() {
+            this.$post("/category/edit", { category: this.category }, data => {
+                this.getCategoryList();
+            });
+            this.isEdit = false;
+            this.loading = true;
+        },
+        handleDialog(mid) {
+            this.getCategory(mid);
+            this.isEdit = true;
         },
         delCategory() {
             if (this.selectRows.length > 0) {
@@ -65,9 +117,12 @@ export default {
                     type: "warning"
                 })
                     .then(() => {
-                        this.$store.dispatch(
-                            "delCategoryAction",
-                            this.selectRows
+                        this.$post(
+                            "/category/del",
+                            { mid: this.selectRows },
+                            data => {
+                                this.$store.dispatch("getCategoryListAction");
+                            }
                         );
                         this.loading = true;
                     })

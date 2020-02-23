@@ -5,12 +5,12 @@ import router from '@/router'
 
 export default {
     state: {
-        categoryList: []
+        categoryList: [],
     },
     mutations: {
         setCategoryList(state, data) {
             state.categoryList = data;
-        }
+        },
     },
     actions: {
         getCategoryListAction(context) {
@@ -27,16 +27,6 @@ export default {
                 context.dispatch('getCategoryListAction');
             });
         },
-        editCategoryAction(context, data) {
-            console.log('editCategoryAction')
-        },
-        delCategoryAction(context, data) {
-            post("/category/del", {
-                mid: data
-            }, (data) => {
-                context.dispatch('getCategoryListAction');
-            });
-        }
     },
     modules: {}
 }
