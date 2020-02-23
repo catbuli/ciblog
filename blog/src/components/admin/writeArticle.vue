@@ -17,7 +17,7 @@
                                      :toolbars="markdownOption"
                                      ref="md"
                                      @change="change"
-                                     @save="save"></mavonEditor>
+                                     @save="saveDraft"></mavonEditor>
                     </div>
                 </section>
                 <section class="content-settings">
@@ -222,10 +222,6 @@ export default {
             var description = value.replace(reg, "");
             this.article.description = description.substring(0, 100);
             this.article.html = render;
-        },
-        // 富文本保存
-        save() {
-            console.log("save", "");
         },
         publish() {
             this.article.fileList = this.$store.state.file.fileList;
