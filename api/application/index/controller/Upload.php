@@ -41,7 +41,7 @@ class Upload extends Controller
             }
             foreach ($files as $file) {
                 // 移动到框架应用根目录/public/uploads/ 目录下, 'ext' => 'jpg,png,gif'
-                $file->validate(['size' => 130000]);
+                $file->validate(['size' => 1100000]);
                 $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
                 if ($info) {
                     $file = new File();

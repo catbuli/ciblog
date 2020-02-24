@@ -92,14 +92,10 @@
                              width="139px"
                              label="预览">
                 <template slot-scope="scope">
-                    <!-- <a :href="$store.state.global.UPLOADPATH +
-                    scope.row.url.replace('\\', '/')"
-                       target='_blank'> -->
                     <el-image style="width: 100px; height: 70px"
                               :src="scope.row.url"
                               :preview-src-list="[scope.row.url]">
                     </el-image>
-                    <!-- </a> -->
                 </template>
             </el-table-column>
             <!-- <el-table-column>
