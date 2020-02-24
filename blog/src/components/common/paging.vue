@@ -75,4 +75,7 @@ export default {
 </script>
 
 <style scoped>
+#paging {
+    min-width: 730px;
+}
 </style>

@@ -142,7 +142,7 @@ export default {
 #nav {
     /* overflow: hidden; */
     padding: 0px;
-    min-width: 200px;
+    min-width: 250px;
     height: 100%;
     width: 17%;
     position: fixed;

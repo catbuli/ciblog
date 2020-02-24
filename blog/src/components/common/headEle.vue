@@ -77,6 +77,7 @@ header {
     background-repeat: no-repeat;
     justify-content: center; /* 水平居中 */
     align-items: center;
+    min-width: 730px;
 }
 /* 页头动画 */
 @keyframes show {

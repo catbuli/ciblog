@@ -26,6 +26,7 @@ export default {
     width: 100%;
     color: black;
     text-align: center;
+    min-width: 730px;
 }
 .footEle .footer-info {
     color: #444;
