@@ -225,13 +225,6 @@ export default {
         },
         publish() {
             this.article.fileList = this.$store.state.file.fileList;
-            // if (this.article.status == 1) {
-            //     if (this.article.draft == -1) {
-            //         this.article.aid = null;
-            //     } else {
-            //         this.article.aid = this.article.draft;
-            //     }
-            // }
             if (!this.article.cover_url) {
                 this.article.cover_url = this.$store.state.global.system.randomBanner;
             }
@@ -251,6 +244,9 @@ export default {
             this.tagName = "";
         },
         saveDraft() {
+            if (!this.article.title) {
+                this.article.title = "未命名文章";
+            }
             this.$store.dispatch("draftAction", this.article);
         }
         // imgAdd(filename, file) {

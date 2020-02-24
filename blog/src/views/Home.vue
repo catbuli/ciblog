@@ -40,11 +40,6 @@ export default {
             }
         };
     },
-    watch: {
-        "$store.state.global.paging": function() {
-            this.paging = this.$store.state.global.paging;
-        }
-    },
     methods: {
         handlePage() {
             this.loading = true;
