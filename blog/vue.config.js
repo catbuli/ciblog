@@ -1,6 +1,8 @@
 module.exports = {
     publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
     // 博客↑
+    // 打包取消map文件
+    productionSourceMap: false,
     devServer: {
         open: true, //是否自动弹出浏览器页面
         https: false,

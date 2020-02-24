@@ -51,6 +51,9 @@
 
 `npm run serve`
 
+`api文件夹移动到服web服务器下`
+
+
 # 效果演示
 
 

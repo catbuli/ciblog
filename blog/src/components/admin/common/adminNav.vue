@@ -55,10 +55,11 @@ export default {
 </script>
 
 <style scoped>
-/* #admin-nav {
-    width: 100%;
+#admin-nav {
+    /* width: 100%;
     position: fixed;
     top: 0;
-    z-index: -1;
-} */
+    z-index: -1; */
+    /* min-width: 730px; */
+}
 </style>
