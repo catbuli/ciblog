@@ -70,7 +70,13 @@
                                        @click.native="changeAvatar"></el-avatar>
                         </div>
                         <div class="comment-content">
-                            <div class="comment-text">{{item.content}}</div>
+                            <div class="comment-text">
+                                <p class="reply"
+                                   v-if="item.reply">
+                                    @{{JSON.parse(item.reply).nickname}}
+                                </p>
+                                <p>{{item.content}}</p>
+                            </div>
                             <p class="comment-meta">
                                 By <span v-text="item.nickname"></span>
                                 at <span v-text="item.create_date"></span>
@@ -421,6 +427,14 @@ export default {
     width: 100%;
     margin-bottom: 10px;
     position: relative;
+}
+.comment-text .reply {
+    margin-bottom: 5px;
+    background-color: #dfdddd;
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-size: 10px;
 }
 .comment-text:before {
     content: "";

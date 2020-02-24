@@ -28,6 +28,11 @@
                              align="center"
                              width="50px">
             </el-table-column>
+            <el-table-column width="50px"
+                             prop="cid"
+                             align="center"
+                             label="评论id">
+            </el-table-column>
             <el-table-column width="60px"
                              align="center"
                              label="作者">
@@ -61,7 +66,7 @@
                             <el-radio-button label=2>垃圾</el-radio-button>
                         </el-radio-group>
                         <span @click="handleDialog(scope.row.cid)">编辑</span>
-                        <span>回复</span>
+                        <span @click="handleReplyDialog(scope.row.aid,scope.row.cid,scope.row.nickname)">回复</span>
                         <span @click="delComment2(scope.row.cid)">删除</span>
                     </p>
                 </template>
@@ -87,6 +92,21 @@
                        style="margin-top:10px"
                        @click="isEdit = false">取消</el-button>
         </el-dialog>
+        <el-dialog title="回复评论"
+                   :visible.sync="isReply">
+            <el-input v-model="comment.content"
+                      resize="none"
+                      type="textarea"
+                      maxlength="200"
+                      show-word-limit
+                      :rows=5></el-input>
+            <el-button type="primary"
+                       style="margin-top:10px"
+                       @click="replyComment()">回复</el-button>
+            <el-button type="info"
+                       style="margin-top:10px"
+                       @click="isReply = false">取消</el-button>
+        </el-dialog>
     </adminFrame>
 </template>
 
@@ -106,6 +126,7 @@ export default {
             loading: true,
             selectRows: [],
             isEdit: false,
+            isReply: false,
             content: "",
             filters: [
                 { text: "未审核", value: 0 },
@@ -179,8 +200,27 @@ export default {
             });
         },
         handleDialog(cid) {
-            this.$store.dispatch("getCommentAction", cid);
             this.isEdit = true;
+            this.$store.dispatch("getCommentAction", cid);
+        },
+        handleReplyDialog(aid, cid, nickname) {
+            this.isReply = true;
+            this.comment = {
+                aid: aid,
+                content: "",
+                nickname: this.$store.state.global.personalData.nickname,
+                email: this.$store.state.global.personalData.mail,
+                reply: {
+                    cid: cid,
+                    nickname: nickname
+                },
+                avatar_url: this.$store.state.global.personalData.imgurl
+            };
+            console.log(this.comment);
+        },
+        replyComment() {
+            this.$store.dispatch("replyCommentAction", this.comment);
+            this.isReply = false;
         },
         editComment(cid) {
             this.$store.dispatch("editCommentAction", this.comment);
