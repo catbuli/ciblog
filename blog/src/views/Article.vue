@@ -63,11 +63,9 @@
                     <li v-for="item in commentList"
                         :key="item.cid">
                         <div class="comment-left">
-                            <el-avatar class="comment-avatar"
-                                       shape="square"
-                                       size="large"
-                                       :src='item.avatar_url'
-                                       @click.native="changeAvatar"></el-avatar>
+                            <Gravatar :email="item.email"
+                                      class="comment-avatar"
+                                      :size="40"></Gravatar>
                         </div>
                         <div class="comment-content">
                             <div class="comment-text">
@@ -105,8 +103,7 @@
                             align="center">
                         <el-avatar class="avatar"
                                    shape="square"
-                                   :src='commentData.avatar_url'
-                                   @click.native="changeAvatar"
+                                   src='https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png'
                                    :size="50"></el-avatar>
                     </el-col>
                     <el-col :span=10>
@@ -143,13 +140,15 @@ import footEle from "@/components/common/footEle.vue";
 import headEle from "@/components/common/headEle.vue";
 import backTop from "@/components/common/backTop.vue";
 import Axios from "axios";
+import Gravatar from "vue-gravatar";
 
 export default {
     name: "home",
     components: {
         headEle,
         footEle,
-        backTop
+        backTop,
+        Gravatar
     },
     data() {
         return {
@@ -240,10 +239,6 @@ export default {
                     return false;
                 }
             });
-        },
-        changeAvatar() {
-            this.commentData.avatar_url =
-                "https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png";
         },
         jump(aid) {
             this.$router.push({
@@ -460,6 +455,7 @@ export default {
     border-radius: 5px;
 }
 .comment-left .comment-avatar {
+    border-radius: 7px;
     position: relative;
     left: 40px;
 }
@@ -483,7 +479,6 @@ export default {
 .add-comment .avatar {
     position: relative;
     top: -10px;
-    cursor: pointer;
 }
 /* 分类信息 */
 .category {
