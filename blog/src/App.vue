@@ -28,20 +28,8 @@ export default {
     },
     watch: {
         $route: function(to, from) {
-            // scrollTo(0, 0);
-            let router_path = to.path;
-            if (router_path.indexOf("/admin") != -1) {
-                this.$store.commit("isAdmin", false);
-                this.$store.commit("handleLeftNav", false);
-            } else if (router_path.indexOf("/login") != -1) {
-                this.$store.commit("isAdmin", false);
-                this.$store.commit("handleLeftNav", false);
-            } else {
-                this.$store.commit("isAdmin", true);
-                this.$store.commit("handleLeftNav", false);
-            }
-        },
-        "$store.state.global.isShowLeftNav": function() {}
+            this.checkRouter();
+        }
     },
     components: {
         navEle,

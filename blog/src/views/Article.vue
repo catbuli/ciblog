@@ -208,6 +208,10 @@ export default {
             this.previous = this.$store.state.article.previous;
             this.next = this.$store.state.article.next;
             this.article.modify_date = this.article.modify_date.split(" ")[0];
+            document.title =
+                this.article.title +
+                "-" +
+                this.$store.state.global.personalData.nickname;
             this.loading = false;
         },
         "$store.state.comment.commentList": function() {

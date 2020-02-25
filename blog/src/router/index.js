@@ -25,13 +25,11 @@ import {
 
 Vue.use(VueRouter)
 
+
 const routes = [{
     path: '/',
     name: 'home',
     component: Home,
-    meta: {
-        title: '首页'
-    },
 }, {
     path: '/search',
     name: 'search',

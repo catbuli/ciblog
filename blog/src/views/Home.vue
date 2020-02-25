@@ -40,10 +40,24 @@ export default {
             }
         };
     },
+    watch: {
+        "$store.state.global.personalData"() {
+            this.setTitle();
+        }
+    },
     methods: {
         handlePage() {
             this.loading = true;
+        },
+        setTitle() {
+            let nickname = this.$store.state.global.personalData.nickname;
+            let description = this.$store.state.global.personalData.description;
+            document.title = nickname + "-" + description;
         }
+    },
+    created() {
+        this.$store.dispatch("getPersonalDataAction");
+        this.setTitle();
     }
 };
 </script>

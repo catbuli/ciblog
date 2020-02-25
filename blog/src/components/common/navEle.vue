@@ -58,7 +58,7 @@
             </div>
             <div class="new">
                 <ul>
-                    <a v-for="item in $store.state.article.articleList"
+                    <a v-for="item in articleList"
                        :key="item.aid"
                        @click="$router.push('/article/'+item.aid)">
                         <li>{{item.title}}<span>{{item.create_date.split(' ')[0].split('-')[1]+'-'+item.create_date.split(' ')[0].split('-')[2]}}</span></li>
@@ -82,12 +82,13 @@ export default {
             github: String,
             email: String,
             paging: {
-                pageSize: 5,
+                pageSize: 10,
                 currentPage: 1,
                 type: -1,
                 typeName: "all",
                 total: 0
-            }
+            },
+            articleList: this.$store.state.article.articleList
         };
     },
     components: {
@@ -122,12 +123,17 @@ export default {
             // else if (scrollTop === 0) {
             //     this.$store.commit("handleLeftNav", true);
             // }
+        },
+        getArticleList() {
+            this.$post("/articlec", { paging: this.paging }, data => {
+                this.articleList = data.data;
+            });
         }
     },
     created() {
+        this.getArticleList();
         this.$store.dispatch("getCountAction");
         this.$store.dispatch("getSystemAciton");
-        this.$store.dispatch("getArticleListAction", this.paging);
         this.$store.dispatch("getPersonalDataAction");
     },
     destroyed() {
@@ -310,12 +316,12 @@ export default {
 .search {
 }
 .hidden-nav {
-    animation: hidden-nav ease 0.5s;
+    /* animation: hidden-nav ease 0.5s; */
     transform: translateX(-101%);
-    transition: all ease-in-out 0.5s;
+    transition: all ease-in 0.5s;
 }
 .show-nav {
-    animation: show-nav ease 0.5s;
+    /* animation: show-nav ease 0.5s; */
     transition: all ease 0.5s;
 }
 
