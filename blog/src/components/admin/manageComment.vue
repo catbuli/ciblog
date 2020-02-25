@@ -37,10 +37,9 @@
                              align="center"
                              label="作者">
                 <template slot-scope="scope">
-                    <el-avatar class="comment-avatar"
-                               shape="square"
-                               size="large"
-                               :src='scope.row.avatar_url'></el-avatar>
+                    <Gravatar :email="scope.row.email"
+                              class="comment-avatar"
+                              :size="50"></Gravatar>
                 </template>
             </el-table-column>
             <el-table-column width="200px">
@@ -113,11 +112,13 @@
 <script>
 import adminFrame from "@/components/admin/common/adminFrame.vue";
 import paging from "@/components/common/paging.vue";
+import Gravatar from "vue-gravatar";
 export default {
     name: "manageComment",
     components: {
         adminFrame,
-        paging
+        paging,
+        Gravatar
     },
     data() {
         return {
@@ -274,5 +275,8 @@ export default {
     border: 2px dashed #ff7b00;
     padding: 2px;
     cursor: default !important;
+}
+.comment-avatar {
+    border-radius: 7px;
 }
 </style>
