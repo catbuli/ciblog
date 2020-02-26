@@ -11,7 +11,7 @@
                         @enter="beforeEnter">
                 <!-- @before-leave="beforeEnter"> -->
                 <!-- mode="out-in"> -->
-                <router-view :key="$store.state.global.refresh" />
+                <router-view />
                 <!-- 博客 ↑ :key="$route.path" -->
             </transition>
         </div>

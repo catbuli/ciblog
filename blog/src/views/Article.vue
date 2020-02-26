@@ -1,5 +1,6 @@
 <template>
-    <div id="Article">
+    <div id="Article"
+         :key="$route.fullPath">
         <headEle height="60%"
                  :isShowInfo="false"
                  :backgroundImage="'url('+article.cover_url+')'"></headEle>
@@ -219,7 +220,9 @@ export default {
             this.loading = false;
         },
         $route: function(to, form) {
-            this.$store.commit("REFRESH", to.path);
+            // this.$store.commit("REFRESH", form.path);
+            this.getArticleData(this.$route.params.id);
+            this.getCommentList(this.$route.params.id);
         }
     },
     methods: {
