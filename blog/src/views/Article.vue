@@ -69,6 +69,8 @@
                                       :size="40"></Gravatar>
                         </div>
                         <div class="comment-content">
+                            <i class="el-icon-chat-line-square comment-reply"
+                               @click="reply(item)"></i>
                             <div class="comment-text">
                                 <p class="reply"
                                    v-if="item.reply">
@@ -160,7 +162,8 @@ export default {
                 content: "",
                 nickname: "",
                 email: "",
-                avatar_url: ""
+                avatar_url: "",
+                reply: {}
             },
             previous: {},
             next: {},
@@ -242,6 +245,12 @@ export default {
                     return false;
                 }
             });
+        },
+        reply(data) {
+            this.commentData.reply = {
+                cid: data.cid,
+                nickname: data.nickname
+            };
         },
         jump(aid) {
             this.$router.push({
@@ -416,9 +425,16 @@ export default {
     width: 15%;
 }
 .comment-content {
-    /* position: relative; */
+    position: relative;
     width: 80%;
-    /* right: 0; */
+}
+.comment-reply {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 20px;
+    z-index: 100;
+    cursor: pointer;
 }
 .comment-text {
     padding: 10px;

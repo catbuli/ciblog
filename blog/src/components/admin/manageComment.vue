@@ -219,7 +219,7 @@ export default {
             };
         },
         replyComment() {
-            this.$store.dispatch("replyCommentAction", this.comment);
+            this.$store.dispatch("addCommentAction", this.comment);
             this.isReply = false;
         },
         editComment() {

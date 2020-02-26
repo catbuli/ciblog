@@ -43,16 +43,6 @@ export default {
                 dispatch('getCommentListAction', rootState.global.paging);
             });
         },
-        replyCommentAction({
-            rootState,
-            dispatch
-        }, data) {
-            post("/commentc/reply", {
-                data: data
-            }, () => {
-                dispatch('getCommentListAction', rootState.global.paging);
-            });
-        },
         editCommentAction({
             rootState,
             dispatch
