@@ -1,6 +1,6 @@
 import {
     post
-} from '@/http'
+} from '@/lib/http'
 
 export default {
     state: {

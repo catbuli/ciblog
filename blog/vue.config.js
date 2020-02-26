@@ -16,7 +16,7 @@ module.exports = {
         port: '8020',
         proxy: {
             '/api': {
-                target: process.env.VUE_APP_URL, //API服务器的地址
+                target: process.env.VUE_APP_URL, //API本地服务器的地址
                 // ws: true, //代理websockets
                 changeOrigin: true, // 虚拟的站点需要更管origin
                 pathRewrite: {
@@ -26,13 +26,13 @@ module.exports = {
             }
         },
         //在本地服务器开启gzip，线上服务器都支持gzip不需要设置
-        before(app) {
-            app.get(/.*.(js)$/, (req, res, next) => {
-                req.url = req.url + '.gz';
-                res.set('Content-Encoding', 'gzip');
-                next();
-            })
-        }
+        // before(app) {
+        //     app.get(/.*.(js)$/, (req, res, next) => {
+        //         req.url = req.url + '.gz';
+        //         res.set('Content-Encoding', 'gzip');
+        //         next();
+        //     })
+        // }
     },
     // webpack配置
     configureWebpack: {

@@ -1,7 +1,7 @@
 import {
     post
-} from '@/http'
-import router from '@/router'
+} from '@/lib/http'
+import router from '@/lib/router'
 
 export default {
     state: {
