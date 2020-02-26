@@ -3,8 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
-import "./assets/styles/iconfont/iconfont.css"
+import "element-ui/lib/theme-chalk/index.css";
+import "./assets/styles/iconfont/iconfont.css";
 import {
     post
 } from '@/http'
@@ -14,7 +14,6 @@ import {
 
 Vue.config.productionTip = false
 Vue.use(ElementUI);
-
 Vue.prototype.$post = post;
 console.log(process.env.VUE_APP_URL);
 console.log(process.env.VUE_APP_MESSAGE);
