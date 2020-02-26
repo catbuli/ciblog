@@ -378,10 +378,10 @@ export default {
 .article-footer div img:hover {
     filter: brightness(1);
 }
-.article-previous {
+/* .article-previous {
 }
 .article-next {
-}
+} */
 /* 评论列表 */
 .response {
     padding: 20px 0;

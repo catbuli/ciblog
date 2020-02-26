@@ -19,14 +19,8 @@ export default {
     data() {
         return {};
     },
-    methods: {
-        checkLogin() {
-            this.$router.push("/login");
-        }
-    },
-    mounted() {
-        // this.checkLogin();
-    }
+    methods: {},
+    mounted() {}
 };
 </script>
 

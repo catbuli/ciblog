@@ -86,7 +86,7 @@
                       :rows=5></el-input>
             <el-button type="primary"
                        style="margin-top:10px"
-                       @click="editComment()">保存</el-button>
+                       @click="editComment">保存</el-button>
             <el-button type="info"
                        style="margin-top:10px"
                        @click="isEdit = false">取消</el-button>
@@ -217,13 +217,12 @@ export default {
                 },
                 avatar_url: this.$store.state.global.personalData.imgurl
             };
-            console.log(this.comment);
         },
         replyComment() {
             this.$store.dispatch("replyCommentAction", this.comment);
             this.isReply = false;
         },
-        editComment(cid) {
+        editComment() {
             this.$store.dispatch("editCommentAction", this.comment);
             this.isEdit = false;
             this.loading = true;
