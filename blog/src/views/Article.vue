@@ -65,8 +65,9 @@
                         :key="item.cid">
                         <div class="comment-left">
                             <Gravatar :email="item.email"
+                                      :class="!JSON.parse(item.reply)?'comment-avatar':'comment-avatar-child'"
                                       class="comment-avatar"
-                                      :size="40"></Gravatar>
+                                      :size="!JSON.parse(item.reply)?45:30"></Gravatar>
                         </div>
                         <div class="comment-content">
                             <i class="el-icon-chat-line-square comment-reply"
@@ -74,9 +75,9 @@
                             <div class="comment-text">
                                 <p class="reply"
                                    v-if="item.reply">
-                                    @{{JSON.parse(item.reply).nickname}}
+                                    <span>@{{JSON.parse(item.reply).nickname}}</span>
                                 </p>
-                                <p>{{item.content}}</p>
+                                <p class="text">{{item.content}}</p>
                             </div>
                             <p class="comment-meta">
                                 By <span v-text="item.nickname"></span>
@@ -156,7 +157,7 @@ export default {
     data() {
         return {
             article: {},
-            commentList: [],
+            // commentList: [],
             loading: true,
             commentData: {
                 content: "",
@@ -205,6 +206,28 @@ export default {
             }
         };
     },
+    computed: {
+        commentList() {
+            let commentList = this.$store.state.comment.commentList;
+            let father = [];
+            let son = [];
+            commentList.forEach((element, index) => {
+                if (!element.reply) {
+                    father.push(element);
+                } else {
+                    son.push(element);
+                }
+            });
+            son.reverse().forEach((element, index) => {
+                father.find(function(val, indext) {
+                    if (val.cid == JSON.parse(element.reply).cid) {
+                        father.splice(indext + 1, 0, element);
+                    }
+                });
+            });
+            return father;
+        }
+    },
     watch: {
         "$store.state.article.article": function() {
             this.article = this.$store.state.article.article;
@@ -218,7 +241,6 @@ export default {
             this.loading = false;
         },
         "$store.state.comment.commentList": function() {
-            this.commentList = this.$store.state.comment.commentList;
             this.commentData.content = "";
             this.loading = false;
         },
@@ -437,7 +459,7 @@ export default {
     cursor: pointer;
 }
 .comment-text {
-    padding: 10px;
+    padding: 10px 40px 10px 10px;
     border: 1px solid #e5e5e5;
     border-radius: 5px;
     background: #fff;
@@ -446,10 +468,16 @@ export default {
     margin-bottom: 10px;
     position: relative;
 }
+.comment-text .text {
+    display: inline;
+    word-wrap: break-word;
+}
 .comment-text .reply {
-    margin-bottom: 5px;
+    display: block;
+    margin-bottom: 10px;
+}
+.comment-text .reply span {
     background-color: #dfdddd;
-    display: inline-block;
     padding: 3px 8px;
     border-radius: 5px;
     font-size: 10px;
@@ -477,6 +505,11 @@ export default {
     border-radius: 7px;
     position: relative;
     left: 40px;
+}
+.comment-left .comment-avatar-child {
+    border-radius: 7px;
+    position: relative;
+    left: 50px;
 }
 
 /* 添加评论 */

@@ -29,7 +29,7 @@
                     <li v-for="item in $store.state.comment.commentList.slice(0,10)"
                         :key="item.cid">
                         <span>{{item.create_date.split(' ')[0].split('-')[1]+'-'+item.create_date.split(' ')[0].split('-')[2]}}</span>
-                        <a style="cursor: pointer;color: #ff7b00;"
+                        <a class="index-top-context"
                            @click="$router.push({path: `/article/${item.aid}`})">
                             {{item.content}}
                         </a>
@@ -90,6 +90,15 @@ export default {
 .index-top p a {
     margin-right: 20px;
 }
+.index-top-context {
+    cursor: pointer;
+    display: inline-block;
+    color: #ff7b00;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 80%;
+}
 .index-bottom {
     display: flex;
 }
@@ -97,16 +106,18 @@ export default {
     flex: 1;
     font-size: 15px;
     margin: 0 10px;
+    overflow: hidden;
 }
 section ul {
-    padding-left: 40px;
+    padding-left: 20px;
 }
 section ul li {
     margin-bottom: 5px;
 }
 section ul li span {
+    vertical-align: top;
     display: inline-block;
-    margin-right: 15px;
+    margin-right: 10px;
     color: #969696;
 }
 </style>
