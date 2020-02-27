@@ -10,7 +10,7 @@
                 <template slot="title">控制台</template>
                 <el-menu-item index="/admin">总览</el-menu-item>
                 <el-menu-item index="/admin/personal_settings">个人</el-menu-item>
-                <el-menu-item index="/admin/backups">备份</el-menu-item>
+                <!-- <el-menu-item index="/admin/backups">备份</el-menu-item> -->
             </el-submenu>
             <el-menu-item index="/admin/write_article">写文章</el-menu-item>
             <el-submenu index="3">
@@ -24,10 +24,10 @@
             <el-submenu index="4">
                 <template slot="title">设置</template>
                 <el-menu-item index="/admin/setup_system">系统设置</el-menu-item>
-                <el-menu-item index="/admin/comment_settings">评论设置</el-menu-item>
-                <el-menu-item index="/admin/read_settings">阅读设置</el-menu-item>
+                <!-- <el-menu-item index="/admin/comment_settings">评论设置</el-menu-item>
+                <el-menu-item index="/admin/read_settings">阅读设置</el-menu-item> -->
             </el-submenu>
-            <el-menu-item><a href="http://localhost:8020/"
+            <el-menu-item><a :href="$store.state.global.personalData.indexurl"
                    target="_blank">网站</a></el-menu-item>
             <el-menu-item style="right:0;position:absolute"
                           @click="logout">登出</el-menu-item>

@@ -4,8 +4,8 @@
         <el-row v-loading="loading"
                 element-loading-text="标签列表加载中">
             <el-col :span="15">
-                <div v-if="this.$store.state.tag.tagList.length>0">
-                    <el-tag v-for="tag in this.$store.state.tag.tagList"
+                <div v-if="tagList.length>0">
+                    <el-tag v-for="tag in tagList"
                             :key="tag.mid"
                             @close="delTag(tag)"
                             closable>
@@ -47,6 +47,11 @@ export default {
             loading: true,
             tagName: ""
         };
+    },
+    component: {
+        tagList() {
+            return this.$store.state.tag.tagList;
+        }
     },
     watch: {
         "$store.state.tag.tagList": function() {

@@ -83,18 +83,21 @@ export default {
     },
     data() {
         return {
-            personalData: {},
             loading: true,
             password: "",
             repassword: ""
         };
+    },
+    component: {
+        personalData() {
+            return this.$store.state.global.personalData;
+        }
     },
     mounted() {
         this.getData();
     },
     watch: {
         "$store.state.global.personalData": function() {
-            this.personalData = this.$store.state.global.personalData;
             this.loading = false;
         }
     },

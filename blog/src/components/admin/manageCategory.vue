@@ -10,7 +10,7 @@
         </el-button>
         <el-table class="category-table"
                   :highlight-current-row="true"
-                  :data="this.$store.state.category.categoryList"
+                  :data="categoryList"
                   v-loading="loading"
                   @selection-change="handleSelectionChange">
             <el-table-column type="selection"
@@ -77,6 +77,11 @@ export default {
             category: {}
         };
     },
+    computed: {
+        categoryList() {
+            return this.$store.state.category.categoryList;
+        }
+    },
     watch: {
         "$store.state.category.categoryList": function() {
             this.loading = false;
@@ -121,7 +126,7 @@ export default {
                             "/category/del",
                             { mid: this.selectRows },
                             data => {
-                                this.$store.dispatch("getCategoryListAction");
+                                this.getCategoryList();
                             }
                         );
                         this.loading = true;

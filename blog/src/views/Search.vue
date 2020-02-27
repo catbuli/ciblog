@@ -37,7 +37,6 @@ export default {
         return {
             loading: true,
             searchMessage: "",
-            searchDescription: "",
             paging: {
                 pageSize: 5,
                 currentPage: 1,
@@ -47,10 +46,12 @@ export default {
             }
         };
     },
+    computed: {
+        searchDescription() {
+            return this.$store.state.global.personalData.description;
+        }
+    },
     watch: {
-        "$store.state.global.personalData.description": function() {
-            this.searchDescription = this.$store.state.global.personalData.description;
-        },
         $route: function(to, form) {
             this.$store.commit("REFRESH", to.fullPath);
         }

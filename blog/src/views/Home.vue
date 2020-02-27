@@ -1,7 +1,7 @@
 <template>
     <div id="home">
-        <headEle :backgroundImage="'url('+$store.state.global.system.randomBanner+')'"></headEle>
-        <articleItem :list-data="$store.state.article.articleList"></articleItem>
+        <headEle :backgroundImage="'url('+banner+')'"></headEle>
+        <articleItem :list-data="articleList"></articleItem>
         <paging action="getArticleListAction"
                 align="center"
                 :paging="paging"
@@ -39,6 +39,14 @@ export default {
                 total: 0
             }
         };
+    },
+    computed: {
+        banner() {
+            return this.$store.state.global.system.randomBanner;
+        },
+        articleList() {
+            return this.$store.state.article.articleList;
+        }
     },
     watch: {
         "$store.state.global.personalData"() {

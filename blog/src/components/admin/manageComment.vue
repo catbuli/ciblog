@@ -151,9 +151,6 @@ export default {
         "$store.state.comment.comment": function() {
             this.comment = this.$store.state.comment.comment;
             this.loading = false;
-        },
-        "$store.state.global.paging": function() {
-            this.paging = this.$store.state.global.paging;
         }
     },
     mounted() {},

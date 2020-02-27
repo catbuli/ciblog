@@ -156,7 +156,6 @@ export default {
     },
     data() {
         return {
-            article: {},
             // commentList: [],
             loading: true,
             commentData: {
@@ -166,8 +165,6 @@ export default {
                 avatar_url: "",
                 reply: {}
             },
-            previous: {},
-            next: {},
             rules: {
                 nickname: [
                     {
@@ -226,13 +223,19 @@ export default {
                 });
             });
             return father;
+        },
+        article() {
+            return this.$store.state.article.article;
+        },
+        previous() {
+            return this.$store.state.article.previous;
+        },
+        next() {
+            return this.$store.state.article.next;
         }
     },
     watch: {
         "$store.state.article.article": function() {
-            this.article = this.$store.state.article.article;
-            this.previous = this.$store.state.article.previous;
-            this.next = this.$store.state.article.next;
             this.article.modify_date = this.article.modify_date.split(" ")[0];
             document.title =
                 this.article.title +
@@ -308,6 +311,9 @@ export default {
 </script>
 
 <style scoped>
+[v-cloak] {
+    display: none;
+}
 /* 文章主体 */
 #Article {
     height: 100%;

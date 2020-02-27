@@ -140,7 +140,6 @@ export default {
     data() {
         return {
             selectRows: [],
-            fileList: [],
             paging: {
                 pageSize: 10,
                 currentPage: 1,
@@ -155,8 +154,12 @@ export default {
     },
     watch: {
         "$store.state.file.fileList": function() {
-            this.fileList = this.$store.state.file.fileList;
             this.loading = false;
+        }
+    },
+    computed: {
+        fileList() {
+            return this.$store.state.file.fileList;
         }
     },
     mounted() {},

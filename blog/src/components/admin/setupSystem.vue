@@ -60,15 +60,18 @@ export default {
     },
     watch: {
         "$store.state.global.system": function() {
-            this.system = this.$store.state.global.system;
             this.loading = false;
         }
     },
     data() {
         return {
-            system: {},
             loading: true
         };
+    },
+    component: {
+        system() {
+            return this.$store.state.global.system;
+        }
     },
     created() {
         this.$store.dispatch("getSystemAciton");

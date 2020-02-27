@@ -116,10 +116,8 @@ export default {
     },
     data() {
         return {
-            articleList: [],
             loading: true,
             selectRows: [],
-            categoryList: [],
             category: [],
             keyword: "",
             paging: {
@@ -131,12 +129,16 @@ export default {
             }
         };
     },
-    watch: {
-        "$store.state.category.categoryList": function() {
-            this.categoryList = this.$store.state.category.categoryList;
+    computed: {
+        categoryList() {
+            return this.$store.state.category.categoryList;
         },
+        articleList() {
+            return this.$store.state.article.articleList;
+        }
+    },
+    watch: {
         "$store.state.article.articleList": function() {
-            this.articleList = this.$store.state.article.articleList;
             this.loading = false;
         }
     },
