@@ -26,6 +26,7 @@ class Commentc extends Controller
                 $title = Article::get($value['aid'])['title'];
                 $value['title'] = $title;
             }
+            $paging['total'] = Comment::Count($paging['typeName'], $paging['type']);
             return Response::result(201, "成功", "数据获取成功!", $data, $paging);
         } catch (Exception $e) {
             return Response::result(400, "请求失败", $e->getMessage());
@@ -115,39 +116,8 @@ class Commentc extends Controller
                     'create_date' => date('Y-m-d H:i:s'),
                     'status' => 1,
                     'ip' => $_SERVER['REMOTE_ADDR'],
-                    'avatar_url' => $data['avatar_url']
-                ]);
-                $comment->save();
-                return Response::result(200, "成功", "评论成功!");
-            }
-            return Response::result(400, "失败", "该文章已关闭评论!");
-        } catch (Exception $e) {
-            $message = $e->getMessage() . PHP_EOL . $e->getLine() . PHP_EOL . $e->getFile();
-            return Response::result(400, "请求失败!", $message);
-        }
-    }
-    /**
-     * 回复
-     *
-     * @param object $data 文章内容
-     * @return JSON
-     */
-    public function reply($data)
-    {
-        try {
-            $article = Article::get($data["aid"]);
-            if ($article->allow_comment === 1) {
-                $comment = new Comment();
-                $comment->data([
-                    'aid' => $data["aid"],
-                    'content' => $data["content"],
-                    'nickname' => $data["nickname"],
-                    'email' => $data["email"],
-                    'create_date' => date('Y-m-d H:i:s'),
-                    'status' => 1,
-                    'ip' => $_SERVER['REMOTE_ADDR'],
                     'avatar_url' => $data['avatar_url'],
-                    'reply' => json_encode($data['reply'])
+                    'reply' => empty($data['reply']) ? null : json_encode($data['reply'])
                 ]);
                 $comment->save();
                 return Response::result(200, "成功", "评论成功!");

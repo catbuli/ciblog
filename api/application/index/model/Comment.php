@@ -18,7 +18,7 @@ class Comment extends Model
                     return $this->where("status", $paging['type'])->order('create_date desc')->limit(($paging['currentPage'] - 1) * $paging['pageSize'], $paging['pageSize'])->select();
                 }
             case 'aid':
-                return $this->where('aid', $paging['type'])->where('status', 1)->order('create_date esc')->select();
+                return $this->where('aid', $paging['type'])->where('status', 1)->order('create_date desc')->select();
             default:
                 return Comment::all();
         }
