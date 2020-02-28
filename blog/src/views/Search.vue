@@ -2,7 +2,7 @@
     <div id="search"
          :key="$route.fullPath">
         <headEle height="70%"
-                 :backgroundImage="'url('+$store.state.global.system.randomBanner+')'"></headEle>
+                 :backgroundImage="'url('+banner+')'"></headEle>
         <div class="search-message">
             <p v-html="searchMessage"></p>
             <p v-html="searchDescription"></p>
@@ -50,6 +50,9 @@ export default {
     computed: {
         searchDescription() {
             return this.$store.state.global.personalData.description;
+        },
+        banner() {
+            return this.$store.state.global.system.randomBanner;
         }
     },
     watch: {

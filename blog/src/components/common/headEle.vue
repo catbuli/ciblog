@@ -4,17 +4,17 @@
              ref="original"
              v-if="isShowInfo">
             <h1 class="name-info"
-                v-html="$store.state.global.personalData.nickname"></h1>
+                v-html="personalData.nickname"></h1>
             <h2 class="description-info"
-                v-html="$store.state.global.personalData.description"></h2>
+                v-html="personalData.description"></h2>
         </div>
         <div class="information two"
              ref="copy"
              v-if="isShowInfo">
             <h1 class="name-info"
-                v-html="$store.state.global.personalData.nickname"></h1>
+                v-html="personalData.nickname"></h1>
             <h2 class="description-info"
-                v-html="$store.state.global.personalData.description"></h2>
+                v-html="personalData.description"></h2>
         </div>
     </header>
 </template>
@@ -38,6 +38,11 @@ export default {
             // "url('https://ciblog.oss-cn-shanghai.aliyuncs.com/images/bg4.jpg')"
         }
     },
+    computed: {
+        personalData() {
+            return this.$store.state.global.personalData;
+        }
+    },
     methods: {
         handleAnimation() {
             if (this.isShowInfo) {
@@ -55,7 +60,6 @@ export default {
             }
         }
     },
-    computed: {},
     mounted() {
         this.handleAnimation();
     }
@@ -71,7 +75,7 @@ header {
     z-index: -1;
     position: relative;
     margin-bottom: 50px;
-    animation: show 1s ease-out 0.5s 1;
+    animation: show 1s ease-out 0.3s 1;
     animation-fill-mode: forwards;
     display: flex;
     background-position: center center;

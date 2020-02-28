@@ -16,24 +16,24 @@
         <div class="intro">
             <div class="head-portrait">
                 <router-link to="/">
-                    <img :src="this.$store.state.global.personalData.imgurl"
+                    <img :src="personalData.imgurl"
                          alt />
                 </router-link>
-                <p class="nickname">{{this.$store.state.global.personalData.nickname}}</p>
-                <p class="description">{{this.$store.state.global.personalData.description}}</p>
+                <p class="nickname">{{personalData.nickname}}</p>
+                <p class="description">{{personalData.description}}</p>
             </div>
             <div class="count">
                 <ul>
                     <li>
-                        <p v-html="$store.state.global.countList.articleCount"></p>
+                        <p v-html="countList.articleCount"></p>
                         <p>文章</p>
                     </li>
                     <li>
-                        <p v-html="$store.state.global.countList.categoryCount"></p>
+                        <p v-html="countList.categoryCount"></p>
                         <p>分类</p>
                     </li>
                     <li>
-                        <p v-html="$store.state.global.countList.tagCount"></p>
+                        <p v-html="countList.tagCount"></p>
                         <p>标签</p>
                     </li>
                 </ul>
@@ -41,15 +41,15 @@
             <div class="platform">
                 <ul>
                     <li>
-                        <a :href="$store.state.global.personalData.github"
+                        <a :href="personalData.github"
                            target="_blank">github+</a>
                     </li>
                     <li>
                         <a target="_blank"
-                           :href="$store.state.global.personalData.bilibili">bilibili+</a>
+                           :href="personalData.bilibili">bilibili+</a>
                     </li>
                     <li>
-                        <a :href="'mailto:'+$store.state.global.personalData.mail">email+</a>
+                        <a :href="'mailto:'+personalData.mail">email+</a>
                     </li>
                 </ul>
             </div>
@@ -102,6 +102,14 @@ export default {
         "$store.state.global.isShowLeftNav": function() {
             var backTopEl = document.getElementById("button-nav");
             backTopEl.classList.toggle("active");
+        }
+    },
+    computed: {
+        personalData() {
+            return this.$store.state.global.personalData;
+        },
+        countList() {
+            return this.$store.state.global.countList;
         }
     },
     methods: {

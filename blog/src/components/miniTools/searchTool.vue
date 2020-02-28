@@ -108,7 +108,6 @@ export default {
 .inint_class {
     opacity: 0;
     visibility: hidden;
-    z-index: 0;
 }
 
 .show {

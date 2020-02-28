@@ -29,6 +29,8 @@ export default {
     min-width: 730px;
 }
 .footEle .footer-info {
-    color: #444;
+    color: rgb(104, 104, 104);
+    font-size: 0.8rem;
+    font-weight: 600;
 }
 </style>
