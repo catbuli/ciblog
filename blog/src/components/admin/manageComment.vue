@@ -145,12 +145,18 @@ export default {
     },
     watch: {
         "$store.state.comment.commentList": function() {
-            this.commentList = this.$store.state.comment.commentList;
             this.loading = false;
         },
         "$store.state.comment.comment": function() {
-            this.comment = this.$store.state.comment.comment;
             this.loading = false;
+        }
+    },
+    computed: {
+        commentList() {
+            return this.$store.state.comment.commentList;
+        },
+        comment() {
+            return this.$store.state.comment.comment;
         }
     },
     mounted() {},
