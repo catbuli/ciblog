@@ -1,7 +1,7 @@
 <template>
     <adminFrame title="总览">
         <div class="index-top">
-            <h1>一共篇<span class="sign">{{$store.state.global.countList.articleCount}}</span>文章,<span class="sign">{{$store.state.global.countList.categoryCount}}</span>种分类,<span class="sign">{{$store.state.global.countList.commentCount}}</span>条评论</h1>
+            <h1>一共篇<span class="sign">{{countList.articleCount}}</span>文章,<span class="sign">{{countList.categoryCount}}</span>种分类,<span class="sign">{{countList.commentCount}}</span>条评论</h1>
             <p>
                 <router-link to="/admin/write_article">写文章</router-link>
                 <router-link to="/admin/manage_article">文章管理</router-link>
@@ -13,7 +13,7 @@
             <section class="list-one">
                 <h3>最新发布的文章</h3>
                 <ul>
-                    <li v-for="item in $store.state.article.articleList.slice(0,10)"
+                    <li v-for="item in articleList"
                         :key="item.aid">
                         <span>{{item.create_date.split(' ')[0].split('-')[1]+'-'+item.create_date.split(' ')[0].split('-')[2]}}</span>
                         <a style="cursor: pointer;color: #ff7b00;"
@@ -26,7 +26,7 @@
             <section class="list-two">
                 <h3>最新评论</h3>
                 <ul>
-                    <li v-for="item in $store.state.comment.commentList.slice(0,10)"
+                    <li v-for="item in commentList"
                         :key="item.cid">
                         <span>{{item.create_date.split(' ')[0].split('-')[1]+'-'+item.create_date.split(' ')[0].split('-')[2]}}</span>
                         <a class="index-top-context"
@@ -57,6 +57,17 @@ export default {
                 total: 0
             }
         };
+    },
+    computed: {
+        countList() {
+            return this.$store.state.global.countList;
+        },
+        articleList() {
+            return this.$store.state.article.articleList;
+        },
+        commentList() {
+            return this.$store.state.comment.commentList;
+        }
     },
     mounted() {
         this.getData();
