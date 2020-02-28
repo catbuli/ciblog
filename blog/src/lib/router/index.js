@@ -154,7 +154,7 @@ const routes = [{
         ]
     },
     {
-        path: '/404',
+        path: '*',
         name: '404',
         component: (resolve) => require(['@/views/404.vue'], resolve),
         meta: {
@@ -173,11 +173,6 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
     if (to.meta.title) {
         document.title = to.meta.title;
-    }
-    console.log(to.fullPath, from.fullPath);
-    if (to.fullPath == from.fullPath) {
-
-        console.log('tag', '')
     }
     if (to.path.indexOf('/admin') == 0) {
         post('/login/check', {}, (data) => {
