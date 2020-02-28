@@ -2,7 +2,7 @@
 基于tp5和vue.js（2.6.10）开发的博客平台
 
 外观是参照我很喜欢的一个typecho主题：Aria 作者：Siphils [作者仓库](https://github.com/Siphils/Typecho-Theme-Aria)
-如有版权问题请联系我
+
 
 
 # 技术栈
@@ -56,7 +56,7 @@
 
 
 # 效果演示
-<!-- [前台预览](http://www.zhangyifei.top) -->
+[个人博客](http://www.zhangyifei.top)
 后台还没调试好 调试完成会放一个公用账号
 
 PS:本来打算两个域名一个是正在使用的blog 一个是这个项目 谁知道管局审核还要20天所以不得已用原先的域名 
