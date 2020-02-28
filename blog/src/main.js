@@ -11,6 +11,10 @@ import {
 // import "./assets/styles/markdown.css"
 // import JQuery from '@/commonFunction/jquery.min.js'
 // import viewClickAnimation from '@/commonFunction/viewClickAnimation.js'
+// const originalPush = router.prototype.push
+// router.prototype.push = function push(location) {
+//     return originalPush.call(this, location).catch(err => err)
+// }
 
 Vue.config.productionTip = false
 Vue.use(ElementUI);

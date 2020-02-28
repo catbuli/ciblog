@@ -55,7 +55,6 @@ export default {
     watch: {
         "$route.fullPath"() {
             this.search();
-            console.log(this.$route.fullPath);
         }
     },
     mounted() {
@@ -68,21 +67,18 @@ export default {
         search() {
             switch (this.$route.query.typeName) {
                 case "keyword":
-                    console.log(this.$route.query.typeName);
                     this.searchMessage =
                         "包含关键字 " + this.$route.query.type + " 的文章";
                     this.paging.typeName = this.$route.query.typeName;
                     this.paging.type = this.$route.query.type;
                     break;
                 case "category":
-                    console.log(this.$route.query.typeName);
                     this.searchMessage =
                         "所属分类为 " + this.$route.query.type + " 的文章";
                     this.paging.typeName = this.$route.query.typeName;
                     this.paging.type = this.$route.query.mid;
                     break;
                 case "tag":
-                    console.log(this.$route.query.typeName);
                     this.searchMessage =
                         "拥有 " + this.$route.query.type + " 标签的文章";
                     this.paging.typeName = this.$route.query.typeName;

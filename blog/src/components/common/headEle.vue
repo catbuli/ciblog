@@ -71,19 +71,20 @@ header {
     z-index: -1;
     position: relative;
     margin-bottom: 50px;
-    animation: show ease-out 1s 1;
+    animation: show 1s ease-out 0.5s 1;
+    animation-fill-mode: forwards;
     display: flex;
     background-position: center center;
     background-repeat: no-repeat;
     justify-content: center; /* 水平居中 */
     align-items: center;
     min-width: 730px;
+    transform: translateY(-100%);
 }
 /* 页头动画 */
 @keyframes show {
     0% {
         opacity: 0;
-        transform: translateY(-100%);
     }
     100% {
         transform: translateY(0%);
