@@ -7,7 +7,7 @@
             <p v-html="searchMessage"></p>
             <p v-html="searchDescription"></p>
         </div>
-        <articleItem :list-data="$store.state.article.articleList"></articleItem>
+        <articleItem :list-data="articleList"></articleItem>
         <paging action="getArticleListAction"
                 align="center"
                 :paging="paging"
@@ -38,6 +38,7 @@ export default {
         return {
             loading: true,
             searchMessage: "",
+            searchDescription: "",
             paging: {
                 pageSize: 5,
                 currentPage: 1,
@@ -48,8 +49,8 @@ export default {
         };
     },
     computed: {
-        searchDescription() {
-            return this.$store.state.global.personalData.description;
+        articleList() {
+            return this.$store.state.article.articleList;
         },
         banner() {
             return this.$store.state.global.system.randomBanner;
@@ -72,10 +73,18 @@ export default {
                 case "keyword":
                     this.searchMessage =
                         "包含关键字 " + this.$route.query.type + " 的文章";
+                    this.searchDescription = this.$store.state.global.personalData.description;
                     this.paging.typeName = this.$route.query.typeName;
                     this.paging.type = this.$route.query.type;
                     break;
                 case "category":
+                    this.$post(
+                        "/category/bymid",
+                        { mid: this.$route.query.mid },
+                        data => {
+                            this.searchDescription = data.data.description;
+                        }
+                    );
                     this.searchMessage =
                         "所属分类为 " + this.$route.query.type + " 的文章";
                     this.paging.typeName = this.$route.query.typeName;
@@ -84,6 +93,7 @@ export default {
                 case "tag":
                     this.searchMessage =
                         "拥有 " + this.$route.query.type + " 标签的文章";
+                    this.searchDescription = this.$store.state.global.personalData.description;
                     this.paging.typeName = this.$route.query.typeName;
                     this.paging.type = this.$route.query.mid;
                     break;
