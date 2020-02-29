@@ -68,7 +68,7 @@ export default {
             loading: true
         };
     },
-    component: {
+    computed: {
         system() {
             return this.$store.state.global.system;
         }
@@ -76,6 +76,7 @@ export default {
     created() {
         this.$store.dispatch("getSystemAciton");
     },
+    mounted() {},
     methods: {
         submit() {
             this.$store.dispatch("updateSystemAciton", this.system);
