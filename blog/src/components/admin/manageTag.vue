@@ -48,7 +48,7 @@ export default {
             tagName: ""
         };
     },
-    component: {
+    computed: {
         tagList() {
             return this.$store.state.tag.tagList;
         }
