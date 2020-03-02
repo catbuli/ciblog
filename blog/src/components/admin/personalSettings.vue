@@ -88,7 +88,7 @@ export default {
             repassword: ""
         };
     },
-    component: {
+    computed: {
         personalData() {
             return this.$store.state.global.personalData;
         }

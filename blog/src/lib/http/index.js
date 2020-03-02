@@ -86,6 +86,7 @@ instance.interceptors.response.use(
                 });
                 localStorage.removeItem('uid');
                 localStorage.removeItem('token');
+                router.push('/login')
                 break;
             }
             // 文章没找到  或者其他页面获取错误 返回404

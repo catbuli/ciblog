@@ -7,6 +7,7 @@ use app\index\model\User;
 use app\index\model\Setup;
 use think\Exception;
 use app\common\Response;
+use app\common\TokenManage;
 use app\index\model\Article;
 use app\index\model\Comment;
 use app\index\model\Meta;
@@ -21,8 +22,10 @@ class Setupc extends Controller
     public function personal()
     {
         try {
+            $header = apache_request_headers();
+            $uid = $header['uid'] ? $header['uid'] : 1;
             $user = new User();
-            return Response::result(201, "成功", "数据获取成功!", $user->getUserById(1));
+            return Response::result(201, "成功", "数据获取成功!", $user->getUserById($uid));
         } catch (Exception $e) {
             return Response::result(400, "请求失败", $e->getMessage());
         }
@@ -36,16 +39,22 @@ class Setupc extends Controller
     public function updatePersonal($data)
     {
         try {
-            $user = new User;
-            $user->save([
-                'mail'  => $data['mail'],
-                'bilibili'  => $data['bilibili'],
-                'github'  => $data['github'],
-                'nickname'  => $data['nickname'],
-                'indexurl'  => $data['indexurl'],
-                'description' => $data['description'],
-            ], ['uid' => 1]);
-            return Response::result(200, "成功", "数据更新成功!");
+            if (TokenManage::checkToken()) {
+                $header = apache_request_headers();
+                $uid = $header['uid'];
+                $user = new User;
+                $user->save([
+                    'mail'  => $data['mail'],
+                    'bilibili'  => $data['bilibili'],
+                    'github'  => $data['github'],
+                    'nickname'  => $data['nickname'],
+                    'indexurl'  => $data['indexurl'],
+                    'description' => $data['description'],
+                ], ['uid' => $uid]);
+                return Response::result(200, "成功", "数据更新成功!");
+            } else {
+                return Response::result(402, "失败", "账号登陆失效！");
+            }
         } catch (Exception $e) {
             return Response::result(400, "请求失败", $e->getMessage());
         }
@@ -58,7 +67,9 @@ class Setupc extends Controller
     public function system()
     {
         try {
-            return Response::result(201, "成功", "数据获取成功!", Setup::get(1));
+            $header = apache_request_headers();
+            $uid = $header['uid'] ? $header['uid'] : 1;
+            return Response::result(201, "成功", "数据获取成功!", Setup::get($uid));
         } catch (Exception $e) {
             return Response::result(400, "请求失败", $e->getMessage());
         }
@@ -72,11 +83,17 @@ class Setupc extends Controller
     public function updateSystem($data)
     {
         try {
-            $setup = new Setup;
-            $setup->save([
-                'banner'  => $data['banner'],
-            ], ['sid' => 1]);
-            return Response::result(200, "成功", "数据更新成功!");
+            if (TokenManage::checkToken()) {
+                $header = apache_request_headers();
+                $uid = $header['uid'];
+                $setup = new Setup;
+                $setup->save([
+                    'banner'  => $data['banner'],
+                ], ['sid' => $uid]);
+                return Response::result(200, "成功", "数据更新成功!");
+            } else {
+                return Response::result(402, "失败", "账号登陆失效！");
+            }
         } catch (Exception $e) {
             return Response::result(400, "请求失败", $e->getMessage());
         }
