@@ -122,8 +122,6 @@ export default {
     },
     data() {
         return {
-            comment: {},
-            commentList: [],
             loading: true,
             selectRows: [],
             isEdit: false,
