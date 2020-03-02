@@ -7,6 +7,7 @@ use app\index\model\User;
 use app\index\model\Setup;
 use think\Exception;
 use app\common\Response;
+use app\common\Session;
 use app\common\TokenManage;
 use app\index\model\Article;
 use app\index\model\Comment;
@@ -38,6 +39,9 @@ class Setupc extends Controller
      */
     public function updatePersonal($data)
     {
+        if (Session::get('uid') == 2) {
+            return Response::result(400, "失败", "该账号没有此操作的权限!", []);
+        }
         try {
             if (TokenManage::checkToken()) {
                 $header = apache_request_headers();
@@ -82,6 +86,9 @@ class Setupc extends Controller
      */
     public function updateSystem($data)
     {
+        if (Session::get('uid') == 2) {
+            return Response::result(400, "失败", "该账号没有此操作的权限!", []);
+        }
         try {
             if (TokenManage::checkToken()) {
                 $header = apache_request_headers();
@@ -116,5 +123,9 @@ class Setupc extends Controller
         } catch (Exception $e) {
             return Response::result(400, "请求失败", $e->getMessage());
         }
+    }
+    public function check()
+    {
+        return Response::result(400, "请求失败", "当前为预览账号，不允许任何数据修改操作");
     }
 }

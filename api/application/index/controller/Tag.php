@@ -7,6 +7,7 @@ use think\Controller;
 use app\index\model\Meta;
 use think\Exception;
 use app\common\Response;
+use app\common\Session;
 
 class Tag extends Controller
 {
@@ -32,6 +33,9 @@ class Tag extends Controller
      */
     public function add($name)
     {
+        if (Session::get('uid') == 2) {
+            return Response::result(400, "失败", "该账号没有此操作的权限!", []);
+        }
         try {
             if (Meta::get(['name' => $name, 'type' => 'tag'])) {
                 return Response::result(400, "失败", "已存在同名标签!");
@@ -59,6 +63,9 @@ class Tag extends Controller
      */
     public function del($mid)
     {
+        if (Session::get('uid') == 2) {
+            return Response::result(400, "失败", "该账号没有此操作的权限!", []);
+        }
         try {
             Meta::destroy($mid);
             ArticleMeta::delMetaByArticle($mid);

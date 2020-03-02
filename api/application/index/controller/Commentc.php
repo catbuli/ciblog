@@ -7,6 +7,7 @@ use app\index\model\Comment;
 use app\index\model\Article;
 use think\Exception;
 use app\common\Response;
+use app\common\Session;
 use think\Db;
 
 class Commentc extends Controller
@@ -57,6 +58,9 @@ class Commentc extends Controller
      */
     public function del($cid)
     {
+        if (Session::get('uid') == 2) {
+            return Response::result(400, "失败", "该账号没有此操作的权限!", []);
+        }
         try {
             Comment::destroy($cid);
             return Response::result(200, "成功", "评论删除成功!");
@@ -72,6 +76,9 @@ class Commentc extends Controller
      */
     public function edit($cid, $content)
     {
+        if (Session::get('uid') == 2) {
+            return Response::result(400, "失败", "该账号没有此操作的权限!", []);
+        }
         try {
             $comment = Comment::get($cid);
             $comment->content = $content;

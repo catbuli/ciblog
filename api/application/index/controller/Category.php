@@ -7,6 +7,7 @@ use app\index\model\Meta;
 use app\index\model\ArticleMeta;
 use think\Exception;
 use app\common\Response;
+use app\common\Session;
 
 class Category extends Controller
 {
@@ -34,6 +35,9 @@ class Category extends Controller
      */
     public function add($name, $description)
     {
+        if (Session::get('uid') == 2) {
+            return Response::result(400, "失败", "该账号没有此操作的权限!", []);
+        }
         try {
             if (Meta::get(['name' => $name, 'type' => 'category'])) {
                 return Response::result(400, "失败", "已存在同名分类!");
@@ -59,6 +63,9 @@ class Category extends Controller
      */
     public function del($mid)
     {
+        if (Session::get('uid') == 2) {
+            return Response::result(400, "失败", "该账号没有此操作的权限!", []);
+        }
         try {
             Meta::destroy($mid);
             foreach ($mid as $value) {
@@ -77,6 +84,9 @@ class Category extends Controller
      */
     public function edit($category)
     {
+        if (Session::get('uid') == 2) {
+            return Response::result(400, "失败", "该账号没有此操作的权限!", []);
+        }
         try {
             $meta  = Meta::get($category['mid']);
             $meta->name = $category['name'];

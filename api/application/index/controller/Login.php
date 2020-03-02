@@ -59,6 +59,9 @@ class Login extends Controller
      */
     public function alterpass($password, $repassword)
     {
+        if (Session::get('uid') == 2) {
+            return Response::result(400, "失败", "该账号没有此操作的权限!", []);
+        }
         try {
             if (TokenManage::checkToken()) {
                 if ($password == $repassword) {

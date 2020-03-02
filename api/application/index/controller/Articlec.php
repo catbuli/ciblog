@@ -8,6 +8,7 @@ use app\index\model\ArticleMeta;
 use app\index\model\Comment;
 use think\Exception;
 use app\common\Response;
+use app\common\Session;
 use think\Db;
 
 class Articlec extends Controller
@@ -44,6 +45,9 @@ class Articlec extends Controller
      */
     public function publish($data)
     {
+        if (Session::get('uid') == 2) {
+            return Response::result(400, "失败", "该账号没有此操作的权限!", []);
+        }
         try {
             if ($data['aid']) {
                 $article = Article::get(-1);
@@ -115,6 +119,9 @@ class Articlec extends Controller
      */
     public function del($aid)
     {
+        if (Session::get('uid') == 2) {
+            return Response::result(400, "失败", "该账号没有此操作的权限!", []);
+        }
         try {
             $article = new Article();
             $article->delArticle($aid);
@@ -183,6 +190,9 @@ class Articlec extends Controller
      */
     public function draft($data)
     {
+        if (Session::get('uid') == 2) {
+            return Response::result(400, "失败", "该账号没有此操作的权限!", []);
+        }
         try {
             $article = new Article();
             if ($data['aid']) {

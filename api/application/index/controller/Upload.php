@@ -4,6 +4,7 @@ namespace app\index\controller;
 
 use think\Controller;
 use app\common\Response;
+use app\common\Session;
 use think\Exception;
 use app\index\model\File;
 
@@ -34,6 +35,9 @@ class Upload extends Controller
      */
     public function add($aid = -1)
     {
+        if (Session::get('uid') == 2) {
+            return Response::result(400, "失败", "该账号没有此操作的权限!", []);
+        }
         try {
             $files = request()->file();
             if (empty($files)) {
@@ -78,6 +82,9 @@ class Upload extends Controller
      */
     public function del($fid)
     {
+        if (Session::get('uid') == 2) {
+            return Response::result(400, "失败", "该账号没有此操作的权限!", []);
+        }
         try {
             foreach ($fid as $value) {
                 $filename = '../api/public/uploads/' . File::get($value)->path;
