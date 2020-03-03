@@ -4,8 +4,7 @@
             <ul>
                 <li>
                     <h4>所有的评论都需要审核</h4>
-                    <el-switch v-model="system.comment_check"
-                               @change="submit">
+                    <el-switch v-model="system.comment_check">
                     </el-switch>
                     <!-- <span class="input-hint">首页banner图片一行一个地址可设置多个,随机更换.</span> -->
                 </li>
@@ -41,10 +40,10 @@
                               v-model="system.mail"></el-input>
                     <span class="input-hint">电子邮箱啦.</span>
                 </li> -->
-                <!-- <li class="input-button">
+                <li class="input-button">
                     <el-button type="primary"
                                @click="submit">保存设置</el-button>
-                </li> -->
+                </li>
             </ul>
         </section>
     </adminFrame>

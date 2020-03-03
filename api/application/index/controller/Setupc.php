@@ -79,7 +79,7 @@ class Setupc extends Controller
         }
     }
     /**
-     * 系统设置更新
+     * 设置更新
      *
      * @param json $data 个人信息数据
      * @return JSON 响应信息
@@ -96,8 +96,9 @@ class Setupc extends Controller
                 $setup = new Setup;
                 $setup->save([
                     'banner'  => $data['banner'],
+                    'comment_check' => $data['comment_check'] == true ? 1 : 0
                 ], ['sid' => $uid]);
-                return Response::result(200, "成功", "数据更新成功!");
+                return Response::result(200, "成功", "设置更新成功!");
             } else {
                 return Response::result(402, "失败", "账号登陆失效！");
             }
