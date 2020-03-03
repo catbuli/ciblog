@@ -104,9 +104,9 @@ const routes = [{
                 }
             },
             {
-                path: '/admin/setup_comment',
-                name: 'setup_comment',
-                component: (resolve) => require(['@/components/admin/setupComment.vue'], resolve),
+                path: '/admin/manage_comment',
+                name: 'manage_comment',
+                component: (resolve) => require(['@/components/admin/manageComment.vue'], resolve),
                 meta: {
                     title: '评论管理'
                 }
@@ -117,6 +117,14 @@ const routes = [{
                 component: (resolve) => require(['@/components/admin/setupSystem.vue'], resolve),
                 meta: {
                     title: '系统设置'
+                }
+            },
+            {
+                path: '/admin/setup_comment',
+                name: 'setup_comment',
+                component: (resolve) => require(['@/components/admin/setupComment.vue'], resolve),
+                meta: {
+                    title: '评论设置'
                 }
             },
             {

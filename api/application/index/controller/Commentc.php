@@ -8,6 +8,7 @@ use app\index\model\Article;
 use think\Exception;
 use app\common\Response;
 use app\common\Session;
+use app\index\model\Setup;
 use think\Db;
 
 class Commentc extends Controller
@@ -121,7 +122,7 @@ class Commentc extends Controller
                     'nickname' => $data["nickname"],
                     'email' => $data["email"],
                     'create_date' => date('Y-m-d H:i:s'),
-                    'status' => 1,
+                    'status' => Setup::get(1)->comment_check == 1 ? 0 : 1,
                     'ip' => $_SERVER['REMOTE_ADDR'],
                     'avatar_url' => $data['avatar_url'],
                     'reply' => empty($data['reply']) ? null : json_encode($data['reply'])
