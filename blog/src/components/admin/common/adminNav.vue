@@ -24,8 +24,8 @@
             <el-submenu index="4">
                 <template slot="title">设置</template>
                 <el-menu-item index="/admin/setup_system">系统设置</el-menu-item>
-                <!-- <el-menu-item index="/admin/comment_settings">评论设置</el-menu-item>
-                <el-menu-item index="/admin/read_settings">阅读设置</el-menu-item> -->
+                <el-menu-item index="/admin/setup_comment">评论设置</el-menu-item>
+                <!-- <el-menu-item index="/admin/read_settings">阅读设置</el-menu-item> -->
             </el-submenu>
             <el-menu-item><a :href="$store.state.global.personalData.indexurl"
                    target="_blank">网站</a></el-menu-item>

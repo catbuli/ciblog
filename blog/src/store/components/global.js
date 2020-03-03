@@ -29,6 +29,7 @@ export default {
     },
     mutations: {
         setSystem(state, data) {
+            //banner处理
             state.system = data;
             state.system.randomBanner = data.banner.split("\n");
             let num = Math.floor(
@@ -36,6 +37,7 @@ export default {
                 state.system.randomBanner.length
             );
             state.system.randomBanner = state.system.randomBanner[num];
+            state.system.comment_check = state.system.comment_check == 1 ? true : false
         },
         isAdmin(state, data) {
             state.isAdmin = data;
