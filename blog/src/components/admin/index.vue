@@ -5,7 +5,7 @@
             <p>
                 <router-link to="/admin/write_article">写文章</router-link>
                 <router-link to="/admin/manage_article">文章管理</router-link>
-                <router-link to="/admin/personal_settings">个人设置</router-link>
+                <router-link to="/admin/setup_personal">个人设置</router-link>
                 <router-link to="/admin/system_settings">系统设置</router-link>
             </p>
         </div>

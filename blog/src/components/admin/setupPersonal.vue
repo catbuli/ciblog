@@ -77,7 +77,7 @@
 <script>
 import adminFrame from "@/components/admin/common/adminFrame.vue";
 export default {
-    name: "personalSettings",
+    name: "setupPersonal",
     components: {
         adminFrame
     },

@@ -48,9 +48,9 @@ const routes = [{
                 }
             },
             {
-                path: '/admin/personal_settings',
-                name: 'personal_settings',
-                component: (resolve) => require(['@/components/admin/personalSettings.vue'], resolve),
+                path: '/admin/setup_personal',
+                name: 'setup_personal',
+                component: (resolve) => require(['@/components/admin/setupPersonal.vue'], resolve),
                 meta: {
                     title: '个人设置'
                 }
