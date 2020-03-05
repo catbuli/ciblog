@@ -121,16 +121,24 @@
                 </el-row>
                 <el-form-item prop="content">
                     <el-input v-model="commentData.content"
+                              id="input"
                               resize="none"
+                              ref="input"
                               type="textarea"
                               placeholder="文明留言哦!"
                               maxlength="200"
                               show-word-limit
                               :rows=5></el-input>
                 </el-form-item>
-                <el-form-item>
-                    <el-button @click="addComment('form')">发送</el-button>
-                </el-form-item>
+                <el-row>
+                    <el-col :span=3>
+                        <QAQ input="input"></QAQ>
+                    </el-col>
+                    <el-col :span=21>
+                        <el-button style="float:right"
+                                   @click="addComment('form')">发送</el-button>
+                    </el-col>
+                </el-row>
             </el-form>
         </div>
         <footEle></footEle>
@@ -143,6 +151,7 @@
 import footEle from "@/components/common/footEle.vue";
 import headEle from "@/components/common/headEle.vue";
 import backTop from "@/components/common/backTop.vue";
+import QAQ from "@/components/miniTools/QAQ.vue";
 import Axios from "axios";
 import Gravatar from "vue-gravatar";
 
@@ -152,7 +161,8 @@ export default {
         headEle,
         footEle,
         backTop,
-        Gravatar
+        Gravatar,
+        QAQ
     },
     data() {
         return {
