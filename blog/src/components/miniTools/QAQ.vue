@@ -2,13 +2,14 @@
     <div id="QAQ">
         <el-popover placement="top-start"
                     trigger="hover"
+                    width=500
                     v-model="visible">
             <span v-for="item in QAQlist"
-                  :key="item.value"
-                  :title="item.title"
+                  :key="item"
+                  :title="item"
                   class="item"
-                  @click="select(item.value)">
-                {{item.value}}
+                  @click="select(item)">
+                {{item}}
             </span>
             <el-button slot="reference">QAQ</el-button>
         </el-popover>
@@ -20,23 +21,23 @@ export default {
     name: "QAQ",
     data() {
         return {
-            visible: false,
-            QAQlist: [
-                { value: "QAQ", title: "第一个图标" },
-                { value: "A", title: "第二个图标" },
-                { value: "B", title: "第二个图标" },
-                { value: "V", title: "第二个图标" },
-                { value: "D", title: "第二个图标" },
-                { value: "Ddd", title: "第二个图标" },
-                { value: "Dddd", title: "第二个图标" },
-                { value: "Ddddd", title: "第二个图标" }
-            ]
+            visible: false
         };
     },
     props: {
         input: {
             type: String,
             required: true
+        }
+    },
+    computed: {
+        QAQlist() {
+            var QAQlist = this.$store.state.global.system.qaq;
+            if (QAQlist) {
+                return QAQlist.split("%");
+            } else {
+                return "正在获取颜文字列表";
+            }
         }
     },
     mounted() {},
@@ -57,6 +58,8 @@ export default {
     padding: 5px;
     border-radius: 5px;
     user-select: none;
+    margin-bottom: 5px;
+    display: inline-block;
 }
 .item + .item {
     margin-left: 5px;

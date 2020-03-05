@@ -6,40 +6,15 @@
                     <h4>所有的评论都需要审核</h4>
                     <el-switch v-model="system.comment_check">
                     </el-switch>
-                    <!-- <span class="input-hint">首页banner图片一行一个地址可设置多个,随机更换.</span> -->
-                </li>
-                <!-- <li>
-                    <h4>主页描述</h4>
-                    <el-input placeholder="请输入内容"
-                              v-model="system.description"></el-input>
-                    <span class="input-hint">
-                        设置显示在主页以及title的描述信息.
-                    </span>
                 </li>
                 <li>
-                    <h4>个人主页地址</h4>
-                    <el-input placeholder="请输入内容"
-                              v-model="system.indexurl"></el-input>
-                    <span class="input-hint">此用户的个人主页地址, 请用 http:// 开头.</span>
+                    <h4>QAQ颜文字设置</h4>
+                    <el-input v-model="system.qaq"
+                              type="textarea"
+                              show-word-limit
+                              :rows=7></el-input>
+                    <span class="input-hint">颜文字表情,'%'分隔.</span>
                 </li>
-                <li>
-                    <h4>哔哩哔哩主页</h4>
-                    <el-input placeholder="请输入内容"
-                              v-model="system.bilibili"></el-input>
-                    <span class="input-hint">bilibili个人主页.</span>
-                </li>
-                <li>
-                    <h4>github主页</h4>
-                    <el-input placeholder="请输入内容"
-                              v-model="system.github"></el-input>
-                    <span class="input-hint">github个人主页.</span>
-                </li>
-                <li>
-                    <h4>电子邮箱</h4>
-                    <el-input placeholder="请输入内容"
-                              v-model="system.mail"></el-input>
-                    <span class="input-hint">电子邮箱啦.</span>
-                </li> -->
                 <li class="input-button">
                     <el-button type="primary"
                                @click="submit">保存设置</el-button>

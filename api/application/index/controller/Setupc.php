@@ -96,7 +96,8 @@ class Setupc extends Controller
                 $setup = new Setup;
                 $setup->save([
                     'banner'  => $data['banner'],
-                    'comment_check' => $data['comment_check'] == true ? 1 : 0
+                    'comment_check' => $data['comment_check'] == true ? 1 : 0,
+                    'qaq' => $data['qaq']
                 ], ['sid' => $uid]);
                 return Response::result(200, "成功", "设置更新成功!");
             } else {
