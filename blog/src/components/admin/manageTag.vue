@@ -118,7 +118,6 @@ li {
     width: 100%;
     font-size: 13px;
     display: inline-block;
-    margin-top: 10px;
     text-align: left;
     color: rgb(255, 136, 0);
 }
