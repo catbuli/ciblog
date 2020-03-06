@@ -52,7 +52,6 @@ class Setupc extends Controller
                     'bilibili'  => $data['bilibili'],
                     'github'  => $data['github'],
                     'nickname'  => $data['nickname'],
-                    'indexurl'  => $data['indexurl'],
                     'description' => $data['description'],
                 ], ['uid' => $uid]);
                 return Response::result(200, "成功", "数据更新成功!");
@@ -97,7 +96,10 @@ class Setupc extends Controller
                 $setup->save([
                     'banner'  => $data['banner'],
                     'comment_check' => $data['comment_check'] == true ? 1 : 0,
-                    'qaq' => $data['qaq']
+                    'qaq' => $data['qaq'],
+                    'web_name' => $data['web_name'],
+                    'web_description' => $data['web_description'],
+                    'web_url' => $data['web_url'],
                 ], ['sid' => $uid]);
                 return Response::result(200, "成功", "设置更新成功!");
             } else {
