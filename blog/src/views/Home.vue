@@ -49,7 +49,7 @@ export default {
         }
     },
     watch: {
-        "$store.state.global.personalData"() {
+        "$store.state.global.system"() {
             this.setTitle();
         }
     },
@@ -60,7 +60,9 @@ export default {
         setTitle() {
             let nickname = this.$store.state.global.system.web_name;
             let description = this.$store.state.global.system.web_description;
-            document.title = nickname + "-" + description;
+            if (nickname && description) {
+                document.title = nickname + "-" + description;
+            }
         }
     },
     created() {
