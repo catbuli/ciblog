@@ -38,6 +38,7 @@ export default {
                 name: this.name,
                 password: this.password
             });
+            this.$store.dispatch("getPersonalDataAction");
             if (!this.$store.state.global.isLogin) {
                 var login = this.$refs.login;
                 login.addEventListener("animationend", function() {

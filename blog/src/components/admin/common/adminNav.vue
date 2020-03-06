@@ -27,10 +27,11 @@
                 <el-menu-item index="/admin/setup_comment">评论设置</el-menu-item>
                 <!-- <el-menu-item index="/admin/read_settings">阅读设置</el-menu-item> -->
             </el-submenu>
-            <el-menu-item><a :href="$store.state.global.personalData.indexurl"
+            <el-menu-item><a :href="$store.state.global.system.web_url"
                    target="_blank">网站</a></el-menu-item>
             <el-menu-item style="right:0;position:absolute"
                           @click="logout">登出</el-menu-item>
+            <el-menu-item style="right:100px;position:absolute;user-select:none">当前账户：{{name}}</el-menu-item>
         </el-menu>
     </nav>
 </template>
@@ -45,6 +46,11 @@ export default {
     },
     components: {},
     mounted() {},
+    computed: {
+        name() {
+            return this.$store.state.global.personalData.name;
+        }
+    },
     watch: {},
     methods: {
         logout() {
