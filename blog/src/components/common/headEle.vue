@@ -4,17 +4,17 @@
              ref="original"
              v-if="isShowInfo">
             <h1 class="name-info"
-                v-html="personalData.nickname"></h1>
+                v-html="system.web_name"></h1>
             <h2 class="description-info"
-                v-html="personalData.description"></h2>
+                v-html="system.web_description"></h2>
         </div>
         <div class="information two"
              ref="copy"
              v-if="isShowInfo">
             <h1 class="name-info"
-                v-html="personalData.nickname"></h1>
+                v-html="system.web_name"></h1>
             <h2 class="description-info"
-                v-html="personalData.description"></h2>
+                v-html="system.web_description"></h2>
         </div>
     </header>
 </template>
@@ -39,8 +39,8 @@ export default {
         }
     },
     computed: {
-        personalData() {
-            return this.$store.state.global.personalData;
+        system() {
+            return this.$store.state.global.system;
         }
     },
     methods: {

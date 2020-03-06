@@ -250,7 +250,7 @@ export default {
             document.title =
                 this.article.title +
                 "-" +
-                this.$store.state.global.personalData.nickname;
+                this.$store.state.global.system.web_name;
             this.loading = false;
         },
         "$store.state.comment.commentList": function() {

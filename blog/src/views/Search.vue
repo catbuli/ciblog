@@ -73,7 +73,7 @@ export default {
                 case "keyword":
                     this.searchMessage =
                         "包含关键字 " + this.$route.query.type + " 的文章";
-                    this.searchDescription = this.$store.state.global.personalData.description;
+                    this.searchDescription = this.$store.state.global.system.web_description;
                     this.paging.typeName = this.$route.query.typeName;
                     this.paging.type = this.$route.query.type;
                     break;
@@ -93,7 +93,7 @@ export default {
                 case "tag":
                     this.searchMessage =
                         "拥有 " + this.$route.query.type + " 标签的文章";
-                    this.searchDescription = this.$store.state.global.personalData.description;
+                    this.searchDescription = this.$store.state.global.system.web_description;
                     this.paging.typeName = this.$route.query.typeName;
                     this.paging.type = this.$route.query.mid;
                     break;

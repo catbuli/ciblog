@@ -58,8 +58,8 @@ export default {
             this.loading = true;
         },
         setTitle() {
-            let nickname = this.$store.state.global.personalData.nickname;
-            let description = this.$store.state.global.personalData.description;
+            let nickname = this.$store.state.global.system.web_name;
+            let description = this.$store.state.global.system.web_description;
             document.title = nickname + "-" + description;
         }
     },

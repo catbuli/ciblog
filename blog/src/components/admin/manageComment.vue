@@ -206,7 +206,7 @@ export default {
             this.comment = {
                 aid: aid,
                 content: "",
-                nickname: this.$store.state.global.personalData.nickname,
+                nickname: this.$store.state.global.system.web_name,
                 email: this.$store.state.global.personalData.mail,
                 reply: {
                     cid: cid,

@@ -110,6 +110,9 @@ export default {
         },
         countList() {
             return this.$store.state.global.countList;
+        },
+        system() {
+            return this.$store.state.global.system;
         }
     },
     methods: {

@@ -12,19 +12,19 @@
                         如果你将此项留空, 将默认使用用户名.</span>
                 </li>
                 <li>
-                    <h4>主页描述</h4>
+                    <h4>个人描述</h4>
                     <el-input placeholder="请输入内容"
                               v-model="personalData.description"></el-input>
                     <span class="input-hint">
-                        设置显示在主页以及title的描述信息.
+                        用于前台显示。
                     </span>
                 </li>
-                <li>
+                <!-- <li>
                     <h4>个人主页地址</h4>
                     <el-input placeholder="请输入内容"
                               v-model="personalData.indexurl"></el-input>
                     <span class="input-hint">此用户的个人主页地址, 请用 http:// 开头.</span>
-                </li>
+                </li> -->
                 <li>
                     <h4>哔哩哔哩主页</h4>
                     <el-input placeholder="请输入内容"

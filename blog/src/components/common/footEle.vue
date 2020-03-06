@@ -1,7 +1,7 @@
 <template>
     <div class="footEle">
         <p class="footer-info">
-            © 2020 • {{this.$store.state.global.personalData.nickname}} • Blog • Test
+            © 2020 • {{this.$store.state.global.system.web_name}} • Blog • Test
         </p>
     </div>
 </template>
