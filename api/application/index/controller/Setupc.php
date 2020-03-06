@@ -53,6 +53,7 @@ class Setupc extends Controller
                     'github'  => $data['github'],
                     'nickname'  => $data['nickname'],
                     'description' => $data['description'],
+                    'imgurl' => $data['imgurl'],
                 ], ['uid' => $uid]);
                 return Response::result(200, "成功", "数据更新成功!");
             } else {

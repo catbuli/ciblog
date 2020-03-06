@@ -5,6 +5,17 @@
         <section>
             <ul>
                 <li>
+                    <el-avatar shape="square"
+                               :size="100"
+                               style="margin-bottom:20px"
+                               :src="imgurl"
+                               :key="imgurl"></el-avatar>
+                    <!-- 博客↑ :key -->
+                    <el-input placeholder="请输入内容"
+                              v-model="personalData.imgurl"></el-input>
+                    <span class="input-hint">头像链接地址。</span>
+                </li>
+                <li>
                     <h4>昵称</h4>
                     <el-input placeholder="请输入内容"
                               v-model="personalData.nickname"></el-input>
@@ -19,12 +30,6 @@
                         用于前台显示。
                     </span>
                 </li>
-                <!-- <li>
-                    <h4>个人主页地址</h4>
-                    <el-input placeholder="请输入内容"
-                              v-model="personalData.indexurl"></el-input>
-                    <span class="input-hint">此用户的个人主页地址, 请用 http:// 开头.</span>
-                </li> -->
                 <li>
                     <h4>哔哩哔哩主页</h4>
                     <el-input placeholder="请输入内容"
@@ -85,7 +90,8 @@ export default {
         return {
             loading: true,
             password: "",
-            repassword: ""
+            repassword: "",
+            imgurl: this.$store.state.global.personalData.imgurl
         };
     },
     computed: {
@@ -99,6 +105,7 @@ export default {
     watch: {
         "$store.state.global.personalData": function() {
             this.loading = false;
+            this.imgurl = this.$store.state.global.personalData.imgurl;
         }
     },
     methods: {
