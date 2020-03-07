@@ -53,7 +53,8 @@
                 </div>
             </div>
         </article>
-        <div class="comments">
+        <div class="comments"
+             ref="comments">
             <span class="response">
                 <p>
                     <i class="el-icon-chat-line-square"> {{commentList.length}} 条评论 </i>
@@ -71,7 +72,7 @@
                         </div>
                         <div class="comment-content">
                             <i class="el-icon-chat-line-square comment-reply"
-                               @click="reply(item)"></i>
+                               @click="reply(item,$event)"></i>
                             <div class="comment-text">
                                 <p class="reply"
                                    v-if="item.reply">
@@ -88,7 +89,8 @@
                 </transition-group>
             </ul>
         </div>
-        <div class="add-comment">
+        <div class="add-comment"
+             ref="commentTop">
             <i class="el-icon-edit-outline title">{{commentMessage}}</i>
             <span class="clear-reply"
                   v-show="isReply"
@@ -172,6 +174,7 @@ export default {
             // commentList: [],
             loading: true,
             isReply: false,
+            anchor: 0,
             commentMessage: "新增评论",
             commentData: {
                 content: "",
@@ -282,12 +285,20 @@ export default {
                 if (valid) {
                     this.commentData.aid = this.$route.params.id;
                     this.$store.dispatch("addCommentAction", this.commentData);
+                    if (!this.isReply) {
+                        this.anchor = this.$refs.comments.offsetTop - 30;
+                    }
+                    scrollTo(0, this.anchor);
                 } else {
                     return false;
                 }
             });
         },
-        reply(data) {
+        reply(data, node) {
+            console.log(node);
+            this.anchor = node.pageY - 20;
+            console.log(this.anchor);
+            scrollTo(0, this.$refs.commentTop.offsetTop);
             this.isReply = true;
             this.commentMessage = "回复 " + data.nickname;
             this.commentData.reply = {
