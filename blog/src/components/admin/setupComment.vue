@@ -12,6 +12,7 @@
                     <el-input v-model="system.qaq"
                               type="textarea"
                               show-word-limit
+                              @keydown.enter.native="submit"
                               :rows=7></el-input>
                     <span class="input-hint">颜文字表情,'%'分隔.</span>
                 </li>

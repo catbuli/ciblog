@@ -5,12 +5,14 @@
                 <li>
                     <h4>站点名称</h4>
                     <el-input placeholder="请输入内容"
+                              @keydown.enter.native="submit"
                               v-model="system.web_name"></el-input>
                     <span class="input-hint">站点描述，用于前台显示。</span>
                 </li>
                 <li>
                     <h4>站点地址</h4>
                     <el-input placeholder="请输入内容"
+                              @keydown.enter.native="submit"
                               v-model="system.web_url"></el-input>
                     <span class="input-hint">
                         站点地址
@@ -19,6 +21,7 @@
                 <li>
                     <h4>站点描述</h4>
                     <el-input placeholder="请输入内容"
+                              @keydown.enter.native="submit"
                               v-model="system.web_description"></el-input>
                     <span class="input-hint">站点描述，用于前台显示</span>
                 </li>
@@ -27,6 +30,7 @@
                     <el-input v-model="system.banner"
                               type="textarea"
                               show-word-limit
+                              @keydown.enter.native="submit"
                               :rows=7></el-input>
                     <span class="input-hint">首页banner图片一行一个地址可设置多个,随机更换.</span>
                 </li>

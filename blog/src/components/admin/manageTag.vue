@@ -22,7 +22,8 @@
                     <li>
                         <h4>标签名称<sup style="color:red">*</sup></h4>
                         <el-input placeholder="请输入内容"
-                                  v-model="tagName"></el-input>
+                                  v-model="tagName"
+                                  @keydown.enter.native="addTag"></el-input>
                         <span class="input-hint">标签名称</span>
                     </li>
                     <li class="input-button">
