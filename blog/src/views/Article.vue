@@ -89,7 +89,10 @@
             </ul>
         </div>
         <div class="add-comment">
-            <i class="el-icon-edit-outline title">新增评论</i>
+            <i class="el-icon-edit-outline title">{{commentMessage}}</i>
+            <span class="clear-reply"
+                  v-show="isReply"
+                  @click="clearReply">取消</span>
             <el-form ref="form"
                      :model="commentData"
                      :rules="rules"
@@ -168,6 +171,8 @@ export default {
         return {
             // commentList: [],
             loading: true,
+            isReply: false,
+            commentMessage: "新增评论",
             commentData: {
                 content: "",
                 nickname: "",
@@ -256,6 +261,7 @@ export default {
         "$store.state.comment.commentList": function() {
             this.commentData.content = "";
             this.loading = false;
+            this.clearReply();
         },
         $route: function(to, form) {
             // this.$store.commit("REFRESH", form.path);
@@ -282,10 +288,17 @@ export default {
             });
         },
         reply(data) {
+            this.isReply = true;
+            this.commentMessage = "回复 " + data.nickname;
             this.commentData.reply = {
                 cid: data.cid,
                 nickname: data.nickname
             };
+        },
+        clearReply() {
+            this.isReply = false;
+            this.commentMessage = "新增评论";
+            this.commentData.reply = {};
         },
         jump(aid) {
             this.$router.push({
@@ -534,6 +547,11 @@ export default {
     width: 700px;
     padding: 15px;
     text-align: left;
+}
+.clear-reply {
+    cursor: pointer;
+    float: right;
+    padding: 5px;
 }
 .add-comment .title {
     font-size: 22px;
