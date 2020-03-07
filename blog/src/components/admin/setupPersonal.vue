@@ -12,6 +12,7 @@
                                :key="imgurl"></el-avatar>
                     <!-- 博客↑ :key -->
                     <el-input placeholder="请输入内容"
+                              @keydown.enter.native="submit"
                               v-model="personalData.imgurl"></el-input>
                     <span class="input-hint">头像链接地址。</span>
                 </li>
