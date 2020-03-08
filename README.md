@@ -6,7 +6,7 @@
 
 
 # 技术栈
-前端：vue2+vuex+vue-router+webpack+ES6/7+element-ui
+前端：vue2+vuex+vue-router+webpack+ES6/7+element-ui+less
 后端：tp5
 
 # 主要功能

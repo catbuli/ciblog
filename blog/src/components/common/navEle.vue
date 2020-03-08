@@ -186,7 +186,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 /* 侧边栏 */
 #nav {
     /* overflow: hidden; */
@@ -262,59 +262,54 @@ export default {
 /* 信息栏 */
 .intro {
     width: 100%;
-    margin-top: 100px;
+    margin-top: 80px;
+    a {
+        display: inline-block;
+        text-decoration: none;
+        color: white;
+    }
+    p {
+        font-size: 18px;
+    }
 }
 
-.intro a {
-    display: inline-block;
-    text-decoration: none;
-    color: white;
+.head-portrait {
+    .nickname {
+        margin-top: 10px;
+        color: rgb(255, 255, 255);
+    }
+    .description {
+        margin-top: 10px;
+        padding: 10px;
+        font-size: 0.8rem;
+        color: rgb(180, 180, 180);
+    }
+    img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        transition: all 1s ease 0s;
+    }
+    img:hover {
+        transform: rotate(360deg);
+    }
 }
 
-.intro p {
-    font-size: 18px;
-}
-
-/* .head-portrait {
-    position: relative;
-    top: 30%;
-} */
-.head-portrait .nickname {
-    margin-top: 10px;
-    color: rgb(255, 255, 255);
-}
-.head-portrait .description {
-    margin-top: 10px;
-    padding: 10px;
-    font-size: 0.8rem;
-    color: rgb(180, 180, 180);
-}
-.head-portrait img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    transition: all 1s ease 0s;
-}
-
-.head-portrait img:hover {
-    transform: rotate(360deg);
-}
 /* 统计数据 */
 .count {
     color: rgb(204, 204, 204);
     width: 70%;
     margin: 30px auto 0;
-}
-
-.count ul {
-    display: flex;
-}
-.count ul li {
-    font-size: 1rem;
-    flex: 1;
-}
-.count ul li + li {
-    border-left: 1px rgb(112, 112, 112) solid;
+    ul {
+        display: flex;
+    }
+    ul li {
+        font-size: 1rem;
+        flex: 1;
+    }
+    ul li + li {
+        border-left: 1px rgb(112, 112, 112) solid;
+    }
 }
 
 /* 平台 */
@@ -322,57 +317,57 @@ export default {
     color: rgb(204, 204, 204);
     width: 80%;
     margin: 30px auto 0;
-}
-.platform a {
-    border: 1px rgb(87, 87, 87) solid;
-    border-radius: 5px;
-    padding: 5px;
-    font-size: 0.9rem;
-}
-.platform ul {
-    display: flex;
-}
-.platform ul li {
-    flex: 1;
+    a {
+        border: 1px rgb(87, 87, 87) solid;
+        border-radius: 5px;
+        padding: 5px;
+        font-size: 0.9rem;
+    }
+    ul {
+        display: flex;
+        li {
+            flex: 1;
+        }
+    }
 }
 
 /* 最新 */
 .recommendation {
     margin: 20px auto 0;
     width: 75%;
-}
-.recommendation .title {
-    color: white;
-    position: relative;
-    z-index: 10;
-}
-.recommendation .title p {
-    color: white;
-    display: inline-block;
-    background-color: rgb(53, 53, 53);
-    padding: 0 10px;
-}
-.recommendation .title:after {
-    content: "";
-    display: block;
-    border-bottom: solid 1px white;
-    width: 100%;
-    position: absolute;
-    top: 12px;
-    z-index: -1;
-}
-.recommendation ul a {
-    display: block;
-    margin-top: 5px;
-    cursor: pointer;
-    font-size: 0.8rem;
-    color: white;
-    text-align: left;
-}
-.recommendation ul a span {
-    float: right;
-    font-size: 0.8rem;
-    color: white;
+    .title {
+        color: white;
+        position: relative;
+        z-index: 10;
+        p {
+            color: white;
+            display: inline-block;
+            background-color: rgb(53, 53, 53);
+            padding: 0 10px;
+        }
+    }
+    .title:after {
+        content: "";
+        display: block;
+        border-bottom: solid 1px white;
+        width: 100%;
+        position: absolute;
+        top: 12px;
+        z-index: -1;
+    }
+    ul a {
+        cursor: pointer;
+        display: block;
+        margin-top: 5px;
+        font-size: 0.8rem;
+        color: white;
+        text-align: left;
+        span {
+            float: right;
+            font-size: 0.8rem;
+            color: white;
+        }
+    }
 }
 
 /* 搜索 */
