@@ -295,9 +295,7 @@ export default {
             });
         },
         reply(data, node) {
-            console.log(node);
             this.anchor = node.pageY - 20;
-            console.log(this.anchor);
             scrollTo(0, this.$refs.commentTop.offsetTop);
             this.isReply = true;
             this.commentMessage = "回复 " + data.nickname;

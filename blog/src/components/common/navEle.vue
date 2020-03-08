@@ -61,7 +61,7 @@
                     <a v-for="item in articleList"
                        :key="item.aid"
                        @click="$router.push('/article/'+item.aid)">
-                        <li>{{item.title}}<span>{{item.create_date.split(' ')[0].split('-')[1]+'-'+item.create_date.split(' ')[0].split('-')[2]}}</span></li>
+                        <li>{{item.title}}<span>{{item.create_date|handleDate}}</span></li>
                     </a>
                 </ul>
             </div>
@@ -82,10 +82,10 @@ export default {
             github: String,
             email: String,
             paging: {
-                pageSize: 10,
+                pageSize: 5,
                 currentPage: 1,
                 type: -1,
-                typeName: "all",
+                typeName: "hot",
                 total: 0
             },
             articleList: this.$store.state.article.articleList
@@ -102,6 +102,15 @@ export default {
         "$store.state.global.isShowLeftNav": function() {
             var backTopEl = document.getElementById("button-nav");
             backTopEl.classList.toggle("active");
+        }
+    },
+    filters: {
+        handleDate(value) {
+            return (
+                value.split(" ")[0].split("-")[1] +
+                "-" +
+                value.split(" ")[0].split("-")[2]
+            );
         }
     },
     computed: {
