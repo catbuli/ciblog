@@ -56,9 +56,24 @@
             <div class="search">
                 <searchTool></searchTool>
             </div>
-            <div class="new">
+            <div class="recommendation">
+                <div class="title">
+                    <p>Hot</p>
+                </div>
                 <ul>
-                    <a v-for="item in articleList"
+                    <a v-for="item in hotList"
+                       :key="item.aid"
+                       @click="$router.push('/article/'+item.aid)">
+                        <li>{{item.title}}<span>{{item.create_date|handleDate}}</span></li>
+                    </a>
+                </ul>
+            </div>
+            <div class="recommendation">
+                <div class="title">
+                    <p>New</p>
+                </div>
+                <ul>
+                    <a v-for="item in newList"
                        :key="item.aid"
                        @click="$router.push('/article/'+item.aid)">
                         <li>{{item.title}}<span>{{item.create_date|handleDate}}</span></li>
@@ -84,11 +99,12 @@ export default {
             paging: {
                 pageSize: 5,
                 currentPage: 1,
-                type: -1,
+                type: 0,
                 typeName: "hot",
                 total: 0
             },
-            articleList: this.$store.state.article.articleList
+            hotList: [],
+            newList: []
         };
     },
     components: {
@@ -134,24 +150,31 @@ export default {
             }
         },
         handleScroll(e) {
-            // var backTopEl = document.getElementById('back-top');
             var scrollTop =
                 document.documentElement.scrollTop || document.body.scrollTop;
             if (scrollTop >= 400) {
                 this.$store.commit("handleLeftNav", false);
             }
-            // else if (scrollTop === 0) {
-            //     this.$store.commit("handleLeftNav", true);
-            // }
         },
-        getArticleList() {
-            this.$post("/articlec", { paging: this.paging }, data => {
-                this.articleList = data.data;
+        getHotList() {
+            let copy = JSON.parse(JSON.stringify(this.paging));
+            copy.typeName = "hot";
+            this.$post("/articlec", { paging: copy }, data => {
+                this.hotList = data.data;
+            });
+        },
+        getNewList() {
+            let copy = JSON.parse(JSON.stringify(this.paging));
+            copy.typeName = "all";
+            this.$post("/articlec", { paging: copy }, data => {
+                this.newList = data.data;
             });
         }
+        // 博客↑
     },
     created() {
-        this.getArticleList();
+        this.getHotList();
+        this.getNewList();
         this.$store.dispatch("getCountAction");
         this.$store.dispatch("getSystemAciton");
         this.$store.dispatch("getPersonalDataAction");
@@ -314,11 +337,31 @@ export default {
 }
 
 /* 最新 */
-.new {
+.recommendation {
     margin: 20px auto 0;
     width: 75%;
 }
-.new ul a {
+.recommendation .title {
+    color: white;
+    position: relative;
+    z-index: 10;
+}
+.recommendation .title p {
+    color: white;
+    display: inline-block;
+    background-color: rgb(53, 53, 53);
+    padding: 0 10px;
+}
+.recommendation .title:after {
+    content: "";
+    display: block;
+    border-bottom: solid 1px white;
+    width: 100%;
+    position: absolute;
+    top: 12px;
+    z-index: -1;
+}
+.recommendation ul a {
     display: block;
     margin-top: 5px;
     cursor: pointer;
@@ -326,7 +369,7 @@ export default {
     color: white;
     text-align: left;
 }
-.new ul a span {
+.recommendation ul a span {
     float: right;
     font-size: 0.8rem;
     color: white;
