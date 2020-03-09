@@ -31,7 +31,8 @@
                    target="_blank">网站</a></el-menu-item>
             <el-menu-item style="right:0;position:absolute"
                           @click="logout">登出</el-menu-item>
-            <el-menu-item style="right:100px;position:absolute;user-select:none">当前账户：{{name}}</el-menu-item>
+            <el-menu-item index="/admin/setup_personal"
+                          style="right:100px;position:absolute;user-select:none">当前账户：{{name}}</el-menu-item>
         </el-menu>
     </nav>
 </template>

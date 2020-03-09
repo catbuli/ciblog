@@ -7,6 +7,7 @@
         <div id="mian"
              :class="[$store.state.global.isShowLeftNav ? '' : 'handle-main']"
              :style="{height:$store.state.global.isAdmin?'100%':''}">
+            <toolbox></toolbox>
             <transition name="fade"
                         @enter="beforeEnter">
                 <!-- @before-leave="beforeEnter"> -->
@@ -21,6 +22,7 @@
 <script>
 import adminNav from "@/components/admin/common/adminNav.vue";
 import navEle from "@/components/common/navEle.vue";
+import toolbox from "@/components/miniTools/toolbox.vue";
 export default {
     name: "app",
     data() {
@@ -33,7 +35,8 @@ export default {
     },
     components: {
         navEle,
-        adminNav
+        adminNav,
+        toolbox
     },
     methods: {
         checkRouter() {
