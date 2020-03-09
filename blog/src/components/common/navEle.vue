@@ -42,14 +42,23 @@
                 <ul>
                     <li>
                         <a :href="personalData.github"
-                           target="_blank">github+</a>
+                           target="_blank">
+                            <img src="@/assets/images/github.png"
+                                 alt="github">
+                        </a>
                     </li>
                     <li>
                         <a target="_blank"
-                           :href="personalData.bilibili">bilibili+</a>
+                           :href="personalData.bilibili">
+                            <img src="@/assets/images/bilibili.png"
+                                 alt="bilibili">
+                        </a>
                     </li>
                     <li>
-                        <a :href="'mailto:'+personalData.mail">email+</a>
+                        <a :href="'mailto:'+personalData.mail">
+                            <img src="@/assets/images/mail.png"
+                                 alt="mail">
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -316,17 +325,29 @@ export default {
 .platform {
     color: rgb(204, 204, 204);
     width: 80%;
-    margin: 30px auto 0;
+    margin: 20px auto 0;
     a {
-        border: 1px rgb(87, 87, 87) solid;
+        // border: 1px rgb(87, 87, 87) solid;
         border-radius: 5px;
         padding: 5px;
         font-size: 0.9rem;
+        height: 40px;
+        width: 40px;
     }
     ul {
         display: flex;
         li {
             flex: 1;
+            img {
+                height: 100%;
+                width: 100%;
+            }
+        }
+        li:nth-of-type(3) {
+            img {
+                height: 80%;
+                transform: translateY(20%);
+            }
         }
     }
 }
