@@ -63,9 +63,8 @@
 
 [项目后台预览](http://ciblog.zhangyifei.top/admin)  
 
-后台还没调试好 暂时只有前台 调试完成会放一个公用账号
+后台账号:testadmin  密码:admin
 
-PS:我这个服务器是学生优惠 带宽只有1Mbps 虽然项目已经进行优化过了 但访问还是有些慢
 
 # 项目结构
 
