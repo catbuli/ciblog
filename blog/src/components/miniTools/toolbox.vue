@@ -5,6 +5,8 @@
          @mousedown="mousedown"
          @mouseup="mouseup">
         <router-link to="/">返回首页</router-link>
+        <a @click="$router.back()">返回</a>
+        <a @click="$router.back(1)">前进</a>
     </div>
 </template>
 
@@ -16,7 +18,9 @@ export default {
             isDrop: false,
             offsetX: 0,
             offsetX: 0,
-            isShow: false
+            isShow: false,
+            body: {},
+            DOM: {}
         };
     },
     computed: {
@@ -28,21 +32,36 @@ export default {
     },
     methods: {
         mousedown(e) {
-            var toolbox = this.$refs.toolbox;
+            this.DOM = this.$refs.toolbox;
+            this.body = document.body;
             this.isDrop = true;
             this.offsetX = e.offsetX;
             this.offsetY = e.offsetY;
             document.addEventListener("mousemove", this.mousemove, true);
         },
         mousemove(e) {
-            var toolbox = this.$refs.toolbox;
+            // console.log(body.offsetWidth);
+            // console.log(toolbox.offsetLeft);
+            // console.log(rightFlag);
             var x = e.clientX - this.offsetX;
             var y = e.clientY - this.offsetY;
-            if (!this.isDrop) {
-                return;
+            var rightLimit = this.body.offsetWidth - this.DOM.offsetWidth;
+            var bottomLimit = this.body.offsetHeight - this.DOM.offsetHeight;
+            if (!this.isDrop) return;
+            if (x <= 0) {
+                this.DOM.style.left = 0 + "px";
+            } else if (x >= rightLimit) {
+                this.DOM.style.left = rightLimit + "px";
+            } else {
+                this.DOM.style.left = x + "px";
             }
-            toolbox.style.left = x + "px";
-            toolbox.style.top = y + "px";
+            if (y <= 0) {
+                this.DOM.style.top = 0 + "px";
+            } else if (y >= bottomLimit) {
+                this.DOM.style.top = bottomLimit + "px";
+            } else {
+                this.DOM.style.top = y + "px";
+            }
         },
         mouseup() {
             this.isDrop = false;
@@ -69,6 +88,7 @@ export default {
 
 <style lang="less" scoped>
 #toolbox {
+    user-select: none;
     z-index: 100;
     background-color: #353535;
     border-radius: 10px;
