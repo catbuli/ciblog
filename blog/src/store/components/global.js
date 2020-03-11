@@ -6,6 +6,7 @@ import router from '@/lib/router'
 export default {
     state: {
         personalData: {},
+        headerDOM: {},
         system: {},
         isAdmin: true,
         isShowLeftNav: true,
@@ -71,6 +72,9 @@ export default {
         },
         setPaging(state, data) {
             state.paging = data;
+        },
+        setHeaderDOM(state, data) {
+            state.headerDOM = data;
         }
     },
     actions: {

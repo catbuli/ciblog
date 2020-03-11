@@ -4,6 +4,7 @@
          :class="[isShow?'':'hidden']"
          @mousedown="mousedown"
          @mouseup="mouseup">
+        <router-link to="/">返回首页</router-link>
     </div>
 </template>
 
@@ -17,6 +18,13 @@ export default {
             offsetX: 0,
             isShow: false
         };
+    },
+    computed: {
+        header() {
+            return this.$store.state.global.headerDOM
+                ? this.$store.state.global.headerDOM
+                : 800;
+        }
     },
     methods: {
         mousedown(e) {
@@ -43,7 +51,7 @@ export default {
         handleScroll(e) {
             var scrollTop =
                 document.documentElement.scrollTop || document.body.scrollTop;
-            if (scrollTop >= 800) {
+            if (scrollTop >= this.header) {
                 this.isShow = true;
             } else {
                 this.isShow = false;
@@ -62,13 +70,15 @@ export default {
 <style lang="less" scoped>
 #toolbox {
     z-index: 100;
-    background: forestgreen;
+    background-color: #353535;
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px rgb(138, 138, 138);
     width: 100px;
-    height: 100px;
+    height: 150px;
     display: inline-block;
     position: fixed;
     left: 300px;
-    top: 200px;
+    bottom: 150px;
 }
 .hidden {
     display: none !important;

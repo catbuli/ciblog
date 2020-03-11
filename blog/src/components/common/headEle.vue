@@ -1,5 +1,6 @@
 <template>
-    <header :style="{height:height,backgroundImage:backgroundImage}">
+    <header :style="{height:height,backgroundImage:backgroundImage}"
+            ref="header">
         <div class="information one"
              ref="original"
              v-if="isShowInfo">
@@ -58,10 +59,14 @@ export default {
             } else {
                 return;
             }
+        },
+        getDOM() {
+            this.$store.commit("setHeaderDOM", this.$refs.header.offsetHeight);
         }
     },
     mounted() {
         this.handleAnimation();
+        this.getDOM();
     }
 };
 </script>

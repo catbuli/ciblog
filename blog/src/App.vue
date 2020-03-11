@@ -7,7 +7,6 @@
         <div id="mian"
              :class="[$store.state.global.isShowLeftNav ? '' : 'handle-main']"
              :style="{height:$store.state.global.isAdmin?'100%':''}">
-            <toolbox></toolbox>
             <transition name="fade"
                         @enter="beforeEnter">
                 <!-- @before-leave="beforeEnter"> -->
@@ -15,6 +14,7 @@
                 <router-view />
                 <!-- 博客 ↑ :key="$route.path" -->
             </transition>
+            <toolbox></toolbox>
         </div>
     </div>
 </template>
