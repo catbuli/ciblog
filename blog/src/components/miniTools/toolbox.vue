@@ -1,6 +1,7 @@
 <template>
     <div id="toolbox"
          ref="toolbox"
+         :class="[isShow?'':'hidden']"
          @mousedown="mousedown"
          @mouseup="mouseup">
     </div>
@@ -13,7 +14,8 @@ export default {
         return {
             isDrop: false,
             offsetX: 0,
-            offsetX: 0
+            offsetX: 0,
+            isShow: false
         };
     },
     methods: {
@@ -37,9 +39,23 @@ export default {
         mouseup() {
             this.isDrop = false;
             document.removeEventListener("mousemove", this.mousemove, true);
+        },
+        handleScroll(e) {
+            var scrollTop =
+                document.documentElement.scrollTop || document.body.scrollTop;
+            if (scrollTop >= 800) {
+                this.isShow = true;
+            } else {
+                this.isShow = false;
+            }
         }
     },
-    mounted() {}
+    mounted() {
+        window.addEventListener("scroll", this.handleScroll, true);
+    },
+    destroyed() {
+        window.removeEventListener("scroll", this.handleScroll, true);
+    }
 };
 </script>
 
@@ -52,5 +68,9 @@ export default {
     display: inline-block;
     position: fixed;
     left: 300px;
+    top: 200px;
+}
+.hidden {
+    display: none !important;
 }
 </style>
