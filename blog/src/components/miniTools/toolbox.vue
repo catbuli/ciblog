@@ -22,8 +22,8 @@ export default {
     data() {
         return {
             isDrop: false,
-            offsetX: 0,
-            offsetX: 0,
+            layerX: 0,
+            layerY: 0,
             isShow: false,
             body: {},
             DOM: {}
@@ -54,21 +54,22 @@ export default {
             this.$store.dispatch("getCategoryListAction");
         },
         mousedown(e) {
-            console.log(e.currentTarget === e.target);
-            console.log(e);
+            // console.log(e.currentTarget === e.target);
+            // console.log(e);
             this.DOM = this.$refs.toolbox;
             this.body = document.body;
             this.isDrop = true;
-            this.offsetX = e.layerX;
-            this.offsetY = e.layerY;
+            this.layerX = e.layerX;
+            this.layerY = e.layerY;
+            // 博客↑
             document.addEventListener("mousemove", this.mousemove);
         },
         mousemove(e) {
             // console.log(body.offsetWidth);
             // console.log(toolbox.offsetLeft);
             // console.log(rightFlag);
-            var x = e.clientX - this.offsetX;
-            var y = e.clientY - this.offsetY;
+            var x = e.clientX - this.layerX;
+            var y = e.clientY - this.layerY + 30;
             var rightLimit = this.body.offsetWidth - this.DOM.offsetWidth;
             var bottomLimit = this.body.offsetHeight - this.DOM.offsetHeight;
             if (!this.isDrop) return;
@@ -79,8 +80,8 @@ export default {
             } else {
                 this.DOM.style.left = x + "px";
             }
-            if (y <= 0) {
-                this.DOM.style.top = 0 + "px";
+            if (y <= 30) {
+                this.DOM.style.top = 30 + "px";
             } else if (y >= bottomLimit) {
                 this.DOM.style.top = bottomLimit + "px";
             } else {
@@ -125,10 +126,10 @@ export default {
     left: 300px;
     bottom: 150px;
     .drag-bar {
-        opacity: 1;
+        opacity: 0;
         width: 100%;
         height: 30px;
-        // position: absolute;
+        position: absolute;
         top: -30px;
         left: 0;
         text-align: center;
@@ -145,6 +146,9 @@ export default {
         color: white;
         cursor: pointer;
     }
+}
+#toolbox:hover .drag-bar {
+    opacity: 1;
 }
 .hidden {
     display: none !important;
