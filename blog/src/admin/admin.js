@@ -1,10 +1,10 @@
 import Vue from 'vue'
-import App from '@/App.vue'
-import router from '@/lib/router'
+import admin from '@/admin/admin.vue'
+import router from '@/admin/router'
 import store from '@/store'
 import ElementUI from 'element-ui';
 import "element-ui/lib/theme-chalk/index.css";
-import "./assets/styles/iconfont/iconfont.css";
+import "@/assets/styles/iconfont/iconfont.css";
 import {
     post
 } from '@/lib/http'
@@ -19,11 +19,11 @@ import {
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.prototype.$post = post;
-console.log('当前为index应用', '')
+console.log('当前为admin应用', '')
 console.log(process.env.VUE_APP_URL);
 console.log(process.env.VUE_APP_MESSAGE);
 new Vue({
     router,
     store,
-    render: h => h(App)
-}).$mount('#app')
+    render: h => h(admin)
+}).$mount('#admin')

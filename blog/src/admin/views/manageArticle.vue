@@ -106,7 +106,7 @@
 </template>
 
 <script>
-import adminFrame from "@/components/admin/common/adminFrame.vue";
+import adminFrame from "@/admin/components/common/adminFrame.vue";
 import paging from "@/components/common/paging.vue";
 export default {
     name: "manageArticle",

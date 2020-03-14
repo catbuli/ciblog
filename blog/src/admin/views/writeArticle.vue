@@ -92,7 +92,7 @@
 
 <script>
 import adminTitle from "@/components/admin/common/adminTitle.vue";
-import adminFrame from "@/components/admin/common/adminFrame.vue";
+import adminFrame from "@/admin/components/common/adminFrame.vue";
 import upload from "@/components/admin/common/upload.vue";
 import { post } from "@/lib/http";
 import { mavonEditor } from "mavon-editor";

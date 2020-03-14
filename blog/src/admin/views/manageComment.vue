@@ -110,7 +110,7 @@
 </template>
 
 <script>
-import adminFrame from "@/components/admin/common/adminFrame.vue";
+import adminFrame from "@/admin/components/common/adminFrame.vue";
 import paging from "@/components/common/paging.vue";
 import Gravatar from "vue-gravatar";
 export default {

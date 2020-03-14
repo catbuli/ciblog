@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import adminFrame from "@/components/admin/common/adminFrame.vue";
+import adminFrame from "@/admin/components/common/adminFrame.vue";
 export default {
     name: "addCategory",
     components: {
