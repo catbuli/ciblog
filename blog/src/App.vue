@@ -14,7 +14,7 @@
                 <router-view />
                 <!-- 博客 ↑ :key="$route.path" -->
             </transition>
-            <toolbox v-if="$store.state.global.isAdmin"></toolbox>
+            <!-- <toolbox v-if="$store.state.global.isAdmin"></toolbox> -->
         </div>
     </div>
 </template>
