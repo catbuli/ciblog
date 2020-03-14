@@ -78,6 +78,12 @@ class Article extends Model
                     ->whereOr('text', 'like', '%' . $type . '%')
                     ->select());
                 break;
+            case 'category':
+                $count = count(Db::name('article_meta')->where("mid", $typeName)->where("type", "category")->select());
+                break;
+            case 'tag':
+                $count = count(Db::name('article_meta')->where("mid", $typeName)->where("type", "category")->select());
+                break;
             case 'status':
                 // if ($value == -1) {
                 //     $count = count(Article::all());
