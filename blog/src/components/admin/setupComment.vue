@@ -3,6 +3,11 @@
         <section :loading="loading">
             <ul>
                 <li>
+                    <h4>是否允许评论</h4>
+                    <el-switch v-model="system.comment_is_allow">
+                    </el-switch>
+                </li>
+                <li>
                     <h4>所有的评论都需要审核</h4>
                     <el-switch v-model="system.comment_check">
                     </el-switch>

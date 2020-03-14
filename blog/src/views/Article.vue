@@ -90,6 +90,7 @@
             </ul>
         </div>
         <div class="add-comment"
+             v-if="$store.state.global.system.comment_is_allow"
              ref="commentTop">
             <i class="el-icon-edit-outline title">{{commentMessage}}</i>
             <span class="clear-reply"
@@ -145,6 +146,10 @@
                     </el-col>
                 </el-row>
             </el-form>
+        </div>
+        <div class="message"
+             v-else>
+            <p>评论功能已关闭</p>
         </div>
         <footEle></footEle>
         <backTop></backTop>
@@ -581,6 +586,17 @@ export default {
 }
 .category + .category::before {
     content: " • ";
+}
+/* 评论功能提示信息 */
+.message {
+    height: 100px;
+    width: 700px;
+    margin: 0 auto;
+}
+.message p {
+    text-align: center;
+    position: relative;
+    top: 30px;
 }
 /* 评论新增动画 */
 .comment-enter {

@@ -39,6 +39,7 @@ export default {
             );
             state.system.randomBanner = state.system.randomBanner[num];
             state.system.comment_check = state.system.comment_check == 1 ? true : false
+            state.system.comment_is_allow = state.system.comment_is_allow == 1 ? true : false
         },
         isAdmin(state, data) {
             state.isAdmin = data;
