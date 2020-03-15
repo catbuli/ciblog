@@ -14,6 +14,7 @@ export default {
             nickname: ""
         };
     },
+    created() {},
     mounted() {},
     methods: {}
 };

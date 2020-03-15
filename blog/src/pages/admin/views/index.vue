@@ -69,6 +69,10 @@ export default {
             return this.$store.state.comment.commentList;
         }
     },
+    created() {
+        this.$store.dispatch("getPersonalDataAction");
+        this.$store.dispatch("getSystemAciton");
+    },
     mounted() {
         this.getData();
         this.getArticleList();

@@ -1,8 +1,8 @@
 import {
     post
 } from '@/lib/http'
-import router from '@/index/router'
-import adminRouter from '@/admin/router.js'
+import router from '@/pages/index/router'
+import adminRouter from '@/pages/admin/router.js'
 
 export default {
     state: {
