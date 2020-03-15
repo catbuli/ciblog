@@ -8,6 +8,9 @@
 后端：tp5
 
 # 主要功能
+
+[开发状态](http://www.zhangyifei.top/archives/97/) 
+
 - [ ] 前台
     - [x] 侧边导航栏
     - [x] banner随机轮换
@@ -65,7 +68,8 @@
 
 [项目前台预览](http://ciblog.zhangyifei.top/)  
 
-[项目后台预览](http://ciblog.zhangyifei.top/admin)  
+[项目后台预览](http://ciblog.zhangyifei.top/admin.html)  
+ 
 
 后台账号:testadmin  密码:admin
 
