@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import navEle from "@/components/common/navEle.vue";
+import navEle from "./components/navEle";
 import toolbox from "@/components/miniTools/toolbox.vue";
 export default {
     name: "app",
