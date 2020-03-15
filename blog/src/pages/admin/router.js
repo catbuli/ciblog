@@ -9,7 +9,7 @@ Vue.use(VueRouter);
 const routes = [{
         path: '/admin',
         name: 'index',
-        component: (resolve) => require(['@/admin/views/index.vue'], resolve),
+        component: (resolve) => require(['./views/index.vue'], resolve),
         meta: {
             title: '总览'
         }
@@ -17,7 +17,7 @@ const routes = [{
     {
         path: '/admin/login',
         name: 'login',
-        component: (resolve) => require(['@/admin/views/Login.vue'], resolve),
+        component: (resolve) => require(['./views/Login.vue'], resolve),
         meta: {
             title: '登陆'
         }
@@ -25,7 +25,7 @@ const routes = [{
     {
         path: '/admin/setup_personal',
         name: 'setup_personal',
-        component: (resolve) => require(['@/admin/views/setupPersonal.vue'], resolve),
+        component: (resolve) => require(['./views/setupPersonal.vue'], resolve),
         meta: {
             title: '个人设置'
         }
@@ -33,7 +33,7 @@ const routes = [{
     {
         path: '/admin/write_article',
         name: 'write_article',
-        component: (resolve) => require(['@/admin/views/writeArticle.vue'], resolve),
+        component: (resolve) => require(['./views/writeArticle.vue'], resolve),
         meta: {
             title: '写文章'
         }
@@ -41,7 +41,7 @@ const routes = [{
     {
         path: '/admin/write_article/:aid',
         name: 'edit_article',
-        component: (resolve) => require(['@/admin/views/writeArticle.vue'], resolve),
+        component: (resolve) => require(['./views/writeArticle.vue'], resolve),
         meta: {
             title: '修改文章'
         }
@@ -49,7 +49,7 @@ const routes = [{
     {
         path: '/admin/manage_category',
         name: 'manage_category',
-        component: (resolve) => require(['@/admin/views/manageCategory.vue'], resolve),
+        component: (resolve) => require(['./views/manageCategory.vue'], resolve),
         meta: {
             title: '分类管理'
         }
@@ -57,7 +57,7 @@ const routes = [{
     {
         path: '/admin/add_category',
         name: 'add_category',
-        component: (resolve) => require(['@/admin/views/addCategory.vue'], resolve),
+        component: (resolve) => require(['./views/addCategory.vue'], resolve),
         meta: {
             title: '添加分类'
         }
@@ -65,7 +65,7 @@ const routes = [{
     {
         path: '/admin/manage_tag',
         name: 'manage_tag',
-        component: (resolve) => require(['@/admin/views/manageTag.vue'], resolve),
+        component: (resolve) => require(['./views/manageTag.vue'], resolve),
         meta: {
             title: '标签管理'
         }
@@ -73,7 +73,7 @@ const routes = [{
     {
         path: '/admin/manage_article',
         name: 'manage_article',
-        component: (resolve) => require(['@/admin/views/manageArticle.vue'], resolve),
+        component: (resolve) => require(['./views/manageArticle.vue'], resolve),
         meta: {
             title: '文章管理'
         }
@@ -81,7 +81,7 @@ const routes = [{
     {
         path: '/admin/manage_comment',
         name: 'manage_comment',
-        component: (resolve) => require(['@/admin/views/manageComment.vue'], resolve),
+        component: (resolve) => require(['./views/manageComment.vue'], resolve),
         meta: {
             title: '评论管理'
         }
@@ -89,7 +89,7 @@ const routes = [{
     {
         path: '/admin/setup_system',
         name: 'setup_system',
-        component: (resolve) => require(['@/admin/views/setupSystem.vue'], resolve),
+        component: (resolve) => require(['./views/setupSystem.vue'], resolve),
         meta: {
             title: '系统设置'
         }
@@ -97,7 +97,7 @@ const routes = [{
     {
         path: '/admin/setup_comment',
         name: 'setup_comment',
-        component: (resolve) => require(['@/admin/views/setupComment.vue'], resolve),
+        component: (resolve) => require(['./views/setupComment.vue'], resolve),
         meta: {
             title: '评论设置'
         }
@@ -105,7 +105,7 @@ const routes = [{
     {
         path: '/admin/read_settings',
         name: 'read_settings',
-        component: (resolve) => require(['@/admin/views/readSettings.vue'], resolve),
+        component: (resolve) => require(['./views/readSettings.vue'], resolve),
         meta: {
             title: '阅读设置'
         }
@@ -113,7 +113,7 @@ const routes = [{
     {
         path: '/admin/backups',
         name: 'backups',
-        component: (resolve) => require(['@/admin/views/backups.vue'], resolve),
+        component: (resolve) => require(['./views/backups.vue'], resolve),
         meta: {
             title: '备份'
         }
@@ -121,7 +121,7 @@ const routes = [{
     {
         path: '/admin/manage_file',
         name: 'manage_file',
-        component: (resolve) => require(['@/admin/views/manageFile.vue'], resolve),
+        component: (resolve) => require(['./views/manageFile.vue'], resolve),
         meta: {
             title: '文件管理'
         }
@@ -129,7 +129,7 @@ const routes = [{
     {
         path: '*',
         name: '404',
-        component: (resolve) => require(['@/admin/views/404.vue'], resolve),
+        component: (resolve) => require(['./views/404.vue'], resolve),
         meta: {
             title: '页面逃走了'
         }

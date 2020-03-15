@@ -9,7 +9,7 @@
 
 <script>
 import footEle from "@/components/common/footEle.vue";
-import adminTitle from "@/admin/components/common/adminTitle.vue";
+import adminTitle from "../common/adminTitle";
 export default {
     name: "adminFrame",
     components: {

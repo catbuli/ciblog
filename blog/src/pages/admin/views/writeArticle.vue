@@ -91,9 +91,9 @@
 </template>
 
 <script>
-import adminTitle from "@/admin/components/common/adminTitle.vue";
-import adminFrame from "@/admin/components/common/adminFrame.vue";
-import upload from "@/admin/components/common/upload.vue";
+import adminTitle from "../components/common/adminTitle.vue";
+import adminFrame from "../components/common/adminFrame.vue";
+import upload from "../components/common/upload.vue";
 import { post } from "@/lib/http";
 import { mavonEditor } from "mavon-editor";
 import "mavon-editor/dist/css/index.css";

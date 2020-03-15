@@ -8,7 +8,7 @@ module.exports = {
     pages: {
         index: {
             // page 的入口
-            entry: 'src/main.js',
+            entry: 'src/pages/index/main.js',
             // 模板来源
             template: 'public/index.html',
             // 在 dist/index.html 的输出
@@ -22,7 +22,7 @@ module.exports = {
         },
         admin: {
             // page 的入口
-            entry: 'src/admin/admin.js',
+            entry: 'src/pages/admin/admin.js',
             // 模板来源
             template: 'public/admin.html',
             // 在 dist/index.html 的输出

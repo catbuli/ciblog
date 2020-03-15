@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import admin from '@/admin/admin.vue'
-import router from '@/admin/router.js'
+import App from './App.vue'
+import router from './router.js'
 import store from '@/lib/store'
 import ElementUI from 'element-ui';
 import "element-ui/lib/theme-chalk/index.css";
@@ -19,11 +19,11 @@ import {
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.prototype.$post = post;
-console.log('当前为admin应用', '')
+console.log('当前为index应用', '')
 console.log(process.env.VUE_APP_URL);
 console.log(process.env.VUE_APP_MESSAGE);
 new Vue({
     router,
     store,
-    render: h => h(admin)
-}).$mount('#admin')
+    render: h => h(App)
+}).$mount('#app')
