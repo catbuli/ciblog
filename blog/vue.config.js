@@ -60,6 +60,12 @@ module.exports = {
                 }
             }
         },
+        historyApiFallback: {
+            rewrites: [{
+                from: /\/admin/,
+                to: '/admin.html'
+            }, ]
+        }
         //在本地服务器开启gzip，线上服务器都支持gzip不需要设置
         // before(app) {
         //     app.get(/.*.(js)$/, (req, res, next) => {
@@ -81,6 +87,7 @@ module.exports = {
                 deleteOriginalAssets: false, //是否删除源文件
             })
         ]
+
     },
     //打包位置
     outputDir: 'C:/Users/Administrator/Desktop/share/ciblog',

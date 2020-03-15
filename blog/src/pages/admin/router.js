@@ -128,12 +128,13 @@ const routes = [{
     },
     {
         path: '*',
-        name: '404',
+        name: 'index',
         component: (resolve) => require(['./views/404.vue'], resolve),
         meta: {
             title: '页面逃走了'
         }
     }
+
 ];
 
 const router = new VueRouter({
@@ -146,6 +147,9 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
     if (to.meta.title) {
         document.title = to.meta.title;
+    }
+    if (to.path == "/admin.html") {
+        next("/admin/");
     }
     if (to.path == "/admin/login") {
         next();
