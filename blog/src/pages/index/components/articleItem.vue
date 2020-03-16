@@ -145,6 +145,7 @@ ul li:hover {
 
 ul a {
     text-decoration: none;
-    color: #000000;
+    color: #333;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 </style>
