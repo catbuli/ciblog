@@ -8,16 +8,11 @@
                @click="jump(item.aid)"
                href=""></a>
             <div class="card-top">
-                <i class="iconfont iconflag"
-                   v-if="item.category==[]">
+                <i class="iconfont iconflag">
                     <span class="card-top-categories"
                           v-for="category in item.category"
                           :key="category.mid"
                           @click="categoryJump(category.name,category.mid)">{{category.name}}</span>
-                </i>
-                <i class="iconfont iconflag"
-                   v-else>
-                    <span class="card-top-categories">无</span>
                 </i>
                 <i class="iconfont icontime-circle"
                    style="margin-left:10px">
