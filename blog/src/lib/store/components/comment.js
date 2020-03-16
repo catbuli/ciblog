@@ -1,7 +1,6 @@
 import {
     post
 } from '@/lib/http'
-import router from '@/index/router'
 
 
 export default {

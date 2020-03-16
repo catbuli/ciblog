@@ -1,7 +1,8 @@
 import {
     post
 } from '@/lib/http'
-import router from '@/index/router'
+import router from '@/pages/index/router'
+import adminRouter from '@/pages/admin/router'
 
 
 export default {
@@ -57,7 +58,7 @@ export default {
             post("/articlec/publish", {
                 data
             }, (data) => {
-                router.push('/admin/manage_article')
+                adminRouter.push('/admin/manage_article')
             });
         },
         delArticleAction({

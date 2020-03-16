@@ -12,7 +12,7 @@
                 <router-view />
                 <!-- 博客 ↑ :key="$route.path" -->
             </transition>
-            <!-- <toolbox v-if="$store.state.global.isAdmin"></toolbox> -->
+            <toolbox v-if="$store.state.global.isAdmin"></toolbox>
             <!--  -->
         </div>
     </div>
@@ -26,7 +26,11 @@ export default {
     data() {
         return {};
     },
-    watch: {},
+    watch: {
+        $route() {
+            this.$store.commit("handleLeftNav", false);
+        }
+    },
     components: {
         navEle,
         toolbox
@@ -41,14 +45,15 @@ export default {
     },
     mounted() {
         let loading = document.getElementById("loading");
-        loading.remove();
+        if (loading) {
+            loading.remove();
+        }
     }
 };
 </script>
 
 <style>
 /* 公共样式设置 */
-
 ::selection {
     background-color: rgba(0, 0, 0, 0.7);
     color: #fff;
@@ -108,6 +113,8 @@ body {
     width: 100%;
     overflow-x: hidden;
     background-color: #f2f2f2;
+    color: #333;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 a {
     text-decoration: none;

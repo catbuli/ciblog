@@ -1,6 +1,6 @@
 import axios from 'axios';
-import router from '@/index/router'
-import adminRouter from '@/admin/router.js'
+import router from '@/pages/index/router'
+import adminRouter from '@/pages/admin/router.js'
 import {
     Notification
 } from 'element-ui';

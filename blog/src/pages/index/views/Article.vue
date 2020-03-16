@@ -15,7 +15,8 @@
                            style="cursor: pointer"
                            v-for="category in article.category"
                            @click="categoryJump(category.name,category.mid)"
-                           :key="category.mid">{{category.name}}</a></span>
+                           :key="category.mid">{{category.name}}</a>
+                    </span>
                     <span class="article-meta-label iconfont iconpushpin">{{article.create_date}}</span>
                 </div>
             </div>
@@ -248,6 +249,12 @@ export default {
             return father;
         },
         article() {
+            let tag = this.$store.state.article.article.tag;
+            if (tag) {
+                if (tag.length == 0) {
+                    this.$store.state.article.article.tag = [{ name: "None" }];
+                }
+            }
             return this.$store.state.article.article;
         },
         previous() {
@@ -320,24 +327,28 @@ export default {
             });
         },
         categoryJump(name, mid) {
-            this.$router.push({
-                path: "/search",
-                query: {
-                    typeName: "category",
-                    type: name,
-                    mid: mid
-                }
-            });
+            if (name && mid) {
+                this.$router.push({
+                    path: "/search",
+                    query: {
+                        typeName: "category",
+                        type: name,
+                        mid: mid
+                    }
+                });
+            }
         },
         tagJump(name, mid) {
-            this.$router.push({
-                path: "/search",
-                query: {
-                    typeName: "tag",
-                    type: name,
-                    mid: mid
-                }
-            });
+            if (name && mid) {
+                this.$router.push({
+                    path: "/search",
+                    query: {
+                        typeName: "tag",
+                        type: name,
+                        mid: mid
+                    }
+                });
+            }
         }
     },
     mounted() {
@@ -583,6 +594,7 @@ export default {
 /* 分类信息 */
 .category {
     color: #2c3e50;
+    user-select: none;
 }
 .category + .category::before {
     content: " • ";

@@ -8,16 +8,17 @@
                @click="jump(item.aid)"
                href=""></a>
             <div class="card-top">
-                <i class="iconfont iconflag"></i>
-                <span class="card-top-categories"
-                      v-for="category in item.category"
-                      :key="category.mid"
-                      style="cursor: pointer"
-                      @click="categoryJump(category.name,category.mid)">{{category.name}}</span>
+                <i class="iconfont iconflag">
+                    <span class="card-top-categories"
+                          v-for="category in item.category"
+                          :key="category.mid"
+                          @click="categoryJump(category.name,category.mid)">{{category.name}}</span>
+                </i>
                 <i class="iconfont icontime-circle"
-                   style="margin-left:10px"></i>
-                <span class="card-top-date"
-                      v-text="item.create_date"></span>
+                   style="margin-left:10px">
+                    <span class="card-top-date"
+                          v-text="item.create_date"></span>
+                </i>
             </div>
             <img class="article-image"
                  :src="item.cover_url"
@@ -64,14 +65,16 @@ export default {
             });
         },
         categoryJump(name, mid) {
-            this.$router.push({
-                path: "/search",
-                query: {
-                    typeName: "category",
-                    type: name,
-                    mid: mid
-                }
-            });
+            if ((name, mid)) {
+                this.$router.push({
+                    path: "/search",
+                    query: {
+                        typeName: "category",
+                        type: name,
+                        mid: mid
+                    }
+                });
+            }
         }
     }
 };
@@ -93,8 +96,8 @@ export default {
 .card-top {
     margin: 10px 0px;
 }
-.card-top span {
-    vertical-align: text-bottom;
+.card-top-categories {
+    cursor: pointer;
 }
 .card-top-categories + .card-top-categories::before {
     content: " • ";
@@ -145,6 +148,7 @@ ul li:hover {
 
 ul a {
     text-decoration: none;
-    color: #000000;
+    color: #333;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 </style>
