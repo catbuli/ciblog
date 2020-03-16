@@ -249,18 +249,10 @@ export default {
             return father;
         },
         article() {
-            let category = this.$store.state.article.article.category;
             let tag = this.$store.state.article.article.tag;
-            if (category) {
-                if (category.length == 0) {
-                    this.$store.state.article.article.category = [
-                        { name: "无" }
-                    ];
-                }
-            }
             if (tag) {
                 if (tag.length == 0) {
-                    this.$store.state.article.article.tag = [{ name: "无" }];
+                    this.$store.state.article.article.tag = [{ name: "None" }];
                 }
             }
             return this.$store.state.article.article;
