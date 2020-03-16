@@ -2,7 +2,7 @@ import {
     post
 } from '@/lib/http'
 import router from '@/pages/index/router'
-
+import adminRouter from '@/pages/admin/router'
 export default {
     state: {
         categoryList: [],
@@ -23,7 +23,7 @@ export default {
                 name: data.name,
                 description: data.description
             }, (data) => {
-                router.push('/admin/manage_category')
+                adminRouter.push('/admin/manage_category')
                 context.dispatch('getCategoryListAction');
             });
         },
