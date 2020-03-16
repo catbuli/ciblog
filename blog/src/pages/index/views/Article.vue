@@ -250,11 +250,17 @@ export default {
         },
         article() {
             let category = this.$store.state.article.article.category;
+            let tag = this.$store.state.article.article.tag;
             if (category) {
                 if (category.length == 0) {
                     this.$store.state.article.article.category = [
-                        { name: "暂无分类" }
+                        { name: "无" }
                     ];
+                }
+            }
+            if (tag) {
+                if (tag.length == 0) {
+                    this.$store.state.article.article.tag = [{ name: "无" }];
                 }
             }
             return this.$store.state.article.article;
@@ -341,14 +347,16 @@ export default {
             }
         },
         tagJump(name, mid) {
-            this.$router.push({
-                path: "/search",
-                query: {
-                    typeName: "tag",
-                    type: name,
-                    mid: mid
-                }
-            });
+            if (name && mid) {
+                this.$router.push({
+                    path: "/search",
+                    query: {
+                        typeName: "tag",
+                        type: name,
+                        mid: mid
+                    }
+                });
+            }
         }
     },
     mounted() {
