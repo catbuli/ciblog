@@ -53,7 +53,8 @@ export default {
                 this.$notify({
                     title: "失败",
                     message: "分类名不能为空",
-                    type: "error"
+                    type: "error",
+                    offset: 50
                 });
             }
         }

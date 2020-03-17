@@ -130,7 +130,8 @@ export default {
                     this.$notify({
                         title: "修改失败",
                         message: "两次密码输入不一致",
-                        type: "error"
+                        type: "error",
+                        offset: 50
                     });
                 } else {
                     this.$store.dispatch("alterPassAction", {
@@ -144,7 +145,8 @@ export default {
                 this.$notify({
                     title: "修改失败",
                     message: "密码或重复密码不能为空！",
-                    type: "error"
+                    type: "error",
+                    offset: 50
                 });
             }
         }

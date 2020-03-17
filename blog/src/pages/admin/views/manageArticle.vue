@@ -132,7 +132,7 @@ export default {
             paging: {
                 pageSize: 10,
                 currentPage: 1,
-                type: 0,
+                type: -1,
                 typeName: "all",
                 total: 0
             }
