@@ -4,6 +4,7 @@ namespace app\index\controller;
 
 use think\Controller;
 use app\index\model\Meta;
+use app\index\model\Article;
 use app\index\model\ArticleMeta;
 use think\Exception;
 use app\common\Response;
@@ -21,9 +22,13 @@ class Category extends Controller
         try {
             $meta = new Meta();
             $meta = $meta->getMetaList('category');
+            foreach ($meta as &$value) {
+                $value["count"] = Article::count("category", $value['mid']);
+            }
             return Response::result(201, "成功", "分类列表获取成功!", $meta);
         } catch (Exception $e) {
-            return Response::result(400, "请求失败!", $e);
+            $message = $e->getMessage() . PHP_EOL . $e->getLine() . PHP_EOL . $e->getFile();
+            return Response::result(400, "请求失败!", $message);
         }
     }
     /**
@@ -52,7 +57,8 @@ class Category extends Controller
                 return Response::result(200, "成功", "分类添加成功!");
             }
         } catch (Exception $e) {
-            return Response::result(400, "请求失败!", $e->getMessage());
+            $message = $e->getMessage() . PHP_EOL . $e->getLine() . PHP_EOL . $e->getFile();
+            return Response::result(400, "请求失败!", $message);
         }
     }
     /**
@@ -73,7 +79,8 @@ class Category extends Controller
             }
             return Response::result(200, "成功", "分类删除成功!");
         } catch (Exception $e) {
-            return Response::result(400, "请求失败!", $e->getMessage());
+            $message = $e->getMessage() . PHP_EOL . $e->getLine() . PHP_EOL . $e->getFile();
+            return Response::result(400, "请求失败!", $message);
         }
     }
     /**
@@ -94,7 +101,8 @@ class Category extends Controller
             $meta->save();
             return Response::result(200, "成功", "分类修改成功!");
         } catch (Exception $e) {
-            return Response::result(400, "请求失败!", $e->getMessage());
+            $message = $e->getMessage() . PHP_EOL . $e->getLine() . PHP_EOL . $e->getFile();
+            return Response::result(400, "请求失败!", $message);
         }
     }
     /**
@@ -109,7 +117,8 @@ class Category extends Controller
             $list = ArticleMeta::getMetaByArticle($aid, "category", true);
             return Response::result(201, "成功", "分类信息获取成功!", $list);
         } catch (Exception $e) {
-            return Response::result(400, "请求失败!", $e->getMessage());
+            $message = $e->getMessage() . PHP_EOL . $e->getLine() . PHP_EOL . $e->getFile();
+            return Response::result(400, "请求失败!", $message);
         }
     }
     /**
@@ -124,7 +133,8 @@ class Category extends Controller
             $data = Meta::get($mid);
             return Response::result(201, "成功", "分类信息获取成功!", $data);
         } catch (Exception $e) {
-            return Response::result(400, "请求失败!", $e->getMessage());
+            $message = $e->getMessage() . PHP_EOL . $e->getLine() . PHP_EOL . $e->getFile();
+            return Response::result(400, "请求失败!", $message);
         }
     }
 }

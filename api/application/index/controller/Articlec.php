@@ -34,7 +34,8 @@ class Articlec extends Controller
             $paging['total'] = Article::Count($paging['typeName'], $paging['type']);
             return Response::result(201, "成功", "数据获取成功!", $list, $paging);
         } catch (Exception $e) {
-            return Response::result(400, "请求失败!", $e->getMessage());
+            $message = $e->getMessage() . PHP_EOL . $e->getLine() . PHP_EOL . $e->getFile();
+            return Response::result(400, "请求失败!", $message);
         }
     }
     /**
@@ -130,7 +131,8 @@ class Articlec extends Controller
             }
             return Response::result(200, "成功", "文章删除成功!");
         } catch (Exception $e) {
-            return Response::result(400, "请求失败!", $e);
+            $message = $e->getMessage() . PHP_EOL . $e->getLine() . PHP_EOL . $e->getFile();
+            return Response::result(400, "请求失败!", $message);
         }
     }
     /**
@@ -179,7 +181,8 @@ class Articlec extends Controller
                 return Response::result(404, "失败", "文章没有找到，或已被删除!");
             }
         } catch (Exception $e) {
-            return Response::result(400, "请求失败!", $e);
+            $message = $e->getMessage() . PHP_EOL . $e->getLine() . PHP_EOL . $e->getFile();
+            return Response::result(400, "请求失败!", $message);
         }
     }
     /**
