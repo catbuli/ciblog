@@ -78,7 +78,15 @@
                              label="操作">
                 <template slot-scope="scope">
                     <i class="el-icon-edit operating-button"
-                       @click="editArticle(scope.row.aid)"></i>
+                       @click="editArticle(scope.row.aid)"
+                       title="编辑"></i>
+                    <a :href="`/article/${scope.row.aid}`"
+                       title="查看"
+                       target="_blank"
+                       class="operating-button">
+                        <i class="el-icon-location-outline">
+                        </i>
+                    </a>
                     <!-- <i class="el-icon-delete operating-button"
                        @click="delArticle(scope.row.aid)"></i> -->
                 </template>
@@ -207,9 +215,11 @@ export default {
 .operating-button {
     cursor: pointer;
     font-size: 20px;
+    display: inline-block;
+    color: #606266;
 }
 .operating-button + .operating-button {
-    margin-left: 5px;
+    margin-left: 10px;
 }
 .article-table-category + .article-table-category::before {
     content: " • ";

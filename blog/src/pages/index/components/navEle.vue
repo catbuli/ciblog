@@ -85,7 +85,10 @@
                     <a v-for="item in newList"
                        :key="item.aid"
                        @click="$router.push('/article/'+item.aid)">
-                        <li>{{item.title}}<span>{{item.create_date|handleDate}}</span></li>
+                        <li>
+                            <p>{{item.title}}</p>
+                            <span>{{item.create_date|handleDate}}</span>
+                        </li>
                     </a>
                 </ul>
             </div>
@@ -277,9 +280,9 @@ export default {
         text-decoration: none;
         color: white;
     }
-    p {
-        font-size: 18px;
-    }
+    // p {
+    //     font-size: 18px;
+    // }
 }
 
 .head-portrait {
@@ -375,6 +378,13 @@ export default {
         position: absolute;
         top: 12px;
         z-index: -1;
+    }
+    ul li p {
+        width: 70%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        display: inline-block;
     }
     ul a {
         cursor: pointer;
