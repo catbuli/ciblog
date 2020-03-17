@@ -22,7 +22,8 @@ class Tag extends Controller
             $meta = new Meta();
             return Response::result(201, "成功", "标签列表获取成功!", $meta->getMetaList('tag'));
         } catch (Exception $e) {
-            return Response::result(400, "请求失败!", $e->getMessage());
+            $message = $e->getMessage() . PHP_EOL . $e->getLine() . PHP_EOL . $e->getFile();
+            return Response::result(400, "请求失败!", $message);
         }
     }
     /**
@@ -37,6 +38,9 @@ class Tag extends Controller
             return Response::result(400, "失败", "该账号没有此操作的权限!", []);
         }
         try {
+            if ($name == "") {
+                return Response::result(400, "失败", "标签名不能为空!");
+            }
             if (Meta::get(['name' => $name, 'type' => 'tag'])) {
                 return Response::result(400, "失败", "已存在同名标签!");
             } else {
@@ -52,7 +56,8 @@ class Tag extends Controller
                 return Response::result(200, "成功", "标签添加成功!");
             }
         } catch (Exception $e) {
-            return Response::result(400, "请求失败!", $e->getMessage());
+            $message = $e->getMessage() . PHP_EOL . $e->getLine() . PHP_EOL . $e->getFile();
+            return Response::result(400, "请求失败!", $message);
         }
     }
     /**
@@ -71,7 +76,8 @@ class Tag extends Controller
             ArticleMeta::delMetaByArticle($mid);
             return Response::result(200, "成功", "标签删除成功!");
         } catch (Exception $e) {
-            return Response::result(400, "请求失败!", $e->getMessage());
+            $message = $e->getMessage() . PHP_EOL . $e->getLine() . PHP_EOL . $e->getFile();
+            return Response::result(400, "请求失败!", $message);
         }
     }
 }

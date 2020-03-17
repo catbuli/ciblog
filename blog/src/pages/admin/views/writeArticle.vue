@@ -238,7 +238,8 @@ export default {
                 this.$notify({
                     title: "错误",
                     message: "标题不能为空",
-                    type: "error"
+                    type: "error",
+                    offset: 50
                 });
             } else {
                 this.$store.dispatch("publishArticleAction", this.article);

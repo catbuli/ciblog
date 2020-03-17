@@ -78,7 +78,15 @@
                              label="操作">
                 <template slot-scope="scope">
                     <i class="el-icon-edit operating-button"
-                       @click="editArticle(scope.row.aid)"></i>
+                       @click="editArticle(scope.row.aid)"
+                       title="编辑"></i>
+                    <a :href="`/article/${scope.row.aid}`"
+                       title="查看"
+                       target="_blank"
+                       class="operating-button">
+                        <i class="el-icon-location-outline">
+                        </i>
+                    </a>
                     <!-- <i class="el-icon-delete operating-button"
                        @click="delArticle(scope.row.aid)"></i> -->
                 </template>
@@ -101,6 +109,7 @@
         </el-table>
         <paging action="getArticleListAction"
                 align="right"
+                :paging="paging"
                 @function="handlePage"></paging>
     </adminFrame>
 </template>
@@ -123,8 +132,8 @@ export default {
             paging: {
                 pageSize: 10,
                 currentPage: 1,
-                type: 1,
-                typeName: "none",
+                type: -1,
+                typeName: "all",
                 total: 0
             }
         };
@@ -144,6 +153,10 @@ export default {
     },
     created() {
         this.$store.dispatch("getCategoryListAction");
+        if (this.$route.query.mid) {
+            this.change(parseInt(this.$route.query.mid));
+            this.category = parseInt(this.$route.query.mid);
+        }
     },
     methods: {
         clear() {
@@ -157,6 +170,7 @@ export default {
             this.$store.dispatch("getArticleListAction", this.paging);
         },
         change(value) {
+            console.log(value);
             this.paging.typeName = "category";
             this.paging.type = value;
             this.$store.dispatch("getArticleListAction", this.paging);
@@ -207,9 +221,11 @@ export default {
 .operating-button {
     cursor: pointer;
     font-size: 20px;
+    display: inline-block;
+    color: #606266;
 }
 .operating-button + .operating-button {
-    margin-left: 5px;
+    margin-left: 10px;
 }
 .article-table-category + .article-table-category::before {
     content: " • ";

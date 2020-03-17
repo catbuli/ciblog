@@ -17,7 +17,7 @@
                            @click="categoryJump(category.name,category.mid)"
                            :key="category.mid">{{category.name}}</a>
                     </span>
-                    <span class="article-meta-label iconfont iconpushpin">{{article.create_date}}</span>
+                    <span class="article-meta-label iconfont iconpushpin">{{article.create_date|handleDate}}</span>
                 </div>
             </div>
             <div class="article-body">
@@ -26,7 +26,7 @@
                 </div>
                 <div class="article-other"></div>
                 <div class="article-update">
-                    <i class="el-icon-time">最后更新于：{{article.modify_date}}</i>
+                    <i class="el-icon-time">最后更新于：{{article.modify_date|handleDate}}</i>
                 </div>
             </div>
             <div class="article-tags">
@@ -227,6 +227,11 @@ export default {
             }
         };
     },
+    filters: {
+        handleDate(value) {
+            if (value) return value.split(" ")[0];
+        }
+    },
     computed: {
         commentList() {
             let commentList = this.$store.state.comment.commentList;
@@ -266,7 +271,6 @@ export default {
     },
     watch: {
         "$store.state.article.article": function() {
-            this.article.modify_date = this.article.modify_date.split(" ")[0];
             document.title =
                 this.article.title +
                 "-" +

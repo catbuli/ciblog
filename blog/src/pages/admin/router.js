@@ -128,7 +128,7 @@ const routes = [{
     },
     {
         path: '*',
-        name: 'index',
+        name: 'error',
         component: (resolve) => require(['./views/404.vue'], resolve),
         meta: {
             title: '页面逃走了'

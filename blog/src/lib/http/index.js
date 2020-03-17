@@ -61,7 +61,8 @@ instance.interceptors.response.use(
                 Notification({
                     title: response.data.title,
                     message: response.data.message,
-                    type: "success"
+                    type: "success",
+                    offset: 50
                 });
                 break;
             }
@@ -74,7 +75,8 @@ instance.interceptors.response.use(
                 Notification({
                     title: response.data.title,
                     message: response.data.message,
-                    type: "error"
+                    type: "error",
+                    offset: 50
                 });
                 break;
             }
@@ -83,7 +85,8 @@ instance.interceptors.response.use(
                 Notification({
                     title: response.data.title,
                     message: response.data.message,
-                    type: "error"
+                    type: "error",
+                    offset: 50
                 });
                 localStorage.removeItem('uid');
                 localStorage.removeItem('token');
@@ -94,7 +97,8 @@ instance.interceptors.response.use(
                 Notification({
                     title: response.data.title,
                     message: response.data.message,
-                    type: "error"
+                    type: "error",
+                    offset: 50
                 });
                 router.push('/404')
             }

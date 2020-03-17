@@ -23,7 +23,8 @@ class Backups extends Controller
             var_dump($var);
             // return Response::result(201, "成功", "数据获取成功!", $a);
         } catch (Exception $e) {
-            return Response::result(400, "请求失败!", $e->getMessage());
+            $message = $e->getMessage() . PHP_EOL . $e->getLine() . PHP_EOL . $e->getFile();
+            return Response::result(400, "请求失败!", $message);
         }
     }
 }

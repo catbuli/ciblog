@@ -33,9 +33,13 @@
                        @click="handleDialog(scope.row.mid)"></i>
                 </template>
             </el-table-column>
-            <el-table-column prop="count"
-                             align="center"
+            <el-table-column align="center"
                              label="文章数">
+                <template slot-scope="scope">
+                    <el-badge :value="scope.row.count"
+                              @click.native="jump(scope.row.mid)"
+                              style="cursor: pointer;user-select:none"></el-badge>
+                </template>
             </el-table-column>
         </el-table>
         <el-dialog title="编辑评论"
@@ -94,6 +98,14 @@ export default {
         this.getCategoryList();
     },
     methods: {
+        jump(mid) {
+            this.$router.push({
+                path: `/admin/manage_article`,
+                query: {
+                    mid: mid
+                }
+            });
+        },
         getCategoryList() {
             this.$store.dispatch("getCategoryListAction");
         },

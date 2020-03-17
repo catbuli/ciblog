@@ -81,7 +81,7 @@ class Setupc extends Controller
     /**
      * 设置更新
      *
-     * @param json $data 个人信息数据
+     * @param json $data 更新设置数据
      * @return JSON 响应信息
      */
     public function updateSystem($data)
@@ -97,6 +97,7 @@ class Setupc extends Controller
                 $setup->save([
                     'banner'  => $data['banner'],
                     'comment_check' => $data['comment_check'] == true ? 1 : 0,
+                    'comment_is_allow' => $data['comment_is_allow'] == true ? 1 : 0,
                     'qaq' => $data['qaq'],
                     'web_name' => $data['web_name'],
                     'web_description' => $data['web_description'],

@@ -79,10 +79,10 @@ class Article extends Model
                     ->select());
                 break;
             case 'category':
-                $count = count(Db::name('article_meta')->where("mid", $typeName)->where("type", "category")->select());
+                $count = count(Db::name('article_meta')->where("mid", $type)->where("type", "category")->select());
                 break;
             case 'tag':
-                $count = count(Db::name('article_meta')->where("mid", $typeName)->where("type", "category")->select());
+                $count = count(Db::name('article_meta')->where("mid", $type)->where("type", "category")->select());
                 break;
             case 'status':
                 // if ($value == -1) {

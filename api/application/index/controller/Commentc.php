@@ -66,7 +66,8 @@ class Commentc extends Controller
             Comment::destroy($cid);
             return Response::result(200, "成功", "评论删除成功!");
         } catch (Exception $e) {
-            return Response::result(400, "请求失败!", $e->getMessage());
+            $message = $e->getMessage() . PHP_EOL . $e->getLine() . PHP_EOL . $e->getFile();
+            return Response::result(400, "请求失败!", $message);
         }
     }
     /**
@@ -86,7 +87,8 @@ class Commentc extends Controller
             $comment->save();
             return Response::result(200, "成功", "评论修改成功!");
         } catch (Exception $e) {
-            return Response::result(400, "请求失败!", $e->getMessage());
+            $message = $e->getMessage() . PHP_EOL . $e->getLine() . PHP_EOL . $e->getFile();
+            return Response::result(400, "请求失败!", $message);
         }
     }
     /**
@@ -101,7 +103,8 @@ class Commentc extends Controller
             $data = Comment::get($cid);
             return Response::result(201, "成功", "评论信息获取成功!", $data);
         } catch (Exception $e) {
-            return Response::result(400, "请求失败!", $e->getMessage());
+            $message = $e->getMessage() . PHP_EOL . $e->getLine() . PHP_EOL . $e->getFile();
+            return Response::result(400, "请求失败!", $message);
         }
     }
     /**

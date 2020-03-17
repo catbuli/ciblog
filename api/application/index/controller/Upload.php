@@ -24,7 +24,8 @@ class Upload extends Controller
             $paging['total'] = File::Count($paging['typeName'], $paging['type']);
             return Response::result(201, "成功!", "文件列表获取成功!", $fileList, $paging);
         } catch (Exception $e) {
-            return Response::result(400, "请求失败!", $e->getMessage());
+            $message = $e->getMessage() . PHP_EOL . $e->getLine() . PHP_EOL . $e->getFile();
+            return Response::result(400, "请求失败!", $message);
         }
     }
     /**
@@ -71,7 +72,8 @@ class Upload extends Controller
             }
             return Response::result(201, "成功!", "上传成功!", ['file' => $file, 'fileList' => $fileList]);
         } catch (Exception $e) {
-            return Response::result(400, "请求失败!", $e->getMessage());
+            $message = $e->getMessage() . PHP_EOL . $e->getLine() . PHP_EOL . $e->getFile();
+            return Response::result(400, "请求失败!", $message);
         }
     }
     /**
@@ -98,7 +100,8 @@ class Upload extends Controller
             }
             return $info;
         } catch (Exception $e) {
-            return Response::result(400, "请求失败!", $e->getMessage());
+            $message = $e->getMessage() . PHP_EOL . $e->getLine() . PHP_EOL . $e->getFile();
+            return Response::result(400, "请求失败!", $message);
         }
     }
 }

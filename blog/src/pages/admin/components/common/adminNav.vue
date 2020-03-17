@@ -47,6 +47,11 @@ export default {
     },
     components: {},
     mounted() {},
+    created() {
+        this.$store.dispatch("getCountAction");
+        this.$store.dispatch("getSystemAciton");
+        this.$store.dispatch("getPersonalDataAction");
+    },
     computed: {
         name() {
             return this.$store.state.global.personalData.name;

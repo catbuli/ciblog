@@ -23,7 +23,9 @@
                         <h4>标签名称<sup style="color:red">*</sup></h4>
                         <el-input placeholder="请输入内容"
                                   v-model="tagName"
-                                  @keydown.enter.native="addTag"></el-input>
+                                  @keydown.enter.native="addTag"
+                                  maxlength="15"
+                                  show-word-limit></el-input>
                         <span class="input-hint">标签名称</span>
                     </li>
                     <li class="input-button">
@@ -86,7 +88,8 @@ export default {
                 this.$notify({
                     title: "失败",
                     message: "标签名不能为空",
-                    type: "error"
+                    type: "error",
+                    offset: 50
                 });
             }
         }
@@ -99,9 +102,7 @@ export default {
     font-size: 20px;
     line-height: 30px;
     margin: 10px auto;
-}
-.el-tag + .el-tag {
-    margin-left: 10px;
+    margin-right: 10px;
 }
 h4 {
     text-align: left;

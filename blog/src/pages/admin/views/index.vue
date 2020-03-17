@@ -1,7 +1,15 @@
 <template>
     <adminFrame title="总览">
         <div class="index-top">
-            <h1>一共篇<span class="sign">{{countList.articleCount}}</span>文章,<span class="sign">{{countList.categoryCount}}</span>种分类,<span class="sign">{{countList.commentCount}}</span>条评论</h1>
+            <h1>
+                一共篇
+                <span class="sign">{{countList.articleCount}}</span>
+                文章,
+                <span class="sign">{{countList.categoryCount}}</span>
+                种分类,
+                <span class="sign">{{countList.commentCount}}</span>
+                条评论
+            </h1>
             <p>
                 <router-link to="/admin/write_article">写文章</router-link>
                 <router-link to="/admin/manage_article">文章管理</router-link>
@@ -15,9 +23,9 @@
                 <ul>
                     <li v-for="item in articleList"
                         :key="item.aid">
-                        <span>{{item.create_date.split(' ')[0].split('-')[1]+'-'+item.create_date.split(' ')[0].split('-')[2]}}</span>
-                        <a style="cursor: pointer;color: #ff7b00;"
-                           @click="$router.push({path: `/article/${item.aid}`})">
+                        <span>{{item.create_date|handleDate}}</span>
+                        <a target="_blank"
+                           :href="`/article/${item.aid}`">
                             {{item.title}}
                         </a>
                     </li>
@@ -28,9 +36,10 @@
                 <ul>
                     <li v-for="item in commentList"
                         :key="item.cid">
-                        <span>{{item.create_date.split(' ')[0].split('-')[1]+'-'+item.create_date.split(' ')[0].split('-')[2]}}</span>
+                        <span>{{item.create_date|handleDate}}</span>
                         <a class="index-top-context"
-                           @click="$router.push({path: `/article/${item.aid}`})">
+                           target="_blank"
+                           :href="`/article/${item.aid}`">
                             {{item.content}}
                         </a>
                     </li>
@@ -46,6 +55,17 @@ export default {
     name: "index",
     components: {
         adminFrame
+    },
+    filters: {
+        handleDate(value) {
+            if (value) {
+                return (
+                    value.split(" ")[0].split("-")[1] +
+                    "-" +
+                    value.split(" ")[0].split("-")[2]
+                );
+            }
+        }
     },
     data() {
         return {
@@ -106,9 +126,7 @@ export default {
     margin-right: 20px;
 }
 .index-top-context {
-    cursor: pointer;
     display: inline-block;
-    color: #ff7b00;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
