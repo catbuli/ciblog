@@ -153,6 +153,10 @@ export default {
     },
     created() {
         this.$store.dispatch("getCategoryListAction");
+        if (this.$route.query.mid) {
+            this.change(parseInt(this.$route.query.mid));
+            this.category = parseInt(this.$route.query.mid);
+        }
     },
     methods: {
         clear() {
@@ -166,6 +170,7 @@ export default {
             this.$store.dispatch("getArticleListAction", this.paging);
         },
         change(value) {
+            console.log(value);
             this.paging.typeName = "category";
             this.paging.type = value;
             this.$store.dispatch("getArticleListAction", this.paging);
