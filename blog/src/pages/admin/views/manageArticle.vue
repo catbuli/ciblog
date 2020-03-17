@@ -109,6 +109,7 @@
         </el-table>
         <paging action="getArticleListAction"
                 align="right"
+                :paging="paging"
                 @function="handlePage"></paging>
     </adminFrame>
 </template>
@@ -131,8 +132,8 @@ export default {
             paging: {
                 pageSize: 10,
                 currentPage: 1,
-                type: 1,
-                typeName: "none",
+                type: 0,
+                typeName: "all",
                 total: 0
             }
         };
