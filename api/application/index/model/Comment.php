@@ -20,7 +20,7 @@ class Comment extends Model
             case 'aid':
                 return $this->where('aid', $paging['type'])->where('status', 1)->order('create_date desc')->select();
             default:
-                return Comment::all();
+                return $this->order('create_date desc')->select();;
         }
     }
     public static function count($field = '', $value = -1)
