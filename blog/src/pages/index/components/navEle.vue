@@ -73,7 +73,10 @@
                     <a v-for="item in hotList"
                        :key="item.aid"
                        @click="$router.push('/article/'+item.aid)">
-                        <li>{{item.title}}<span>{{item.create_date|handleDate}}</span></li>
+                        <li>
+                            <p>{{item.title}}</p>
+                            <span>{{item.create_date|handleDate}}</span>
+                        </li>
                     </a>
                 </ul>
             </div>
