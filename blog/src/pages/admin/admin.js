@@ -38,7 +38,8 @@ import {
     Tag,
     Image,
     Notification,
-    Message
+    Message,
+    MessageBox
 } from 'element-ui';
 Vue.use(Image);
 Vue.use(Tag);
@@ -72,7 +73,9 @@ Vue.use(Loading);
 Vue.use(Popover);
 Vue.prototype.$notify = Notification;
 Vue.prototype.$message = Message;
+Vue.prototype.$confirm = MessageBox.confirm;
 Vue.prototype.$post = post;
+
 Vue.config.productionTip = false
 console.log('当前为admin应用', '')
 console.log(process.env.VUE_APP_URL);
