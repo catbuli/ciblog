@@ -30,7 +30,6 @@
                     <el-input v-model="system.banner"
                               type="textarea"
                               show-word-limit
-                              @keydown.enter.native="submit"
                               :rows=7></el-input>
                     <span class="input-hint">首页banner图片一行一个地址可设置多个,随机更换.</span>
                 </li>

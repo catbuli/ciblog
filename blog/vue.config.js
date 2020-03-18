@@ -118,6 +118,7 @@ module.exports = {
             }
         })
     },
+    // 博客 ↑
     //打包位置
     outputDir: 'C:/Users/Administrator/Desktop/share/ciblog',
     // outputDir: 'C:/wamp64/www',
