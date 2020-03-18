@@ -18,7 +18,7 @@ module.exports = {
             title: 'index Page',
             // 在这个页面中包含的块，默认情况下会包含
             // 提取出来的通用 chunk 和 vendor chunk。
-            chunks: ['chunk-vendors', 'chunk-common', 'index']
+            chunks: ['chunk-index-vendors', 'chunk-common', 'index']
         },
         admin: {
             // page 的入口
@@ -32,7 +32,7 @@ module.exports = {
             title: 'admin Page',
             // 在这个页面中包含的块，默认情况下会包含
             // 提取出来的通用 chunk 和 vendor chunk。
-            chunks: ['chunk-vendors', 'chunk-common', 'admin']
+            chunks: ['chunk-admin-vendors', 'chunk-common', 'admin']
         },
         // 当使用只有入口的字符串格式时，
         // 模板会被推导为 `public/subpage.html`
@@ -88,6 +88,35 @@ module.exports = {
             })
         ]
 
+    },
+    chainWebpack: config => {
+        const IS_VENDOR = /[\\/]node_modules[\\/]/
+        config.optimization.splitChunks({
+            cacheGroups: {
+                index: {
+                    name: `chunk-index-vendors`,
+                    priority: -11,
+                    chunks: chunk => chunk.name === 'index',
+                    test: IS_VENDOR,
+                    enforce: true,
+                },
+                admin: {
+                    name: `chunk-admin-vendors`,
+                    priority: -11,
+                    chunks: chunk => chunk.name === 'admin',
+                    test: IS_VENDOR,
+                    enforce: true,
+                },
+                common: {
+                    name: 'chunk-common',
+                    priority: -20,
+                    chunks: 'initial',
+                    minChunks: 2,
+                    reuseExistingChunk: true,
+                    enforce: true,
+                }
+            }
+        })
     },
     //打包位置
     outputDir: 'C:/Users/Administrator/Desktop/share/ciblog',
