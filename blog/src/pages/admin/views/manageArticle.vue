@@ -170,7 +170,6 @@ export default {
             this.$store.dispatch("getArticleListAction", this.paging);
         },
         change(value) {
-            console.log(value);
             this.paging.typeName = "category";
             this.paging.type = value;
             this.$store.dispatch("getArticleListAction", this.paging);
