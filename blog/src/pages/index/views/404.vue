@@ -14,7 +14,7 @@
 
 <script>
 import footEle from "@/components/common/footEle.vue";
-import headEle from "@/components/common/headEle.vue";
+import headEle from "../components/headEle.vue";
 import searchTool from "@/components/miniTools/searchTool.vue";
 export default {
     name: "errorPage",
