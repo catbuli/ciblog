@@ -9,6 +9,7 @@ use app\index\model\ArticleMeta;
 use think\Exception;
 use app\common\Response;
 use app\common\Session;
+use think\Db;
 
 class Category extends Controller
 {
@@ -77,6 +78,10 @@ class Category extends Controller
                 return Response::result(400, "失败", "不允许删除全部分类，至少保留一个");
             }
             foreach ($mid as $value) {
+                $list = Db::name('article_meta')->where("mid", $value)->where("type", "category")->select();
+                foreach ($list as $item) {
+                    Article::destroy($item['aid']);
+                }
                 Meta::destroy($value);
                 ArticleMeta::delMetaByArticle($value);
             }
