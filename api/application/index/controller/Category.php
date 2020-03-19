@@ -73,6 +73,9 @@ class Category extends Controller
             return Response::result(400, "失败", "该账号没有此操作的权限!", []);
         }
         try {
+            if (Meta::count("category") <= count($mid)) {
+                return Response::result(400, "失败", "不允许删除全部分类，至少保留一个");
+            }
             foreach ($mid as $value) {
                 Meta::destroy($value);
                 ArticleMeta::delMetaByArticle($value);
