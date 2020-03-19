@@ -28,7 +28,12 @@ export default {
     },
     computed: {
         banner() {
-            return this.$store.state.global.system.randomBanner;
+            let url = this.$store.state.global.system.randomBanner;
+            if (!url) {
+                url =
+                    "https://ciblog.oss-cn-shanghai.aliyuncs.com/images/bg4.jpg";
+            }
+            return url;
         }
     }
 };

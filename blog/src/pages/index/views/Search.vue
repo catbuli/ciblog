@@ -14,7 +14,7 @@
                 @function="handlePage"></paging>
         <footEle></footEle>
         <backTop></backTop>
-</template>
+    </div>
 </template>
 
 <script>
@@ -53,7 +53,12 @@ export default {
             return this.$store.state.article.articleList;
         },
         banner() {
-            return this.$store.state.global.system.randomBanner;
+            let url = this.$store.state.global.system.randomBanner;
+            if (!url) {
+                url =
+                    "https://ciblog.oss-cn-shanghai.aliyuncs.com/images/bg4.jpg";
+            }
+            return url;
         }
     },
     watch: {

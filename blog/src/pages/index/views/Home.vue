@@ -28,6 +28,11 @@ export default {
         backTop,
         paging
     },
+    filters: {
+        handleImage(value) {
+            console.log(value);
+        }
+    },
     data() {
         return {
             loading: true,
@@ -42,7 +47,12 @@ export default {
     },
     computed: {
         banner() {
-            return this.$store.state.global.system.randomBanner;
+            let url = this.$store.state.global.system.randomBanner;
+            if (!url) {
+                url =
+                    "https://ciblog.oss-cn-shanghai.aliyuncs.com/images/bg4.jpg";
+            }
+            return url;
         },
         articleList() {
             return this.$store.state.article.articleList;
