@@ -124,9 +124,8 @@ class Articlec extends Controller
             return Response::result(400, "失败", "该账号没有此操作的权限!", []);
         }
         try {
-            $article = new Article();
-            $article->delArticle($aid);
             foreach ($aid as $value) {
+                Article::destroy($value);
                 Comment::where("aid", $value)->delete();
             }
             return Response::result(200, "成功", "文章删除成功!");

@@ -8,6 +8,7 @@ use think\Db;
 
 class Article extends Model
 {
+    protected $pk = "aid";
     /**
      * 根据条件返回文章列表
      *

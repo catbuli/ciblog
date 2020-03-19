@@ -73,8 +73,8 @@ class Category extends Controller
             return Response::result(400, "失败", "该账号没有此操作的权限!", []);
         }
         try {
-            Meta::destroy($mid);
             foreach ($mid as $value) {
+                Meta::destroy($value);
                 ArticleMeta::delMetaByArticle($value);
             }
             return Response::result(200, "成功", "分类删除成功!");
