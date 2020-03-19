@@ -16,8 +16,7 @@
                 </i>
                 <i class="iconfont icontime-circle"
                    style="margin-left:10px">
-                    <span class="card-top-date"
-                          v-text="item.create_date"></span>
+                    <span class="card-top-date">{{item.create_date|handleDate}}</span>
                 </i>
             </div>
             <img class="article-image"
@@ -29,7 +28,7 @@
             <div class="card-bottom">
                 <span class="card-bottom-left">
                     <a @click="jump(item.aid)"
-                       href="">
+                       style="cursor: pointer;">
                         <i class="iconfont iconellipsis"></i>
                         <i class="iconfont iconellipsis"></i>
                     </a>
@@ -56,6 +55,11 @@ export default {
         article_date: String
         // article_reviews : Number,
         // article_pv : Number,
+    },
+    filters: {
+        handleDate(value) {
+            if (value) return value.split(" ")[0];
+        }
     },
     mounted() {},
     methods: {

@@ -14,7 +14,7 @@
 
 <script>
 import footEle from "@/components/common/footEle.vue";
-import headEle from "@/components/common/headEle.vue";
+import headEle from "../components/headEle.vue";
 import searchTool from "@/components/miniTools/searchTool.vue";
 export default {
     name: "errorPage",
@@ -28,7 +28,12 @@ export default {
     },
     computed: {
         banner() {
-            return this.$store.state.global.system.randomBanner;
+            let url = this.$store.state.global.system.randomBanner;
+            if (!url) {
+                url =
+                    "https://ciblog.oss-cn-shanghai.aliyuncs.com/images/bg4.jpg";
+            }
+            return url;
         }
     }
 };

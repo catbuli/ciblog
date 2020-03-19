@@ -8,6 +8,7 @@ use think\Db;
 
 class Article extends Model
 {
+    protected $pk = "aid";
     /**
      * 根据条件返回文章列表
      *
@@ -17,6 +18,7 @@ class Article extends Model
     public function getArticleList($paging)
     {
         //根据分页 typeName type 进行数据获取
+        if (!$paging) return [];
         $pagingDate = ($paging['currentPage'] - 1) * $paging['pageSize'];
         switch ($paging['typeName']) {
             case 'all':

@@ -24,6 +24,10 @@
                              align="center"
                              label="分类描述">
             </el-table-column>
+            <el-table-column prop="order"
+                             align="center"
+                             label="排序">
+            </el-table-column>
             <el-table-column align="center"
                              width="80px"
                              label="操作">
@@ -128,11 +132,15 @@ export default {
         },
         delCategory() {
             if (this.selectRows.length > 0) {
-                this.$confirm("此操作将永久删除所选分类, 是否继续?", "提示", {
-                    confirmButtonText: "确定",
-                    cancelButtonText: "取消",
-                    type: "warning"
-                })
+                this.$confirm(
+                    "此操作将永久删除所选分类,以及该分类下所有文章, 是否继续?",
+                    "提示",
+                    {
+                        confirmButtonText: "确定",
+                        cancelButtonText: "取消",
+                        type: "warning"
+                    }
+                )
                     .then(() => {
                         this.$post(
                             "/category/del",

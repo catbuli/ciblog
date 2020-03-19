@@ -14,7 +14,7 @@
 <script>
 // @ is an alias to /src
 import footEle from "@/components/common/footEle.vue";
-import headEle from "@/components/common/headEle.vue";
+import headEle from "../components/headEle.vue";
 import articleItem from "../components/articleItem.vue";
 import backTop from "@/components/common/backTop.vue";
 import paging from "@/components/common/paging.vue";
@@ -27,6 +27,11 @@ export default {
         articleItem,
         backTop,
         paging
+    },
+    filters: {
+        handleImage(value) {
+            console.log(value);
+        }
     },
     data() {
         return {
@@ -42,7 +47,12 @@ export default {
     },
     computed: {
         banner() {
-            return this.$store.state.global.system.randomBanner;
+            let url = this.$store.state.global.system.randomBanner;
+            if (!url) {
+                url =
+                    "https://ciblog.oss-cn-shanghai.aliyuncs.com/images/bg4.jpg";
+            }
+            return url;
         },
         articleList() {
             return this.$store.state.article.articleList;

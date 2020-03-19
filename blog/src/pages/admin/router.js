@@ -128,11 +128,8 @@ const routes = [{
     },
     {
         path: '*',
-        name: 'error',
-        component: (resolve) => require(['./views/404.vue'], resolve),
-        meta: {
-            title: '页面逃走了'
-        }
+        name: '/admin/',
+        component: (resolve) => require(['./views/index.vue'], resolve),
     }
 
 ];
