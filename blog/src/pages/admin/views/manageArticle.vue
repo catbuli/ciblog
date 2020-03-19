@@ -81,6 +81,7 @@
                        @click="editArticle(scope.row.aid)"
                        title="编辑"></i>
                     <a :href="`/article/${scope.row.aid}`"
+                       v-if="scope.row.status<2"
                        title="查看"
                        target="_blank"
                        class="operating-button">

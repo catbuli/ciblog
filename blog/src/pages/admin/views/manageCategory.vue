@@ -24,6 +24,10 @@
                              align="center"
                              label="分类描述">
             </el-table-column>
+            <el-table-column prop="order"
+                             align="center"
+                             label="排序">
+            </el-table-column>
             <el-table-column align="center"
                              width="80px"
                              label="操作">
