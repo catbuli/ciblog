@@ -7,6 +7,20 @@
 前端：vue2+vuex+vue-router+webpack+ES6/7+element-ui+less
 后端：tp5
 
+
+# 效果演示
+
+[个人博客](http://www.zhangyifei.top)  
+
+[项目前台预览](http://ciblog.zhangyifei.top/)  
+
+[项目后台预览](http://ciblog.zhangyifei.top/admin.html)  
+ 
+
+后台账号:testadmin  密码:admin
+
+ps:有的时候发布会慢一点。（●>∀<●）
+
 # 主要功能
 
 [开发状态](http://www.zhangyifei.top/archives/97/) 
@@ -61,19 +75,6 @@
 
 `npm run serve`
 
-
-# 效果演示
-
-[个人博客](http://www.zhangyifei.top)  
-
-[项目前台预览](http://ciblog.zhangyifei.top/)  
-
-[项目后台预览](http://ciblog.zhangyifei.top/admin.html)  
- 
-
-后台账号:testadmin  密码:admin
-
-ps:预览可能与实际内容不一致，不是每次提交都会发布.（●>∀<●）
 
 # 项目结构
 
