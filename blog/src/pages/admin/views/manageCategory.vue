@@ -16,6 +16,11 @@
             <el-table-column type="selection"
                              align="center">
             </el-table-column>
+            <el-table-column prop="order"
+                             align="center"
+                             width="50px"
+                             label="排序">
+            </el-table-column>
             <el-table-column prop="name"
                              align="center"
                              label="名称">
@@ -24,9 +29,14 @@
                              align="center"
                              label="分类描述">
             </el-table-column>
-            <el-table-column prop="order"
-                             align="center"
-                             label="排序">
+            <el-table-column align="center">
+                <template slot-scope="scope">
+                    <span class="defaultButton isdefault"
+                          v-if="scope.row.mid==defaultCategory">默认</span>
+                    <span class="defaultButton"
+                          @click="editDefault(scope.row.mid)"
+                          v-else>默认</span>
+                </template>
             </el-table-column>
             <el-table-column align="center"
                              width="80px"
@@ -88,6 +98,9 @@ export default {
     computed: {
         categoryList() {
             return this.$store.state.category.categoryList;
+        },
+        defaultCategory() {
+            return this.$store.state.global.system.default_category;
         }
     },
     watch: {
@@ -109,6 +122,17 @@ export default {
                     mid: mid
                 }
             });
+        },
+        editDefault(mid) {
+            this.$post(
+                "/setupc/edit",
+                { name: "default_category", value: mid },
+                data => {
+                    // this.$store.dispatch("getSystemAciton");
+                    this.$store.state.global.system.default_category = mid;
+                    this.getCategoryList();
+                }
+            );
         },
         getCategoryList() {
             this.$store.dispatch("getCategoryListAction");
@@ -167,9 +191,23 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .category-table {
     width: 100%;
     margin: 20px auto;
+}
+.defaultButton {
+    cursor: pointer;
+    color: rgb(255, 136, 0);
+    opacity: 0;
+}
+.el-table__row:hover .defaultButton {
+    /* visibility: visible; */
+    opacity: 1;
+}
+.isdefault {
+    cursor: auto;
+    opacity: 1;
+    color: #606266;
 }
 </style>
