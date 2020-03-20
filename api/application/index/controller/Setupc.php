@@ -84,6 +84,25 @@ class Setupc extends Controller
         }
     }
     /**
+     * 设置单项修改
+     *
+     * @param [type] $name 设置名称
+     * @param [type] $value 设置值
+     * @return JSON 响应信息
+     */
+    public function edit($name, $value)
+    {
+        if (Session::get('uid') == 2) {
+            return Response::result(400, "失败", "该账号没有此操作的权限!", []);
+        }
+        try {
+            Setup::where('user', 1)->where('name', $name)->update(['value' => $value]);
+            return Response::result(201, "成功", "修改成功!");
+        } catch (Exception $e) {
+            return Response::result(400, "请求失败", $e->getMessage());
+        }
+    }
+    /**
      * 设置更新
      *
      * @param json $data 更新设置数据
