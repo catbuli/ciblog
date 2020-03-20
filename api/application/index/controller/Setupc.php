@@ -72,8 +72,32 @@ class Setupc extends Controller
     {
         try {
             $header = apache_request_headers();
-            $uid = $header['uid'] ? $header['uid'] : 1;
-            return Response::result(201, "成功", "数据获取成功!", Setup::get($uid));
+            $uid = $header['uid'] ? 1 : 1;
+            $list = Setup::where('user', $uid)->select();
+            $handle = [];
+            foreach ($list as $item) {
+                $handle[$item->name] = $item->value;
+            };
+            return Response::result(201, "成功", "数据获取成功!", $handle);
+        } catch (Exception $e) {
+            return Response::result(400, "请求失败", $e->getMessage());
+        }
+    }
+    /**
+     * 设置单项修改
+     *
+     * @param [type] $name 设置名称
+     * @param [type] $value 设置值
+     * @return JSON 响应信息
+     */
+    public function edit($name, $value)
+    {
+        if (Session::get('uid') == 2) {
+            return Response::result(400, "失败", "该账号没有此操作的权限!", []);
+        }
+        try {
+            Setup::where('user', 1)->where('name', $name)->update(['value' => $value]);
+            return Response::result(201, "成功", "修改成功!");
         } catch (Exception $e) {
             return Response::result(400, "请求失败", $e->getMessage());
         }
@@ -93,16 +117,27 @@ class Setupc extends Controller
             if (TokenManage::checkToken()) {
                 $header = apache_request_headers();
                 $uid = $header['uid'];
-                $setup = new Setup;
-                $setup->save([
-                    'banner'  => $data['banner'],
-                    'comment_check' => $data['comment_check'] == true ? 1 : 0,
-                    'comment_is_allow' => $data['comment_is_allow'] == true ? 1 : 0,
-                    'qaq' => $data['qaq'],
-                    'web_name' => $data['web_name'],
-                    'web_description' => $data['web_description'],
-                    'web_url' => $data['web_url'],
-                ], ['sid' => $uid]);
+                foreach ($data as $key => $item) {
+                    Setup::where('user', 1)->where('name', $key)->update(['value' => $item]);
+                }
+                // $setup->save([
+                //     'banner'  => $data['banner'],
+                //     'comment_check' => $data['comment_check'] == true ? 1 : 0,
+                //     'comment_is_allow' => $data['comment_is_allow'] == true ? 1 : 0,
+                //     'qaq' => $data['qaq'],
+                //     'web_name' => $data['web_name'],
+                //     'web_description' => $data['web_description'],
+                //     'web_url' => $data['web_url'],
+                // ], ['sid' => $uid]);
+                // $setup->save([
+                //     'banner'  => $data->banner,
+                //     'comment_check' => $data->comment_check == true ? 1 : 0,
+                //     'comment_is_allow' => $data->comment_is_allow == true ? 1 : 0,
+                //     'qaq' => $data->qaq,
+                //     'web_name' => $data->web_name,
+                //     'web_description' => $data->web_description,
+                //     'web_url' => $data->web_url,
+                // ], ['sid' => $uid]);
                 return Response::result(200, "成功", "设置更新成功!");
             } else {
                 return Response::result(402, "失败", "账号登陆失效！");
