@@ -1,11 +1,12 @@
 <template>
     <adminFrame v-loading="loading"
                 width='75%'
+                :title="title"
                 element-loading-text="数据获取中">
-        <adminTitle v-if="isEdit"
+        <!-- <adminTitle v-if="isEdit"
                     :title="'编辑文章　'+showTitle"></adminTitle>
         <adminTitle v-else
-                    title="写文章"></adminTitle>
+                    title="写文章"></adminTitle> -->
         <el-row>
             <el-col :span="16">
                 <section class="content-main">
@@ -192,6 +193,15 @@ export default {
             this.article = this.$store.state.article.article;
             this.showTitle = this.$store.state.article.article.title;
             this.loading = false;
+        }
+    },
+    computed: {
+        title() {
+            if (this.isEdit) {
+                return "编辑文章　" + this.showTitle;
+            } else {
+                return "写文章";
+            }
         }
     },
     mounted() {

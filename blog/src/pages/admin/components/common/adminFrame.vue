@@ -1,9 +1,9 @@
 <template>
     <div id="admin-frame"
          :style="{ height: height,width:width}">
-        <adminTitle :title="title"
-                    v-if="action">
+        <adminTitle :title="title">
             <i class="el-icon-refresh refresh"
+               v-if="action"
                @click="refresh()"></i>
         </adminTitle>
         <slot></slot>
