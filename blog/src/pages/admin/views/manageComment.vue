@@ -1,5 +1,7 @@
 <template>
-    <adminFrame title="评论管理">
+    <adminFrame title="评论管理"
+                action
+                @refresh-click="getData">
         <el-row>
             <el-col :span=2>
                 <el-button type="primary"
@@ -155,6 +157,10 @@ export default {
     },
     mounted() {},
     methods: {
+        getData() {
+            this.loading = true;
+            this.$store.dispatch("getCommentListAction", this.paging);
+        },
         selectChange(value) {
             this.loading = true;
             this.paging.currentPage = 1;

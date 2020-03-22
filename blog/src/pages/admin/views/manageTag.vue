@@ -1,6 +1,8 @@
 <template>
     <adminFrame title="标签管理"
-                width="70%">
+                width="70%"
+                action
+                @refresh-click="getTagList">
         <el-row v-loading="loading"
                 element-loading-text="标签列表加载中">
             <el-col :span="15">
@@ -66,6 +68,7 @@ export default {
     },
     methods: {
         getTagList() {
+            this.loading = true;
             this.$store.dispatch("getTagListAction");
         },
         delTag(tag) {

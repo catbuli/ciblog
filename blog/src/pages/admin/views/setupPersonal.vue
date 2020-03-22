@@ -1,7 +1,9 @@
 <template>
     <adminFrame title="个人设置"
                 v-loading="loading"
-                element-loading-text="数据获取中">
+                element-loading-text="数据获取中"
+                action
+                @refresh-click="getData">
         <section>
             <ul>
                 <li>
@@ -117,6 +119,7 @@ export default {
     },
     methods: {
         getData() {
+            this.loading = true;
             this.$store.dispatch("getPersonalDataAction");
         },
         submit() {

@@ -1,6 +1,9 @@
 <template>
-    <h2 id="admin-title"
-        v-text="this.title"></h2>
+    <div id="admin-title">
+        <h2 v-text="this.title">
+        </h2>
+        <slot></slot>
+    </div>
 </template>
 
 <script>
@@ -13,9 +16,12 @@ export default {
 </script>
 
 <style scoped>
-#admin-title {
+/* #admin-title {
+} */
+h2 {
     text-align: left;
     font-weight: bold;
     margin: 30px auto;
+    display: inline-block;
 }
 </style>
