@@ -1,6 +1,8 @@
 <template>
-    <adminFrame title="评论设置">
-        <section :loading="loading">
+    <adminFrame title="评论设置"
+                action
+                @refresh-click="getData">
+        <section v-loading="loading">
             <ul>
                 <li>
                     <h4>是否允许评论</h4>
@@ -48,10 +50,19 @@ export default {
         }
     },
     created() {
-        this.$store.dispatch("getSystemAciton");
+        this.getData();
+    },
+    watch: {
+        "$store.state.global.system": function() {
+            this.loading = false;
+        }
     },
     mounted() {},
     methods: {
+        getData() {
+            this.loading = true;
+            this.$store.dispatch("getSystemAciton");
+        },
         submit() {
             this.$store.dispatch("updateSystemAciton", this.system);
         }

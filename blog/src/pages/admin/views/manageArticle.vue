@@ -1,6 +1,8 @@
 <template>
     <adminFrame title="文章管理"
-                width="65%">
+                width="65%"
+                action
+                @refresh-click="getData">
         <el-row>
             <el-col :span="2">
                 <el-button type="primary"
@@ -153,13 +155,17 @@ export default {
         }
     },
     created() {
-        this.$store.dispatch("getCategoryListAction");
         if (this.$route.query.mid) {
             this.change(parseInt(this.$route.query.mid));
             this.category = parseInt(this.$route.query.mid);
         }
     },
     methods: {
+        //获取文章列表
+        getData() {
+            this.loading = true;
+            this.$store.dispatch("getArticleListAction", this.paging);
+        },
         clear() {
             this.paging.typeName = "all";
             this.paging.type = -1;

@@ -1,7 +1,11 @@
 <template>
     <div id="admin-frame"
          :style="{ height: height,width:width}">
-        <adminTitle :title="title"></adminTitle>
+        <adminTitle :title="title"
+                    v-if="action">
+            <i class="el-icon-refresh refresh"
+               @click="refresh()"></i>
+        </adminTitle>
         <slot></slot>
         <footEle></footEle>
     </div>
@@ -19,9 +23,18 @@ export default {
     props: {
         title: String,
         height: String,
-        width: String
+        width: String,
+        action: {
+            type: Boolean,
+            default: false
+        }
     },
-    mounted() {}
+    mounted() {},
+    methods: {
+        refresh() {
+            this.$emit("refresh-click");
+        }
+    }
 };
 </script>
 
@@ -36,5 +49,9 @@ export default {
     right: 0;
     top: 60px;
     bottom: 0;
+}
+.refresh {
+    margin-left: 10px;
+    cursor: pointer;
 }
 </style>

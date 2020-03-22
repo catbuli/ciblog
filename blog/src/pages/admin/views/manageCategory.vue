@@ -1,5 +1,7 @@
 <template>
-    <adminFrame title="分类管理">
+    <adminFrame title="分类管理"
+                action
+                @refresh-click="getCategoryList">
         <el-button type="primary"
                    icon="el-icon-plus"
                    @click="$router.push('/admin/add_category')">
@@ -135,6 +137,7 @@ export default {
             );
         },
         getCategoryList() {
+            this.loading = true;
             this.$store.dispatch("getCategoryListAction");
         },
         getCategory(mid) {

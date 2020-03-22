@@ -1,5 +1,7 @@
 <template>
     <adminFrame title="文件管理"
+                action
+                @refresh-click="getData"
                 width="70%">
         <el-row>
             <el-col :span=2>
@@ -164,6 +166,10 @@ export default {
     },
     mounted() {},
     methods: {
+        getData() {
+            this.loading = true;
+            this.$store.dispatch("getFileListAction", this.paging);
+        },
         /**
          * 覆盖组件
          */
