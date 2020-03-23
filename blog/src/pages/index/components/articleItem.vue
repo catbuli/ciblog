@@ -29,8 +29,7 @@
                 <span class="card-bottom-left">
                     <a @click="jump(item.aid)"
                        style="cursor: pointer;">
-                        <i class="iconfont iconellipsis"></i>
-                        <i class="iconfont iconellipsis"></i>
+                        ••• •••
                     </a>
                 </span>
                 <span class="card-bottom-right">

@@ -1,7 +1,7 @@
 <template>
     <div class="footEle">
         <p class="footer-info">
-            © 2020 • {{this.$store.state.global.system.web_name}} • Blog • Test
+            © 2020 • {{this.$store.state.global.system.web_name}} • ciblog • 0.0.2
         </p>
     </div>
 </template>
@@ -22,8 +22,10 @@ export default {
 
 <style scoped>
 .footEle {
+    /* position: absolute; */
+    /* bottom: 0px; */
     clear: both;
-    margin: 20px auto;
+    margin: 40px auto;
     width: 100%;
     color: black;
     text-align: center;
