@@ -156,12 +156,12 @@ li {
 
 /* 路由切换动画 */
 .fade-enter {
-    transform: translateY(-80%);
+    transform: translateY(-100%);
     /* transform: scale(0.3); */
     opacity: 0;
 }
 .fade-enter-active {
-    transition: all 1.5s ease;
+    transition: all 0.5s ease;
 }
 .fade-enter-to {
     transform: translateY(0);
@@ -175,11 +175,11 @@ li {
     opacity: 1;
 }
 .fade-leave-active {
-    transition: all 1s ease;
+    transition: all 0.5s ease;
     /* animation: card-out 1s ease; */
 }
 .fade-leave-to {
-    transform: translateY(150%);
+    transform: translateY(100%);
     /* transform: scale(0.3); */
     opacity: 0.3;
 }
