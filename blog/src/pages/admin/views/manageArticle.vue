@@ -155,6 +155,7 @@ export default {
         }
     },
     created() {
+        this.$store.dispatch("getCategoryListAction");
         if (this.$route.query.mid) {
             this.change(parseInt(this.$route.query.mid));
             this.category = parseInt(this.$route.query.mid);
@@ -164,6 +165,7 @@ export default {
         //获取文章列表
         getData() {
             this.loading = true;
+            this.$store.dispatch("getCategoryListAction");
             this.$store.dispatch("getArticleListAction", this.paging);
         },
         clear() {

@@ -2,16 +2,16 @@
 
 namespace app\index\controller;
 
-use think\Controller;
-use app\index\model\User;
-use app\index\model\Setup;
-use think\Exception;
 use app\common\Response;
 use app\common\Session;
 use app\common\TokenManage;
 use app\index\model\Article;
 use app\index\model\Comment;
 use app\index\model\Meta;
+use app\index\model\Setup;
+use app\index\model\User;
+use think\Controller;
+use think\Exception;
 
 class Setupc extends Controller
 {
@@ -48,10 +48,10 @@ class Setupc extends Controller
                 $uid = $header['uid'];
                 $user = new User;
                 $user->save([
-                    'mail'  => $data['mail'],
-                    'bilibili'  => $data['bilibili'],
-                    'github'  => $data['github'],
-                    'nickname'  => $data['nickname'],
+                    'mail' => $data['mail'],
+                    'bilibili' => $data['bilibili'],
+                    'github' => $data['github'],
+                    'nickname' => $data['nickname'],
                     'description' => $data['description'],
                     'imgurl' => $data['imgurl'],
                 ], ['uid' => $uid]);
