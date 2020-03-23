@@ -1,12 +1,11 @@
 <template>
     <adminFrame title="个人设置"
-                v-loading="loading"
                 element-loading-text="数据获取中"
                 action
                 @refresh-click="getData">
         <section>
             <ul>
-                <li>
+                <li v-loading="loading">
                     <el-avatar shape="square"
                                :size="100"
                                style="margin-bottom:20px"
@@ -18,7 +17,7 @@
                               v-model="personalData.imgurl"></el-input>
                     <span class="input-hint">头像链接地址。</span>
                 </li>
-                <li>
+                <li v-loading="loading">
                     <h4>昵称</h4>
                     <el-input placeholder="请输入内容"
                               @keydown.enter.native="submit"
@@ -26,7 +25,7 @@
                     <span class="input-hint">用户昵称可以与用户名不同, 用于前台显示.
                         如果你将此项留空, 将默认使用用户名.</span>
                 </li>
-                <li>
+                <li v-loading="loading">
                     <h4>个人描述</h4>
                     <el-input placeholder="请输入内容"
                               @keydown.enter.native="submit"
@@ -35,21 +34,21 @@
                         用于前台显示。
                     </span>
                 </li>
-                <li>
+                <li v-loading="loading">
                     <h4>哔哩哔哩主页</h4>
                     <el-input placeholder="请输入内容"
                               @keydown.enter.native="submit"
                               v-model="personalData.bilibili"></el-input>
                     <span class="input-hint">bilibili个人主页.</span>
                 </li>
-                <li>
+                <li v-loading="loading">
                     <h4>github主页</h4>
                     <el-input placeholder="请输入内容"
                               @keydown.enter.native="submit"
                               v-model="personalData.github"></el-input>
                     <span class="input-hint">github个人主页.</span>
                 </li>
-                <li>
+                <li v-loading="loading">
                     <h4>电子邮箱</h4>
                     <el-input placeholder="请输入内容"
                               @keydown.enter.native="submit"
