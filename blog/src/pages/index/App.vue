@@ -5,8 +5,7 @@
         <div id="mian"
              :class="[$store.state.global.isShowLeftNav ? '' : 'handle-main']"
              :style="{height:$store.state.global.isAdmin?'100%':''}">
-            <transition name="fade"
-                        @enter="beforeEnter">
+            <transition name="fade">
                 <!-- @before-leave="beforeEnter"> -->
                 <!-- mode="out-in"> -->
                 <router-view />
@@ -29,6 +28,7 @@ export default {
     watch: {
         $route() {
             this.$store.commit("handleLeftNav", false);
+            scrollTo(0, 0);
         }
     },
     components: {
@@ -156,9 +156,9 @@ li {
 
 /* 路由切换动画 */
 .fade-enter {
-    transform: translateX(100%);
+    transform: translateY(-80%);
     /* transform: scale(0.3); */
-    opacity: 0.3;
+    opacity: 0;
 }
 .fade-enter-active {
     transition: all 1.5s ease;
@@ -175,12 +175,36 @@ li {
     opacity: 1;
 }
 .fade-leave-active {
-    transition: all 0.5s ease;
+    transition: all 1s ease;
     /* animation: card-out 1s ease; */
 }
 .fade-leave-to {
-    transform: translateX(-100%);
+    transform: translateY(150%);
     /* transform: scale(0.3); */
-    opacity: 0;
+    opacity: 0.3;
 }
+/* 路由切换动画 */
+/* .fade-enter {
+    transform: translateX(100%);
+    opacity: 0.3;
+}
+.fade-enter-active {
+    transition: all 1.5s ease;
+}
+.fade-enter-to {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.fade-leave {
+    transform: translateX(0);
+    opacity: 1;
+}
+.fade-leave-active {
+    transition: all 0.5s ease;
+}
+.fade-leave-to {
+    transform: translateX(-100%);
+    opacity: 0;
+} */
 </style>
