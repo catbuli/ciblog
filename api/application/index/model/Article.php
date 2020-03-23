@@ -40,7 +40,7 @@ class Article extends Model
                     ->limit($pagingDate, $paging['pageSize'])
                     ->where('title', 'like', '%' . $paging['type'] . '%')
                     ->whereOr('text', 'like', '%' . $paging['type'] . '%')
-                    ->field('aid,title,create_date,pv,comment_count,cover_url,description')
+                    ->field('aid,title,create_date,pv,comment_count,cover_url,description,status')
                     ->select();
             case 'category':
                 $list = Db::name('article_meta')
@@ -52,7 +52,7 @@ class Article extends Model
                 foreach ($list as $value) {
                     array_unshift($dataList, Db::name("article")
                         ->where('aid', $value['aid'])
-                        ->field('aid,title,create_date,pv,comment_count,cover_url,description')
+                        ->field('aid,title,create_date,pv,comment_count,cover_url,description,status')
                         ->find());
                 }
                 return $dataList;
