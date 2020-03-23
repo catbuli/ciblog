@@ -23,9 +23,16 @@ class Article extends Model
         switch ($paging['typeName']) {
             case 'all':
                 if ($paging['type'] == 0) {
-                    return $this->order('create_date desc')->where('status', "<", 2)->limit($pagingDate, $paging['pageSize'])->field('aid,title,create_date,pv,comment_count,cover_url,description,status')->select();
+                    return $this->order('create_date desc')
+                        ->where('status', "<", 2)
+                        ->limit($pagingDate, $paging['pageSize'])
+                        ->field('aid,title,create_date,pv,comment_count,cover_url,description,status')
+                        ->select();
                 } else {
-                    return $this->order('create_date desc')->limit($pagingDate, $paging['pageSize'])->field('aid,title,create_date,pv,comment_count,cover_url,description,status,draft')->select();
+                    return $this->order('create_date desc')
+                        ->limit($pagingDate, $paging['pageSize'])
+                        ->field('aid,title,create_date,pv,comment_count,cover_url,description,status,draft')
+                        ->select();
                 }
                 // 关键字搜索
             case 'keyword':
@@ -36,21 +43,38 @@ class Article extends Model
                     ->field('aid,title,create_date,pv,comment_count,cover_url,description')
                     ->select();
             case 'category':
-                $list = Db::name('article_meta')->where("mid", $paging['type'])->where("type", "category")->limit($pagingDate, $paging['pageSize'])->select();
+                $list = Db::name('article_meta')
+                    ->where("mid", $paging['type'])
+                    ->where("type", "category")
+                    ->limit($pagingDate, $paging['pageSize'])
+                    ->select();
                 $dataList = [];
                 foreach ($list as $value) {
-                    array_push($dataList, Db::name("article")->where('aid', $value['aid'])->field('aid,title,create_date,pv,comment_count,cover_url,description')->find());
+                    array_unshift($dataList, Db::name("article")
+                        ->where('aid', $value['aid'])
+                        ->field('aid,title,create_date,pv,comment_count,cover_url,description')
+                        ->find());
                 }
                 return $dataList;
             case 'tag':
-                $list = Db::name('article_meta')->where("mid", $paging['type'])->where("type", "tag")->limit($pagingDate, $paging['pageSize'])->select();
+                $list = Db::name('article_meta')
+                    ->where("mid", $paging['type'])
+                    ->where("type", "tag")
+                    ->limit($pagingDate, $paging['pageSize'])
+                    ->select();
                 $dataList = [];
                 foreach ($list as $value) {
-                    array_push($dataList, Db::name("article")->where('aid', $value['aid'])->field('aid,title,create_date,pv,comment_count,cover_url,description,status')->find());
+                    array_unshift($dataList, Db::name("article")
+                        ->where('aid', $value['aid'])
+                        ->field('aid,title,create_date,pv,comment_count,cover_url,description,status')
+                        ->find());
                 }
                 return $dataList;
             case 'hot':
-                $list = $this->order('pv desc')->field('aid,title,create_date,pv,comment_count,cover_url,description')->limit($pagingDate, $paging['pageSize'])->select();
+                $list = $this->order('pv desc')
+                    ->field('aid,title,create_date,pv,comment_count,cover_url,description')
+                    ->limit($pagingDate, $paging['pageSize'])
+                    ->select();
                 return $list;
             default:
                 return Article::all();
