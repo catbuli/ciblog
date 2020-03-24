@@ -156,7 +156,7 @@ li {
 
 /* 路由切换动画 */
 .fade-enter {
-    transform: translateY(-70%);
+    transform: translateY(-50%);
     /* transform: scale(0.3); */
     opacity: 0;
 }

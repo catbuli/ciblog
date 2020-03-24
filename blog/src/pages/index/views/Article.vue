@@ -279,10 +279,10 @@ export default {
         },
         "$store.state.comment.commentList": function() {
             this.commentData.content = "";
-            this.loading = false;
             this.clearReply();
         },
         $route: function(to, form) {
+            this.loading = true;
             // this.$store.commit("REFRESH", form.path);
             this.getArticleData(this.$route.params.id);
             this.getCommentList(this.$route.params.id);
@@ -356,6 +356,7 @@ export default {
         }
     },
     mounted() {
+        this.loading = true;
         this.getArticleData(this.$route.params.id);
         this.getCommentList(this.$route.params.id);
     }
