@@ -73,14 +73,17 @@
                         <h4>文章标签</h4>
                         <el-checkbox-group v-model="article.tagList">
                             <el-checkbox v-for="item in $store.state.tag.tagList"
+                                         size="small"
                                          :key="item.mid"
                                          :label="item.mid"
                                          border>{{item.name}}</el-checkbox>
+                            <el-input placeholder="新标签"
+                                      v-model="tagName"
+                                      size="small"
+                                      class="new-tag"
+                                      clearable
+                                      @keyup.enter.native="newTag"></el-input>
                         </el-checkbox-group>
-                        <el-input placeholder="新标签"
-                                  v-model="tagName"
-                                  class="new-tag"
-                                  @keyup.enter.native="newTag"></el-input>
                     </el-row>
                     <el-row class="setting-row">
                         <upload :aid=Number(this.$route.params.aid)></upload>
@@ -341,6 +344,8 @@ li {
     margin-left: 0px;
 }
 .new-tag {
-    width: 150px;
+    width: 100px;
+    vertical-align: top;
+    display: inline-block;
 }
 </style>
