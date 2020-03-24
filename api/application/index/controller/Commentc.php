@@ -63,8 +63,12 @@ class Commentc extends Controller
             return Response::result(400, "失败", "该账号没有此操作的权限!", []);
         }
         try {
-            foreach ($cid as $value) {
-                Comment::destroy($value);
+            if (is_array($cid)) {
+                foreach ($cid as $value) {
+                    Comment::destroy($value);
+                }
+            } else {
+                Comment::destroy($cid);
             }
             return Response::result(200, "成功", "评论删除成功!");
         } catch (Exception $e) {
