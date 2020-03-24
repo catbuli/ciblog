@@ -62,12 +62,19 @@
                 <section class="content-settings">
                     <el-row class="setting-row">
                         <h4>文章分类</h4>
-                        <el-checkbox-group v-model="article.categoryList">
-                            <el-checkbox v-for="item in $store.state.category.categoryList"
+                        <!-- <el-checkbox-group v-model="article.categoryList">
+                            <el-checkbox v-for="item in categoryList"
                                          :key="item.mid"
                                          :label="item.mid"
                                          border>{{item.name}}</el-checkbox>
-                        </el-checkbox-group>
+                        </el-checkbox-group> -->
+                        <el-tree :props="props"
+                                 :data="categoryList"
+                                 node-key="mid"
+                                 show-checkbox
+                                 ref="tree"
+                                 @check="check">
+                        </el-tree>
                     </el-row>
                     <el-row class="setting-row">
                         <h4>文章标签</h4>
@@ -159,6 +166,10 @@ export default {
                 description: "",
                 status: 0
             },
+            props: {
+                label: "name",
+                children: "zones"
+            },
             showTitle: "",
             loading: true,
             isEdit: false,
@@ -196,9 +207,13 @@ export default {
             this.article = this.$store.state.article.article;
             this.showTitle = this.$store.state.article.article.title;
             this.loading = false;
+            this.setCheckedKeys(this.article);
         }
     },
     computed: {
+        categoryList() {
+            return this.$store.state.category.categoryList;
+        },
         title() {
             if (this.isEdit) {
                 return "编辑文章　" + this.showTitle;
@@ -212,6 +227,14 @@ export default {
         this.getMetaList();
     },
     methods: {
+        //设置当前已经被勾选的数组
+        setCheckedKeys(data) {
+            this.$refs.tree.setCheckedKeys(data.categoryList);
+        },
+        //根据当前选择修改分类数据
+        check(data, list) {
+            this.article.categoryList = list.checkedKeys;
+        },
         getMetaList() {
             this.$store.dispatch("getCategoryListAction");
             this.$store.dispatch("getTagListAction");
@@ -255,6 +278,7 @@ export default {
                     offset: 50
                 });
             } else {
+                // console.log(this.article);
                 this.$store.dispatch("publishArticleAction", this.article);
             }
         },
