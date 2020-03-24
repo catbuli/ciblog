@@ -39,9 +39,11 @@ import {
     Image,
     Notification,
     Message,
-    MessageBox
+    MessageBox,
+    Tree
 } from 'element-ui';
 Vue.use(Image);
+Vue.use(Tree);
 Vue.use(Tag);
 Vue.use(Radio);
 Vue.use(RadioButton);

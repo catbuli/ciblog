@@ -63,8 +63,12 @@ class Commentc extends Controller
             return Response::result(400, "失败", "该账号没有此操作的权限!", []);
         }
         try {
-            foreach ($cid as $value) {
-                Comment::destroy($value);
+            if (is_array($cid)) {
+                foreach ($cid as $value) {
+                    Comment::destroy($value);
+                }
+            } else {
+                Comment::destroy($cid);
             }
             return Response::result(200, "成功", "评论删除成功!");
         } catch (Exception $e) {
@@ -127,7 +131,7 @@ class Commentc extends Controller
                     'nickname' => $data["nickname"],
                     'email' => $data["email"],
                     'create_date' => date('Y-m-d H:i:s'),
-                    'status' => Setup::get(1)->comment_check == 1 ? 0 : 1,
+                    'status' => Setup::get(['user' => 1, 'name' => 'comment_check'])['value'] == 1 ? 0 : 1,
                     'ip' => $_SERVER['REMOTE_ADDR'],
                     'avatar_url' => $data['avatar_url'],
                     'reply' => empty($data['reply']) ? null : json_encode($data['reply'])
