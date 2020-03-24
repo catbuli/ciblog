@@ -1,6 +1,7 @@
 <template>
     <div class="footEle">
-        <p class="footer-info">
+        <p class="footer-info"
+           v-if="$store.state.global.system.web_name">
             © 2020 • {{this.$store.state.global.system.web_name}} • ciblog • 0.0.2
         </p>
     </div>
