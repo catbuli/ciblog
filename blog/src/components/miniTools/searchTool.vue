@@ -69,11 +69,7 @@ export default {
         search() {
             this.isShow = false;
             this.$router.push({
-                path: "/search",
-                query: {
-                    typeName: "keyword",
-                    type: this.input
-                }
+                path: `/search/keyword/${this.input}`
             });
             this.input = "";
         }

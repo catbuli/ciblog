@@ -333,24 +333,14 @@ export default {
         categoryJump(name, mid) {
             if (name && mid) {
                 this.$router.push({
-                    path: "/search",
-                    query: {
-                        typeName: "category",
-                        type: name,
-                        mid: mid
-                    }
+                    path: `/search/category/${mid}`
                 });
             }
         },
         tagJump(name, mid) {
             if (name && mid) {
                 this.$router.push({
-                    path: "/search",
-                    query: {
-                        typeName: "tag",
-                        type: name,
-                        mid: mid
-                    }
+                    path: `/search/tag/${mid}`
                 });
             }
         }

@@ -20,6 +20,14 @@ const routes = [{
         }
     },
     {
+        path: '/search/:typeName/:type',
+        name: 'search',
+        component: (resolve) => require(['./views/Search.vue'], resolve),
+        meta: {
+            title: '搜索'
+        }
+    },
+    {
         path: '/article/:id',
         name: 'article',
         component: (resolve) => require(['./views/Article.vue'], resolve)

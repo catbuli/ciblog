@@ -3,7 +3,8 @@
          :key="$route.fullPath">
         <headEle height="70%"
                  :backgroundImage="'url('+banner+')'"></headEle>
-        <div class="search-message">
+        <div class="search-message"
+             v-loading="loading">
             <p v-html="searchMessage"></p>
             <p v-html="searchDescription"></p>
         </div>
@@ -59,11 +60,17 @@ export default {
                     "https://ciblog.oss-cn-shanghai.aliyuncs.com/images/bg4.jpg";
             }
             return url;
+        },
+        webDescription() {
+            return this.$store.state.global.system.web_description;
         }
     },
     watch: {
         "$route.fullPath"() {
             this.search();
+        },
+        webDescription() {
+            this.searchDescription = this.webDescription;
         }
     },
     mounted() {
@@ -74,37 +81,41 @@ export default {
     },
     methods: {
         search() {
-            switch (this.$route.query.typeName) {
+            this.searchDescription = this.webDescription;
+            this.paging.typeName = this.$route.params.typeName;
+            this.paging.type = this.$route.params.type;
+            switch (this.$route.params.typeName) {
                 case "keyword":
                     this.searchMessage =
-                        "包含关键字 " + this.$route.query.type + " 的文章";
-                    this.searchDescription = this.$store.state.global.system.web_description;
-                    this.paging.typeName = this.$route.query.typeName;
-                    this.paging.type = this.$route.query.type;
+                        "包含关键字 " + this.$route.params.type + " 的文章";
                     break;
                 case "category":
+                    this.searchMessage = "所属分类为 " + "   " + " 的文章";
                     this.$post(
                         "/category/bymid",
-                        { mid: this.$route.query.mid },
+                        { mid: this.$route.params.type },
                         data => {
                             this.searchDescription = data.data.description;
+                            this.searchMessage =
+                                "所属分类为 " + data.data.name + " 的文章";
                         }
                     );
-                    this.searchMessage =
-                        "所属分类为 " + this.$route.query.type + " 的文章";
-                    this.paging.typeName = this.$route.query.typeName;
-                    this.paging.type = this.$route.query.mid;
                     break;
                 case "tag":
-                    this.searchMessage =
-                        "拥有 " + this.$route.query.type + " 标签的文章";
-                    this.searchDescription = this.$store.state.global.system.web_description;
-                    this.paging.typeName = this.$route.query.typeName;
-                    this.paging.type = this.$route.query.mid;
+                    this.searchMessage = "拥有 " + "   " + " 标签的文章";
+                    this.$post(
+                        "/category/bymid",
+                        { mid: this.$route.params.type },
+                        data => {
+                            this.searchMessage =
+                                "拥有 " + data.data.name + " 标签的文章";
+                        }
+                    );
                     break;
                 default:
                     break;
             }
+            this.loading = false;
         },
         handlePage() {
             this.loading = true;
