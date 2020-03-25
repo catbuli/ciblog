@@ -104,7 +104,7 @@ export default {
                 case "tag":
                     this.searchMessage = "拥有 " + "   " + " 标签的文章";
                     this.$post(
-                        "/category/bymid",
+                        "/tag/bymid",
                         { mid: this.$route.params.type },
                         data => {
                             this.searchMessage =
