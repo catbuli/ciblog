@@ -80,4 +80,20 @@ class Tag extends Controller
             return Response::result(400, "请求失败!", $message);
         }
     }
+    /**
+     * 根据标签mid获取标签信息
+     *
+     * @param int $mid mateID
+     * @return 响应信息
+     */
+    public function bymid($mid)
+    {
+        try {
+            $data = Meta::get($mid);
+            return Response::result(201, "成功", "数据获取成功!", $data);
+        } catch (Exception $e) {
+            $message = $e->getMessage() . PHP_EOL . $e->getLine() . PHP_EOL . $e->getFile();
+            return Response::result(400, "请求失败!", $message);
+        }
+    }
 }

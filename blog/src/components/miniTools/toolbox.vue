@@ -123,8 +123,8 @@ export default {
     height: 150px;
     display: block;
     position: fixed;
-    left: 300px;
-    bottom: 150px;
+    left: 20px;
+    bottom: 20px;
     .drag-bar {
         opacity: 0;
         width: 100%;
