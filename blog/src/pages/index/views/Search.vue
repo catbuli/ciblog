@@ -117,7 +117,8 @@ export default {
                         );
                         break;
                     default:
-                        this.$router.push({ path: `/404` });
+                        this.searchDescription =
+                            "搜索条件错误，显示全部文章！！";
                         break;
                 }
             } else {

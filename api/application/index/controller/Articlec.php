@@ -167,9 +167,19 @@ class Articlec extends Controller
                 $article->category = ArticleMeta::getMetaByArticle($aid, "category", true);
                 $article->tag = ArticleMeta::getMetaByArticle($aid, "tag", true);
                 $list = [];
-                $list["next"] = Db::name('article')->where('aid', '<', $aid)->where('status', '<', 2)->order("aid asc")->find();
+                $list["next"] = Db::name('article')
+                    ->where('create_date', '<', $article->create_date)
+                    ->where('status', '<', 2)
+                    ->order("create_date desc")
+                    ->limit(0, 1)
+                    ->find();
                 $list["present"] = $article;
-                $list["previous"] = Db::name('article')->where('aid', '>', $aid)->where('status', '<', 2)->order("aid desc")->find();
+                $list["previous"] = Db::name('article')
+                    ->where('create_date', '>', $article->create_date)
+                    ->where('status', '<', 2)
+                    ->order("create_date asc")
+                    ->limit(0, 1)
+                    ->find();
                 if ($article->status > 0) {
                     $data = json_decode($article->draft);
                     $data->aid = (int) $aid;
