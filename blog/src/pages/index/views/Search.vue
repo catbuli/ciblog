@@ -71,6 +71,9 @@ export default {
         },
         webDescription() {
             this.searchDescription = this.webDescription;
+        },
+        articleList() {
+            this.loading = false;
         }
     },
     mounted() {
@@ -81,41 +84,46 @@ export default {
     },
     methods: {
         search() {
-            this.searchDescription = this.webDescription;
-            this.paging.typeName = this.$route.params.typeName;
-            this.paging.type = this.$route.params.type;
-            switch (this.$route.params.typeName) {
-                case "keyword":
-                    this.searchMessage =
-                        "包含关键字 " + this.$route.params.type + " 的文章";
-                    break;
-                case "category":
-                    this.searchMessage = "所属分类为 " + "   " + " 的文章";
-                    this.$post(
-                        "/category/bymid",
-                        { mid: this.$route.params.type },
-                        data => {
-                            this.searchDescription = data.data.description;
-                            this.searchMessage =
-                                "所属分类为 " + data.data.name + " 的文章";
-                        }
-                    );
-                    break;
-                case "tag":
-                    this.searchMessage = "拥有 " + "   " + " 标签的文章";
-                    this.$post(
-                        "/tag/bymid",
-                        { mid: this.$route.params.type },
-                        data => {
-                            this.searchMessage =
-                                "拥有 " + data.data.name + " 标签的文章";
-                        }
-                    );
-                    break;
-                default:
-                    break;
+            if (this.$route.params.type && this.$route.params.typeName) {
+                this.searchDescription = this.webDescription;
+                this.paging.typeName = this.$route.params.typeName;
+                this.paging.type = this.$route.params.type;
+                switch (this.$route.params.typeName) {
+                    case "keyword":
+                        this.searchMessage =
+                            "包含关键字 " + this.$route.params.type + " 的文章";
+                        break;
+                    case "category":
+                        this.searchMessage = "所属分类为 " + "   " + " 的文章";
+                        this.$post(
+                            "/category/bymid",
+                            { mid: this.$route.params.type },
+                            data => {
+                                this.searchDescription = data.data.description;
+                                this.searchMessage =
+                                    "所属分类为 " + data.data.name + " 的文章";
+                            }
+                        );
+                        break;
+                    case "tag":
+                        this.searchMessage = "拥有 " + "   " + " 标签的文章";
+                        this.$post(
+                            "/tag/bymid",
+                            { mid: this.$route.params.type },
+                            data => {
+                                this.searchMessage =
+                                    "拥有 " + data.data.name + " 标签的文章";
+                            }
+                        );
+                        break;
+                    default:
+                        this.searchDescription =
+                            "搜索条件错误，显示全部文章！！";
+                        break;
+                }
+            } else {
+                this.$router.push({ path: `/404` });
             }
-            this.loading = false;
         },
         handlePage() {
             this.loading = true;

@@ -52,8 +52,6 @@ export default {
         article_id: Number,
         article_title: String,
         article_date: String
-        // article_reviews : Number,
-        // article_pv : Number,
     },
     filters: {
         handleDate(value) {

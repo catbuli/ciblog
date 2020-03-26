@@ -40,16 +40,18 @@
                      v-if="previous">
                     <a @click="jump(previous.aid)">
                         <span>{{previous.title}}</span>
+                        <span>上一篇</span>
                         <img :src="previous.cover_url"
-                             alt="上一篇">
+                             title="上一篇">
                     </a>
                 </div>
                 <div class="article-next"
                      v-if="next">
                     <a @click="jump(next.aid)">
                         <span>{{next.title}}</span>
+                        <span>下一篇</span>
                         <img :src="next.cover_url"
-                             alt="下一篇">
+                             title="下一篇">
                     </a>
                 </div>
             </div>
@@ -453,6 +455,15 @@ export default {
     width: 70%;
     left: 15%;
     top: 50px;
+    display: inline-block;
+    position: absolute;
+    z-index: 20;
+    color: #fff;
+}
+.article-footer div span:nth-of-type(2) {
+    width: 70%;
+    left: 15%;
+    top: 75px;
     display: inline-block;
     position: absolute;
     z-index: 20;
