@@ -127,10 +127,13 @@ body {
 }
 a {
     text-decoration: none;
+    transition: all 0.24s ease;
 }
 a:visited {
-    color: #ff7b00;
     text-decoration: none;
+}
+a:hover {
+    color: #8a8a8a !important;
 }
 body,
 ul,

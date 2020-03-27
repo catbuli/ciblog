@@ -9,10 +9,11 @@
                href=""></a>
             <div class="card-top">
                 <i class="iconfont iconflag">
-                    <span class="card-top-categories"
-                          v-for="category in item.category"
-                          :key="category.mid"
-                          @click="categoryJump(category.name,category.mid)">{{category.name}}</span>
+                    <a class="card-top-categories"
+                       v-for="category in item.category"
+                       :key="category.mid"
+                       target="_blank"
+                       :href="`/search/category/${category.mid}`">{{category.name}}</a>
                 </i>
                 <i class="iconfont icontime-circle"
                    style="margin-left:10px">
@@ -69,11 +70,6 @@ export default {
             if ((name, mid)) {
                 this.$router.push({
                     path: `/search/category/${mid}`
-                    // query: {
-                    //     typeName: "category",
-                    //     type: name,
-                    //     mid: mid
-                    // }
                 });
             }
         }
@@ -97,11 +93,17 @@ export default {
 .card-top {
     margin: 10px 0px;
 }
+.card-top i {
+    font-size: 15px;
+}
 .card-top-categories {
     cursor: pointer;
 }
 .card-top-categories + .card-top-categories::before {
     content: " • ";
+}
+.card-top-date {
+    color: #8a8a8a;
 }
 .card-bottom-right {
     float: right;

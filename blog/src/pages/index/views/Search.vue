@@ -14,7 +14,6 @@
                 :paging="paging"
                 @function="handlePage"></paging>
         <footEle></footEle>
-        <backTop></backTop>
     </div>
 </template>
 
