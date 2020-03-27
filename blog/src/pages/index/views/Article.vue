@@ -155,7 +155,6 @@
             <p>评论功能已关闭</p>
         </div>
         <footEle></footEle>
-        <backTop></backTop>
     </div>
 </template>
 
@@ -163,7 +162,6 @@
 // @ is an alias to /src
 import footEle from "@/components/common/footEle.vue";
 import headEle from "../components/headEle.vue";
-import backTop from "@/components/common/backTop.vue";
 import QAQ from "@/components/miniTools/QAQ.vue";
 import Axios from "axios";
 import Gravatar from "vue-gravatar";
@@ -173,7 +171,6 @@ export default {
     components: {
         headEle,
         footEle,
-        backTop,
         Gravatar,
         QAQ
     },

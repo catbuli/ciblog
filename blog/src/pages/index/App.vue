@@ -13,12 +13,14 @@
                 <!-- 博客 ↑ :key="$route.path" -->
             </transition>
             <toolbox v-if="$store.state.global.isAdmin"></toolbox>
+            <backTop></backTop>
             <!--  -->
         </div>
     </div>
 </template>
 
 <script>
+import backTop from "@/components/common/backTop.vue";
 import navEle from "./components/navEle";
 import toolbox from "@/components/miniTools/toolbox.vue";
 export default {
@@ -34,7 +36,8 @@ export default {
     },
     components: {
         navEle,
-        toolbox
+        toolbox,
+        backTop
     },
     methods: {
         beforeEnter(el) {
