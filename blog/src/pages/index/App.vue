@@ -5,19 +5,22 @@
         <div id="mian"
              :class="[$store.state.global.isShowLeftNav ? '' : 'handle-main']"
              :style="{height:$store.state.global.isAdmin?'100%':''}">
-            <transition name="fade">
+            <transition name="fade"
+                        @enter="enter">
                 <!-- @before-leave="beforeEnter"> -->
                 <!-- mode="out-in"> -->
                 <router-view />
                 <!-- 博客 ↑ :key="$route.path" -->
             </transition>
             <toolbox v-if="$store.state.global.isAdmin"></toolbox>
+            <backTop></backTop>
             <!--  -->
         </div>
     </div>
 </template>
 
 <script>
+import backTop from "@/components/common/backTop.vue";
 import navEle from "./components/navEle";
 import toolbox from "@/components/miniTools/toolbox.vue";
 export default {
@@ -33,11 +36,17 @@ export default {
     },
     components: {
         navEle,
-        toolbox
+        toolbox,
+        backTop
     },
     methods: {
         beforeEnter(el) {
             scrollTo(0, 0);
+        },
+        enter: function(el, done) {
+            if (this.$route.fullPath == "/") {
+                done();
+            }
         }
     },
     created() {
@@ -117,12 +126,26 @@ body {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 a {
+    color: #333;
     text-decoration: none;
+    transition: all 0.24s ease;
 }
 a:visited {
-    color: #ff7b00;
     text-decoration: none;
 }
+a:hover {
+    color: #8a8a8a !important;
+}
+.link {
+    cursor: pointer;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.24s ease;
+}
+.link:hover {
+    color: #8a8a8a !important;
+}
+
 body,
 ul,
 li,
@@ -156,7 +179,7 @@ li {
 
 /* 路由切换动画 */
 .fade-enter {
-    transform: translateY(-50%);
+    transform: translateY(-100%);
     /* transform: scale(0.3); */
     opacity: 0;
 }

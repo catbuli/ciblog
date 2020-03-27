@@ -7,7 +7,6 @@
                 :paging="paging"
                 @function="handlePage"></paging>
         <footEle></footEle>
-        <backTop></backTop>
     </div>
 </template>
 
@@ -16,7 +15,6 @@
 import footEle from "@/components/common/footEle.vue";
 import headEle from "../components/headEle.vue";
 import articleItem from "../components/articleItem.vue";
-import backTop from "@/components/common/backTop.vue";
 import paging from "@/components/common/paging.vue";
 
 export default {
@@ -25,7 +23,6 @@ export default {
         headEle,
         footEle,
         articleItem,
-        backTop,
         paging
     },
     filters: {

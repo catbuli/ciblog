@@ -42,12 +42,7 @@ export default {
     methods: {
         categoryJump(name, mid) {
             this.$router.push({
-                path: "/search",
-                query: {
-                    typeName: "category",
-                    type: name,
-                    mid: mid
-                }
+                path: `/search/category/${mid}`
             });
         },
         getCategoryList() {

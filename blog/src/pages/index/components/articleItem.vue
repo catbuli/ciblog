@@ -3,16 +3,17 @@
         <li v-for="item in listData"
             class="card"
             :key="item.aid">
-            <a class="article-title"
-               v-text="item.title"
-               @click="jump(item.aid)"
-               href=""></a>
+            <span class="article-title link"
+                  v-text="item.title"
+                  @click="jump(item.aid)"
+                  href=""></span>
             <div class="card-top">
                 <i class="iconfont iconflag">
-                    <span class="card-top-categories"
-                          v-for="category in item.category"
-                          :key="category.mid"
-                          @click="categoryJump(category.name,category.mid)">{{category.name}}</span>
+                    <a class="card-top-categories"
+                       v-for="category in item.category"
+                       :key="category.mid"
+                       target="_blank"
+                       :href="`/search/category/${category.mid}`">{{category.name}}</a>
                 </i>
                 <i class="iconfont icontime-circle"
                    style="margin-left:10px">
@@ -69,11 +70,6 @@ export default {
             if ((name, mid)) {
                 this.$router.push({
                     path: `/search/category/${mid}`
-                    // query: {
-                    //     typeName: "category",
-                    //     type: name,
-                    //     mid: mid
-                    // }
                 });
             }
         }
@@ -97,11 +93,17 @@ export default {
 .card-top {
     margin: 10px 0px;
 }
+.card-top i {
+    font-size: 15px;
+}
 .card-top-categories {
     cursor: pointer;
 }
 .card-top-categories + .card-top-categories::before {
     content: " • ";
+}
+.card-top-date {
+    color: #8a8a8a;
 }
 .card-bottom-right {
     float: right;
@@ -149,7 +151,6 @@ ul li:hover {
 
 ul a {
     text-decoration: none;
-    color: #333;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 </style>

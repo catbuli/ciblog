@@ -12,9 +12,9 @@
                     <span class="article-meta-label iconfont iconpushpin">{{article.pv}}次阅读</span>
                     <span class="article-meta-label iconfont iconpushpin">
                         <a class="category"
-                           style="cursor: pointer"
+                           :href="`/search/category/${category.mid}`"
+                           target="_blank"
                            v-for="category in article.category"
-                           @click="categoryJump(category.name,category.mid)"
                            :key="category.mid">{{category.name}}</a>
                     </span>
                     <span class="article-meta-label iconfont iconpushpin">{{article.create_date|handleDate}}</span>
@@ -30,10 +30,13 @@
                 </div>
             </div>
             <div class="article-tags">
-                <span v-for="item in article.tag"
-                      :key="item.mid"
-                      style="cursor:pointer"
-                      @click="tagJump(item.name,item.mid)"><i class="el-icon-collection-tag">{{item.name}}</i></span>
+                <a v-for="item in article.tag"
+                   class="el-icon-collection-tag"
+                   :key="item.mid"
+                   :href="`/search/tag/${item.mid}`"
+                   target="_blank">
+                    {{item.name}}
+                </a>
             </div>
             <div class="article-footer">
                 <div class="article-previous"
@@ -155,7 +158,6 @@
             <p>评论功能已关闭</p>
         </div>
         <footEle></footEle>
-        <backTop></backTop>
     </div>
 </template>
 
@@ -163,7 +165,6 @@
 // @ is an alias to /src
 import footEle from "@/components/common/footEle.vue";
 import headEle from "../components/headEle.vue";
-import backTop from "@/components/common/backTop.vue";
 import QAQ from "@/components/miniTools/QAQ.vue";
 import Axios from "axios";
 import Gravatar from "vue-gravatar";
@@ -173,7 +174,6 @@ export default {
     components: {
         headEle,
         footEle,
-        backTop,
         Gravatar,
         QAQ
     },
@@ -331,20 +331,6 @@ export default {
             this.$router.push({
                 path: `/article/${aid}`
             });
-        },
-        categoryJump(name, mid) {
-            if (name && mid) {
-                this.$router.push({
-                    path: `/search/category/${mid}`
-                });
-            }
-        },
-        tagJump(name, mid) {
-            if (name && mid) {
-                this.$router.push({
-                    path: `/search/tag/${mid}`
-                });
-            }
         }
     },
     mounted() {
@@ -424,11 +410,11 @@ export default {
     border-bottom: 1px dashed #dadada;
     text-align: left;
 }
-.article-tags span {
+.article-tags a {
     line-height: 50px;
     display: inline-block;
 }
-.article-tags span + span::before {
+.article-tags a + a::before {
     content: " • ";
     margin-left: 5px;
 }
