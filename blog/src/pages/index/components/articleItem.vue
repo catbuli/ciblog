@@ -3,10 +3,10 @@
         <li v-for="item in listData"
             class="card"
             :key="item.aid">
-            <a class="article-title"
-               v-text="item.title"
-               @click="jump(item.aid)"
-               href=""></a>
+            <span class="article-title link"
+                  v-text="item.title"
+                  @click="jump(item.aid)"
+                  href=""></span>
             <div class="card-top">
                 <i class="iconfont iconflag">
                     <a class="card-top-categories"

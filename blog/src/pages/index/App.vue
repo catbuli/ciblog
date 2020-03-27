@@ -136,6 +136,16 @@ a:visited {
 a:hover {
     color: #8a8a8a !important;
 }
+.link {
+    cursor: pointer;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.24s ease;
+}
+.link:hover {
+    color: #8a8a8a !important;
+}
+
 body,
 ul,
 li,
