@@ -5,7 +5,8 @@
         <div id="mian"
              :class="[$store.state.global.isShowLeftNav ? '' : 'handle-main']"
              :style="{height:$store.state.global.isAdmin?'100%':''}">
-            <transition name="fade">
+            <transition name="fade"
+                        @enter="enter">
                 <!-- @before-leave="beforeEnter"> -->
                 <!-- mode="out-in"> -->
                 <router-view />
@@ -38,6 +39,11 @@ export default {
     methods: {
         beforeEnter(el) {
             scrollTo(0, 0);
+        },
+        enter: function(el, done) {
+            if (this.$route.fullPath == "/") {
+                done();
+            }
         }
     },
     created() {
@@ -156,7 +162,7 @@ li {
 
 /* 路由切换动画 */
 .fade-enter {
-    transform: translateY(-50%);
+    transform: translateY(-100%);
     /* transform: scale(0.3); */
     opacity: 0;
 }
