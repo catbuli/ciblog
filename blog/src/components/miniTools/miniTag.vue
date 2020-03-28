@@ -45,12 +45,15 @@ export default {
     border-right: 13.5px solid rgba(0, 0, 0, 0.6);
 }
 .miniTag::after {
-    content: "•";
+    content: " ";
     display: block;
     position: absolute;
-    top: 1px;
+    height: 4px;
+    width: 4px;
+    border-radius: 4px;
     left: -5px;
-    color: white;
+    bottom: 12px;
+    background: rgb(255, 255, 255);
 }
 .miniTag a:hover {
     color: white !important;
