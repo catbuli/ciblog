@@ -3,7 +3,6 @@
          class="index-frame"
          :key="$route.fullPath">
         <headEle height="60%"
-                 :isShowInfo="false"
                  :backgroundImage="'url('+article.cover_url+')'"></headEle>
         <article v-loading="loading">
             <div class="article-header">
