@@ -1,5 +1,6 @@
 <template>
-    <div id="home">
+    <div id="home"
+         class="index-frame">
         <headEle :backgroundImage="'url('+banner+')'"></headEle>
         <articleItem :list-data="articleList"></articleItem>
         <paging action="getArticleListAction"
@@ -80,11 +81,6 @@ export default {
 </script>
 
 <style>
-#home {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-}
 .articleItem {
     margin-top: 30px;
 }

@@ -25,6 +25,14 @@ const routes = [{
         component: (resolve) => require(['./views/Article.vue'], resolve)
     },
     {
+        path: '/log',
+        name: 'log',
+        component: (resolve) => require(['./views/Log.vue'], resolve),
+        meta: {
+            title: '归档'
+        }
+    },
+    {
         path: '*',
         name: '404',
         component: (resolve) => require(['./views/404.vue'], resolve),

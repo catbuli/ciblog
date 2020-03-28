@@ -1,32 +1,23 @@
 <template>
-    <div id="error"
+    <div id="log"
          class="index-frame">
         <headEle height="70%"
-                 :backgroundImage="'url('+banner+')'">
-        </headEle>
-        <div class="error-main">
-            <h3>哦吼！页面出错了搜索一下吧。</h3>
-            <searchTool></searchTool>
-        </div>
+                 :backgroundImage="'url('+banner+')'"></headEle>
         <footEle></footEle>
     </div>
-
 </template>
 
 <script>
 import footEle from "@/components/common/footEle.vue";
 import headEle from "../components/headEle.vue";
-import searchTool from "@/components/miniTools/searchTool.vue";
+// import searchTool from "@/components/miniTools/searchTool.vue";
 export default {
-    name: "errorPage",
+    name: "log",
     components: {
         footEle,
-        headEle,
-        searchTool
+        headEle
     },
-    created() {
-        this.$store.dispatch("getSystemAciton");
-    },
+    created() {},
     computed: {
         banner() {
             let url = this.$store.state.global.system.randomBanner;
@@ -41,11 +32,4 @@ export default {
 </script>
 
 <style scoped>
-.error-main {
-    height: 100px;
-}
-.error-main div {
-    width: 60%;
-    margin: 0 auto;
-}
 </style>
