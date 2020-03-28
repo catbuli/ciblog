@@ -1,8 +1,8 @@
 <template>
     <div id="Article"
+         class="index-frame"
          :key="$route.fullPath">
         <headEle height="60%"
-                 :isShowInfo="false"
                  :backgroundImage="'url('+article.cover_url+')'"></headEle>
         <article v-loading="loading">
             <div class="article-header">
@@ -346,11 +346,6 @@ export default {
     display: none;
 }
 /* 文章主体 */
-#Article {
-    height: 100%;
-    position: absolute;
-    width: 100%;
-}
 #Article article {
     border-radius: 10px;
     margin: 0 auto;

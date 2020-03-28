@@ -7,7 +7,7 @@
              :style="{height:$store.state.global.isAdmin?'100%':''}">
             <transition name="fade"
                         @enter="enter">
-                <!-- @before-leave="beforeEnter"> -->
+                <!-- @leave="leave" -->
                 <!-- mode="out-in"> -->
                 <router-view />
                 <!-- 博客 ↑ :key="$route.path" -->
@@ -43,7 +43,12 @@ export default {
         beforeEnter(el) {
             scrollTo(0, 0);
         },
-        enter: function(el, done) {
+        enter(el, done) {
+            if (this.$route.fullPath == "/") {
+                done();
+            }
+        },
+        leave(el, done) {
             if (this.$route.fullPath == "/") {
                 done();
             }
@@ -51,6 +56,7 @@ export default {
     },
     created() {
         this.$store.dispatch("getPersonalDataAction");
+        this.$store.dispatch("getSystemAciton");
     },
     mounted() {
         let loading = document.getElementById("loading");
@@ -62,6 +68,12 @@ export default {
 </script>
 
 <style>
+/* index框架样式 */
+.index-frame {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
 /* 公共样式设置 */
 ::selection {
     background-color: rgba(0, 0, 0, 0.7);
@@ -184,7 +196,7 @@ li {
     opacity: 0;
 }
 .fade-enter-active {
-    transition: all 0.5s ease;
+    transition: all 01s ease;
 }
 .fade-enter-to {
     transform: translateY(0);

@@ -1,5 +1,6 @@
 <template>
     <div id="search"
+         class="index-frame"
          :key="$route.fullPath">
         <headEle height="70%"
                  :backgroundImage="'url('+banner+')'"></headEle>
@@ -76,9 +77,7 @@ export default {
     mounted() {
         this.search();
     },
-    created() {
-        this.$store.dispatch("getSystemAciton");
-    },
+    created() {},
     methods: {
         search() {
             if (this.$route.params.type && this.$route.params.typeName) {
@@ -130,11 +129,6 @@ export default {
 </script>
 
 <style>
-#search {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-}
 .search-message {
     text-align: left;
     background-color: #ffffff;

@@ -1,5 +1,6 @@
 <template>
-    <div id="error">
+    <div id="error"
+         class="index-frame">
         <headEle height="70%"
                  :backgroundImage="'url('+banner+')'">
         </headEle>
@@ -40,11 +41,6 @@ export default {
 </script>
 
 <style scoped>
-#error {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
 .error-main {
     height: 100px;
 }
