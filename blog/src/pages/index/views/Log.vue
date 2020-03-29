@@ -24,32 +24,17 @@
                 </div>
             </div>
             <div class="timeline">
-                <div class="timeline-item">
+                <div class="timeline-item"
+                     v-for="month in articleTimeLine"
+                     :key="month.date">
                     <a class="timeline-title"
-                       href="#">2020 年 03 月</a>
-                    <div class="timeline-content">
-                        <span class="timeline-time">19 日</span>
+                       href="#">{{month.date}}</a>
+                    <div class="timeline-content"
+                         v-for="day in month.articleList"
+                         :key="day.aid">
+                        <span class="timeline-time">{{day.create_date|handleDay}}</span>
                         <a class="timeline-link"
-                           href="#">有关b站番剧点评的一些想法</a>
-                    </div>
-                    <div class="timeline-content">
-                        <span class="timeline-time">19 日</span>
-                        <a class="timeline-link"
-                           href="#">有关b站番剧点评的一些想法</a>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <a class="timeline-title"
-                       href="#">2020 年 03 月</a>
-                    <div class="timeline-content">
-                        <span class="timeline-time">19 日</span>
-                        <a class="timeline-link"
-                           href="#">有关b站番剧点评的一些想法</a>
-                    </div>
-                    <div class="timeline-content">
-                        <span class="timeline-time">19 日</span>
-                        <a class="timeline-link"
-                           href="#">有关b站番剧点评的一些想法</a>
+                           href="#">{{day.title}}</a>
                     </div>
                 </div>
             </div>
@@ -74,6 +59,11 @@ export default {
         this.$store.dispatch("getCategoryListAction");
         this.$store.dispatch("getTagListAction");
     },
+    filters: {
+        handleDay(value) {
+            return value.split(" ")[0].split("-")[2] + " 日";
+        }
+    },
     computed: {
         categoryList() {
             return this.$store.state.category.categoryList;
@@ -88,6 +78,51 @@ export default {
                     "https://ciblog.oss-cn-shanghai.aliyuncs.com/images/bg4.jpg";
             }
             return url;
+        },
+        articleTimeLine() {
+            let data = [
+                {
+                    date: "2020-03",
+                    articleList: [
+                        {
+                            aid: 155,
+                            title: "asdasd1",
+                            create_date: "2020-03-25 20:09:46"
+                        },
+                        {
+                            aid: 156,
+                            title: "asdasd2",
+                            create_date: "2020-03-26 20:09:46"
+                        },
+                        {
+                            aid: 157,
+                            title: "asdasd3",
+                            create_date: "2020-03-27 20:09:46"
+                        }
+                    ]
+                },
+                {
+                    date: "2020-04",
+                    articleList: [
+                        {
+                            aid: 158,
+                            title: "asdasd1",
+                            create_date: "2020-03-25 20:09:46"
+                        },
+                        {
+                            aid: 159,
+                            title: "asdasd2",
+                            create_date: "2020-03-26 20:09:46"
+                        },
+                        {
+                            aid: 160,
+                            title: "asdasd3",
+                            create_date: "2020-03-27 20:09:46"
+                        }
+                    ]
+                }
+            ];
+            return data;
         }
     }
 };
