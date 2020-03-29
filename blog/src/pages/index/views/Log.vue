@@ -6,18 +6,22 @@
                  :backgroundImage="'url('+banner+')'"></headEle>
         <div class="log-main">
             <div class="log-tags">
-                <h1 class="log-title">Tags</h1>
-                <miniTag v-for="item in tagList"
-                         :key="item.mid"
-                         :href="`/search/tag/${item.mid}`"
-                         :content="item.name"></miniTag>
+                <h1 class="log-title text">Tags</h1>
+                <div class="mate">
+                    <miniTag v-for="item in tagList"
+                             :key="item.mid"
+                             :href="`/search/tag/${item.mid}`"
+                             :content="item.name"></miniTag>
+                </div>
             </div>
             <div class="log-categorys">
-                <h1 class="log-title">Categorys</h1>
-                <miniTag v-for="item in categoryList"
-                         :key="item.mid"
-                         :href="`/search/category/${item.mid}`"
-                         :content="item.name"></miniTag>
+                <h1 class="log-title text">Categorys</h1>
+                <div class="mate">
+                    <miniTag v-for="item in categoryList"
+                             :key="item.mid"
+                             :href="`/search/category/${item.mid}`"
+                             :content="item.name"></miniTag>
+                </div>
             </div>
         </div>
         <footEle></footEle>
@@ -63,6 +67,9 @@ export default {
 .log-main {
     width: 720px;
     margin: 0 auto;
+    .mate {
+        padding-left: 40px;
+    }
     .log-tags {
         text-align: left;
     }
@@ -71,6 +78,7 @@ export default {
     }
     .log-title {
         text-align: left;
+        font-size: 2.5rem;
     }
 }
 </style>
