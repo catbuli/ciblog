@@ -23,6 +23,36 @@
                              :content="item.name"></miniTag>
                 </div>
             </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <a class="timeline-title"
+                       href="#">2020 年 03 月</a>
+                    <div class="timeline-content">
+                        <span class="timeline-time">19 日</span>
+                        <a class="timeline-link"
+                           href="#">有关b站番剧点评的一些想法</a>
+                    </div>
+                    <div class="timeline-content">
+                        <span class="timeline-time">19 日</span>
+                        <a class="timeline-link"
+                           href="#">有关b站番剧点评的一些想法</a>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <a class="timeline-title"
+                       href="#">2020 年 03 月</a>
+                    <div class="timeline-content">
+                        <span class="timeline-time">19 日</span>
+                        <a class="timeline-link"
+                           href="#">有关b站番剧点评的一些想法</a>
+                    </div>
+                    <div class="timeline-content">
+                        <span class="timeline-time">19 日</span>
+                        <a class="timeline-link"
+                           href="#">有关b站番剧点评的一些想法</a>
+                    </div>
+                </div>
+            </div>
         </div>
         <footEle></footEle>
     </div>
@@ -72,13 +102,77 @@ export default {
     }
     .log-tags {
         text-align: left;
+        padding-bottom: 50px;
     }
     .log-categorys {
         text-align: left;
+        padding-bottom: 50px;
     }
     .log-title {
         text-align: left;
         font-size: 2.5rem;
+    }
+    .timeline {
+        text-align: left;
+        position: relative;
+        .timeline-item {
+            .timeline-title {
+                display: inline-block;
+                padding: 5px 20px;
+                background: #6f6f6f;
+                border-radius: 20px;
+                color: white;
+            }
+            .timeline-title:hover {
+                color: white;
+            }
+            .timeline-content {
+                padding-left: 90px;
+                margin: 10px 15px;
+                .timeline-time {
+                    position: absolute;
+                    left: 18px;
+                    width: 40px;
+                }
+                .timeline-time::after {
+                    content: " ";
+                    position: absolute;
+                    width: 20px;
+                    height: 20px;
+                    background-color: #8a8a8a;
+                    border-radius: 20px;
+                    right: -27px;
+                    top: 1px;
+                }
+                .timeline-link {
+                    position: relative;
+                }
+                .timeline-link::before {
+                    content: " ";
+                    top: 5px;
+                    left: -36px;
+                    position: absolute;
+                    width: 12px;
+                    height: 12px;
+                    background-color: white;
+                    border-radius: 12px;
+                    transition: all 0.5s ease;
+                }
+                .timeline-link:hover::before {
+                    background-color: rgb(44, 44, 44);
+                }
+            }
+        }
+        .timeline-item::before {
+            z-index: -1;
+            content: "";
+            position: absolute;
+            width: 4px;
+            left: 73px;
+            top: 10px;
+            height: 100%;
+            background-color: #dcdcdc;
+        }
     }
 }
 </style>
