@@ -28,13 +28,15 @@
                      v-for="month in articleTimeLine"
                      :key="month.date">
                     <a class="timeline-title"
-                       href="#">{{month.date}}</a>
+                       target="_blank"
+                       :href="`/search/${month.date.split('-')[0]}/${month.date.split('-')[1]}`">{{month.date|handleDate}}</a>
                     <div class="timeline-content"
                          v-for="day in month.articleList"
                          :key="day.aid">
                         <span class="timeline-time">{{day.create_date|handleDay}}</span>
                         <a class="timeline-link"
-                           href="#">{{day.title}}</a>
+                           target="_blank"
+                           :href="`/article/${day.aid}`">{{day.title}}</a>
                     </div>
                 </div>
             </div>
@@ -62,6 +64,9 @@ export default {
     filters: {
         handleDay(value) {
             return value.split(" ")[0].split("-")[2] + " 日";
+        },
+        handleDate(value) {
+            return value.split("-")[0] + " 年 " + value.split("-")[1] + " 月";
         }
     },
     computed: {
@@ -159,7 +164,7 @@ export default {
                 color: white;
             }
             .timeline-title:hover {
-                color: white;
+                color: white !important;
             }
             .timeline-content {
                 padding-left: 90px;
