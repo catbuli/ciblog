@@ -113,9 +113,15 @@ export default {
                         );
                         break;
                     default:
-                        this.searchDescription =
-                            "搜索条件错误，显示全部文章！！";
-                        break;
+                        var regPos = /^\d+$/;
+                        if (regPos.test(this.$route.params.typeName)) {
+                            this.searchDescription = "是按照日期搜索";
+                            break;
+                        } else {
+                            this.searchDescription =
+                                "搜索条件错误，显示全部文章！！";
+                            break;
+                        }
                 }
             } else {
                 this.$router.push({ path: `/404` });
