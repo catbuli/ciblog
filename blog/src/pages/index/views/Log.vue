@@ -6,7 +6,7 @@
                  :backgroundImage="'url('+banner+')'"></headEle>
         <div class="log-main">
             <div class="log-tags">
-                <h1 class="log-title text">Tags</h1>
+                <h1 class="log-title text-shadow">Tags</h1>
                 <div class="mate">
                     <miniTag v-for="item in tagList"
                              :key="item.mid"
@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="log-categorys">
-                <h1 class="log-title text">Categorys</h1>
+                <h1 class="log-title text-shadow">Categorys</h1>
                 <div class="mate">
                     <miniTag v-for="item in categoryList"
                              :key="item.mid"

@@ -157,7 +157,7 @@ a:hover {
 .link:hover {
     color: #8a8a8a !important;
 }
-.text {
+.text-shadow {
     color: rgba(0, 0, 0, 0.6);
     text-shadow: 0 0 5px #b2b2b2;
 }
