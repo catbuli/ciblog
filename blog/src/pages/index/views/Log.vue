@@ -23,23 +23,7 @@
                              :content="item.name"></miniTag>
                 </div>
             </div>
-            <div class="timeline">
-                <div class="timeline-item"
-                     v-for="month in articleTimeLine"
-                     :key="month.date">
-                    <a class="timeline-title"
-                       target="_blank"
-                       :href="`/search/${month.date.split('-')[0]}/${month.date.split('-')[1]}`">{{month.date|handleDate}}</a>
-                    <div class="timeline-content"
-                         v-for="day in month.articleList"
-                         :key="day.aid">
-                        <span class="timeline-time">{{day.create_date|handleDay}}</span>
-                        <a class="timeline-link"
-                           target="_blank"
-                           :href="`/article/${day.aid}`">{{day.title}}</a>
-                    </div>
-                </div>
-            </div>
+            <timeLine :data="timeline"></timeLine>
         </div>
         <footEle></footEle>
     </div>
@@ -49,24 +33,31 @@
 import footEle from "@/components/common/footEle.vue";
 import miniTag from "@/components/miniTools/miniTag.vue";
 import headEle from "../components/headEle.vue";
+import timeLine from "../components/timeLine.vue";
 // import searchTool from "@/components/miniTools/searchTool.vue";
 export default {
     name: "log",
     components: {
         footEle,
         headEle,
-        miniTag
+        miniTag,
+        timeLine
+    },
+    data() {
+        return {
+            timeline: []
+        };
     },
     created() {
         this.$store.dispatch("getCategoryListAction");
         this.$store.dispatch("getTagListAction");
+        this.getTimeLineData();
     },
-    filters: {
-        handleDay(value) {
-            return value.split(" ")[0].split("-")[2] + " 日";
-        },
-        handleDate(value) {
-            return value.split("-")[0] + " 年 " + value.split("-")[1] + " 月";
+    methods: {
+        getTimeLineData() {
+            this.$post("/articlec/log", {}, data => {
+                this.timeline = data.data;
+            });
         }
     },
     computed: {
@@ -83,51 +74,6 @@ export default {
                     "https://ciblog.oss-cn-shanghai.aliyuncs.com/images/bg4.jpg";
             }
             return url;
-        },
-        articleTimeLine() {
-            let data = [
-                {
-                    date: "2020-03",
-                    articleList: [
-                        {
-                            aid: 155,
-                            title: "asdasd1",
-                            create_date: "2020-03-25 20:09:46"
-                        },
-                        {
-                            aid: 156,
-                            title: "asdasd2",
-                            create_date: "2020-03-26 20:09:46"
-                        },
-                        {
-                            aid: 157,
-                            title: "asdasd3",
-                            create_date: "2020-03-27 20:09:46"
-                        }
-                    ]
-                },
-                {
-                    date: "2020-04",
-                    articleList: [
-                        {
-                            aid: 158,
-                            title: "asdasd1",
-                            create_date: "2020-03-25 20:09:46"
-                        },
-                        {
-                            aid: 159,
-                            title: "asdasd2",
-                            create_date: "2020-03-26 20:09:46"
-                        },
-                        {
-                            aid: 160,
-                            title: "asdasd3",
-                            create_date: "2020-03-27 20:09:46"
-                        }
-                    ]
-                }
-            ];
-            return data;
         }
     }
 };
@@ -137,81 +83,83 @@ export default {
 .log-main {
     width: 720px;
     margin: 0 auto;
+    h1 {
+        margin: 0 0 20px 0;
+    }
     .mate {
         padding-left: 40px;
     }
     .log-tags {
         text-align: left;
         padding-bottom: 50px;
+        animation-duration: 1s;
+        animation-fill-mode: both;
+        animation-name: left;
+        animation-delay: 0.7s;
     }
     .log-categorys {
         text-align: left;
         padding-bottom: 50px;
+        animation-duration: 1s;
+        animation-fill-mode: both;
+        animation-name: right;
+        animation-delay: 0.7s;
     }
     .log-title {
         text-align: left;
         font-size: 2.5rem;
     }
-    .timeline {
-        text-align: left;
-        position: relative;
-        .timeline-item {
-            .timeline-title {
-                display: inline-block;
-                padding: 5px 20px;
-                background: #6f6f6f;
-                border-radius: 20px;
-                color: white;
-            }
-            .timeline-title:hover {
-                color: white !important;
-            }
-            .timeline-content {
-                padding-left: 90px;
-                margin: 10px 15px;
-                .timeline-time {
-                    position: absolute;
-                    left: 18px;
-                    width: 40px;
-                }
-                .timeline-time::after {
-                    content: " ";
-                    position: absolute;
-                    width: 20px;
-                    height: 20px;
-                    background-color: #8a8a8a;
-                    border-radius: 20px;
-                    right: -27px;
-                    top: 1px;
-                }
-                .timeline-link {
-                    position: relative;
-                }
-                .timeline-link::before {
-                    content: " ";
-                    top: 5px;
-                    left: -36px;
-                    position: absolute;
-                    width: 12px;
-                    height: 12px;
-                    background-color: white;
-                    border-radius: 12px;
-                    transition: all 0.5s ease;
-                }
-                .timeline-link:hover::before {
-                    background-color: rgb(44, 44, 44);
-                }
-            }
+    @keyframes left {
+        0%,
+        60%,
+        75%,
+        90%,
+        100% {
+            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
         }
-        .timeline-item::before {
-            z-index: -1;
-            content: "";
-            position: absolute;
-            width: 4px;
-            left: 73px;
-            top: 10px;
-            height: 100%;
-            background-color: #dcdcdc;
+
+        0% {
+            opacity: 0;
+            transform: translate3d(-3000px, 0, 0);
+        }
+        60% {
+            opacity: 1;
+            transform: translate3d(25px, 0, 0);
+        }
+        75% {
+            transform: translate3d(-10px, 0, 0);
+        }
+        90% {
+            transform: translate3d(5px, 0, 0);
+        }
+        100% {
+            transform: translateZ(0);
+        }
+    }
+    @keyframes right {
+        0%,
+        60%,
+        75%,
+        90%,
+        100% {
+            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+        0% {
+            opacity: 0;
+            transform: translate3d(3000px, 0, 0);
+        }
+        60% {
+            opacity: 1;
+            transform: translate3d(-25px, 0, 0);
+        }
+        75% {
+            transform: translate3d(10px, 0, 0);
+        }
+        90% {
+            transform: translate3d(-5px, 0, 0);
+        }
+        100% {
+            transform: translateZ(0);
         }
     }
 }

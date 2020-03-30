@@ -78,4 +78,14 @@ export default {
 #paging {
     min-width: 730px;
 }
+#paging >>> .el-pagination.is-background .el-pager li {
+    transition: all 0.3s ease;
+}
+#paging >>> .el-pagination.is-background .el-pager li:not(.disabled).active {
+    background-color: #8a8a8a;
+    color: #5a5e66;
+}
+#paging >>> .el-pagination.is-background .el-pager li:hover {
+    color: #5a5e6677;
+}
 </style>
