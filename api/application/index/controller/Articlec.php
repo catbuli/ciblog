@@ -246,6 +246,31 @@ class Articlec extends Controller
     public function log()
     {
         try {
+            $list = Db::name("article")->order('create_date asc')
+                ->field('create_date')
+                ->select();
+            $monthList = [];
+            foreach ($list as &$item) {
+                // var_dump($item);
+                array_unshift($monthList, date("Y-m", strtotime($item['create_date'])));
+            }
+            $monthList = array_values(array_unique($monthList));
+            $timeline = [];
+            foreach ($monthList as $item) {
+                $list = array("date" => $item);
+                $date = $item;
+                $maxDate = date("Y-m", strtotime("+1 month", strtotime($date)));
+                // $maxDate = $paging['typeName'] . "-" . ((int) $paging['type'] + 1);
+                $articleList = Db::name("article")
+                    ->order('create_date desc')
+                    ->whereTime('create_date', ">", $date)
+                    ->whereTime('create_date', "<", $maxDate)
+                    ->field('aid,title,create_date')
+                    ->select();
+                $list["articleList"] = $articleList;
+                array_push($timeline, $list);
+            }
+            return Response::result(200, "成功", "数据获取成功!", $timeline);
         } catch (Exception $e) {
             $message = $e->getMessage() . PHP_EOL . $e->getLine() . PHP_EOL . $e->getFile();
             return Response::result(400, "请求失败!", $message);

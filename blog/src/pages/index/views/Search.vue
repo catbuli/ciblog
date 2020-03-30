@@ -120,12 +120,10 @@ export default {
                                 "年" +
                                 this.$route.params.type +
                                 "月";
-                            break;
                         } else {
                             this.paging.typeName = "all";
                             this.searchDescription =
                                 "搜索条件错误，显示全部文章！！";
-                            break;
                         }
                 }
             } else {

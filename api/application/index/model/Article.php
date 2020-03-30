@@ -104,7 +104,8 @@ class Article extends Model
                 $pattern = "/^\d+$/";
                 if (preg_match($pattern, $str)) {
                     $date = $paging['typeName'] . "-" . $paging['type'];
-                    $maxDate = $paging['typeName'] . "-" . ((int) $paging['type'] + 1);
+                    $maxDate = date("Y-m", strtotime("+1 month", strtotime($date)));
+                    // $maxDate = $paging['typeName'] . "-" . ((int) $paging['type'] + 1);
                     $list = $this->order('pv desc')
                         ->whereTime('create_date', ">", $date)
                         ->whereTime('create_date', "<", $maxDate)

@@ -25,7 +25,7 @@
             </div>
             <div class="timeline">
                 <div class="timeline-item"
-                     v-for="month in articleTimeLine"
+                     v-for="month in timeline"
                      :key="month.date">
                     <a class="timeline-title"
                        target="_blank"
@@ -57,9 +57,15 @@ export default {
         headEle,
         miniTag
     },
+    data() {
+        return {
+            timeline: []
+        };
+    },
     created() {
         this.$store.dispatch("getCategoryListAction");
         this.$store.dispatch("getTagListAction");
+        this.test();
     },
     filters: {
         handleDay(value) {
@@ -67,6 +73,13 @@ export default {
         },
         handleDate(value) {
             return value.split("-")[0] + " 年 " + value.split("-")[1] + " 月";
+        }
+    },
+    methods: {
+        test() {
+            this.$post("/articlec/log", {}, data => {
+                this.timeline = data.data;
+            });
         }
     },
     computed: {
@@ -83,51 +96,6 @@ export default {
                     "https://ciblog.oss-cn-shanghai.aliyuncs.com/images/bg4.jpg";
             }
             return url;
-        },
-        articleTimeLine() {
-            let data = [
-                {
-                    date: "2020-03",
-                    articleList: [
-                        {
-                            aid: 155,
-                            title: "asdasd1",
-                            create_date: "2020-03-25 20:09:46"
-                        },
-                        {
-                            aid: 156,
-                            title: "asdasd2",
-                            create_date: "2020-03-26 20:09:46"
-                        },
-                        {
-                            aid: 157,
-                            title: "asdasd3",
-                            create_date: "2020-03-27 20:09:46"
-                        }
-                    ]
-                },
-                {
-                    date: "2020-04",
-                    articleList: [
-                        {
-                            aid: 158,
-                            title: "asdasd1",
-                            create_date: "2020-03-25 20:09:46"
-                        },
-                        {
-                            aid: 159,
-                            title: "asdasd2",
-                            create_date: "2020-03-26 20:09:46"
-                        },
-                        {
-                            aid: 160,
-                            title: "asdasd3",
-                            create_date: "2020-03-27 20:09:46"
-                        }
-                    ]
-                }
-            ];
-            return data;
         }
     }
 };
