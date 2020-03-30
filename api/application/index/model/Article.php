@@ -23,25 +23,36 @@ class Article extends Model
         switch ($paging['typeName']) {
             case 'all':
                 if ($paging['type'] == 0) {
-                    return $this->order('create_date desc')
+                    $list = $this->order('create_date desc')
                         ->where('status', "<", 2)
                         ->limit($pagingDate, $paging['pageSize'])
                         ->field('aid,title,create_date,pv,comment_count,cover_url,description,status')
                         ->select();
+                    $total = $this->where('status', "<", 2)->count();
+                    $paging["total"] = $total;
+                    return array("list" => $list, "paging" => $paging);
                 } else {
-                    return $this->order('create_date desc')
+                    $list = $this->order('create_date desc')
                         ->limit($pagingDate, $paging['pageSize'])
                         ->field('aid,title,create_date,pv,comment_count,cover_url,description,status,draft')
                         ->select();
+                    $total = $this->count();
+                    $paging["total"] = $total;
+                    return array("list" => $list, "paging" => $paging);
                 }
                 // 关键字搜索
             case 'keyword':
-                return $this->order('create_date desc')
+                $list =  $this->order('create_date desc')
                     ->limit($pagingDate, $paging['pageSize'])
                     ->where('title', 'like', '%' . $paging['type'] . '%')
                     ->whereOr('text', 'like', '%' . $paging['type'] . '%')
                     ->field('aid,title,create_date,pv,comment_count,cover_url,description,status')
                     ->select();
+                $total = $this->where('title', 'like', '%' . $paging['type'] . '%')
+                    ->whereOr('text', 'like', '%' . $paging['type'] . '%')
+                    ->count();
+                $paging["total"] = $total;
+                return array("list" => $list, "paging" => $paging);
             case 'category':
                 $list = Db::name('article_meta')
                     ->where("mid", $paging['type'])
@@ -55,7 +66,12 @@ class Article extends Model
                         ->field('aid,title,create_date,pv,comment_count,cover_url,description,status')
                         ->find());
                 }
-                return $dataList;
+                $total = Db::name('article_meta')
+                    ->where("mid", $paging['type'])
+                    ->where("type", "category")
+                    ->count();
+                $paging["total"] = $total;
+                return array("list" => $dataList, "paging" => $paging);
             case 'tag':
                 $list = Db::name('article_meta')
                     ->where("mid", $paging['type'])
@@ -69,15 +85,40 @@ class Article extends Model
                         ->field('aid,title,create_date,pv,comment_count,cover_url,description,status')
                         ->find());
                 }
-                return $dataList;
+                $total = Db::name('article_meta')
+                    ->where("mid", $paging['type'])
+                    ->where("type", "tag")
+                    ->count();
+                $paging["total"] = $total;
+                return array("list" => $dataList, "paging" => $paging);
             case 'hot':
                 $list = $this->order('pv desc')
                     ->field('aid,title,create_date,pv,comment_count,cover_url,description')
                     ->limit($pagingDate, $paging['pageSize'])
                     ->select();
-                return $list;
+                $total = $this->count();
+                $paging["total"] = $total;
+                return array("list" => $list, "paging" => $paging);
             default:
-                return Article::all();
+                $str = $paging['typeName'];
+                $pattern = "/^\d+$/";
+                if (preg_match($pattern, $str)) {
+                    $date = $paging['typeName'] . "-" . $paging['type'];
+                    $maxDate = $paging['typeName'] . "-" . ((int) $paging['type'] + 1);
+                    $list = $this->order('pv desc')
+                        ->whereTime('create_date', ">", $date)
+                        ->whereTime('create_date', "<", $maxDate)
+                        ->field('aid,title,create_date,pv,comment_count,cover_url,description')
+                        ->limit($pagingDate, $paging['pageSize'])
+                        ->select();
+                    $total = $this->whereTime('create_date', ">", $date)
+                        ->whereTime('create_date', "<", $maxDate)
+                        ->count();
+                    $paging["total"] = $total;
+                    return array("list" => $list, "paging" => $paging);
+                } else {
+                    return Article::all();
+                }
         }
     }
     /**

@@ -23,16 +23,15 @@ class Articlec extends Controller
         try {
             $article = new Article();
             $list = $article->getArticleList($paging);
-            foreach ($list as $value) {
+            foreach ($list["list"] as $value) {
                 Db::table('ciblog_article')->where('aid', $value['aid'])->update(['comment_count' => count(Comment::getCommentById($value['aid']))]);
             }
             $list = $article->getArticleList($paging);
-            foreach ($list as &$value) {
+            foreach ($list["list"] as &$value) {
                 $value['category'] = ArticleMeta::getMetaByArticle($value['aid'], "category", true);
                 $value['tag'] = ArticleMeta::getMetaByArticle($value['aid'], "tag", true);
             }
-            $paging['total'] = Article::Count($paging['typeName'], $paging['type']);
-            return Response::result(201, "成功", "数据获取成功!", $list, $paging);
+            return Response::result(201, "成功", "数据获取成功!", $list["list"], $list["paging"]);
         } catch (Exception $e) {
             $message = $e->getMessage() . PHP_EOL . $e->getLine() . PHP_EOL . $e->getFile();
             return Response::result(400, "请求失败!", $message);
@@ -233,6 +232,20 @@ class Articlec extends Controller
             $article->tagList = $data['tagList'];
             $list["present"] = $article;
             return Response::result(200, "成功", "草稿保存成功!", $list);
+        } catch (Exception $e) {
+            $message = $e->getMessage() . PHP_EOL . $e->getLine() . PHP_EOL . $e->getFile();
+            return Response::result(400, "请求失败!", $message);
+        }
+    }
+    /**
+     * 归档数据
+     *
+     * @param JSON $data 保存草稿的文章信息
+     * @return void
+     */
+    public function log()
+    {
+        try {
         } catch (Exception $e) {
             $message = $e->getMessage() . PHP_EOL . $e->getLine() . PHP_EOL . $e->getFile();
             return Response::result(400, "请求失败!", $message);
