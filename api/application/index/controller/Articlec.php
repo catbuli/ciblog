@@ -270,7 +270,7 @@ class Articlec extends Controller
                 $list["articleList"] = $articleList;
                 array_push($timeline, $list);
             }
-            return Response::result(200, "成功", "数据获取成功!", $timeline);
+            return Response::result(201, "成功", "数据获取成功!", $timeline);
         } catch (Exception $e) {
             $message = $e->getMessage() . PHP_EOL . $e->getLine() . PHP_EOL . $e->getFile();
             return Response::result(400, "请求失败!", $message);

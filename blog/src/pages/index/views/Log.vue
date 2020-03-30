@@ -23,23 +23,7 @@
                              :content="item.name"></miniTag>
                 </div>
             </div>
-            <div class="timeline">
-                <div class="timeline-item"
-                     v-for="month in timeline"
-                     :key="month.date">
-                    <a class="timeline-title"
-                       target="_blank"
-                       :href="`/search/${month.date.split('-')[0]}/${month.date.split('-')[1]}`">{{month.date|handleDate}}</a>
-                    <div class="timeline-content"
-                         v-for="day in month.articleList"
-                         :key="day.aid">
-                        <span class="timeline-time">{{day.create_date|handleDay}}</span>
-                        <a class="timeline-link"
-                           target="_blank"
-                           :href="`/article/${day.aid}`">{{day.title}}</a>
-                    </div>
-                </div>
-            </div>
+            <timeLine :data="timeline"></timeLine>
         </div>
         <footEle></footEle>
     </div>
@@ -49,13 +33,15 @@
 import footEle from "@/components/common/footEle.vue";
 import miniTag from "@/components/miniTools/miniTag.vue";
 import headEle from "../components/headEle.vue";
+import timeLine from "../components/timeLine.vue";
 // import searchTool from "@/components/miniTools/searchTool.vue";
 export default {
     name: "log",
     components: {
         footEle,
         headEle,
-        miniTag
+        miniTag,
+        timeLine
     },
     data() {
         return {
@@ -65,18 +51,10 @@ export default {
     created() {
         this.$store.dispatch("getCategoryListAction");
         this.$store.dispatch("getTagListAction");
-        this.test();
-    },
-    filters: {
-        handleDay(value) {
-            return value.split(" ")[0].split("-")[2] + " 日";
-        },
-        handleDate(value) {
-            return value.split("-")[0] + " 年 " + value.split("-")[1] + " 月";
-        }
+        this.getTimeLineData();
     },
     methods: {
-        test() {
+        getTimeLineData() {
             this.$post("/articlec/log", {}, data => {
                 this.timeline = data.data;
             });
@@ -119,68 +97,6 @@ export default {
     .log-title {
         text-align: left;
         font-size: 2.5rem;
-    }
-    .timeline {
-        text-align: left;
-        position: relative;
-        .timeline-item {
-            .timeline-title {
-                display: inline-block;
-                padding: 5px 20px;
-                background: #6f6f6f;
-                border-radius: 20px;
-                color: white;
-            }
-            .timeline-title:hover {
-                color: white !important;
-            }
-            .timeline-content {
-                padding-left: 90px;
-                margin: 10px 15px;
-                .timeline-time {
-                    position: absolute;
-                    left: 18px;
-                    width: 40px;
-                }
-                .timeline-time::after {
-                    content: " ";
-                    position: absolute;
-                    width: 20px;
-                    height: 20px;
-                    background-color: #8a8a8a;
-                    border-radius: 20px;
-                    right: -27px;
-                    top: 1px;
-                }
-                .timeline-link {
-                    position: relative;
-                }
-                .timeline-link::before {
-                    content: " ";
-                    top: 5px;
-                    left: -36px;
-                    position: absolute;
-                    width: 12px;
-                    height: 12px;
-                    background-color: white;
-                    border-radius: 12px;
-                    transition: all 0.5s ease;
-                }
-                .timeline-link:hover::before {
-                    background-color: rgb(44, 44, 44);
-                }
-            }
-        }
-        .timeline-item::before {
-            z-index: -1;
-            content: "";
-            position: absolute;
-            width: 4px;
-            left: 73px;
-            top: 10px;
-            height: 100%;
-            background-color: #dcdcdc;
-        }
     }
 }
 </style>
