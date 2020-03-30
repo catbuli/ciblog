@@ -113,11 +113,16 @@ export default {
                         );
                         break;
                     default:
-                        var regPos = /^\d+$/;
+                        var regPos = /^\d{4}$/;
                         if (regPos.test(this.$route.params.typeName)) {
-                            this.searchDescription = "是按照日期搜索";
+                            this.searchMessage =
+                                this.$route.params.typeName +
+                                "年" +
+                                this.$route.params.type +
+                                "月";
                             break;
                         } else {
+                            this.paging.typeName = "all";
                             this.searchDescription =
                                 "搜索条件错误，显示全部文章！！";
                             break;
