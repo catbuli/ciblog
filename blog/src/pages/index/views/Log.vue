@@ -83,20 +83,84 @@ export default {
 .log-main {
     width: 720px;
     margin: 0 auto;
+    h1 {
+        margin: 0 0 20px 0;
+    }
     .mate {
         padding-left: 40px;
     }
     .log-tags {
         text-align: left;
         padding-bottom: 50px;
+        animation-duration: 1s;
+        animation-fill-mode: both;
+        animation-name: left;
+        animation-delay: 0.7s;
     }
     .log-categorys {
         text-align: left;
         padding-bottom: 50px;
+        animation-duration: 1s;
+        animation-fill-mode: both;
+        animation-name: right;
+        animation-delay: 0.7s;
     }
     .log-title {
         text-align: left;
         font-size: 2.5rem;
+    }
+    @keyframes left {
+        0%,
+        60%,
+        75%,
+        90%,
+        100% {
+            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+
+        0% {
+            opacity: 0;
+            transform: translate3d(-3000px, 0, 0);
+        }
+        60% {
+            opacity: 1;
+            transform: translate3d(25px, 0, 0);
+        }
+        75% {
+            transform: translate3d(-10px, 0, 0);
+        }
+        90% {
+            transform: translate3d(5px, 0, 0);
+        }
+        100% {
+            transform: translateZ(0);
+        }
+    }
+    @keyframes right {
+        0%,
+        60%,
+        75%,
+        90%,
+        100% {
+            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+        0% {
+            opacity: 0;
+            transform: translate3d(3000px, 0, 0);
+        }
+        60% {
+            opacity: 1;
+            transform: translate3d(-25px, 0, 0);
+        }
+        75% {
+            transform: translate3d(10px, 0, 0);
+        }
+        90% {
+            transform: translate3d(-5px, 0, 0);
+        }
+        100% {
+            transform: translateZ(0);
+        }
     }
 }
 </style>

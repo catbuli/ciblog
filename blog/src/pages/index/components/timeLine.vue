@@ -1,5 +1,6 @@
 <template>
-    <div class="timeline">
+    <div class="timeline"
+         ref="timeline">
         <div class="timeline-item"
              v-for="month in data"
              :key="month.date">
@@ -21,6 +22,11 @@
 <script>
 export default {
     name: "timeLine",
+    data() {
+        return {
+            height: 110
+        };
+    },
     props: {
         data: {
             type: Array,
@@ -36,8 +42,26 @@ export default {
         }
     },
     computed: {},
-    methods: {},
-    mounted() {}
+    mounted() {
+        window.addEventListener("scroll", this.handleScroll, true);
+    },
+    methods: {
+        handleScroll(e) {
+            var scrollTop =
+                document.documentElement.scrollTop || document.body.scrollTop;
+            var windowHeight =
+                document.documentElement.clientHeight ||
+                document.body.clientHeight;
+            var scrollHeight =
+                document.documentElement.scrollHeight ||
+                document.body.scrollHeight;
+            if (scrollHeight < 20 + scrollTop + windowHeight) {
+                this.$refs.timeline.className = "timeline open";
+                this.$refs.timeline.style.maxHeight = this.height + "px";
+                this.height += 50;
+            }
+        }
+    }
 };
 </script>
 
@@ -45,6 +69,9 @@ export default {
 .timeline {
     text-align: left;
     position: relative;
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 0.8s;
     .timeline-item {
         .timeline-title {
             display: inline-block;
@@ -58,7 +85,7 @@ export default {
         }
         .timeline-content {
             padding-left: 90px;
-            margin: 10px 15px;
+            margin: 15px 15px;
             .timeline-time {
                 position: absolute;
                 left: 18px;
@@ -91,6 +118,20 @@ export default {
             .timeline-link:hover::before {
                 background-color: rgb(44, 44, 44);
             }
+            .timeline-link::after {
+                content: "";
+                display: block;
+                width: 0;
+                height: 2px;
+                position: absolute;
+                left: 0;
+                bottom: -5px;
+                background: #6f6f6f;
+                transition: all 0.5s ease-in-out;
+            }
+            .timeline-link:hover::after {
+                width: 100%;
+            }
         }
     }
     .timeline-item::before {
@@ -103,5 +144,8 @@ export default {
         height: 100%;
         background-color: #dcdcdc;
     }
+}
+.open {
+    max-height: 110px;
 }
 </style>

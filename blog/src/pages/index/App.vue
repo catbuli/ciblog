@@ -44,12 +44,12 @@ export default {
             scrollTo(0, 0);
         },
         enter(el, done) {
-            if (this.$route.fullPath == "/") {
+            if (this.$route.fullPath == "/" || this.$route.fullPath == "/log") {
                 done();
             }
         },
         leave(el, done) {
-            if (this.$route.fullPath == "/") {
+            if (this.$route.fullPath == "/" || this.$route.fullPath == "/log") {
                 done();
             }
         }
