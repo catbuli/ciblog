@@ -1,5 +1,6 @@
 <template>
     <nav id="nav"
+         ref="nav"
          :class="[$store.state.global.isShowLeftNav ? 'show-nav' : 'hidden-nav']">
         <svg @click="$store.commit('handleLeftNav', !$store.state.global.isShowLeftNav);"
              id="button-nav"
@@ -126,6 +127,7 @@ export default {
         searchTool
     },
     mounted() {
+        this.getDOM();
         window.addEventListener("mousemove", this.handleMouse, true);
         window.addEventListener("scroll", this.handleScroll, true);
     },
@@ -156,6 +158,9 @@ export default {
         }
     },
     methods: {
+        getDOM() {
+            this.$store.commit("setNavDOM", this.$refs.nav.offsetWidth);
+        },
         handleMouse(e) {
             if (
                 e.clientX <= 5 &&
