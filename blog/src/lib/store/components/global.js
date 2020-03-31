@@ -8,6 +8,7 @@ export default {
     state: {
         personalData: {},
         headerDOM: {},
+        navDOM: {},
         system: {},
         isAdmin: true,
         isShowLeftNav: false,
@@ -77,6 +78,9 @@ export default {
         },
         setHeaderDOM(state, data) {
             state.headerDOM = data;
+        },
+        setNavDOM(state, data) {
+            state.navDOM = data;
         }
     },
     actions: {

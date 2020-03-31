@@ -33,9 +33,10 @@ Vue.use(Pagination);
 Vue.use(Loading);
 Vue.use(Popover);
 Vue.prototype.$post = post;
-console.log('当前为index应用', '')
-console.log(process.env.VUE_APP_URL);
-console.log(process.env.VUE_APP_MESSAGE);
+console.log('%c当前为index应用', 'padding:5px 10px;color:white;background-color:orange');
+// console.log("%c", "font-size:40px;background-size:100% 100%;background:url('https://xiaochengxuimg.oss-cn-beijing.aliyuncs.com/Blog/oh.jpg')  no-repeat;");
+console.log(`%c${process.env.VUE_APP_URL}`, 'padding:5px 10px;color:white;background-color:green');
+console.log(`%c${process.env.VUE_APP_MESSAGE}`, 'padding:5px 10px;color:white;background-color:orange');
 new Vue({
     router,
     store,

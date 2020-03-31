@@ -68,6 +68,10 @@ export default {
 </script>
 
 <style>
+/* 鼠标样式 */
+body {
+    /* cursor: url("../../assets/images/cursor/Hand.png") auto; */
+}
 /* index框架样式 */
 .index-frame {
     position: absolute;

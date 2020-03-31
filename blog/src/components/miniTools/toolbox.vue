@@ -1,18 +1,17 @@
 <template>
     <div id="toolbox"
          ref="toolbox"
-         :class="[isShow?'':'hidden']"
-         @mouseup="mouseup">
-        <div class="drag-bar"
-             @mousedown="mousedown"><i class="el-icon-rank"></i></div>
-        <router-link to="/">返回首页</router-link>
-        <p @click="$router.back()">返回</p>
-        <p @click="$router.back(1)">前进</p>
-        <ul class="category-list">
-            <li v-for="category in categoryList"
-                @click="categoryJump(category.name,category.mid)"
-                :key="category.mid">{{category.name}}</li>
-        </ul>
+         :class="[isShow?'':'hidden']">
+        <!-- <div class="drag-bar"
+             @mousedown="mousedown">
+            <i class="el-icon-rank"></i>
+        </div> -->
+        <div class="head-portrait"
+             @mousedown="mousedown">
+            <img :src="personalData.imgurl"
+                 @dblclick="jump"
+                 alt />
+        </div>
     </div>
 </template>
 
@@ -26,10 +25,14 @@ export default {
             layerY: 0,
             isShow: false,
             body: {},
-            DOM: {}
+            DOM: {},
+            offsetWidth: 0
         };
     },
     computed: {
+        personalData() {
+            return this.$store.state.global.personalData;
+        },
         header() {
             return this.$store.state.global.headerDOM
                 ? this.$store.state.global.headerDOM
@@ -37,9 +40,28 @@ export default {
         },
         categoryList() {
             return this.$store.state.category.categoryList;
+        },
+        isShowLeftNav() {
+            return this.$store.state.global.isShowLeftNav;
+        }
+    },
+    watch: {
+        "$store.state.global.isShowLeftNav"(newValue, oldValue) {
+            if (!newValue) {
+                this.offsetWidth = 0;
+            } else {
+                this.offsetWidth = this.$store.state.global.navDOM;
+            }
         }
     },
     methods: {
+        jump() {
+            if (this.$route.fullPath != "/") {
+                this.$router.push({
+                    path: `/`
+                });
+            }
+        },
         categoryJump(name, mid) {
             this.$router.push({
                 path: `/search/category/${mid}`
@@ -49,9 +71,6 @@ export default {
             this.$store.dispatch("getCategoryListAction");
         },
         mousedown(e) {
-            // console.log(e.currentTarget === e.target);
-            // console.log(e);
-            this.DOM = this.$refs.toolbox;
             this.body = document.body;
             this.isDrop = true;
             this.layerX = e.layerX;
@@ -64,19 +83,19 @@ export default {
             // console.log(toolbox.offsetLeft);
             // console.log(rightFlag);
             var x = e.clientX - this.layerX;
-            var y = e.clientY - this.layerY + 30;
+            var y = e.clientY - this.layerY;
             var rightLimit = this.body.offsetWidth - this.DOM.offsetWidth;
             var bottomLimit = this.body.offsetHeight - this.DOM.offsetHeight;
             if (!this.isDrop) return;
-            if (x <= 0) {
-                this.DOM.style.left = 0 + "px";
+            if (x <= this.offsetWidth) {
+                this.DOM.style.left = this.offsetWidth + "px";
             } else if (x >= rightLimit) {
                 this.DOM.style.left = rightLimit + "px";
             } else {
                 this.DOM.style.left = x + "px";
             }
-            if (y <= 30) {
-                this.DOM.style.top = 30 + "px";
+            if (y <= 0) {
+                this.DOM.style.top = 0 + "px";
             } else if (y >= bottomLimit) {
                 this.DOM.style.top = bottomLimit + "px";
             } else {
@@ -98,11 +117,14 @@ export default {
         }
     },
     mounted() {
+        this.DOM = this.$refs.toolbox;
         this.getCategoryList();
         window.addEventListener("scroll", this.handleScroll, true);
+        window.addEventListener("mouseup", this.mouseup, true);
     },
     destroyed() {
         window.removeEventListener("scroll", this.handleScroll, true);
+        window.removeEventListener("mouseup", this.mouseup, true);
     }
 };
 </script>
@@ -111,41 +133,56 @@ export default {
 #toolbox {
     user-select: none;
     z-index: 100;
-    background-color: #353535;
-    border-radius: 10px;
-    box-shadow: 3px 3px 3px rgb(138, 138, 138);
-    width: 100px;
-    height: 150px;
+    width: 80px;
+    height: 80px;
     display: block;
     position: fixed;
     left: 20px;
     bottom: 20px;
-    .drag-bar {
-        opacity: 0;
-        width: 100%;
-        height: 30px;
-        position: absolute;
-        top: -30px;
-        left: 0;
-        text-align: center;
-        background: #fff;
-        box-shadow: 0 0 5px #ddd;
-        cursor: move;
-        color: #999;
-        line-height: 30px;
-        font-size: 20px;
-        transition: opacity 0.3s;
-        z-index: 70;
-    }
-    .category-list {
-        color: white;
+    .head-portrait {
         cursor: pointer;
+        user-select: none;
+        width: 80px;
+        height: 80px;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        img {
+            -webkit-user-drag: none;
+            width: 100%;
+            border-radius: 50%;
+            transition: all 1s ease 0s;
+        }
+        img:hover {
+            transform: rotate(360deg);
+        }
     }
+    // .drag-bar {
+    //     opacity: 0;
+    //     width: 100%;
+    //     height: 30px;
+    //     position: absolute;
+    //     top: -30px;
+    //     left: 0;
+    //     text-align: center;
+    //     background: #fff;
+    //     box-shadow: 0 0 5px #ddd;
+    //     cursor: move;
+    //     color: #999;
+    //     line-height: 30px;
+    //     font-size: 20px;
+    //     transition: opacity 0.3s;
+    //     z-index: 70;
+    // }
 }
-#toolbox:hover .drag-bar {
-    opacity: 1;
-}
+// #toolbox:hover .drag-bar {
+//     opacity: 1;
+// }
 .hidden {
+    // visibility: hidden !important;
     display: none !important;
 }
 </style>
