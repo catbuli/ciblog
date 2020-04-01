@@ -9,6 +9,7 @@
         <div class="head-portrait"
              @mousedown="mousedown">
             <img :src="personalData.imgurl"
+                 title="双击进入归档页面"
                  @dblclick="jump"
                  alt />
         </div>
@@ -56,9 +57,9 @@ export default {
     },
     methods: {
         jump() {
-            if (this.$route.fullPath != "/") {
+            if (this.$route.fullPath != "/log") {
                 this.$router.push({
-                    path: `/`
+                    path: `/log`
                 });
             }
         },
