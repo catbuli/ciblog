@@ -14,7 +14,7 @@
 
 [项目前台预览](http://ciblog.zhangyifei.top/)  
 
-[项目后台预览](http://ciblog.zhangyifei.top/admin.html)  
+[项目后台预览](http://ciblog.zhangyifei.top/admin)  
  
 
 后台账号:testadmin  密码:admin
