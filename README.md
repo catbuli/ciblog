@@ -14,12 +14,12 @@
 
 [项目前台预览](http://ciblog.zhangyifei.top/)  
 
-[项目后台预览](http://ciblog.zhangyifei.top/admin.html)  
+[项目后台预览](http://ciblog.zhangyifei.top/admin)  
  
 
 后台账号:testadmin  密码:admin
 
-ps:有的时候发布会慢一点。（●>∀<●）
+ps:有的时候发布会慢一点。（●>∀<●） 暂时还没有做移动端适配。这个我打算放到0.3.0。
 
 pps:还没做移动端适配，手机访问可能会有一些问题
 
