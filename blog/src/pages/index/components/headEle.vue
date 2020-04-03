@@ -73,6 +73,7 @@ export default {
 
 <style scoped>
 header {
+    opacity: 0;
     height: 100%;
     width: 100%;
     color: black;
@@ -80,7 +81,7 @@ header {
     z-index: -1;
     position: relative;
     margin-bottom: 50px;
-    animation: show 1s ease-out 0.5s 1;
+    animation: show 1s ease-out 0.7s 1;
     animation-fill-mode: forwards;
     display: flex;
     background-position: center center;

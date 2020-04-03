@@ -1,7 +1,7 @@
 <template>
     <div id="Article"
-         class="index-frame"
-         :key="$route.fullPath">
+         class="index-frame">
+        <!-- :key="$route.fullPath" -->
         <headEle height="60%"
                  :backgroundImage="'url('+article.cover_url+')'"></headEle>
         <article v-loading="loading">
@@ -347,6 +347,7 @@ export default {
 }
 /* 文章主体 */
 #Article article {
+    position: relative;
     border-radius: 10px;
     margin: 0 auto;
     width: 700px;
