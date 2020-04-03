@@ -1,4 +1,4 @@
-# CIblog（0.2.0）
+# CIblog（0.3.0）
 vue.js（2.6.10）开发的博客平台
 
 外观是参照我很喜欢的一个typecho主题：Aria 作者：Siphils [作者仓库](https://github.com/Siphils/Typecho-Theme-Aria)
