@@ -1,12 +1,15 @@
-# CIblog（0.2.0）
-基于tp5和vue.js（2.6.10）开发的博客平台
+# CIblog（0.3.0）
+vue.js（2.6.10）开发的博客平台
 
 外观是参照我很喜欢的一个typecho主题：Aria 作者：Siphils [作者仓库](https://github.com/Siphils/Typecho-Theme-Aria)
 
 # 技术栈
-前端：vue2+vuex+vue-router+webpack+ES6/7+element-ui+less
-后端：tp5
 
+vue2+vuex+vue-router+webpack+ES6/7+element-ui+less
+
+# 后端仓库
+
+[后端仓库地址](https://github.com/zhangyifei233/ciblog_api)
 
 # 效果演示
 
@@ -15,7 +18,6 @@
 [项目前台预览](http://ciblog.zhangyifei.top/)  
 
 [项目后台预览](http://ciblog.zhangyifei.top/admin)  
- 
 
 后台账号:testadmin  密码:admin
 

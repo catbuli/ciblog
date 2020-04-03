@@ -81,7 +81,4 @@ export default {
 </script>
 
 <style>
-.articleItem {
-    margin-top: 30px;
-}
 </style>

@@ -33,11 +33,9 @@ Vue.use(Pagination);
 Vue.use(Loading);
 Vue.use(Popover);
 Vue.prototype.$post = post;
-console.log('%c当前访问为index应用', 'padding:5px 10px;color:white;background-color:orange');
-// console.log("%c", "font-size:40px;background-size:100% 100%;background:url('https://xiaochengxuimg.oss-cn-beijing.aliyuncs.com/Blog/oh.jpg')  no-repeat;");
-// console.log(`%c${process.env.VUE_APP_URL}`, 'padding:5px 10px;color:white;background-color:green');
+console.log(`%c当前访问为index应用`, 'padding:5px 10px;color:white;background-color:orange');
 console.log(`%c${process.env.VUE_APP_MESSAGE}`, 'padding:5px 10px;color:white;background-color:orange');
-console.log(`%c猫不理的锅包肉-Ciblog-0.2.0`, 'padding:5px 10px;color:white;background-color:green');
+console.log(`%c${process.env.VUE_APP_VERSION}`, 'padding:5px 10px;color:white;background-color:green');
 new Vue({
     router,
     store,
