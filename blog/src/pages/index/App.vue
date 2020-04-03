@@ -31,6 +31,7 @@ export default {
         $route() {
             this.$store.commit("handleLeftNav", false);
             scrollTo(0, 0);
+            console.log(this.$route);
         }
     },
     components: {

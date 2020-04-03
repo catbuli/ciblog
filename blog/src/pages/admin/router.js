@@ -145,19 +145,18 @@ router.beforeEach((to, from, next) => {
     if (to.meta.title) {
         document.title = to.meta.title;
     }
-    if (to.path == "/admin.html") {
-        next("/admin/");
-    }
     if (to.path == "/admin/login") {
         next();
     } else {
-        post('/login/check', {}, (data) => {
-            if (data.code == 201) {
-                next();
-            } else {
-                next("/admin/login");
-            }
-        });
+        if (from.path.indexOf("admin") != -1) {
+            post('/login/check', {}, (data) => {
+                if (data.code == 201) {
+                    next();
+                } else {
+                    next("/admin/login");
+                }
+            });
+        }
     }
 });
 
