@@ -21,15 +21,16 @@ export default {
         back() {
             let backTop = this.$refs.backTop;
             backTop.classList.add("backtop");
-            var backTopTimer = setInterval(function() {
+            var backTopTimer = window.setInterval(function() {
                 var scrollTop =
                     document.documentElement.scrollTop ||
                     document.body.scrollTop;
-                var speed = scrollTop / 6;
-                if (document.documentElement.scrollTop === 0) {
+                var speed = scrollTop / 4;
+                if (scrollTop === 0) {
                     clearInterval(backTopTimer);
                 } else {
                     document.documentElement.scrollTop -= speed;
+                    document.body.scrollTop -= speed;
                 }
             }, 10);
             // backTop.addEventListener("animationend", function() {

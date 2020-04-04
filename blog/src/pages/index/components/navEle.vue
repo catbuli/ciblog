@@ -1,9 +1,11 @@
 <template>
     <nav id="nav"
          ref="nav"
+         :style="{'min-width':style.navWidth}"
          :class="[$store.state.global.isShowLeftNav ? 'show-nav' : 'hidden-nav']">
         <svg @click="$store.commit('handleLeftNav', !$store.state.global.isShowLeftNav);"
              id="button-nav"
+             :style="style.navButton"
              class="button-nav ham hamRotate180 ham5"
              viewBox="0 0 100 100"
              width="80">
@@ -18,6 +20,7 @@
             <div class="head-portrait">
                 <router-link to="/">
                     <img :src="personalData.imgurl"
+                         :style="style.navAvatar"
                          alt />
                 </router-link>
                 <p class="nickname">{{personalData.nickname}}</p>
@@ -147,6 +150,9 @@ export default {
         }
     },
     computed: {
+        style() {
+            return this.$store.getters.globalStyle;
+        },
         personalData() {
             return this.$store.state.global.personalData;
         },
@@ -211,9 +217,9 @@ export default {
 #nav {
     /* overflow: hidden; */
     padding: 0px;
-    min-width: 250px;
+    min-width: 20%;
     height: 100%;
-    width: 17%;
+    width: 20%;
     position: fixed;
     z-index: 50;
     background-color: rgb(53, 53, 53);
@@ -296,12 +302,13 @@ export default {
 .head-portrait {
     .nickname {
         margin-top: 10px;
+        font-size: 1.6rem;
         color: rgb(255, 255, 255);
     }
     .description {
         margin-top: 10px;
         padding: 10px;
-        font-size: 0.8rem;
+        font-size: 1rem;
         color: rgb(180, 180, 180);
     }
     img {

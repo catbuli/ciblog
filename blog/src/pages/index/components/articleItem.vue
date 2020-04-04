@@ -49,27 +49,34 @@
 export default {
     name: "Item",
     props: {
-        listData: {},
-        article_id: Number,
-        article_title: String,
-        article_date: String
+        listData: {}
     },
     filters: {
         handleDate(value) {
             if (value) return value.split(" ")[0];
         }
     },
+    watch: {
+        listData(oldVal, newVal) {
+            this.$nextTick(() => {
+                if (this.$refs.articleList) {
+                    this.$refs.articleList.children
+                        .item(0)
+                        .classList.add("show");
+                }
+            });
+            // 博客↑
+        }
+    },
     methods: {
-        getCardHeight() {
-            this.listData.length;
-        },
         handleScroll(e) {
             var scrollTop =
                 document.documentElement.scrollTop || document.body.scrollTop;
             this.$refs.articleList.children.forEach((element, index) => {
                 if (
                     scrollTop + document.body.clientHeight - 200 >=
-                    element.offsetTop
+                        element.offsetTop &&
+                    index > 0
                 ) {
                     element.classList.add("show");
                 }
@@ -90,7 +97,6 @@ export default {
     },
     mounted() {
         document.addEventListener("scroll", this.handleScroll, true);
-        this.handleScroll();
     },
     destroyed() {
         document.removeEventListener("scroll", this.handleScroll, true);
