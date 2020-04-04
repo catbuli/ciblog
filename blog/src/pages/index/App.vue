@@ -207,8 +207,8 @@ li {
 
 #mian {
     position: absolute;
-    width: 83%;
-    left: 17%;
+    width: 80%;
+    left: 20%;
     transition: all 0.5s ease;
 }
 

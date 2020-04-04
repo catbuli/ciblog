@@ -16,10 +16,22 @@ export default {
         isPC: true,
         style: {
             pc: {
-                navWidth: "10%"
+                navWidth: "17%",
+                navButton: {
+                    width: "70px",
+                    height: "70px"
+                },
             },
             mc: {
-                navWidth: "40%"
+                navWidth: "40%",
+                navButton: {
+                    width: "140px",
+                    height: "140px"
+                },
+                navAvatar: {
+                    width: "120px",
+                    height: "120px"
+                }
             }
         },
         uid: localStorage.getItem('uid') ? localStorage.getItem('uid') : '',
