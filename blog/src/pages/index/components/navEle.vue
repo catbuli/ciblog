@@ -1,6 +1,7 @@
 <template>
     <nav id="nav"
          ref="nav"
+         :style="{'min-width':style.navWidth}"
          :class="[$store.state.global.isShowLeftNav ? 'show-nav' : 'hidden-nav']">
         <svg @click="$store.commit('handleLeftNav', !$store.state.global.isShowLeftNav);"
              id="button-nav"
@@ -147,6 +148,9 @@ export default {
         }
     },
     computed: {
+        style() {
+            return this.$store.getters.globalStyle;
+        },
         personalData() {
             return this.$store.state.global.personalData;
         },
@@ -211,7 +215,7 @@ export default {
 #nav {
     /* overflow: hidden; */
     padding: 0px;
-    min-width: 250px;
+    min-width: 20%;
     height: 100%;
     width: 17%;
     position: fixed;

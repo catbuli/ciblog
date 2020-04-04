@@ -31,7 +31,6 @@ export default {
         $route() {
             this.$store.commit("handleLeftNav", false);
             scrollTo(0, 0);
-            console.log(this.$route);
         }
     },
     components: {
@@ -52,6 +51,31 @@ export default {
             if (this.$route.fullPath == "/" || this.$route.fullPath == "/log") {
                 done();
             }
+        },
+        isPC() {
+            var userAgentInfo = navigator.userAgent;
+            var Agents = [
+                "Android",
+                "iPhone",
+                "SymbianOS",
+                "Windows Phone",
+                "iPad",
+                "iPod"
+            ];
+            var flag = true;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            this.$store.commit("isPC", flag);
+        },
+        handleLoading() {
+            let loading = document.getElementById("loading");
+            if (loading) {
+                loading.remove();
+            }
         }
     },
     created() {
@@ -59,10 +83,8 @@ export default {
         this.$store.dispatch("getSystemAciton");
     },
     mounted() {
-        let loading = document.getElementById("loading");
-        if (loading) {
-            loading.remove();
-        }
+        this.isPC();
+        this.handleLoading();
     }
 };
 </script>

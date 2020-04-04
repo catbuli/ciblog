@@ -13,6 +13,15 @@ export default {
         isAdmin: true,
         isShowLeftNav: false,
         isLogin: false,
+        isPC: true,
+        style: {
+            pc: {
+                navWidth: "10%"
+            },
+            mc: {
+                navWidth: "40%"
+            }
+        },
         uid: localStorage.getItem('uid') ? localStorage.getItem('uid') : '',
         token: localStorage.getItem('token') ? localStorage.getItem('token') : '',
         countList: {
@@ -30,7 +39,19 @@ export default {
         refresh: "main",
         UPLOADPATH: process.env.VUE_APP_UPLOADPATH,
     },
+    getters: {
+        globalStyle: state => {
+            if (state.isPC) {
+                return state.style.pc;
+            } else {
+                return state.style.mc;
+            }
+        }
+    },
     mutations: {
+        isPC(state, data) {
+            state.isPC = data;
+        },
         setSystem(state, data) {
             //banner处理
             state.system = data;
