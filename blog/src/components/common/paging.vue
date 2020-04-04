@@ -55,17 +55,18 @@ export default {
             this.getList();
         },
         backTop() {
-            let backTopTimer = setInterval(function() {
-                var scrollTop =
-                    document.documentElement.scrollTop ||
-                    document.body.scrollTop;
-                var speed = scrollTop / 10;
-                if (document.documentElement.scrollTop === 0) {
-                    clearInterval(backTopTimer);
-                } else {
-                    document.documentElement.scrollTop -= speed;
-                }
-            }, 10);
+            // let backTopTimer = setInterval(function() {
+            //     var scrollTop =
+            //         document.documentElement.scrollTop ||
+            //         document.body.scrollTop;
+            //     var speed = scrollTop / 10;
+            //     if (document.documentElement.scrollTop === 0) {
+            //         clearInterval(backTopTimer);
+            //     } else {
+            //         document.documentElement.scrollTop -= speed;
+            //     }
+            // }, 10);
+            scrollTo(0, 0);
         },
         getList() {
             this.$store.dispatch(this.action, this.page);
