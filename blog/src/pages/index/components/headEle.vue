@@ -103,10 +103,9 @@ header {
 }
 /* 信息显示 */
 .information {
-    top: 35%;
+    top: 40%;
     color: white;
     position: absolute;
-    margin: 0 auto;
     text-shadow: 0 0 5px #c3c3c3;
 }
 .one {
