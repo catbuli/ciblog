@@ -16,14 +16,14 @@ export default {
         isPC: true,
         style: {
             pc: {
-                navWidth: "17%",
+                navWidth: "20%",
                 navButton: {
                     width: "70px",
                     height: "70px"
                 },
             },
             mc: {
-                navWidth: "40%",
+                navWidth: "30%",
                 navButton: {
                     width: "140px",
                     height: "140px"

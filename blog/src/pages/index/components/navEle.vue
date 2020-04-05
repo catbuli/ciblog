@@ -1,7 +1,7 @@
 <template>
     <nav id="nav"
          ref="nav"
-         :style="{'min-width':style.navWidth}"
+         :style="{'width':style.navWidth}"
          :class="[$store.state.global.isShowLeftNav ? 'show-nav' : 'hidden-nav']">
         <svg @click="$store.commit('handleLeftNav', !$store.state.global.isShowLeftNav);"
              id="button-nav"
@@ -216,10 +216,10 @@ export default {
 /* 侧边栏 */
 #nav {
     /* overflow: hidden; */
+    min-width: 220px;
     padding: 0px;
-    min-width: 20%;
     height: 100%;
-    width: 20%;
+    width: 17%;
     position: fixed;
     z-index: 50;
     background-color: rgb(53, 53, 53);
