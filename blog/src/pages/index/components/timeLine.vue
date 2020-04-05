@@ -45,6 +45,9 @@ export default {
     mounted() {
         window.addEventListener("scroll", this.handleScroll, true);
     },
+    destroyed() {
+        window.removeEventListener("scroll", this.handleScroll, true);
+    },
     methods: {
         handleScroll(e) {
             var scrollTop =
@@ -56,7 +59,7 @@ export default {
                 document.documentElement.scrollHeight ||
                 document.body.scrollHeight;
             if (scrollHeight < 20 + scrollTop + windowHeight) {
-                this.$refs.timeline.className = "timeline open";
+                this.$refs.timeline.classList.add = "open";
                 this.$refs.timeline.style.maxHeight = this.height + "px";
                 this.height += 50;
             }
