@@ -97,7 +97,7 @@
         </div>
         <div class="add-comment"
              v-if="$store.state.global.system.comment_is_allow"
-             ref="commentTop">
+             ref="addComment">
             <i class="el-icon-edit-outline title">{{commentMessage}}</i>
             <span class="clear-reply"
                   v-show="isReply"
@@ -291,6 +291,19 @@ export default {
         }
     },
     methods: {
+        handleScroll(e) {
+            var scrollTop =
+                document.documentElement.scrollTop || document.body.scrollTop;
+            var dom = this.$refs.addComment;
+            if (dom.offsetTop) {
+                if (
+                    scrollTop + document.body.clientHeight - 200 >=
+                    dom.offsetTop
+                ) {
+                    dom.classList.add("show");
+                }
+            }
+        },
         getArticleData(aid) {
             this.$store.dispatch("getArticleDataAction", aid);
         },
@@ -314,7 +327,7 @@ export default {
         },
         reply(data, node) {
             this.anchor = node.pageY - 20;
-            scrollTo(0, this.$refs.commentTop.offsetTop);
+            scrollTo(0, this.$refs.addComment.offsetTop);
             this.isReply = true;
             this.commentMessage = "回复 " + data.nickname;
             this.commentData.reply = {
@@ -334,9 +347,13 @@ export default {
         }
     },
     mounted() {
+        document.addEventListener("scroll", this.handleScroll, true);
         this.loading = true;
         this.getArticleData(this.$route.params.id);
         this.getCommentList(this.$route.params.id);
+    },
+    destroyed() {
+        document.removeEventListener("scroll", this.handleScroll, true);
     }
 };
 </script>
@@ -556,10 +573,24 @@ export default {
 
 /* 添加评论 */
 .add-comment {
+    visibility: hidden;
     margin: 0 auto;
     width: 700px;
     padding: 15px;
     text-align: left;
+}
+.show {
+    visibility: visible !important;
+    animation: add-comment-show 1s ease;
+    animation-fill-mode: forwards;
+}
+@keyframes add-comment-show {
+    0% {
+        clip-path: circle(0% at 50% 50%);
+    }
+    100% {
+        clip-path: circle(100% at 50% 50%);
+    }
 }
 .clear-reply {
     cursor: pointer;
