@@ -100,6 +100,10 @@ body {
     width: 100%;
     height: 100%;
 }
+.element-frame {
+    margin: 0 auto;
+    width: 750px;
+}
 /* 公共样式设置 */
 ::selection {
     background-color: rgba(0, 0, 0, 0.7);

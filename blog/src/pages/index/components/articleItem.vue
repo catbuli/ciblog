@@ -104,109 +104,96 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 #articleItem {
-    margin-top: 50px;
-}
-
-.show {
-    visibility: visible !important;
-    animation: show 1.5s ease;
-    animation-fill-mode: forwards;
-}
-@keyframes show {
-    0% {
-        opacity: 0;
-        transform: scale(0.4) rotateZ(-2deg);
-    }
-    20% {
-        transform: rotateZ(2deg);
-    }
-    40% {
-        transform: rotateZ(-2deg);
-    }
-    60% {
-        transform: rotateZ(2deg);
-    }
-    80% {
-        transform: rotateZ(-2deg);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1) rotateZ(0);
-    }
-}
-.card {
-    opacity: 0;
-    visibility: hidden;
-    text-align: left;
-    background-color: #ffffff;
-    list-style: none;
-    width: 700px;
-    margin: 0 auto 70px;
-    border-radius: 8px;
-    padding: 15px;
-}
-
-.card:hover {
-    box-shadow: 0px 0px 10px 5px #9d9d9d;
-    transition: all 0.5s ease;
-}
-.card-line {
-    width: 100%;
-    height: 2px;
-    margin: 10px 0;
-    overflow: hidden;
-    font-size: 0;
-    border-bottom: 1px solid #e1e1e1;
-}
-
-.card-top {
-    margin: 10px 0px;
-}
-.card-top i {
-    font-size: 15px;
-}
-.card-top-categories {
-    cursor: pointer;
-}
-.card-top-categories + .card-top-categories::before {
-    content: " • ";
-}
-.card-top-date {
-    color: #8a8a8a;
-}
-.card-bottom-right {
-    float: right;
-}
-
-.article-title {
-    margin: 0px;
-    font-size: 1.5rem;
-}
-
-.article-image {
-    width: 700px;
-    height: 325px;
-    cursor: pointer;
-}
-
-.article-content {
-    width: 80%;
-    margin: 10px 0px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-ul {
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-
-ul a {
-    text-decoration: none;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    .card {
+        width: 90%;
+        opacity: 0;
+        visibility: hidden;
+        text-align: left;
+        background-color: #ffffff;
+        list-style: none;
+        margin: 0 auto 70px;
+        border-radius: 8px;
+        padding: 15px;
+        .article-title {
+            margin: 0px;
+            font-size: 1.5rem;
+        }
+        .article-image {
+            width: 100%;
+            height: 330px;
+            cursor: pointer;
+        }
+        .article-content {
+            width: 80%;
+            margin: 10px 0px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .card-top {
+            margin: 10px 0px;
+            i {
+                font-size: 15px;
+            }
+            .card-top-categories {
+                cursor: pointer;
+            }
+            .card-top-categories + .card-top-categories::before {
+                content: " • ";
+            }
+            .card-top-date {
+                color: #8a8a8a;
+            }
+        }
+        .card-line {
+            width: 100%;
+            height: 2px;
+            margin: 10px 0;
+            overflow: hidden;
+            font-size: 0;
+            border-bottom: 1px solid #e1e1e1;
+        }
+        .card-bottom {
+            .card-bottom-right {
+                float: right;
+            }
+        }
+    }
+    .card:hover {
+        box-shadow: 0px 0px 10px 5px #9d9d9d;
+        transition: all 0.5s ease;
+    }
+    .show {
+        visibility: visible !important;
+        animation: show 1.5s ease;
+        animation-fill-mode: forwards;
+    }
+    @keyframes show {
+        0% {
+            opacity: 0;
+            transform: scale(0.4) rotateZ(-2deg);
+        }
+        20% {
+            transform: rotateZ(2deg);
+        }
+        40% {
+            transform: rotateZ(-2deg);
+        }
+        60% {
+            transform: rotateZ(2deg);
+        }
+        80% {
+            transform: rotateZ(-2deg);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1) rotateZ(0);
+        }
+    }
 }
 </style>
