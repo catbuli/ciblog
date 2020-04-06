@@ -45,6 +45,7 @@ export default {
         select(value) {
             var input = document.getElementById(this.input);
             input.value += value;
+            this.visible = false;
         }
     }
 };
