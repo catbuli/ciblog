@@ -4,163 +4,166 @@
         <!-- :key="$route.fullPath" -->
         <headEle height="60%"
                  :backgroundImage="'url('+article.cover_url+')'"></headEle>
-        <article v-loading="loading">
-            <div class="article-header">
-                <h2 class="article-title"
-                    v-text="article.title"></h2>
-                <div class="article-meta">
-                    <span class="article-meta-label iconfont iconpushpin">{{article.pv}}次阅读</span>
-                    <span class="article-meta-label iconfont iconpushpin">
-                        <a class="category"
-                           :href="`/search/category/${category.mid}`"
-                           target="_blank"
-                           v-for="category in article.category"
-                           :key="category.mid">{{category.name}}</a>
-                    </span>
-                    <span class="article-meta-label iconfont iconpushpin">{{article.create_date|handleDate}}</span>
+        <div class="element-frame">
+            <article v-loading="loading">
+                <div class="article-header">
+                    <h2 class="article-title"
+                        v-text="article.title"></h2>
+                    <div class="article-meta">
+                        <span class="article-meta-label iconfont iconpushpin">{{article.pv}}次阅读</span>
+                        <span class="article-meta-label iconfont iconpushpin">
+                            <a class="category"
+                               :href="`/search/category/${category.mid}`"
+                               target="_blank"
+                               v-for="category in article.category"
+                               :key="category.mid">{{category.name}}</a>
+                        </span>
+                        <span class="article-meta-label iconfont iconpushpin">{{article.create_date|handleDate}}</span>
+                    </div>
                 </div>
-            </div>
-            <div class="article-body">
-                <div class="markdown-body"
-                     v-html="article.html">
+                <div class="article-body">
+                    <div class="markdown-body"
+                         v-html="article.html">
+                    </div>
+                    <div class="article-other"></div>
+                    <div class="article-update">
+                        <i class="el-icon-time">最后更新于：{{article.modify_date|handleDate}}</i>
+                    </div>
                 </div>
-                <div class="article-other"></div>
-                <div class="article-update">
-                    <i class="el-icon-time">最后更新于：{{article.modify_date|handleDate}}</i>
-                </div>
-            </div>
-            <div class="article-tags">
-                <a v-for="item in article.tag"
-                   class="el-icon-collection-tag"
-                   :key="item.mid"
-                   :href="`/search/tag/${item.mid}`"
-                   target="_blank">
-                    {{item.name}}
-                </a>
-            </div>
-            <div class="article-footer">
-                <div class="article-previous"
-                     v-if="previous">
-                    <a @click="jump(previous.aid)">
-                        <span>{{previous.title}}</span>
-                        <span>上一篇</span>
-                        <img :src="previous.cover_url"
-                             title="上一篇">
+                <div class="article-tags">
+                    <a v-for="item in article.tag"
+                       class="el-icon-collection-tag"
+                       :key="item.mid"
+                       :href="`/search/tag/${item.mid}`"
+                       target="_blank">
+                        {{item.name}}
                     </a>
                 </div>
-                <div class="article-next"
-                     v-if="next">
-                    <a @click="jump(next.aid)">
-                        <span>{{next.title}}</span>
-                        <span>下一篇</span>
-                        <img :src="next.cover_url"
-                             title="下一篇">
-                    </a>
+                <div class="article-footer">
+                    <div class="article-previous"
+                         v-if="previous">
+                        <a @click="jump(previous.aid)">
+                            <span>{{previous.title}}</span>
+                            <span>上一篇</span>
+                            <img :src="previous.cover_url"
+                                 title="上一篇">
+                        </a>
+                    </div>
+                    <div class="article-next"
+                         v-if="next">
+                        <a @click="jump(next.aid)">
+                            <span>{{next.title}}</span>
+                            <span>下一篇</span>
+                            <img :src="next.cover_url"
+                                 title="下一篇">
+                        </a>
+                    </div>
                 </div>
-            </div>
-        </article>
-        <div class="comments"
-             ref="comments">
-            <span class="response">
-                <p>
-                    <i class="el-icon-chat-line-square"> {{commentList.length}} 条评论 </i>
-                </p>
-            </span>
-            <ul>
-                <transition-group name="comment">
-                    <li v-for="item in commentList"
-                        :key="item.cid">
-                        <div class="comment-left">
-                            <Gravatar :email="item.email"
-                                      :class="!JSON.parse(item.reply)?'comment-avatar':'comment-avatar-child'"
-                                      class="comment-avatar"
-                                      :size="!JSON.parse(item.reply)?45:30"></Gravatar>
-                        </div>
-                        <div class="comment-content">
-                            <i class="el-icon-chat-line-square comment-reply"
-                               @click="reply(item,$event)"></i>
-                            <div class="comment-text">
-                                <p class="reply"
-                                   v-if="item.reply">
-                                    <span>@{{JSON.parse(item.reply).nickname}}</span>
-                                </p>
-                                <p class="text">{{item.content}}</p>
+            </article>
+            <div class="comments"
+                 ref="comments">
+                <span class="response">
+                    <p>
+                        <i class="el-icon-chat-line-square"> {{commentList.length}} 条评论 </i>
+                    </p>
+                </span>
+                <ul>
+                    <transition-group name="comment">
+                        <li v-for="item in commentList"
+                            :key="item.cid">
+                            <div class="comment-left">
+                                <Gravatar :email="item.email"
+                                          :class="!JSON.parse(item.reply)?'comment-avatar':'comment-avatar-child'"
+                                          class="comment-avatar"
+                                          :size="!JSON.parse(item.reply)?45:30"></Gravatar>
                             </div>
-                            <p class="comment-meta">
-                                By <span v-text="item.nickname"></span>
-                                at <span v-text="item.create_date"></span>
-                            </p>
-                        </div>
-                    </li>
-                </transition-group>
-            </ul>
+                            <div class="comment-content">
+                                <i class="el-icon-chat-line-square comment-reply"
+                                   @click="reply(item,$event)"></i>
+                                <div class="comment-text">
+                                    <p class="reply"
+                                       v-if="item.reply">
+                                        <span>@{{JSON.parse(item.reply).nickname}}</span>
+                                    </p>
+                                    <p class="text">{{item.content}}</p>
+                                </div>
+                                <p class="comment-meta">
+                                    By <span v-text="item.nickname"></span>
+                                    at <span v-text="item.create_date"></span>
+                                </p>
+                            </div>
+                        </li>
+                    </transition-group>
+                </ul>
+            </div>
+            <div class="add-comment"
+                 v-if="$store.state.global.system.comment_is_allow"
+                 ref="addComment">
+                <i class="el-icon-edit-outline title">{{commentMessage}}</i>
+                <span class="clear-reply"
+                      v-show="isReply"
+                      @click="clearReply">取消</span>
+                <el-form ref="form"
+                         :model="commentData"
+                         :rules="rules"
+                         status-icon>
+                    <el-row>
+                        <el-col :span=10
+                                class="username">
+                            <el-form-item prop="nickname">
+                                <el-input v-model="commentData.nickname"
+                                          label="用户名"
+                                          prefix-icon="el-icon-user"
+                                          placeholder="姓名（必须）"></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span=4
+                                class="avatar"
+                                align="center">
+                            <el-avatar class="avatar"
+                                       shape="square"
+                                       src='https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png'
+                                       :size="50"></el-avatar>
+                        </el-col>
+                        <el-col :span=10
+                                class="email">
+                            <el-form-item prop="email">
+                                <el-input v-model="commentData.email"
+                                          label="邮箱"
+                                          placeholder="邮箱（必须）"
+                                          prefix-icon="el-icon-message"></el-input>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                    <el-form-item prop="content"
+                                  class="content">
+                        <el-input v-model="commentData.content"
+                                  id="input"
+                                  resize="none"
+                                  ref="input"
+                                  type="textarea"
+                                  placeholder="文明留言哦!"
+                                  maxlength="200"
+                                  show-word-limit
+                                  :rows=5></el-input>
+                    </el-form-item>
+                    <el-row>
+                        <el-col :span=3>
+                            <QAQ input="input"></QAQ>
+                        </el-col>
+                        <el-col :span=21>
+                            <el-button style="float:right"
+                                       @click="addComment('form')">发送</el-button>
+                        </el-col>
+                    </el-row>
+                </el-form>
+            </div>
+            <div class="message"
+                 v-else>
+                <p>评论功能已关闭</p>
+            </div>
         </div>
-        <div class="add-comment"
-             v-if="$store.state.global.system.comment_is_allow"
-             ref="addComment">
-            <i class="el-icon-edit-outline title">{{commentMessage}}</i>
-            <span class="clear-reply"
-                  v-show="isReply"
-                  @click="clearReply">取消</span>
-            <el-form ref="form"
-                     :model="commentData"
-                     :rules="rules"
-                     status-icon>
-                <el-row>
-                    <el-col :span=10
-                            class="username">
-                        <el-form-item prop="nickname">
-                            <el-input v-model="commentData.nickname"
-                                      label="用户名"
-                                      prefix-icon="el-icon-user"
-                                      placeholder="姓名（必须）"></el-input>
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span=4
-                            class="avatar"
-                            align="center">
-                        <el-avatar class="avatar"
-                                   shape="square"
-                                   src='https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png'
-                                   :size="50"></el-avatar>
-                    </el-col>
-                    <el-col :span=10
-                            class="email">
-                        <el-form-item prop="email">
-                            <el-input v-model="commentData.email"
-                                      label="邮箱"
-                                      placeholder="邮箱（必须）"
-                                      prefix-icon="el-icon-message"></el-input>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-form-item prop="content"
-                              class="content">
-                    <el-input v-model="commentData.content"
-                              id="input"
-                              resize="none"
-                              ref="input"
-                              type="textarea"
-                              placeholder="文明留言哦!"
-                              maxlength="200"
-                              show-word-limit
-                              :rows=5></el-input>
-                </el-form-item>
-                <el-row>
-                    <el-col :span=3>
-                        <QAQ input="input"></QAQ>
-                    </el-col>
-                    <el-col :span=21>
-                        <el-button style="float:right"
-                                   @click="addComment('form')">发送</el-button>
-                    </el-col>
-                </el-row>
-            </el-form>
-        </div>
-        <div class="message"
-             v-else>
-            <p>评论功能已关闭</p>
-        </div>
+
         <footEle></footEle>
     </div>
 </template>
@@ -392,7 +395,7 @@ export default {
     position: relative;
     border-radius: 10px;
     margin: 0 auto;
-    width: 700px;
+    width: 90%;
     background: #ffffff;
     padding: 15px;
     margin-bottom: 30px;
@@ -521,7 +524,7 @@ export default {
     padding: 15px;
     margin: 0 auto;
     text-align: left;
-    width: 700px;
+    width: 94%;
 }
 .comments ul li {
     margin-bottom: 20px;
@@ -600,7 +603,7 @@ export default {
 .add-comment {
     visibility: hidden;
     margin: 0 auto;
-    width: 700px;
+    width: 94%;
     padding: 15px;
     text-align: left;
 }
