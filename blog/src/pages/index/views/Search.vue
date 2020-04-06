@@ -4,16 +4,18 @@
          :key="$route.fullPath">
         <headEle height="70%"
                  :backgroundImage="'url('+banner+')'"></headEle>
-        <div class="search-message"
-             v-loading="loading">
-            <p v-html="searchMessage"></p>
-            <p v-html="searchDescription"></p>
+        <div class="element-frame">
+            <div class="search-message"
+                 v-loading="loading">
+                <p v-html="searchMessage"></p>
+                <p v-html="searchDescription"></p>
+            </div>
+            <articleItem :list-data="articleList"></articleItem>
+            <paging action="getArticleListAction"
+                    align="center"
+                    :paging="paging"
+                    @function="handlePage"></paging>
         </div>
-        <articleItem :list-data="articleList"></articleItem>
-        <paging action="getArticleListAction"
-                align="center"
-                :paging="paging"
-                @function="handlePage"></paging>
         <footEle></footEle>
     </div>
 </template>
@@ -137,12 +139,12 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less" scoped>
 .search-message {
     text-align: left;
     background-color: #ffffff;
-    width: 700px;
-    margin: 0 auto;
+    width: 90%;
+    margin: 0 auto 30px;
     border-radius: 8px;
     padding: 17px;
 }
