@@ -2,11 +2,13 @@
     <div id="home"
          class="index-frame">
         <headEle :backgroundImage="'url('+banner+')'"></headEle>
-        <articleItem :list-data="articleList"></articleItem>
-        <paging action="getArticleListAction"
-                align="center"
-                :paging="paging"
-                @function="handlePage"></paging>
+        <div class="element-frame">
+            <articleItem :list-data="articleList"></articleItem>
+            <paging action="getArticleListAction"
+                    align="center"
+                    :paging="paging"
+                    @function="handlePage"></paging>
+        </div>
         <footEle></footEle>
     </div>
 </template>

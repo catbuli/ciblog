@@ -2,6 +2,7 @@
     <div id="back-top"
          ref="backTop"
          @click="back"
+         :style="[style.backTop.box,style.backTop.position]"
          :class="[isShow ? 'show' : 'hidden']">
     </div>
 </template>
@@ -16,6 +17,11 @@ export default {
     },
     mounted() {
         window.addEventListener("scroll", this.handleScroll, true);
+    },
+    computed: {
+        style() {
+            return this.$store.getters.globalStyle;
+        }
     },
     methods: {
         back() {
@@ -53,6 +59,7 @@ export default {
 
 <style scoped>
 #back-top {
+    z-index: 100;
     padding: 0;
     margin: 0;
     width: 100px;
@@ -62,7 +69,7 @@ export default {
     bottom: 100px;
     transition: all 0.8s ease;
     background: url(../../assets/images/backtop.png) no-repeat;
-    background-size: 100px 100px;
+    background-size: 100% 100%;
 }
 
 .show {

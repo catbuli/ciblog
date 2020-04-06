@@ -4,9 +4,11 @@
         <headEle height="70%"
                  :backgroundImage="'url('+banner+')'">
         </headEle>
-        <div class="error-main">
-            <h3>哦吼！页面出错了搜索一下吧。</h3>
-            <searchTool></searchTool>
+        <div class="element-frame">
+            <div class="error-main">
+                <h3>哦吼！页面出错了搜索一下吧。</h3>
+                <searchTool></searchTool>
+            </div>
         </div>
         <footEle></footEle>
     </div>

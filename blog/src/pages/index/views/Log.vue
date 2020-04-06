@@ -4,26 +4,28 @@
         <headEle height="70%"
                  :isShowInfo="false"
                  :backgroundImage="'url('+banner+')'"></headEle>
-        <div class="log-main">
-            <div class="log-tags">
-                <h1 class="log-title text-shadow">Tags</h1>
-                <div class="mate">
-                    <miniTag v-for="item in tagList"
-                             :key="item.mid"
-                             :href="`/search/tag/${item.mid}`"
-                             :content="item.name"></miniTag>
+        <div class="element-frame">
+            <div class="log-main">
+                <div class="log-tags">
+                    <h1 class="log-title text-shadow">Tags</h1>
+                    <div class="meta">
+                        <miniTag v-for="item in tagList"
+                                 :key="item.mid"
+                                 :href="`/search/tag/${item.mid}`"
+                                 :content="item.name"></miniTag>
+                    </div>
                 </div>
-            </div>
-            <div class="log-categorys">
-                <h1 class="log-title text-shadow">Categorys</h1>
-                <div class="mate">
-                    <miniTag v-for="item in categoryList"
-                             :key="item.mid"
-                             :href="`/search/category/${item.mid}`"
-                             :content="item.name"></miniTag>
+                <div class="log-categorys">
+                    <h1 class="log-title text-shadow">Categorys</h1>
+                    <div class="meta">
+                        <miniTag v-for="item in categoryList"
+                                 :key="item.mid"
+                                 :href="`/search/category/${item.mid}`"
+                                 :content="item.name"></miniTag>
+                    </div>
                 </div>
+                <timeLine :data="timeline"></timeLine>
             </div>
-            <timeLine :data="timeline"></timeLine>
         </div>
         <footEle></footEle>
     </div>
@@ -81,12 +83,12 @@ export default {
 
 <style lang="less" scoped>
 .log-main {
-    width: 720px;
+    width: 90%;
     margin: 0 auto;
     h1 {
         margin: 0 0 20px 0;
     }
-    .mate {
+    .meta {
         padding-left: 40px;
     }
     .log-tags {
