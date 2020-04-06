@@ -8,7 +8,7 @@
             <div class="log-main">
                 <div class="log-tags">
                     <h1 class="log-title text-shadow">Tags</h1>
-                    <div class="mate">
+                    <div class="meta">
                         <miniTag v-for="item in tagList"
                                  :key="item.mid"
                                  :href="`/search/tag/${item.mid}`"
@@ -17,7 +17,7 @@
                 </div>
                 <div class="log-categorys">
                     <h1 class="log-title text-shadow">Categorys</h1>
-                    <div class="mate">
+                    <div class="meta">
                         <miniTag v-for="item in categoryList"
                                  :key="item.mid"
                                  :href="`/search/category/${item.mid}`"
@@ -88,7 +88,7 @@ export default {
     h1 {
         margin: 0 0 20px 0;
     }
-    .mate {
+    .meta {
         padding-left: 40px;
     }
     .log-tags {

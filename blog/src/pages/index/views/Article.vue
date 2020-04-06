@@ -96,74 +96,75 @@
                     </transition-group>
                 </ul>
             </div>
-            <div class="add-comment"
-                 v-if="$store.state.global.system.comment_is_allow"
-                 ref="addComment">
-                <i class="el-icon-edit-outline title">{{commentMessage}}</i>
-                <span class="clear-reply"
-                      v-show="isReply"
-                      @click="clearReply">取消</span>
-                <el-form ref="form"
-                         :model="commentData"
-                         :rules="rules"
-                         status-icon>
-                    <el-row>
-                        <el-col :span=10
-                                class="username">
-                            <el-form-item prop="nickname">
-                                <el-input v-model="commentData.nickname"
-                                          label="用户名"
-                                          prefix-icon="el-icon-user"
-                                          placeholder="姓名（必须）"></el-input>
-                            </el-form-item>
-                        </el-col>
-                        <el-col :span=4
-                                class="avatar"
-                                align="center">
-                            <el-avatar class="avatar"
-                                       shape="square"
-                                       src='https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png'
-                                       :size="50"></el-avatar>
-                        </el-col>
-                        <el-col :span=10
-                                class="email">
-                            <el-form-item prop="email">
-                                <el-input v-model="commentData.email"
-                                          label="邮箱"
-                                          placeholder="邮箱（必须）"
-                                          prefix-icon="el-icon-message"></el-input>
-                            </el-form-item>
-                        </el-col>
-                    </el-row>
-                    <el-form-item prop="content"
-                                  class="content">
-                        <el-input v-model="commentData.content"
-                                  id="input"
-                                  resize="none"
-                                  ref="input"
-                                  type="textarea"
-                                  placeholder="文明留言哦!"
-                                  maxlength="200"
-                                  show-word-limit
-                                  :rows=5></el-input>
-                    </el-form-item>
-                    <el-row>
-                        <el-col :span=3>
-                            <QAQ input="input"></QAQ>
-                        </el-col>
-                        <el-col :span=21>
-                            <el-button style="float:right"
-                                       @click="addComment('form')">发送</el-button>
-                        </el-col>
-                    </el-row>
-                </el-form>
-            </div>
-            <div class="message"
-                 v-else>
-                <p>评论功能已关闭</p>
-            </div>
+            <animationFrame className="circular-diffusion">
+                <div class="add-comment"
+                     v-if="$store.state.global.system.comment_is_allow"
+                     ref="addComment">
+                    <i class="el-icon-edit-outline title">{{commentMessage}}</i>
+                    <span class="clear-reply"
+                          v-show="isReply"
+                          @click="clearReply">取消</span>
+                    <el-form ref="form"
+                             :model="commentData"
+                             :rules="rules"
+                             status-icon>
+                        <el-row>
+                            <el-col :span=10
+                                    class="username">
+                                <el-form-item prop="nickname">
+                                    <el-input v-model="commentData.nickname"
+                                              label="用户名"
+                                              prefix-icon="el-icon-user"
+                                              placeholder="姓名（必须）"></el-input>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span=4
+                                    class="avatar"
+                                    align="center">
+                                <el-avatar class="avatar"
+                                           shape="square"
+                                           src='https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png'
+                                           :size="50"></el-avatar>
+                            </el-col>
+                            <el-col :span=10
+                                    class="email">
+                                <el-form-item prop="email">
+                                    <el-input v-model="commentData.email"
+                                              label="邮箱"
+                                              placeholder="邮箱（必须）"
+                                              prefix-icon="el-icon-message"></el-input>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-form-item prop="content"
+                                      class="content">
+                            <el-input v-model="commentData.content"
+                                      id="input"
+                                      resize="none"
+                                      ref="input"
+                                      type="textarea"
+                                      placeholder="文明留言哦!"
+                                      maxlength="200"
+                                      show-word-limit
+                                      :rows=5></el-input>
+                        </el-form-item>
+                        <el-row>
+                            <el-col :span=3>
+                                <QAQ input="input"></QAQ>
+                            </el-col>
+                            <el-col :span=21>
+                                <el-button style="float:right"
+                                           @click="addComment('form')">发送</el-button>
+                            </el-col>
+                        </el-row>
+                    </el-form>
+                </div>
+                <div class="message"
+                     v-else>
+                    <p>评论功能已关闭</p>
+                </div>
+            </animationFrame>
         </div>
-
         <footEle></footEle>
     </div>
 </template>
@@ -171,6 +172,7 @@
 <script>
 // @ is an alias to /src
 import footEle from "@/components/common/footEle.vue";
+import animationFrame from "@/components/common/animationFrame.vue";
 import headEle from "../components/headEle.vue";
 import QAQ from "@/components/miniTools/QAQ.vue";
 import Axios from "axios";
@@ -182,6 +184,7 @@ export default {
         headEle,
         footEle,
         Gravatar,
+        animationFrame,
         QAQ
     },
     data() {
@@ -354,13 +357,13 @@ export default {
         }
     },
     mounted() {
-        document.addEventListener("scroll", this.handleScroll, true);
+        // document.addEventListener("scroll", this.handleScroll, true);
         this.loading = true;
         this.getArticleData(this.$route.params.id);
         this.getCommentList(this.$route.params.id);
     },
     destroyed() {
-        document.removeEventListener("scroll", this.handleScroll, true);
+        // document.removeEventListener("scroll", this.handleScroll, true);
     }
 };
 </script>
@@ -601,24 +604,10 @@ export default {
 
 /* 添加评论 */
 .add-comment {
-    visibility: hidden;
     margin: 0 auto;
     width: 94%;
     padding: 15px;
     text-align: left;
-}
-.show {
-    visibility: visible !important;
-    animation: add-comment-show 1s ease;
-    animation-fill-mode: forwards;
-}
-@keyframes add-comment-show {
-    0% {
-        clip-path: circle(0% at 50% 50%);
-    }
-    100% {
-        clip-path: circle(100% at 50% 50%);
-    }
 }
 .clear-reply {
     cursor: pointer;
