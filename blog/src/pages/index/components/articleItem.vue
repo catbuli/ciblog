@@ -1,53 +1,60 @@
 <template>
     <ul id="articleItem"
         ref="articleList">
-        <li v-for="item in listData"
-            class="card"
-            :key="item.aid">
-            <span class="article-title link"
-                  v-text="item.title"
-                  @click="jump(item.aid)"></span>
-            <div class="card-top">
-                <i class="iconfont iconflag">
-                    <a class="card-top-categories"
-                       v-for="category in item.category"
-                       :key="category.mid"
-                       target="_blank"
-                       :href="`/search/category/${category.mid}`">{{category.name}}</a>
-                </i>
-                <i class="iconfont icontime-circle"
-                   style="margin-left:10px">
-                    <span class="card-top-date">{{item.create_date|handleDate}}</span>
-                </i>
-            </div>
-            <img class="article-image"
-                 :src="item.cover_url"
-                 @click="jump(item.aid)">
-            <p class="article-content"
-               v-text="item.description"></p>
-            <div class='card-line'></div>
-            <div class="card-bottom">
-                <span class="card-bottom-left">
-                    <a @click="jump(item.aid)"
-                       style="cursor: pointer;">
-                        ••• •••
-                    </a>
-                </span>
-                <span class="card-bottom-right">
-                    <i class="iconfont iconcomment"
-                       v-text="item.comment_count"></i>
-                    <i class="iconfont iconeye"
-                       style="margin-left:10px"
-                       v-text="item.pv"></i>
-                </span>
-            </div>
-        </li>
+        <animationFrame className="fade-out-sway"
+                        class="card"
+                        v-for="item in listData"
+                        :key="item.aid">
+            <li>
+                <span class="article-title link"
+                      v-text="item.title"
+                      @click="jump(item.aid)"></span>
+                <div class="card-top">
+                    <i class="iconfont iconflag">
+                        <a class="card-top-categories"
+                           v-for="category in item.category"
+                           :key="category.mid"
+                           target="_blank"
+                           :href="`/search/category/${category.mid}`">{{category.name}}</a>
+                    </i>
+                    <i class="iconfont icontime-circle"
+                       style="margin-left:10px">
+                        <span class="card-top-date">{{item.create_date|handleDate}}</span>
+                    </i>
+                </div>
+                <img class="article-image"
+                     :src="item.cover_url"
+                     @click="jump(item.aid)">
+                <p class="article-content"
+                   v-text="item.description"></p>
+                <div class='card-line'></div>
+                <div class="card-bottom">
+                    <span class="card-bottom-left">
+                        <a @click="jump(item.aid)"
+                           style="cursor: pointer;">
+                            ••• •••
+                        </a>
+                    </span>
+                    <span class="card-bottom-right">
+                        <i class="iconfont iconcomment"
+                           v-text="item.comment_count"></i>
+                        <i class="iconfont iconeye"
+                           style="margin-left:10px"
+                           v-text="item.pv"></i>
+                    </span>
+                </div>
+            </li>
+        </animationFrame>
     </ul>
 </template>
 
 <script>
+import animationFrame from "@/components/common/animationFrame.vue";
 export default {
     name: "Item",
+    components: {
+        animationFrame
+    },
     props: {
         listData: {}
     },
@@ -57,16 +64,16 @@ export default {
         }
     },
     watch: {
-        listData(oldVal, newVal) {
-            this.$nextTick(() => {
-                if (this.$refs.articleList) {
-                    this.$refs.articleList.children
-                        .item(0)
-                        .classList.add("show");
-                }
-            });
-            // 博客↑
-        }
+        // listData(oldVal, newVal) {
+        //     this.$nextTick(() => {
+        //         if (this.$refs.articleList) {
+        //             this.$refs.articleList.children
+        //                 .item(0)
+        //                 .classList.add("show");
+        //         }
+        //     });
+        //     // 博客↑
+        // }
     },
     methods: {
         handleScroll(e) {
@@ -94,13 +101,13 @@ export default {
                 });
             }
         }
-    },
-    mounted() {
-        document.addEventListener("scroll", this.handleScroll, true);
-    },
-    destroyed() {
-        document.removeEventListener("scroll", this.handleScroll, true);
     }
+    // mounted() {
+    //     document.addEventListener("scroll", this.handleScroll, true);
+    // },
+    // destroyed() {
+    //     document.removeEventListener("scroll", this.handleScroll, true);
+    // }
 };
 </script>
 
@@ -111,8 +118,6 @@ export default {
     justify-content: center;
     .card {
         width: 90%;
-        opacity: 0;
-        visibility: hidden;
         text-align: left;
         background-color: #ffffff;
         list-style: none;
@@ -167,33 +172,6 @@ export default {
     .card:hover {
         box-shadow: 0px 0px 10px 5px #9d9d9d;
         transition: all 0.5s ease;
-    }
-    .show {
-        visibility: visible !important;
-        animation: show 1.5s ease;
-        animation-fill-mode: forwards;
-    }
-    @keyframes show {
-        0% {
-            opacity: 0;
-            transform: scale(0.4) rotateZ(-2deg);
-        }
-        20% {
-            transform: rotateZ(2deg);
-        }
-        40% {
-            transform: rotateZ(-2deg);
-        }
-        60% {
-            transform: rotateZ(2deg);
-        }
-        80% {
-            transform: rotateZ(-2deg);
-        }
-        100% {
-            opacity: 1;
-            transform: scale(1) rotateZ(0);
-        }
     }
 }
 </style>

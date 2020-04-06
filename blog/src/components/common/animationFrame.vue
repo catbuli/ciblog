@@ -42,15 +42,16 @@ export default {
 div {
     width: 100%;
 }
+// 圆形扩散  从无到有
 .circular-diffusion {
     visibility: hidden;
 }
 .circular-diffusion-show {
     visibility: visible !important;
-    animation: add-comment-show 1s ease;
+    animation: circular-diffusion 1s ease;
     animation-fill-mode: forwards;
 }
-@keyframes add-comment-show {
+@keyframes circular-diffusion {
     0% {
         clip-path: circle(0% at 50% 50%);
     }
@@ -58,4 +59,37 @@ div {
         clip-path: circle(100% at 50% 50%);
     }
 }
+
+.fade-out-sway {
+    opacity: 0;
+    visibility: hidden;
+}
+.fade-out-sway-show {
+    visibility: visible !important;
+    animation: fade-out-sway-show 1.5s ease;
+    animation-fill-mode: forwards;
+}
+@keyframes fade-out-sway-show {
+    0% {
+        opacity: 0;
+        transform: scale(0.4) rotateZ(-2deg);
+    }
+    20% {
+        transform: rotateZ(2deg);
+    }
+    40% {
+        transform: rotateZ(-2deg);
+    }
+    60% {
+        transform: rotateZ(2deg);
+    }
+    80% {
+        transform: rotateZ(-2deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotateZ(0);
+    }
+}
+// 从小到大 从无到有 左右晃动
 </style>

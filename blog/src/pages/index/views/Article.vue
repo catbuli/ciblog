@@ -301,19 +301,6 @@ export default {
         }
     },
     methods: {
-        handleScroll(e) {
-            var scrollTop =
-                document.documentElement.scrollTop || document.body.scrollTop;
-            var dom = this.$refs.addComment;
-            if (dom) {
-                if (
-                    scrollTop + document.body.clientHeight - 200 >=
-                    dom.offsetTop
-                ) {
-                    dom.classList.add("show");
-                }
-            }
-        },
         getArticleData(aid) {
             this.$store.dispatch("getArticleDataAction", aid);
         },
@@ -357,14 +344,11 @@ export default {
         }
     },
     mounted() {
-        // document.addEventListener("scroll", this.handleScroll, true);
         this.loading = true;
         this.getArticleData(this.$route.params.id);
         this.getCommentList(this.$route.params.id);
     },
-    destroyed() {
-        // document.removeEventListener("scroll", this.handleScroll, true);
-    }
+    destroyed() {}
 };
 </script>
 
