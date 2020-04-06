@@ -107,7 +107,8 @@
                      :rules="rules"
                      status-icon>
                 <el-row>
-                    <el-col :span=10>
+                    <el-col :span=10
+                            class="username">
                         <el-form-item prop="nickname">
                             <el-input v-model="commentData.nickname"
                                       label="用户名"
@@ -116,13 +117,15 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span=4
+                            class="avatar"
                             align="center">
                         <el-avatar class="avatar"
                                    shape="square"
                                    src='https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png'
                                    :size="50"></el-avatar>
                     </el-col>
-                    <el-col :span=10>
+                    <el-col :span=10
+                            class="email">
                         <el-form-item prop="email">
                             <el-input v-model="commentData.email"
                                       label="邮箱"
@@ -131,7 +134,8 @@
                         </el-form-item>
                     </el-col>
                 </el-row>
-                <el-form-item prop="content">
+                <el-form-item prop="content"
+                              class="content">
                     <el-input v-model="commentData.content"
                               id="input"
                               resize="none"
@@ -359,6 +363,27 @@ export default {
 </script>
 
 <style scoped>
+/* 媒体查询 */
+@media screen and (max-width: 1200px) {
+} /* 大型设备（大台式电脑，1200px 起） */
+
+@media screen and (max-width: 992px) {
+} /* 中型设备（台式电脑，992px 起） */
+
+@media screen and (max-width: 768px) {
+} /* 小型设备（平板电脑，768px 起） */
+
+@media screen and (max-width: 960px) {
+    .add-comment {
+    }
+    .add-comment .avatar {
+        display: none;
+    }
+    .add-comment >>> .el-col-10 {
+        width: 100%;
+    }
+} /* 超小设备（手机，小于 768px） */
+
 [v-cloak] {
     display: none;
 }

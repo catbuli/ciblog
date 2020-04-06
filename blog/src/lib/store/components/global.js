@@ -18,6 +18,11 @@ export default {
 				navButton: {
 					width: '70px',
 					height: '70px'
+				},
+				navAvatar: {},
+				backTop: {
+					position: {},
+					box: {}
 				}
 			},
 			mc: {
@@ -35,8 +40,8 @@ export default {
 						bottom: '200px'
 					},
 					box: {
-						width: '150px',
-						height: '150px'
+						width: '130px',
+						height: '130px'
 					}
 				}
 			}
