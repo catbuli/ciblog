@@ -295,7 +295,7 @@ export default {
             var scrollTop =
                 document.documentElement.scrollTop || document.body.scrollTop;
             var dom = this.$refs.addComment;
-            if (dom.offsetTop) {
+            if (dom) {
                 if (
                     scrollTop + document.body.clientHeight - 200 >=
                     dom.offsetTop
