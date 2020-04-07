@@ -148,7 +148,7 @@ router.beforeEach((to, from, next) => {
     if (to.path == "/admin/login") {
         next();
     } else {
-        if (from.path.indexOf("admin") != -1) {
+        if (to.path.indexOf("admin") != -1) {
             post('/login/check', {}, (data) => {
                 if (data.code == 201) {
                     next();

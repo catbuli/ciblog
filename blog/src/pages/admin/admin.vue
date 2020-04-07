@@ -1,11 +1,9 @@
 <template>
     <div id="admin">
         <adminNav></adminNav>
-        <div class="main">
-            <transition name="card">
-                <router-view />
-            </transition>
-        </div>
+        <transition name="card">
+            <router-view />
+        </transition>
     </div>
 </template>
 
@@ -16,6 +14,30 @@ export default {
     components: {
         adminNav
     },
+    methods: {
+        isPC() {
+            var userAgentInfo = navigator.userAgent;
+            var Agents = [
+                "Android",
+                "iPhone",
+                "SymbianOS",
+                "Windows Phone",
+                "iPad",
+                "iPod"
+            ];
+            var flag = true;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            this.$store.commit("isPC", flag);
+        }
+    },
+    created() {
+        this.isPC();
+    },
     mounted() {
         let loading = document.getElementById("loading");
         loading.remove();
@@ -24,6 +46,16 @@ export default {
 </script>
 
 <style lang="less">
+/* admin框架样式 */
+.admin-frame {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.element-frame {
+    margin: 0 auto;
+    width: 750px;
+}
 /* 公共样式设置 */
 ::selection {
     background-color: rgba(0, 0, 0, 0.7);
@@ -111,9 +143,6 @@ li {
     // position: relative;
     width: 100%;
     height: 100%;
-}
-.main {
-    width: 100%;
 }
 
 .card-enter {

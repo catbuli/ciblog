@@ -156,23 +156,49 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+@transition: ~"all 1s ease";
+@media screen and (max-width: 960px) {
+    li {
+        width: 90% !important;
+    }
+    li /deep/ .el-input__inner {
+        font-size: 2rem;
+        height: 5rem;
+    }
+    h4 {
+        font-size: 2rem;
+        margin: 1.5rem auto;
+    }
+    .input-hint {
+        font-size: 1.5rem !important;
+    }
+    .input-button /deep/ .el-button {
+        font-size: 2rem;
+        height: 5rem;
+    }
+} /* 超小设备（手机，小于 480px） */
 section {
     padding-bottom: 20px;
 }
 h4 {
+    transition: @transition;
     text-align: left;
     font-weight: 900;
 }
 li {
+    transition: @transition;
     width: 50%;
     margin: 0 auto;
 }
 .input-button {
+    transition: @transition;
     margin: 20px auto;
     text-align: left;
 }
 .input-hint {
+    transition: @transition;
+    margin-top: 0.625rem;
     width: 100%;
     font-size: 13px;
     display: inline-block;

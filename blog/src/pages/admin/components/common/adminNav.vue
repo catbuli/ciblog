@@ -1,10 +1,10 @@
 <template>
     <nav id="admin-nav">
         <el-menu class="el-menu-demo"
-                 mode="horizontal"
                  background-color="#545c64"
                  text-color="#fff"
                  active-text-color="#ff8819"
+                 mode="horizontal"
                  router>
             <el-submenu index="1">
                 <template slot="title">控制台</template>
@@ -67,11 +67,4 @@ export default {
 </script>
 
 <style scoped>
-#admin-nav {
-    /* width: 100%;
-    position: fixed;
-    top: 0;
-    z-index: -1; */
-    /* min-width: 730px; */
-}
 </style>

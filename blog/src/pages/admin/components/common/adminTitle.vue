@@ -16,8 +16,12 @@ export default {
 </script>
 
 <style scoped>
-/* #admin-title {
-} */
+/* 媒体查询 */
+@media screen and (max-width: 960px) {
+    h2 {
+        font-size: 2.5rem;
+    }
+} /* 超小设备（手机，小于 480px） */
 h2 {
     text-align: left;
     font-weight: bold;

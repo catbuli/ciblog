@@ -8,7 +8,7 @@
         <adminTitle v-else
                     title="写文章"></adminTitle> -->
         <el-row>
-            <el-col :span="16">
+            <el-col :span="style.writeArticle.left.span">
                 <section class="content-main">
                     <el-input placeholder="标题"
                               v-model="article.title"></el-input>
@@ -57,40 +57,62 @@
                     </el-row>
                 </section>
             </el-col>
-            <el-col :span="7"
-                    :offset="1">
+            <el-col :span="style.writeArticle.right.span"
+                    :offset="style.writeArticle.right.offset">
                 <section class="content-settings">
                     <el-row class="setting-row">
-                        <h4>文章分类</h4>
-                        <!-- <el-checkbox-group v-model="article.categoryList">
+                        <el-col :span="style.isPC?24:12">
+                            <h4>文章分类</h4>
+                            <!-- <el-checkbox-group v-model="article.categoryList">
                             <el-checkbox v-for="item in categoryList"
                                          :key="item.mid"
                                          :label="item.mid"
                                          border>{{item.name}}</el-checkbox>
                         </el-checkbox-group> -->
-                        <el-tree :props="props"
-                                 :data="categoryList"
-                                 node-key="mid"
-                                 show-checkbox
-                                 ref="tree"
-                                 @check="check">
-                        </el-tree>
+                            <el-tree :props="props"
+                                     :data="categoryList"
+                                     node-key="mid"
+                                     show-checkbox
+                                     ref="tree"
+                                     @check="check">
+                            </el-tree>
+                        </el-col>
+                        <el-col v-if="!style.isPC"
+                                :span="12">
+                            <h4>文章标签</h4>
+                            <el-checkbox-group v-model="article.tagList">
+                                <el-checkbox v-for="item in $store.state.tag.tagList"
+                                             size="small"
+                                             :key="item.mid"
+                                             :label="item.mid"
+                                             border>{{item.name}}</el-checkbox>
+                                <el-input placeholder="新标签"
+                                          v-model="tagName"
+                                          size="small"
+                                          class="new-tag"
+                                          clearable
+                                          @keyup.enter.native="newTag"></el-input>
+                            </el-checkbox-group>
+                        </el-col>
                     </el-row>
-                    <el-row class="setting-row">
-                        <h4>文章标签</h4>
-                        <el-checkbox-group v-model="article.tagList">
-                            <el-checkbox v-for="item in $store.state.tag.tagList"
-                                         size="small"
-                                         :key="item.mid"
-                                         :label="item.mid"
-                                         border>{{item.name}}</el-checkbox>
-                            <el-input placeholder="新标签"
-                                      v-model="tagName"
-                                      size="small"
-                                      class="new-tag"
-                                      clearable
-                                      @keyup.enter.native="newTag"></el-input>
-                        </el-checkbox-group>
+                    <el-row class="setting-row"
+                            v-if="style.isPC">
+                        <el-col>
+                            <h4>文章标签</h4>
+                            <el-checkbox-group v-model="article.tagList">
+                                <el-checkbox v-for="item in $store.state.tag.tagList"
+                                             size="small"
+                                             :key="item.mid"
+                                             :label="item.mid"
+                                             border>{{item.name}}</el-checkbox>
+                                <el-input placeholder="新标签"
+                                          v-model="tagName"
+                                          size="small"
+                                          class="new-tag"
+                                          clearable
+                                          @keyup.enter.native="newTag"></el-input>
+                            </el-checkbox-group>
+                        </el-col>
                     </el-row>
                     <el-row class="setting-row">
                         <upload :aid=Number(this.$route.params.aid)></upload>
@@ -211,6 +233,9 @@ export default {
         }
     },
     computed: {
+        style() {
+            return this.$store.getters.globalStyle;
+        },
         categoryList() {
             return this.$store.state.category.categoryList;
         },
@@ -316,7 +341,11 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+@transition: ~"all 1s ease";
+@media screen and (max-width: 960px) {
+} /* 超小设备（手机，小于 480px） */
+
 section {
     margin-bottom: 30px;
     padding: 20px;

@@ -372,7 +372,7 @@ export default {
     .add-comment >>> .el-col-10 {
         width: 100%;
     }
-} /* 超小设备（手机，小于 768px） */
+} /* 超小设备（手机，小于 480px） */
 
 [v-cloak] {
     display: none;

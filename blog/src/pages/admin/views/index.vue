@@ -112,45 +112,70 @@ export default {
 };
 </script>
 
-<style scoped>
-.sign {
-    font-size: 60px;
-    color: #ff7b00;
-}
+<style lang="less" scoped>
+@multiple: 2;
+@media screen and (max-width: 960px) {
+    .index-top {
+        text-align: center;
+        p a {
+            font-size: 15px * @multiple;
+        }
+    }
+    .index-bottom {
+        display: block !important;
+        h3 {
+            font-size: 30px;
+        }
+        section {
+            font-size: 1rem * @multiple !important;
+        }
+        section ul {
+            padding-left: 50px !important;
+        }
+        section ul li span {
+            margin-right: 1.875rem !important;
+        }
+    }
+} /* 超小设备（手机，小于 480px） */
 .index-top {
     margin-bottom: 25px;
     padding: 0 0 35px;
     border-bottom: 2px solid #c7c7c7;
+    .sign {
+        font-size: 3.75rem;
+        color: #ff7b00;
+    }
+    p a {
+        margin-right: 20px;
+    }
+    .index-top-context {
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 80%;
+    }
 }
-.index-top p a {
-    margin-right: 20px;
-}
-.index-top-context {
-    display: inline-block;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    width: 80%;
-}
+
 .index-bottom {
     display: flex;
-}
-.index-bottom section {
-    flex: 1;
-    font-size: 15px;
-    margin: 0 10px;
-    overflow: hidden;
-}
-section ul {
-    padding-left: 20px;
-}
-section ul li {
-    margin-bottom: 5px;
-}
-section ul li span {
-    vertical-align: top;
-    display: inline-block;
-    margin-right: 10px;
-    color: #969696;
+    section {
+        flex: 1;
+        font-size: 0.9375rem;
+        margin: 0 10px;
+        overflow: hidden;
+    }
+    section ul {
+        padding-left: 20px;
+    }
+    section ul li {
+        margin-bottom: 5px;
+    }
+    section ul li span {
+        vertical-align: top;
+        display: inline-block;
+        margin-right: 10px;
+        color: #969696;
+    }
 }
 </style>
