@@ -39,8 +39,15 @@ export default {
 </script>
 
 <style scoped>
+/* 媒体查询 */
+@media screen and (max-width: 960px) {
+    #admin-frame {
+        min-width: 480px !important;
+        width: 90% !important;
+    }
+} /* 超小设备（手机，小于 480px） */
 #admin-frame {
-    min-width: 1000px;
+    min-width: 800px;
     width: 60%;
     margin: auto;
     text-align: left;

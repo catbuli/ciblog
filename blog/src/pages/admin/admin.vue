@@ -1,11 +1,9 @@
 <template>
     <div id="admin">
         <adminNav></adminNav>
-        <div class="main">
-            <transition name="card">
-                <router-view />
-            </transition>
-        </div>
+        <transition name="card">
+            <router-view />
+        </transition>
     </div>
 </template>
 
@@ -24,6 +22,16 @@ export default {
 </script>
 
 <style lang="less">
+/* admin框架样式 */
+.admin-frame {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.element-frame {
+    margin: 0 auto;
+    width: 750px;
+}
 /* 公共样式设置 */
 ::selection {
     background-color: rgba(0, 0, 0, 0.7);
@@ -111,9 +119,6 @@ li {
     // position: relative;
     width: 100%;
     height: 100%;
-}
-.main {
-    width: 100%;
 }
 
 .card-enter {
