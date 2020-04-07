@@ -45,6 +45,9 @@ export default {
         min-width: 480px !important;
         width: 90% !important;
     }
+    .refresh {
+        font-size: 2.5rem;
+    }
 } /* 超小设备（手机，小于 480px） */
 #admin-frame {
     min-width: 800px;
