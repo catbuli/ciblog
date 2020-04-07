@@ -25,7 +25,7 @@ export default {
 @transition: ~"all 1s ease";
 @media screen and (max-width: 960px) {
     .footer-info {
-        font-size: 1.8rem !important;
+        font-size: 1.5rem !important;
     }
 } /* 超小设备（手机，小于 480px） */
 #footEle {

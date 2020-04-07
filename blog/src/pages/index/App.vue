@@ -79,11 +79,11 @@ export default {
         }
     },
     created() {
+        this.isPC();
         this.$store.dispatch("getPersonalDataAction");
         this.$store.dispatch("getSystemAciton");
     },
     mounted() {
-        this.isPC();
         this.handleLoading();
     }
 };
