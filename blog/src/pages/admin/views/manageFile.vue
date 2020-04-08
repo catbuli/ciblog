@@ -10,7 +10,7 @@
                            @click="delComment">
                 </el-button>
             </el-col>
-            <el-col :span=9>
+            <el-col :span=14>
                 <el-radio-group v-model="paging.type"
                                 @change="selectChange">
                     <el-radio-button label=-1>全部</el-radio-button>
@@ -20,7 +20,7 @@
                 </el-radio-group>
             </el-col>
             <el-col :span=3
-                    :offset=10
+                    :offset=5
                     class="upload">
                 <el-upload multiple
                            style="text-align:right"
