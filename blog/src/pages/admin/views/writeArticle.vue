@@ -49,7 +49,8 @@
                             </el-switch>
                         </el-col>
                     </el-row>
-                    <el-row class="setting-row">
+                    <el-row class="setting-row"
+                            v-if="style.isPC">
                         <el-button type="primary"
                                    @click="publish">发布</el-button>
                         <el-button type="info"
@@ -116,6 +117,13 @@
                     </el-row>
                     <el-row class="setting-row">
                         <upload :aid=Number(this.$route.params.aid)></upload>
+                    </el-row>
+                    <el-row class="setting-row"
+                            v-if="!style.isPC">
+                        <el-button type="primary"
+                                   @click="publish">发布</el-button>
+                        <el-button type="info"
+                                   @click="saveDraft">保存草稿</el-button>
                     </el-row>
                 </section>
             </el-col>
