@@ -5,7 +5,7 @@
                 @refresh-click="getTagList">
         <el-row v-loading="loading"
                 element-loading-text="标签列表加载中">
-            <el-col :span="15">
+            <el-col :span="style.isPC?15:24">
                 <div v-if="tagList.length>0">
                     <el-tag v-for="tag in tagList"
                             :key="tag.mid"
@@ -18,7 +18,7 @@
                     <h3>暂无标签，请在右侧添加新的标签.</h3>
                 </div>
             </el-col>
-            <el-col :span="9"
+            <el-col :span="style.isPC?9:24"
                     style="float:right">
                 <ul>
                     <li>
@@ -54,6 +54,9 @@ export default {
         };
     },
     computed: {
+        style() {
+            return this.$store.getters.globalStyle;
+        },
         tagList() {
             return this.$store.state.tag.tagList;
         }
@@ -100,7 +103,32 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+@transition: ~"all 1s ease";
+@media screen and (max-width: 960px) {
+    li /deep/ .el-input__inner {
+        font-size: 2rem;
+        height: 5rem;
+    }
+    h4 {
+        font-size: 1.8rem;
+        margin: 1.5rem auto;
+    }
+    .input-hint {
+        font-size: 1.5rem !important;
+    }
+    .input-button /deep/ .el-button {
+        font-size: 2rem;
+        height: 5rem;
+    }
+    .el-tag {
+        width: auto !important;
+        height: auto !important;
+        font-size: 2.5rem !important;
+        line-height: 3rem !important;
+    }
+} /* 超小设备（手机，小于 480px） */
+
 .el-tag {
     font-size: 20px;
     line-height: 30px;
@@ -110,10 +138,6 @@ export default {
 h4 {
     text-align: left;
     font-weight: 900;
-}
-li {
-    width: 90%;
-    margin: 0 auto;
 }
 .input-button {
     margin: 20px auto;
