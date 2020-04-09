@@ -367,6 +367,21 @@ export default {
 } /* 小型设备（平板电脑，768px 起） */
 
 @media screen and (max-width: 960px) {
+    .article-title {
+        font-size: 2.5rem !important;
+    }
+    .article-meta span {
+        font-size: 1.5rem !important;
+    }
+    .article-update i {
+        font-size: 1.5rem !important;
+    }
+    .article-tags a {
+        font-size: 1.5rem !important;
+    }
+    .markdown-body {
+        font-size: 1.5rem !important;
+    }
 } /* 超小设备（手机，小于 480px） */
 
 [v-cloak] {
