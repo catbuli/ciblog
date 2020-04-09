@@ -71,7 +71,7 @@ export default {
 </script>
 
 <style scoped>
-@transition: ~"all 1s ease";
+/* @transition: ~"all 1s ease"; */
 @media screen and (max-width: 960px) {
     li {
         width: 90% !important;

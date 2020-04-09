@@ -109,7 +109,7 @@
                              :rules="rules"
                              status-icon>
                         <el-row>
-                            <el-col :span=10
+                            <el-col :span="style.isPC?10:24"
                                     class="username">
                                 <el-form-item prop="nickname">
                                     <el-input v-model="commentData.nickname"
@@ -118,7 +118,7 @@
                                               placeholder="姓名（必须）"></el-input>
                                 </el-form-item>
                             </el-col>
-                            <el-col :span=4
+                            <el-col :span="style.isPC?4:0"
                                     class="avatar"
                                     align="center">
                                 <el-avatar class="avatar"
@@ -126,7 +126,7 @@
                                            src='https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png'
                                            :size="50"></el-avatar>
                             </el-col>
-                            <el-col :span=10
+                            <el-col :span="style.isPC?10:24"
                                     class="email">
                                 <el-form-item prop="email">
                                     <el-input v-model="commentData.email"
@@ -245,6 +245,9 @@ export default {
         }
     },
     computed: {
+        style() {
+            return this.$store.getters.globalStyle;
+        },
         commentList() {
             let commentList = this.$store.state.comment.commentList;
             let father = [];
@@ -364,13 +367,20 @@ export default {
 } /* 小型设备（平板电脑，768px 起） */
 
 @media screen and (max-width: 960px) {
-    .add-comment {
+    .article-title {
+        font-size: 2.5rem !important;
     }
-    .add-comment .avatar {
-        display: none;
+    .article-meta span {
+        font-size: 1.5rem !important;
     }
-    .add-comment >>> .el-col-10 {
-        width: 100%;
+    .article-update i {
+        font-size: 1.5rem !important;
+    }
+    .article-tags a {
+        font-size: 1.5rem !important;
+    }
+    .markdown-body {
+        font-size: 1.5rem !important;
     }
 } /* 超小设备（手机，小于 480px） */
 

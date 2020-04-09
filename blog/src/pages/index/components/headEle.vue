@@ -72,6 +72,11 @@ export default {
 </script>
 
 <style scoped>
+@media screen and (max-width: 960px) {
+    .description-info {
+        font-size: 2rem !important;
+    }
+} /* 超小设备（手机，小于 480px） */
 header {
     opacity: 0;
     height: 100%;

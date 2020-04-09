@@ -75,18 +75,21 @@ export default {
 };
 </script>
 
-<style scoped>
-#paging {
-    min-width: 730px;
-}
-#paging >>> .el-pagination.is-background .el-pager li {
+<style lang="less" scoped>
+@media screen and (max-width: 960px) {
+    #paging {
+        zoom: 1.7;
+    }
+} /* 超小设备（手机，小于 480px） */
+
+#paging /deep/ .el-pagination.is-background .el-pager li {
     transition: all 0.3s ease;
 }
-#paging >>> .el-pagination.is-background .el-pager li:not(.disabled).active {
+#paging /deep/ .el-pagination.is-background .el-pager li:not(.disabled).active {
     background-color: #8a8a8a;
     color: #5a5e66;
 }
-#paging >>> .el-pagination.is-background .el-pager li:hover {
+#paging /deep/ .el-pagination.is-background .el-pager li:hover {
     color: #5a5e6677;
 }
 </style>

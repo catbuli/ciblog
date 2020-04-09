@@ -112,6 +112,33 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@transition: ~"all 1s ease";
+@media screen and (max-width: 960px) {
+    #articleItem {
+        .card {
+            .article-title {
+                font-size: 1.5rem * 1.5 !important;
+            }
+            .card-top {
+                i {
+                    font-size: 1rem * 1.5 !important;
+                }
+            }
+            .article-content {
+                font-size: 1.5rem !important;
+            }
+            .card-bottom {
+                .card-bottom-left {
+                    font-size: 2rem !important;
+                }
+                .card-bottom-right i {
+                    font-size: 2rem !important;
+                }
+            }
+        }
+    }
+} /* 超小设备（手机，小于 480px） */
+
 #articleItem {
     display: flex;
     flex-direction: column;
@@ -143,7 +170,7 @@ export default {
         .card-top {
             margin: 10px 0px;
             i {
-                font-size: 15px;
+                font-size: 1rem;
             }
             .card-top-categories {
                 cursor: pointer;
