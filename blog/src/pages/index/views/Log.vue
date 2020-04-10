@@ -82,6 +82,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+#log {
+    position: absolute;
+}
 .log-main {
     width: 90%;
     margin: 0 auto;
@@ -112,14 +115,6 @@ export default {
         font-size: 2.5rem;
     }
     @keyframes left {
-        0%,
-        60%,
-        75%,
-        90%,
-        100% {
-            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-        }
-
         0% {
             opacity: 0;
             transform: translate3d(-3000px, 0, 0);
@@ -135,17 +130,11 @@ export default {
             transform: translate3d(5px, 0, 0);
         }
         100% {
+            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
             transform: translateZ(0);
         }
     }
     @keyframes right {
-        0%,
-        60%,
-        75%,
-        90%,
-        100% {
-            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-        }
         0% {
             opacity: 0;
             transform: translate3d(3000px, 0, 0);
@@ -162,6 +151,7 @@ export default {
         }
         100% {
             transform: translateZ(0);
+            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
         }
     }
 }

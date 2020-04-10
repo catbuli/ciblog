@@ -35,6 +35,14 @@
                               :rows=7></el-input>
                     <span class="input-hint">首页banner图片一行一个地址可设置多个,随机更换.</span>
                 </li>
+                <li>
+                    <h4>导航栏配置</h4>
+                    <el-input v-model="system.nav_configuration"
+                              type="textarea"
+                              show-word-limit
+                              :rows=7></el-input>
+                    <span class="input-hint">导航栏配置信息</span>
+                </li>
                 <li class="input-button">
                     <el-button type="primary"
                                @click="submit">保存设置</el-button>

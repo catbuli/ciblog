@@ -106,6 +106,7 @@ export default {
             }
             .timeline-link {
                 position: relative;
+                line-height: 20px;
             }
             .timeline-link::before {
                 content: " ";

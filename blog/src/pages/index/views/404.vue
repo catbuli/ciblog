@@ -43,6 +43,9 @@ export default {
 </script>
 
 <style scoped>
+#error {
+    position: absolute;
+}
 .error-main {
     height: 100px;
 }

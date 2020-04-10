@@ -25,6 +25,7 @@ export default {
 
 <style scoped>
 .miniTag {
+    height: 20px;
     position: relative;
     display: inline-block;
     background-color: rgba(0, 0, 0, 0.6);
@@ -40,9 +41,9 @@ export default {
     display: block;
     position: absolute;
     top: 0;
-    left: -27px;
-    border: 13.5px solid transparent;
-    border-right: 13.5px solid rgba(0, 0, 0, 0.6);
+    left: -26px;
+    border: 13px solid transparent;
+    border-right: 13px solid rgba(0, 0, 0, 0.6);
 }
 .miniTag::after {
     content: " ";
@@ -52,7 +53,7 @@ export default {
     width: 4px;
     border-radius: 4px;
     left: -5px;
-    bottom: 12px;
+    bottom: 11px;
     background: rgb(255, 255, 255);
 }
 .miniTag a:hover {

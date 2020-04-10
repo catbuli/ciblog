@@ -83,4 +83,7 @@ export default {
 </script>
 
 <style>
+#home {
+    position: absolute;
+}
 </style>

@@ -384,8 +384,8 @@ export default {
     }
 } /* 超小设备（手机，小于 480px） */
 
-[v-cloak] {
-    display: none;
+#Article {
+    position: absolute;
 }
 /* 文章主体 */
 #Article article {

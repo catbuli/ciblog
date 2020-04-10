@@ -1,17 +1,15 @@
 <template>
     <div id="app">
-        <navEle v-if="$store.state.global.isAdmin"
-                v-cloak></navEle>
+        <navEle></navEle>
         <div id="mian"
-             :class="[$store.state.global.isShowLeftNav ? '' : 'handle-main']"
-             :style="{height:$store.state.global.isAdmin?'100%':''}">
+             :class="[$store.state.global.isShowLeftNav&&style.isPC ? 'handle-main' : '']">
             <transition name="fade">
                 <!-- @leave="leave" -->
                 <!-- mode="out-in"> -->
                 <router-view :key="$route.fullPath" />
                 <!-- 博客 ↑ :key="$route.path" -->
             </transition>
-            <toolbox v-if="$store.state.global.isAdmin"></toolbox>
+            <toolbox v-if="style.isPC"></toolbox>
             <backTop></backTop>
             <!--  -->
         </div>
@@ -37,6 +35,11 @@ export default {
         navEle,
         toolbox,
         backTop
+    },
+    computed: {
+        style() {
+            return this.$store.getters.globalStyle;
+        }
     },
     methods: {
         beforeEnter(el) {
@@ -91,9 +94,9 @@ export default {
 
 <style>
 /* 鼠标样式 */
-body {
-    /* cursor: url("../../assets/images/cursor/Hand.png") auto; */
-}
+/* body {
+    cursor: url("../../assets/images/cursor/Hand.png") auto;
+} */
 /* index框架样式 */
 .index-frame {
     position: relative;
@@ -210,15 +213,16 @@ li {
 }
 
 #mian {
+    height: 100%;
     position: absolute;
-    width: 83%;
-    left: 17%;
+    width: 100%;
+    left: 0;
     transition: all 0.5s ease;
 }
 
 .handle-main {
-    width: 100% !important;
-    left: 0 !important;
+    width: 83% !important;
+    left: 17% !important;
     transition: all 0.5s ease;
 }
 
