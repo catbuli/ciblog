@@ -11,7 +11,7 @@
                 <router-view :key="$route.fullPath" />
                 <!-- 博客 ↑ :key="$route.path" -->
             </transition>
-            <toolbox v-if="$store.state.global.isAdmin"></toolbox>
+            <toolbox v-if="$store.state.global.isAdmin&&style.isPC"></toolbox>
             <backTop></backTop>
             <!--  -->
         </div>
@@ -37,6 +37,11 @@ export default {
         navEle,
         toolbox,
         backTop
+    },
+    computed: {
+        style() {
+            return this.$store.getters.globalStyle;
+        }
     },
     methods: {
         beforeEnter(el) {
