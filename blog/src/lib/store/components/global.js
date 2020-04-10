@@ -40,7 +40,7 @@ export default {
             },
             mc: {
                 isPC: false,
-                navWidth: '30%',
+                navWidth: '40%',
                 navButton: {
                     width: '140px',
                     height: '140px'

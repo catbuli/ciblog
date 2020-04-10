@@ -82,6 +82,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+#log {
+    position: absolute;
+}
 .log-main {
     width: 90%;
     margin: 0 auto;

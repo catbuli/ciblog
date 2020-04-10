@@ -111,6 +111,7 @@ header {
     top: 40%;
     color: white;
     position: absolute;
+    text-align: center;
     text-shadow: 0 0 5px #c3c3c3;
 }
 .one {

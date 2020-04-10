@@ -140,6 +140,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+#search {
+    position: absolute;
+}
 .search-message {
     text-align: left;
     background-color: #ffffff;

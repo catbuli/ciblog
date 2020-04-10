@@ -26,7 +26,8 @@
                 <p class="nickname">{{personalData.nickname}}</p>
                 <p class="description">{{personalData.description}}</p>
             </div>
-            <div class="count">
+            <div class="count"
+                 v-if="style.isPC">
                 <ul>
                     <li>
                         <p v-html="countList.articleCount"></p>
@@ -42,7 +43,8 @@
                     </li>
                 </ul>
             </div>
-            <div class="platform">
+            <div class="platform"
+                 v-if="style.isPC">
                 <ul>
                     <li>
                         <a :href="personalData.github"
@@ -69,7 +71,8 @@
             <div class="search">
                 <searchTool></searchTool>
             </div>
-            <div class="recommendation">
+            <div class="recommendation"
+                 v-if="style.isPC">
                 <div class="title">
                     <p>Hot</p>
                 </div>
@@ -84,7 +87,8 @@
                     </a>
                 </ul>
             </div>
-            <div class="recommendation">
+            <div class="recommendation"
+                 v-if="style.isPC">
                 <div class="title">
                     <p>New</p>
                 </div>
@@ -215,26 +219,12 @@ export default {
 <style lang="less" scoped>
 /* 侧边栏 */
 #nav {
-    /* overflow: hidden; */
-    min-width: 220px;
     padding: 0px;
     height: 100%;
     width: 17%;
     position: fixed;
     z-index: 50;
     background-color: rgb(53, 53, 53);
-    /* background: -webkit-linear-gradient(
-        145deg,
-        #fc354c,
-        #0abfbc
-    );  */
-    /* Chrome 10-25, Safari 5.1-6 */
-    /* background: linear-gradient(
-        145deg,
-        #fc354c,
-        #0abfbc
-    );  */
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 /* 汉堡包动画 */
@@ -417,38 +407,39 @@ export default {
 }
 
 /* 搜索 */
-.search {
-}
+// .search {
+// }
 .hidden-nav {
-    /* animation: hidden-nav ease 0.5s; */
+    transition: all ease 0.5s;
+    // animation: hidden-nav ease 0.5s;
     transform: translateX(-101%);
-    transition: all ease-in 0.5s;
 }
 .show-nav {
-    /* animation: show-nav ease 0.5s; */
     transition: all ease 0.5s;
+    // transition: all ease 0.5s;
+    // animation: show-nav ease 0.5s;
 }
 
-@keyframes show-nav {
-    0% {
-        border-radius: 0 100% 100% 0/0 50% 50% 0;
-    }
-    70% {
-        border-radius: 0 100% 100% 0/0 50% 50% 0;
-    }
-    100% {
-        border-radius: 0;
-        /* opacity: 1; */
-    }
-}
-@keyframes hidden-nav {
-    0% {
-        /* border-radius: 0; */
-        /* opacity: 1; */
-    }
-    100% {
-        /* border-radius: 0 100% 100% 0; */
-        /* opacity: 0; */
-    }
-}
+// @keyframes show-nav {
+//     0% {
+//         border-radius: 0 100% 100% 0/0 50% 50% 0;
+//     }
+//     70% {
+//         border-radius: 0 100% 100% 0/0 50% 50% 0;
+//     }
+//     100% {
+//         border-radius: 0;
+//         opacity: 1;
+//     }
+// }
+// @keyframes hidden-nav {
+//     0% {
+//         border-radius: 0;
+//         opacity: 1;
+//     }
+//     100% {
+//         border-radius: 0 100% 100% 0;
+//         opacity: 0;
+//     }
+// }
 </style>
