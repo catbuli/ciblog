@@ -71,6 +71,26 @@
             <div class="search">
                 <searchTool></searchTool>
             </div>
+            <div class="nav-configuration">
+                <ul>
+                    <li v-for="(item, index) in navList"
+                        :key="index">
+                        <a v-if="item.href"
+                           :href="item.href">{{item.text}}</a>
+                        <router-link v-else
+                                     :to="item.linkto">{{item.text}}</router-link>
+                        <ul v-if="item.sub">
+                            <li v-for="(sub, subindex) in item.sub"
+                                :key="subindex">
+                                <a v-if="sub.href"
+                                   :href="sub.href">{{sub.text}}</a>
+                                <router-link v-else
+                                             :to="sub.linkto">{{sub.text}}</router-link>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
             <div class="recommendation"
                  v-if="style.isPC">
                 <div class="title">
@@ -165,6 +185,17 @@ export default {
         },
         system() {
             return this.$store.state.global.system;
+        },
+        navList() {
+            let list = [];
+            if (this.$store.state.global.system.nav_configuration) {
+                list =
+                    "[" +
+                    this.$store.state.global.system.nav_configuration +
+                    "]";
+                list = JSON.parse(list);
+            }
+            return list;
         }
     },
     methods: {
@@ -289,6 +320,7 @@ export default {
     // }
 }
 
+//头像以及个人信息
 .head-portrait {
     .nickname {
         margin-top: 10px;
@@ -311,7 +343,35 @@ export default {
         transform: rotate(360deg);
     }
 }
+@media screen and (max-width: 960px) {
+    .nickname {
+        font-size: 3.2rem !important;
+    }
+    .description {
+        font-size: 2rem !important;
+    }
+} /* 超小设备（手机，小于 480px） */
 
+//移动端导航栏列表
+.nav-configuration {
+    color: white;
+    > ul {
+        width: 70%;
+        margin: 30px auto 0;
+        > li {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+        li li {
+            margin-top: 15px;
+            padding-left: 60px;
+        }
+    }
+    a {
+        display: inline-block;
+        font-size: 3rem;
+    }
+}
 /* 统计数据 */
 .count {
     color: rgb(204, 204, 204);
