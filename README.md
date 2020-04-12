@@ -21,9 +21,7 @@ vue2+vuex+vue-router+webpack+ES6/7+element-ui+less
 
 后台账号:testadmin  密码:admin
 
-ps:有的时候发布会慢一点。（●>∀<●） 暂时还没有做移动端适配。这个我打算放到0.3.0。
-
-pps:还没做移动端适配，手机访问可能会有一些问题
+ps:有的时候发布会慢一点。（●>∀<●）
 
 # 主要功能
 

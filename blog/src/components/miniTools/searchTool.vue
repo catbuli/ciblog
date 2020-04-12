@@ -78,13 +78,13 @@ export default {
 </script>
 
 <style scoped>
-/* #search-tool {
-    width: 60px;
-    height: 60px;
-    margin: 0 auto;
-    border-radius: 15%;
-    background-color: rgb(255, 255, 255);
-} */
+@media screen and (max-width: 960px) {
+    .open input {
+        height: 60px !important;
+        font-size: 2rem !important;
+        border-radius: 10px !important;
+    }
+} /* 超小设备（手机，小于 480px） */
 #search-tool i {
     font-size: 35px;
     line-height: 60px;

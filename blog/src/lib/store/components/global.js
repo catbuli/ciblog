@@ -40,14 +40,14 @@ export default {
             },
             mc: {
                 isPC: false,
-                navWidth: '40%',
+                navWidth: '50%',
                 navButton: {
                     width: '140px',
                     height: '140px'
                 },
                 navAvatar: {
-                    width: '120px',
-                    height: '120px'
+                    width: '50%',
+                    height: '50%'
                 },
                 backTop: {
                     position: {
