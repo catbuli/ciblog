@@ -71,7 +71,8 @@
             <div class="search">
                 <searchTool></searchTool>
             </div>
-            <div class="nav-configuration">
+            <div v-if="!style.isPC"
+                 class="nav-configuration">
                 <ul>
                     <li v-for="(item, index) in navList"
                         :key="index">
