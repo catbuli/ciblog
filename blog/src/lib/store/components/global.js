@@ -17,16 +17,6 @@ export default {
         style: {
             pc: {
                 isPC: true,
-                navWidth: '17%',
-                navButton: {
-                    width: '70px',
-                    height: '70px'
-                },
-                navAvatar: {},
-                backTop: {
-                    position: {},
-                    box: {}
-                },
                 writeArticle: {
                     left: {
                         span: 16,
@@ -40,23 +30,9 @@ export default {
             },
             mc: {
                 isPC: false,
-                navWidth: '50%',
-                navButton: {
-                    width: '140px',
-                    height: '140px'
-                },
                 navAvatar: {
                     width: '50%',
                     height: '50%'
-                },
-                backTop: {
-                    position: {
-                        bottom: '200px'
-                    },
-                    box: {
-                        width: '130px',
-                        height: '130px'
-                    }
                 },
                 writeArticle: {
                     left: {

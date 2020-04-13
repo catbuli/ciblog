@@ -113,28 +113,31 @@ export default {
 
 <style lang="less" scoped>
 @transition: ~"all 1s ease";
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 480px) {
     #articleItem {
         .card {
             .article-title {
-                font-size: 1.5rem * 1.5 !important;
-            }
-            .card-top {
-                i {
-                    font-size: 1rem * 1.5 !important;
-                }
-            }
-            .article-content {
                 font-size: 1.5rem !important;
             }
-            .card-bottom {
-                .card-bottom-left {
-                    font-size: 2rem !important;
-                }
-                .card-bottom-right i {
-                    font-size: 2rem !important;
-                }
+            .article-image {
+                height: 170px !important;
             }
+            // .card-top {
+            //     i {
+            //         font-size: 1rem !important;
+            //     }
+            // }
+            // .article-content {
+            //     font-size: 1.5rem !important;
+            // }
+            // .card-bottom {
+            //     .card-bottom-left {
+            //         font-size: 1rem !important;
+            //     }
+            //     .card-bottom-right i {
+            //         font-size: 2rem !important;
+            //     }
+            // }
         }
     }
 } /* 超小设备（手机，小于 480px） */

@@ -23,10 +23,7 @@ export default {
 
 <style lang="less" scoped>
 @transition: ~"all 1s ease";
-@media screen and (max-width: 960px) {
-    .footer-info {
-        font-size: 1.5rem !important;
-    }
+@media screen and (max-width: 480) {
 } /* 超小设备（手机，小于 480px） */
 #footEle {
     clear: both;
@@ -34,7 +31,6 @@ export default {
     width: 100%;
     color: black;
     text-align: center;
-    min-width: 730px;
 }
 #footEle .footer-info {
     transition: @transition;

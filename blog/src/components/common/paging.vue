@@ -76,10 +76,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@media screen and (max-width: 960px) {
-    #paging {
-        zoom: 1.7;
-    }
+@media screen and (max-width: 480px) {
 } /* 超小设备（手机，小于 480px） */
 
 #paging /deep/ .el-pagination.is-background .el-pager li {
