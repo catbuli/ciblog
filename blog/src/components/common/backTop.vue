@@ -2,7 +2,6 @@
     <div id="back-top"
          ref="backTop"
          @click="back"
-         :style="[style.backTop.box,style.backTop.position]"
          :class="[isShow ? 'show' : 'hidden']">
     </div>
 </template>
@@ -58,6 +57,14 @@ export default {
 </script>
 
 <style scoped>
+@media screen and (max-width: 480px) {
+    #back-top {
+        width: 70px !important;
+        height: 70px !important;
+        right: 20px !important;
+        bottom: 40px !important;
+    }
+} /* 超小设备（手机，小于 480px） */
 #back-top {
     z-index: 100;
     padding: 0;

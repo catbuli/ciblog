@@ -78,11 +78,9 @@ export default {
 </script>
 
 <style scoped>
-@media screen and (max-width: 960px) {
-    .open input {
-        height: 60px !important;
-        font-size: 2rem !important;
-        border-radius: 10px !important;
+@media screen and (max-width: 480px) {
+    .search-bar {
+        zoom: 0.6;
     }
 } /* 超小设备（手机，小于 480px） */
 #search-tool i {

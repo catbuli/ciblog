@@ -21,7 +21,7 @@ export default {
             var dom = this.$refs.frame;
             if (dom) {
                 if (
-                    scrollTop + document.body.clientHeight - 200 >=
+                    scrollTop + document.body.clientHeight - 100 >=
                     dom.offsetTop
                 ) {
                     dom.classList.add(this.className + "-show");
@@ -30,6 +30,7 @@ export default {
         }
     },
     mounted() {
+        this.handleScroll();
         document.addEventListener("scroll", this.handleScroll, true);
     },
     destroyed() {

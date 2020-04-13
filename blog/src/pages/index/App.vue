@@ -93,6 +93,11 @@ export default {
 </script>
 
 <style>
+@media screen and (max-width: 480px) {
+    .element-frame {
+        width: 90% !important;
+    }
+} /* 超小设备（手机，小于 480px） */
 /* 鼠标样式 */
 /* body {
     cursor: url("../../assets/images/cursor/Hand.png") auto;
@@ -103,7 +108,9 @@ export default {
     width: 100%;
     height: 100%;
 }
+
 .element-frame {
+    overflow: hidden;
     margin: 0 auto;
     width: 750px;
 }

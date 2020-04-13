@@ -82,6 +82,11 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@media screen and (max-width: 480px) {
+    .meta {
+        padding-left: 20px !important;
+    }
+} /* 超小设备（手机，小于 480px） */
 #log {
     position: absolute;
 }

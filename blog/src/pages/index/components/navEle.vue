@@ -1,7 +1,6 @@
 <template>
     <nav id="nav"
          ref="nav"
-         :style="{'width':style.navWidth}"
          :class="[$store.state.global.isShowLeftNav ? 'show-nav' : 'hidden-nav']">
         <svg @click="$store.commit('handleLeftNav', !$store.state.global.isShowLeftNav);"
              id="button-nav"
@@ -249,6 +248,11 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@media screen and (max-width: 480px) {
+    #nav {
+        width: 50% !important;
+    }
+} /* 超小设备（手机，小于 480px） */
 /* 侧边栏 */
 #nav {
     padding: 0px;
@@ -344,14 +348,6 @@ export default {
         transform: rotate(360deg);
     }
 }
-@media screen and (max-width: 960px) {
-    .nickname {
-        font-size: 3.2rem !important;
-    }
-    .description {
-        font-size: 2rem !important;
-    }
-} /* 超小设备（手机，小于 480px） */
 
 //移动端导航栏列表
 .nav-configuration {
@@ -370,7 +366,7 @@ export default {
     }
     a {
         display: inline-block;
-        font-size: 3rem;
+        font-size: 1.5rem;
     }
 }
 /* 统计数据 */

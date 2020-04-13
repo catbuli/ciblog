@@ -1,10 +1,10 @@
 <template>
-    <div class="miniTag">
+    <span class="miniTag">
         <a target="_blank"
            :href="href">
             {{content}}
         </a>
-    </div>
+    </span>
 </template>
 
 <script>
@@ -24,6 +24,8 @@ export default {
 </script>
 
 <style scoped>
+@media screen and (max-width: 480px) {
+} /* 超小设备（手机，小于 480px） */
 .miniTag {
     height: 20px;
     position: relative;
@@ -31,6 +33,7 @@ export default {
     background-color: rgba(0, 0, 0, 0.6);
     padding: 3px 10px;
     border-radius: 0px 5px 5px 0px;
+    margin-bottom: 10px;
 }
 .miniTag a {
     height: 100%;
@@ -59,7 +62,7 @@ export default {
 .miniTag a:hover {
     color: white !important;
 }
-.miniTag + .miniTag {
-    margin-left: 25px;
+.miniTag {
+    margin-right: 25px;
 }
 </style>

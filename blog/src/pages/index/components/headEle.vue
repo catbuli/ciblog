@@ -72,12 +72,16 @@ export default {
 </script>
 
 <style scoped>
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 480px) {
+    .name-info {
+        font-size: 3rem !important;
+    }
     .description-info {
-        font-size: 2rem !important;
+        font-size: 1rem !important;
     }
 } /* 超小设备（手机，小于 480px） */
 header {
+    overflow: hidden;
     opacity: 0;
     height: 100%;
     width: 100%;
@@ -93,7 +97,6 @@ header {
     background-repeat: no-repeat;
     justify-content: center; /* 水平居中 */
     align-items: center;
-    min-width: 730px;
     transform: translateY(-100%);
 }
 /* 页头动画 */

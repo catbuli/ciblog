@@ -366,21 +366,28 @@ export default {
 @media screen and (max-width: 768px) {
 } /* 小型设备（平板电脑，768px 起） */
 
-@media screen and (max-width: 960px) {
-    .article-title {
-        font-size: 2.5rem !important;
+@media screen and (max-width: 480px) {
+    .article-footer {
+        height: 100px !important;
     }
-    .article-meta span {
-        font-size: 1.5rem !important;
+    .article-footer img {
+        height: 100px !important;
     }
-    .article-update i {
-        font-size: 1.5rem !important;
+    .article-footer div span {
+        top: 25px !important;
     }
-    .article-tags a {
-        font-size: 1.5rem !important;
+    .article-footer div span:nth-of-type(2) {
+        top: 45px !important;
     }
-    .markdown-body {
-        font-size: 1.5rem !important;
+    .comment-left .comment-avatar {
+        left: 10px !important;
+    }
+    .comment-left .comment-avatar-child {
+        left: 20px !important;
+    }
+    .article-meta-label {
+        min-width: 100%;
+        margin: 0.1rem auto !important;
     }
 } /* 超小设备（手机，小于 480px） */
 
@@ -406,11 +413,14 @@ export default {
 /* 文章信息 */
 .article-meta {
     text-align: center;
+    display: flex;
+    flex-wrap: wrap;
 }
 .article-meta a {
     color: #2c3e50;
 }
 .article-meta-label {
+    flex: 1;
     font-size: 16px;
     margin: 0 15px;
 }
@@ -463,13 +473,13 @@ export default {
     cursor: pointer;
 }
 .article-footer div {
-    height: 150px;
+    height: 100%;
     flex: 1;
     position: relative;
 }
 .article-footer div img {
     width: 100%;
-    height: 100%;
+    height: 150px;
     filter: brightness(0.5);
     /* opacity: 0.3; */
     transition: all ease 0.3s;
@@ -496,10 +506,6 @@ export default {
 .article-footer div img:hover {
     filter: brightness(1);
 }
-/* .article-previous {
-}
-.article-next {
-} */
 /* 评论列表 */
 .response {
     padding: 20px 0;
@@ -508,10 +514,10 @@ export default {
     position: relative;
 }
 .response p {
-    font-size: 30px;
+    font-size: 1.1rem;
     transform: translate(-50%, -50%);
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 0 30px;
     position: absolute;
     left: 50%;
     top: 0;
@@ -528,7 +534,7 @@ export default {
     display: flex;
 }
 .comment-left {
-    width: 15%;
+    width: 20%;
 }
 .comment-content {
     position: relative;
