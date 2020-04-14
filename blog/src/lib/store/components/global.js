@@ -65,7 +65,6 @@ export default {
     },
     getters: {
         globalStyle: (state) => {
-            console.log(state.isPC)
             if (state.isPC) {
                 return state.style.pc;
             } else {

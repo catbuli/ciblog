@@ -474,8 +474,8 @@ export default {
 }
 .article-footer div {
     height: 100%;
-    flex: 1;
     position: relative;
+    flex: 1;
 }
 .article-footer div img {
     width: 100%;
