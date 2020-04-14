@@ -76,21 +76,6 @@ export default {
     li {
         width: 90% !important;
     }
-    li /deep/ .el-input__inner {
-        font-size: 2rem;
-        height: 5rem;
-    }
-    h4 {
-        font-size: 2rem;
-        margin: 1.5rem auto;
-    }
-    .input-hint {
-        font-size: 1.5rem !important;
-    }
-    .input-button /deep/ .el-button {
-        font-size: 2rem;
-        height: 5rem;
-    }
 } /* 超小设备（手机，小于 480px） */
 section {
     padding-bottom: 20px;

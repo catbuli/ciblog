@@ -3,13 +3,13 @@
                 action
                 @refresh-click="getData">
         <el-row>
-            <el-col :span=2>
+            <el-col :span="style.isPC?2:4">
                 <el-button type="primary"
                            icon="el-icon-delete"
                            @click="delComment">
                 </el-button>
             </el-col>
-            <el-col :span=12>
+            <el-col :span="style.isPC?2:20">
                 <el-radio-group v-model="paging.type"
                                 @change="selectChange">
                     <el-radio-button label=-1>全部</el-radio-button>
@@ -28,7 +28,7 @@
                   ref="table">
             <el-table-column type="selection"
                              align="center"
-                             width="50px">
+                             :width="style.isPC?'50px':'25px'">
             </el-table-column>
             <el-table-column width="50px"
                              prop="cid"
@@ -52,6 +52,7 @@
                 </template>
             </el-table-column>
             <el-table-column label="内容"
+                             :width="style.isPC?'':'400px'"
                              prop="status">
                 <template slot-scope="scope">
                     <p class="content-table-top">{{scope.row.create_date}}　评论于　<a :href="'/article/'+scope.row.aid">{{scope.row.title}}</a> </p>
@@ -153,6 +154,11 @@ export default {
         "$store.state.comment.comment": function() {
             this.comment = this.$store.state.comment.comment;
             this.loading = false;
+        }
+    },
+    computed: {
+        style() {
+            return this.$store.getters.globalStyle;
         }
     },
     mounted() {},

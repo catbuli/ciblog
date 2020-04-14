@@ -1,5 +1,5 @@
 <template>
-    <div id="admin-frame"
+    <div class="admin-frame"
          :style="{ height: height,width:width}">
         <adminTitle :title="title">
             <i class="el-icon-refresh refresh"
@@ -40,17 +40,16 @@ export default {
 
 <style scoped>
 /* 媒体查询 */
-@media screen and (max-width: 960px) {
-    #admin-frame {
-        min-width: 480px !important;
+@media screen and (max-width: 480px) {
+    .admin-frame {
         width: 90% !important;
+        top: 120px !important;
     }
     .refresh {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
 } /* 超小设备（手机，小于 480px） */
-#admin-frame {
-    min-width: 800px;
+.admin-frame {
     width: 60%;
     margin: auto;
     text-align: left;

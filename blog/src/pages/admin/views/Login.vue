@@ -53,6 +53,11 @@ export default {
 </script>
 
 <style>
+@media screen and (max-width: 960px) {
+    .login-main {
+        zoom: 0.7;
+    }
+} /* 超小设备（手机，小于 480px） */
 #login {
     height: 100%;
     width: 100%;
@@ -75,7 +80,6 @@ export default {
     filter: blur(20px);
 }
 .login-main {
-    padding-bottom: 70px;
 }
 .login-top {
     background: #e1e1e1;

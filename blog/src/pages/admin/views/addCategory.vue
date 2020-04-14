@@ -63,6 +63,12 @@ export default {
 </script>
 
 <style scoped>
+@media screen and (max-width: 480px) {
+    li {
+        width: 90% !important;
+    }
+} /* 超小设备（手机，小于 480px） */
+
 sup {
     color: red;
 }

@@ -104,29 +104,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@transition: ~"all 1s ease";
-@media screen and (max-width: 960px) {
-    li /deep/ .el-input__inner {
-        font-size: 2rem;
-        height: 5rem;
-    }
-    h4 {
-        font-size: 1.8rem;
-        margin: 1.5rem auto;
-    }
-    .input-hint {
-        font-size: 1.5rem !important;
-    }
-    .input-button /deep/ .el-button {
-        font-size: 2rem;
-        height: 5rem;
-    }
-    .el-tag {
-        width: auto !important;
-        height: auto !important;
-        font-size: 2.5rem !important;
-        line-height: 3rem !important;
-    }
+@media screen and (max-width: 480px) {
 } /* 超小设备（手机，小于 480px） */
 
 .el-tag {

@@ -158,24 +158,9 @@ export default {
 
 <style lang="less" scoped>
 @transition: ~"all 1s ease";
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 480px) {
     li {
-        width: 90% !important;
-    }
-    li /deep/ .el-input__inner {
-        font-size: 2rem;
-        height: 5rem;
-    }
-    h4 {
-        font-size: 2rem;
-        margin: 1.5rem auto;
-    }
-    .input-hint {
-        font-size: 1.5rem !important;
-    }
-    .input-button /deep/ .el-button {
-        font-size: 2rem;
-        height: 5rem;
+        width: 95% !important;
     }
 } /* 超小设备（手机，小于 480px） */
 section {
@@ -188,7 +173,7 @@ h4 {
 }
 li {
     transition: @transition;
-    width: 50%;
+    width: 70%;
     margin: 0 auto;
 }
 .input-button {

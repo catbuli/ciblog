@@ -113,27 +113,15 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@multiple: 2;
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 480px) {
     .index-top {
-        text-align: center;
-        p a {
-            font-size: 15px * @multiple;
+        h1 {
+            margin-top: 0px;
         }
     }
     .index-bottom {
-        display: block !important;
-        h3 {
-            font-size: 30px;
-        }
-        section {
-            font-size: 1rem * @multiple !important;
-        }
         section ul {
-            padding-left: 50px !important;
-        }
-        section ul li span {
-            margin-right: 1.875rem !important;
+            padding-left: 0px !important;
         }
     }
 } /* 超小设备（手机，小于 480px） */
