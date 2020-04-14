@@ -351,7 +351,7 @@ export default {
 
 <style lang="less" scoped>
 @transition: ~"all 1s ease";
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 480px) {
 } /* 超小设备（手机，小于 480px） */
 
 section {
