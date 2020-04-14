@@ -9,7 +9,7 @@
                            @click="delComment">
                 </el-button>
             </el-col>
-            <el-col :span="style.isPC?2:20">
+            <el-col :span="style.isPC?10:20">
                 <el-radio-group v-model="paging.type"
                                 @change="selectChange">
                     <el-radio-button label=-1>全部</el-radio-button>

@@ -146,6 +146,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-top: 10px;
     .card {
         width: 90%;
         text-align: left;

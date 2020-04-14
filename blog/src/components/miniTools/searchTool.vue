@@ -78,6 +78,12 @@ export default {
 </script>
 
 <style scoped>
+@media screen and (max-width: 768px) {
+    .search-bar {
+        zoom: 0.8;
+    }
+} /* 小型设备（平板电脑，768px 起） */
+
 @media screen and (max-width: 480px) {
     .search-bar {
         zoom: 0.6;

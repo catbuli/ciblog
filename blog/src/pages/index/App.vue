@@ -95,7 +95,7 @@ export default {
 <style>
 @media screen and (max-width: 480px) {
     .element-frame {
-        width: 90% !important;
+        width: 95% !important;
     }
 } /* 超小设备（手机，小于 480px） */
 /* 鼠标样式 */
