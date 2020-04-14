@@ -4,26 +4,26 @@
                 @refresh-click="getData"
                 width="70%">
         <el-row>
-            <el-col :span=2>
+            <el-col :span="style.isPC?2:4">
                 <el-button type="primary"
                            icon="el-icon-delete"
                            @click="delComment">
                 </el-button>
             </el-col>
-            <el-col :span=14>
+            <el-col :span="style.isPC?14:20">
                 <el-radio-group v-model="paging.type"
                                 @change="selectChange">
                     <el-radio-button label=-1>全部</el-radio-button>
-                    <el-radio-button label=0>归档文件</el-radio-button>
-                    <el-radio-button label=1>临时文件</el-radio-button>
-                    <el-radio-button label=2>全局文件</el-radio-button>
+                    <el-radio-button label=0>归档</el-radio-button>
+                    <el-radio-button label=1>临时</el-radio-button>
+                    <el-radio-button label=2>全局</el-radio-button>
                 </el-radio-group>
             </el-col>
-            <el-col :span=3
-                    :offset=5
+            <el-col :span="style.isPC?3:24"
+                    :offset="style.isPC?5:0"
                     class="upload">
                 <el-upload multiple
-                           style="text-align:right"
+                           :style="{'text-align':style.isPC?'right':'left'}"
                            action="#"
                            :http-request="upload"
                            :file-list="fileList">
@@ -108,7 +108,7 @@
                 </template>
             </el-table-column> -->
         </el-table>
-        <el-dialog title="编辑评论"
+        <el-dialog title="文章链接"
                    width="30%"
                    multiple
                    :visible.sync="isEdit">
@@ -160,6 +160,9 @@ export default {
         }
     },
     computed: {
+        style() {
+            return this.$store.getters.globalStyle;
+        },
         fileList() {
             return this.$store.state.file.fileList;
         }
@@ -236,6 +239,12 @@ export default {
 </script>
 
 <style scoped>
+@transition: ~"all 1s ease";
+@media screen and (max-width: 960px) {
+    .el-col {
+        margin: 5px auto;
+    }
+} /* 超小设备（手机，小于 480px） */
 .file-table {
     width: 100%;
     margin: 20px auto;

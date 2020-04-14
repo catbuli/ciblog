@@ -4,19 +4,19 @@
                 action
                 @refresh-click="getData">
         <el-row>
-            <el-col :span="2">
+            <el-col :span="style.isPC?2:5">
                 <el-button type="primary"
                            icon="el-icon-plus"
                            @click="$router.push('/admin/write_article')">
                 </el-button>
             </el-col>
-            <el-col :span="2">
+            <el-col :span="style.isPC?2:5">
                 <el-button type="primary"
                            icon="el-icon-delete"
                            @click="delArticle">
                 </el-button>
             </el-col>
-            <el-col :span="4">
+            <el-col :span="style.isPC?4:7">
                 <el-select v-model="category"
                            clearable
                            placeholder="分类筛选"
@@ -29,8 +29,8 @@
                     </el-option>
                 </el-select>
             </el-col>
-            <el-col :span="4"
-                    :offset=1>
+            <el-col :span="style.isPC?4:7"
+                    :offset="style.isPC?1:0">
                 <el-input clearable
                           placeholder="关键字筛选"
                           v-model="keyword"
@@ -142,6 +142,9 @@ export default {
         };
     },
     computed: {
+        style() {
+            return this.$store.getters.globalStyle;
+        },
         categoryList() {
             return this.$store.state.category.categoryList;
         },

@@ -1,7 +1,8 @@
 <template>
     <div id="admin">
-        <adminNav></adminNav>
-        <transition name="card">
+        <adminNav v-show="isShow"></adminNav>
+        <transition name="card"
+                    @leave="leave">
             <router-view />
         </transition>
     </div>
@@ -13,6 +14,20 @@ export default {
     name: "admin",
     components: {
         adminNav
+    },
+    data() {
+        return {
+            isShow: false
+        };
+    },
+    watch: {
+        $route() {
+            if (this.$route.fullPath == "/admin/login") {
+                this.isShow = false;
+            } else {
+                this.isShow = true;
+            }
+        }
     },
     methods: {
         isPC() {
@@ -33,6 +48,9 @@ export default {
                 }
             }
             this.$store.commit("isPC", flag);
+        },
+        leave() {
+            this.isShow = true;
         }
     },
     created() {
@@ -47,15 +65,7 @@ export default {
 
 <style lang="less">
 /* admin框架样式 */
-.admin-frame {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-.element-frame {
-    margin: 0 auto;
-    width: 750px;
-}
+
 /* 公共样式设置 */
 ::selection {
     background-color: rgba(0, 0, 0, 0.7);

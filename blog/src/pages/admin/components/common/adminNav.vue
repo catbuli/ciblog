@@ -29,10 +29,12 @@
             </el-submenu>
             <el-menu-item><a :href="$store.state.global.system.web_url"
                    target="_blank">网站</a></el-menu-item>
-            <el-menu-item style="right:0;position:absolute"
+            <!-- <el-menu-item style="right:0;position:absolute"
                           @click="logout">登出</el-menu-item>
             <el-menu-item index="/admin/setup_personal"
-                          style="right:100px;position:absolute;user-select:none">当前账户：{{name}}</el-menu-item>
+                          style="right:100px;position:absolute;user-select:none">当前账户：{{name}}</el-menu-item> -->
+            <el-menu-item index="/admin/setup_personal">当前账户：{{name}}</el-menu-item>
+            <el-menu-item @click="logout">登出</el-menu-item>
         </el-menu>
     </nav>
 </template>
@@ -66,5 +68,11 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+@media screen and (max-width: 480px) {
+} /* 超小设备（手机，小于 480px） */
+#admin-nav {
+    width: 100%;
+    position: absolute;
+}
 </style>
