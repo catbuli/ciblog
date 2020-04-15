@@ -1,7 +1,6 @@
 <template>
     <div id="search"
-         class="index-frame"
-         :key="$route.fullPath">
+         class="index-frame">
         <headEle height="70%"
                  :backgroundImage="'url('+banner+')'"></headEle>
         <div class="element-frame">

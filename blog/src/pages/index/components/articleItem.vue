@@ -36,11 +36,8 @@
                         </a>
                     </span>
                     <span class="card-bottom-right">
-                        <i class="iconfont iconcomment"
-                           v-text="item.comment_count"></i>
-                        <i class="iconfont iconeye"
-                           style="margin-left:10px"
-                           v-text="item.pv"></i>
+                        <i class="iconfont iconcomment">{{' '+item.comment_count}}</i>
+                        <i class="iconfont iconeye">{{' '+item.pv}}</i>
                     </span>
                 </div>
             </li>
@@ -62,18 +59,6 @@ export default {
         handleDate(value) {
             if (value) return value.split(" ")[0];
         }
-    },
-    watch: {
-        // listData(oldVal, newVal) {
-        //     this.$nextTick(() => {
-        //         if (this.$refs.articleList) {
-        //             this.$refs.articleList.children
-        //                 .item(0)
-        //                 .classList.add("show");
-        //         }
-        //     });
-        //     // 博客↑
-        // }
     },
     methods: {
         handleScroll(e) {
@@ -102,47 +87,26 @@ export default {
             }
         }
     }
-    // mounted() {
-    //     document.addEventListener("scroll", this.handleScroll, true);
-    // },
-    // destroyed() {
-    //     document.removeEventListener("scroll", this.handleScroll, true);
-    // }
 };
 </script>
 
 <style lang="less" scoped>
-@transition: ~"all 1s ease";
 @media screen and (max-width: 480px) {
     #articleItem {
         .card {
+            margin-bottom: 30px !important;
             .article-title {
                 font-size: 1.5rem !important;
             }
             .article-image {
                 height: 170px !important;
             }
-            // .card-top {
-            //     i {
-            //         font-size: 1rem !important;
-            //     }
-            // }
-            // .article-content {
-            //     font-size: 1.5rem !important;
-            // }
-            // .card-bottom {
-            //     .card-bottom-left {
-            //         font-size: 1rem !important;
-            //     }
-            //     .card-bottom-right i {
-            //         font-size: 2rem !important;
-            //     }
-            // }
         }
     }
 } /* 超小设备（手机，小于 480px） */
 
 #articleItem {
+    transition: all 1s ease;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -152,7 +116,7 @@ export default {
         text-align: left;
         background-color: #ffffff;
         list-style: none;
-        margin: 0 auto 70px;
+        margin: 0 auto 60px;
         border-radius: 8px;
         padding: 15px;
         .article-title {
@@ -172,9 +136,9 @@ export default {
             text-overflow: ellipsis;
         }
         .card-top {
-            margin: 10px 0px;
+            margin: 7px 0px;
             i {
-                font-size: 1rem;
+                font-size: 0.9rem;
             }
             .card-top-categories {
                 cursor: pointer;
@@ -197,11 +161,17 @@ export default {
         .card-bottom {
             .card-bottom-right {
                 float: right;
+                i {
+                    font-size: 1rem;
+                }
+                i + i {
+                    margin-left: 10px;
+                }
             }
         }
     }
     .card:hover {
-        box-shadow: 0px 0px 10px 5px #9d9d9d;
+        box-shadow: 0px 5px 10px 5px #acacac;
         transition: all 0.5s ease;
     }
 }
