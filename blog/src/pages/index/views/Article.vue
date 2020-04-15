@@ -532,7 +532,7 @@ export default {
         margin: 0 auto;
         text-align: left;
         width: 94%;
-        border-bottom: 1px solid #ddd;
+        // border-bottom: 1px solid #ddd;
         .response {
             padding: 30px 0;
             display: block;
