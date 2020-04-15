@@ -4,14 +4,10 @@
         <div id="mian"
              :class="[$store.state.global.isShowLeftNav&&style.isPC ? 'handle-main' : '']">
             <transition name="fade">
-                <!-- @leave="leave" -->
-                <!-- mode="out-in"> -->
-                <router-view :key="$route.fullPath" />
-                <!-- 博客 ↑ :key="$route.path" -->
+                <router-view :key="$route.path" />
             </transition>
             <toolbox v-if="style.isPC"></toolbox>
             <backTop></backTop>
-            <!--  -->
         </div>
     </div>
 </template>
@@ -26,6 +22,7 @@ export default {
         return {};
     },
     watch: {
+        //监听路由变换
         $route() {
             this.$store.commit("handleLeftNav", false);
             scrollTo(0, 0);
@@ -42,19 +39,7 @@ export default {
         }
     },
     methods: {
-        beforeEnter(el) {
-            scrollTo(0, 0);
-        },
-        enter(el, done) {
-            if (this.$route.fullPath == "/" || this.$route.fullPath == "/log") {
-                done();
-            }
-        },
-        leave(el, done) {
-            if (this.$route.fullPath == "/" || this.$route.fullPath == "/log") {
-                done();
-            }
-        },
+        //检查客户端类型
         isPC() {
             var userAgentInfo = navigator.userAgent;
             var Agents = [
@@ -74,9 +59,9 @@ export default {
             }
             this.$store.commit("isPC", flag);
         },
+        //控制应用加载动画
         handleLoading() {
-            let loading = document.getElementById("loading");
-            if (loading) {
+            if (document.getElementById("loading")) {
                 loading.remove();
             }
         }
@@ -92,61 +77,49 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less">
 @media screen and (max-width: 480px) {
     .element-frame {
         width: 95% !important;
     }
 } /* 超小设备（手机，小于 480px） */
-/* 鼠标样式 */
-/* body {
-    cursor: url("../../assets/images/cursor/Hand.png") auto;
-} */
-/* index框架样式 */
+
+/* 字体设置 */
+@font-face {
+    font-family: "ipix";
+    src: url("../../assets/styles/font/IPix中文像素字体.ttf");
+}
+
+/* #app */
+#app {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    #mian {
+        height: 100%;
+        position: absolute;
+        width: 100%;
+        left: 0;
+        transition: all 0.5s ease;
+    }
+    .handle-main {
+        width: 83% !important;
+        left: 17% !important;
+        transition: all 0.5s ease;
+    }
+}
+
+/* 框架样式 */
 .index-frame {
     position: relative;
     width: 100%;
     height: 100%;
 }
-
 .element-frame {
-    overflow: hidden;
     margin: 0 auto;
-    width: 750px;
-}
-/* 公共样式设置 */
-::selection {
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #fff;
-}
-/* 滚动条整体部分，可以设置宽度等 */
-::-webkit-scrollbar {
-    width: 10px;
-    height: 7px;
-}
-/* 外层轨道 */
-::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px #8a8a8a;
-    border-radius: 10px;
-    background-color: #8a8a8a;
-}
-/* 内层滚动槽 */
-::-webkit-scrollbar-track-piece {
-    background-color: #f8f8f8;
-}
-/* 滚动的滑块 */
-::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    box-shadow: inset 0 0 6px #8a8a8a;
-    background-color: #8a8a8a;
-}
-::-webkit-scrollbar-thumb:hover {
-    background-color: #b4b4b4;
+    width: 800px;
 }
 
-[v-cloak] {
-    display: none;
-}
 img {
     user-select: none;
 }
@@ -163,6 +136,18 @@ html {
     width: 100%;
 }
 input,
+textarea,
+button,
+span,
+i,
+a,
+div {
+    font-family: BlinkMacSystemFont, "Microsoft YaHei", "Segoe UI", Helvetica,
+        Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+        "Segoe UI Symbol";
+}
+input,
+textarea,
 button {
     margin: 0;
     padding: 0;
@@ -170,6 +155,9 @@ button {
     outline: none;
 }
 body {
+    font-family: BlinkMacSystemFont, "Microsoft YaHei", "Segoe UI", Helvetica,
+        Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+        "Segoe UI Symbol";
     height: 100%;
     width: 100%;
     overflow-x: hidden;
@@ -213,77 +201,56 @@ li {
     list-style: none;
 }
 
-#app {
-    text-align: center;
-    width: 100%;
-    height: 100%;
+/* 选中样式 */
+::selection {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
 }
-
-#mian {
-    height: 100%;
-    position: absolute;
-    width: 100%;
-    left: 0;
-    transition: all 0.5s ease;
+/* 滚动条整体部分，可以设置宽度等 */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 7px;
 }
-
-.handle-main {
-    width: 83% !important;
-    left: 17% !important;
-    transition: all 0.5s ease;
+/* 外层轨道 */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px #8a8a8a;
+    border-radius: 10px;
+    background-color: #8a8a8a;
+}
+/* 内层滚动槽 */
+::-webkit-scrollbar-track-piece {
+    background-color: #f8f8f8;
+}
+/* 滚动的滑块 */
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px #8a8a8a;
+    background-color: #8a8a8a;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #b4b4b4;
 }
 
 /* 路由切换动画 */
 .fade-enter {
     transform: translateY(100%);
-    /* transform: scale(0.3); */
-    /* opacity: 0; */
 }
 .fade-enter-active {
     transition: all 1s ease;
 }
 .fade-enter-to {
     transform: translateY(0);
-    /* transform: scale(1); */
-    /* opacity: 1; */
 }
 
 .fade-leave {
     transform: translateY(0);
-    /* transform: scale(1); */
     opacity: 1;
 }
 .fade-leave-active {
     transition: all 0.7s ease;
-    /* animation: card-out 1s ease; */
 }
 .fade-leave-to {
     transform: translateY(-150%);
-    /* transform: scale(0.3); */
     opacity: 0;
 }
-/* 路由切换动画 */
-/* .fade-enter {
-    transform: translateX(100%);
-    opacity: 0.3;
-}
-.fade-enter-active {
-    transition: all 1.5s ease;
-}
-.fade-enter-to {
-    transform: translateX(0);
-    opacity: 1;
-}
-
-.fade-leave {
-    transform: translateX(0);
-    opacity: 1;
-}
-.fade-leave-active {
-    transition: all 0.5s ease;
-}
-.fade-leave-to {
-    transform: translateX(-100%);
-    opacity: 0;
-} */
 </style>
