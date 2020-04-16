@@ -127,6 +127,14 @@ const routes = [{
         }
     },
     {
+        path: '/admin/backups',
+        name: 'backups',
+        component: () => import( /* webpackChunkName: "admin-group" */ './views/backups.vue'),
+        meta: {
+            title: '备份'
+        }
+    },
+    {
         path: '*',
         name: '/admin/',
         component: () => import( /* webpackChunkName: "admin-group" */ './views/index.vue'),
