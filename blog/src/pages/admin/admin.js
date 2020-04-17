@@ -5,7 +5,8 @@ import store from '@/lib/store'
 import "element-ui/lib/theme-chalk/index.css";
 import "@/assets/styles/iconfont/iconfont.css";
 import {
-    post
+    post,
+    test
 } from '@/lib/http'
 import {
     Input,

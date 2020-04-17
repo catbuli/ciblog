@@ -18,9 +18,7 @@ export default {
     mounted() {},
     methods: {
         backups() {
-            this.$post("/backups", {}, data => {
-                console.log(data);
-            });
+            this.$post("/backups", {}, data => {});
         }
     }
 };
