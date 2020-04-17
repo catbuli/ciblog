@@ -1,6 +1,7 @@
 <template>
     <adminFrame title="备份">
-
+        <el-button type="primary"
+                   @click="backups()">备份</el-button>
     </adminFrame>
 </template>
 
@@ -16,14 +17,8 @@ export default {
     },
     mounted() {},
     methods: {
-        getData() {
-            this.$store.dispatch("getCountAction");
-        },
-        getArticleList() {
-            this.$store.dispatch("getArticleListAction");
-        },
-        getCommentList() {
-            this.$store.dispatch("getCommentListAction");
+        backups() {
+            this.$post("/backups", {}, data => {});
         }
     }
 };

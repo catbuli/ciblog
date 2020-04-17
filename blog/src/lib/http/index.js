@@ -19,10 +19,9 @@ instance.defaults.baseURL = baseUrl; //设置默认接口地址
 
 instance.interceptors.request.use(
     config => {
-        // const token = getCookie('名称');注意使用的时候需要引入cookie方法，推荐js-cookie
         // config.data = JSON.stringify(config.data);
         config.headers = {
-            "Accept": "application/json",
+            // "Accept": "application/json",
             'token': localStorage.getItem('token') ? localStorage.getItem('token') : '',
             'uid': localStorage.getItem('uid') ? localStorage.getItem('uid') : 0,
         }
@@ -32,26 +31,6 @@ instance.interceptors.request.use(
         return Promise.reject(error);
     }
 );
-
-/**
- * 封装post请求
- * @param url 请求url
- * @param data 请求参数
- * @param fn 回调函数
- * @returns {Promise}
- */
-export function post(url, data = {}, fn) {
-    return new Promise((resolve, reject) => {
-        instance.post(url, data)
-            .then(response => {
-                // resolve(response.data);
-                fn(response.data);
-            }, err => {
-                reject(err)
-            })
-    })
-}
-
 
 instance.interceptors.response.use(
     response => {
@@ -103,7 +82,7 @@ instance.interceptors.response.use(
                 router.push('/404')
             }
             default: {
-                router.push('/404')
+                // router.push('/404')
             }
         }
         return response;
@@ -114,7 +93,30 @@ instance.interceptors.response.use(
     error => {
         return Promise.reject(error);
     }
-
 )
+
+
+/**
+ * 封装post请求
+ * @param url 请求url
+ * @param data 请求参数
+ * @param fn 回调函数
+ * @returns {Promise}
+ */
+export function post(url, data = {}, fn) {
+    return new Promise((resolve, reject) => {
+        instance.post(url, data)
+            .then(response => {
+                // resolve(response.data);
+                fn(response.data);
+            }, err => {
+                reject(err)
+            })
+    })
+}
+
+export function test() {
+    console.log('tag', '')
+}
 
 export default instance;
