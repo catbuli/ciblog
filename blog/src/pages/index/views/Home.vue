@@ -3,7 +3,9 @@
          class="index-frame">
         <headEle :backgroundImage="'url('+banner+')'"></headEle>
         <div class="element-frame">
-            <articleItem :list-data="articleList"></articleItem>
+            <articleItem v-if="articleList"
+                         :list-data="articleList"
+                         :top="system.top_article"></articleItem>
             <paging action="getArticleListAction"
                     align="center"
                     :paging="paging"
@@ -46,6 +48,9 @@ export default {
         };
     },
     computed: {
+        system() {
+            return this.$store.state.global.system;
+        },
         banner() {
             let url = this.$store.state.global.system.randomBanner;
             if (!url) {
@@ -75,8 +80,12 @@ export default {
             }
         }
     },
+    mounted() {
+        window.addEventListener("beforeunload", function() {
+            window.scrollTo(0, 0);
+        });
+    },
     created() {
-        this.$store.dispatch("getPersonalDataAction");
         this.setTitle();
     }
 };
@@ -85,5 +94,6 @@ export default {
 <style>
 #home {
     position: absolute;
+    width: 100%;
 }
 </style>

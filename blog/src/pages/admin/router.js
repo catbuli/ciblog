@@ -103,9 +103,9 @@ const routes = [{
         }
     },
     {
-        path: '/admin/read_settings',
-        name: 'read_settings',
-        component: () => import( /* webpackChunkName: "admin-group" */ './views/readSettings.vue'),
+        path: '/admin/setup_read',
+        name: 'setup_read',
+        component: () => import( /* webpackChunkName: "admin-group" */ './views/setupRead.vue'),
         meta: {
             title: '阅读设置'
         }
@@ -161,6 +161,8 @@ router.beforeEach((to, from, next) => {
                 if (data.code == 201) {
                     next();
                 } else {
+                    localStorage.removeItem("id");
+                    localStorage.removeItem("token")
                     next("/admin/login");
                 }
             });

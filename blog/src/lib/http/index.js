@@ -45,7 +45,7 @@ instance.interceptors.response.use(
                 });
                 break;
             }
-            // 调用成功返回数据 没有提示细腻
+            // 调用成功返回数据 没有提示信息
             case 201: {
                 break;
             }
@@ -115,8 +115,5 @@ export function post(url, data = {}, fn) {
     })
 }
 
-export function test() {
-    console.log('tag', '')
-}
 
 export default instance;

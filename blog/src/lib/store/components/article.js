@@ -44,12 +44,17 @@ export default {
                 context.commit('setPaging', data.paging);
             });
         },
-        getArticleDataAction(context, data) {
+        getArticleDataAction({
+            rootState,
+            commit
+        }, data) {
+            // if (data != rootState.article.article.aid) {
             post("/articlec/byid", {
                 aid: data
             }, (data) => {
-                context.commit('setArticle', data.data);
+                commit('setArticle', data.data);
             });
+            // }
         },
         publishArticleAction({
             rootState,

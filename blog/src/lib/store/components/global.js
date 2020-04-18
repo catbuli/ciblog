@@ -112,6 +112,9 @@ export default {
                 localStorage.removeItem('token');
             }
         },
+        setIsLogin(state, data) {
+            state.isLogin = data;
+        },
         setCountList(state, data) {
             state.countList = data;
         },
@@ -186,6 +189,19 @@ export default {
                 context.commit('setSystem', res.data);
             });
         },
+        setSystemAction({
+            rootState,
+            dispatch
+        }, data) {
+            post(
+                "/setupc/edit", data,
+                res => {
+                    if (res.code == 201) {
+                        rootState.global.system.top_article = data.value;
+                    }
+                }
+            );
+        },
         updateSystemAciton(context, data) {
             post(
                 '/setupc/updateSystem', {
@@ -195,7 +211,8 @@ export default {
                     context.dispatch('getSystemAciton');
                 }
             );
-        }
+        },
+
     },
     modules: {}
 };

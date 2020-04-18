@@ -76,16 +76,22 @@ export default {
     background-size: cover;
     background-repeat: no-repeat;
     transition: all 1.5 ease;
-    transform: scale(1.5);
+    transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -o-transform: scale(1.2);
     filter: blur(20px);
-}
-.login-main {
+    -ms-filter: blur(20px);
+    -moz-filter: blur(20px);
+    -webkit-filter: blur(20px);
 }
 .login-top {
     background: #e1e1e1;
     padding: 40px 60px;
     border-radius: 25px 25px 0px 0px;
 }
+
 .login-botton {
     padding: 20px 60px;
     background: #e15748;
@@ -93,23 +99,41 @@ export default {
     border-top: 2px solid #ad4337;
     cursor: pointer;
 }
-.login-button:hover {
-}
 @keyframes error {
     0% {
         transform: translateX(0px);
+        -ms-transform: translateX(0px);
+        -moz-transform: translateX(0px);
+        -webkit-transform: translateX(0px);
+        -o-transform: translateX(0px);
     }
     25% {
         transform: translateX(5px);
+        -ms-transform: translateX(5px);
+        -moz-transform: translateX(5px);
+        -webkit-transform: translateX(5px);
+        -o-transform: translateX(5px);
     }
     50% {
         transform: translateX(-5px);
+        -ms-transform: translateX(-5px);
+        -moz-transform: translateX(-5px);
+        -webkit-transform: translateX(-5px);
+        -o-transform: translateX(-5px);
     }
     75% {
         transform: translateX(5px);
+        -ms-transform: translateX(5px);
+        -moz-transform: translateX(5px);
+        -webkit-transform: translateX(5px);
+        -o-transform: translateX(5px);
     }
     100% {
         transform: translateX(0px);
+        -ms-transform: translateX(0px);
+        -moz-transform: translateX(0px);
+        -webkit-transform: translateX(0px);
+        -o-transform: translateX(0px);
     }
 }
 .login-botton h3 {

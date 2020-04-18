@@ -237,10 +237,8 @@ export default {
         this.getHotList();
         this.getNewList();
         this.$store.dispatch("getCountAction");
-        this.$store.dispatch("getSystemAciton");
-        this.$store.dispatch("getPersonalDataAction");
     },
-    destroyed() {
+    beforeDestroy() {
         window.removeEventListener("mousemove", this.handleMouse, true);
         window.removeEventListener("scroll", this.handleScroll, true);
     }
