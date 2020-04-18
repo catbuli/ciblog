@@ -161,6 +161,8 @@ router.beforeEach((to, from, next) => {
                 if (data.code == 201) {
                     next();
                 } else {
+                    localStorage.removeItem("id");
+                    localStorage.removeItem("token")
                     next("/admin/login");
                 }
             });

@@ -115,8 +115,5 @@ export function post(url, data = {}, fn) {
     })
 }
 
-export function test() {
-    console.log('tag', '')
-}
 
 export default instance;

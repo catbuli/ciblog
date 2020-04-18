@@ -112,6 +112,9 @@ export default {
                 localStorage.removeItem('token');
             }
         },
+        setIsLogin(state, data) {
+            state.isLogin = data;
+        },
         setCountList(state, data) {
             state.countList = data;
         },

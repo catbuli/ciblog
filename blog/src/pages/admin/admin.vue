@@ -22,11 +22,8 @@ export default {
     },
     watch: {
         $route() {
-            if (this.$route.fullPath == "/admin/login") {
-                this.isShow = false;
-            } else {
-                this.isShow = true;
-            }
+            console.log(this.$store.state.global.isLogin);
+            if (this.$store.state.global.isLogin) this.isShow = true;
         }
     },
     methods: {
@@ -49,16 +46,23 @@ export default {
             }
             this.$store.commit("isPC", flag);
         },
+        isLogin() {
+            if (localStorage.getItem("uid") && localStorage.getItem("token"))
+                this.$store.commit("setIsLogin", true);
+        },
         leave() {
             this.isShow = true;
         }
     },
     created() {
         this.isPC();
+        this.isLogin();
     },
     mounted() {
         let loading = document.getElementById("loading");
-        loading.remove();
+        if (loading) {
+            loading.remove();
+        }
     }
 };
 </script>

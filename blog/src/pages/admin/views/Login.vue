@@ -76,8 +76,11 @@ export default {
     background-size: cover;
     background-repeat: no-repeat;
     transition: all 1.5 ease;
-    transform: scale(1.5);
+    transform: scale(1.2);
     filter: blur(20px);
+    -ms-filter: blur(20px);
+    -moz-filter: blur(20px);
+    -webkit-filter: blur(20px);
 }
 .login-main {
 }
@@ -86,6 +89,7 @@ export default {
     padding: 40px 60px;
     border-radius: 25px 25px 0px 0px;
 }
+
 .login-botton {
     padding: 20px 60px;
     background: #e15748;
@@ -93,7 +97,9 @@ export default {
     border-top: 2px solid #ad4337;
     cursor: pointer;
 }
-.login-button:hover {
+.login-botton:hover {
+    /* transition: all 1s ease;
+    background: #8f372e; */
 }
 @keyframes error {
     0% {
