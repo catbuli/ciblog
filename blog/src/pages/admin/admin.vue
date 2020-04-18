@@ -1,8 +1,7 @@
 <template>
     <div id="admin">
         <adminNav v-show="isShow"></adminNav>
-        <transition name="card"
-                    @leave="leave">
+        <transition name="card">
             <router-view />
         </transition>
     </div>
@@ -17,16 +16,17 @@ export default {
     },
     data() {
         return {
-            isShow: false
+            isShow: false // nav显示
         };
     },
     watch: {
+        // 监听路由
         $route() {
-            console.log(this.$store.state.global.isLogin);
             if (this.$store.state.global.isLogin) this.isShow = true;
         }
     },
     methods: {
+        // 判断是pc还是移动端
         isPC() {
             var userAgentInfo = navigator.userAgent;
             var Agents = [
@@ -46,12 +46,17 @@ export default {
             }
             this.$store.commit("isPC", flag);
         },
+        //判断是否登陆
         isLogin() {
             if (localStorage.getItem("uid") && localStorage.getItem("token"))
                 this.$store.commit("setIsLogin", true);
         },
-        leave() {
-            this.isShow = true;
+        //删除loading组件
+        removeLoading() {
+            let loading = document.getElementById("loading");
+            if (loading) {
+                loading.remove();
+            }
         }
     },
     created() {
@@ -59,10 +64,7 @@ export default {
         this.isLogin();
     },
     mounted() {
-        let loading = document.getElementById("loading");
-        if (loading) {
-            loading.remove();
-        }
+        this.removeLoading();
     }
 };
 </script>
@@ -154,14 +156,16 @@ li {
 }
 
 #admin {
-    // position: relative;
     width: 100%;
     height: 100%;
 }
 
 .card-enter {
     transform: translateX(-80%);
-    /* transform: scale(0.3); */
+    -ms-transform: translateX(-80%);
+    -moz-transform: translateX(-80%);
+    -webkit-transform: translateX(-80%);
+    -o-transform: translateX(-80%);
     opacity: 0.3;
 }
 .card-enter-active {
@@ -169,22 +173,30 @@ li {
 }
 .card-enter-to {
     transform: translateX(0);
-    /* transform: scale(1); */
+    -ms-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -webkit-transform: translateX(0);
+    -o-transform: translateX(0);
     opacity: 1;
 }
 
 .card-leave {
     transform: translateX(0);
-    /* transform: scale(1); */
+    -ms-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -webkit-transform: translateX(0);
+    -o-transform: translateX(0);
     opacity: 1;
 }
 .card-leave-active {
     transition: all 1s ease;
-    /* animation: card-out 1s ease; */
 }
 .card-leave-to {
     transform: translateX(150%);
-    /* transform: scale(0.3); */
+    -ms-transform: translateX(150%);
+    -moz-transform: translateX(150%);
+    -webkit-transform: translateX(150%);
+    -o-transform: translateX(150%);
     opacity: 0.3;
 }
 </style>
