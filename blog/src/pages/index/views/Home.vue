@@ -3,7 +3,8 @@
          class="index-frame">
         <headEle :backgroundImage="'url('+banner+')'"></headEle>
         <div class="element-frame">
-            <articleItem :list-data="articleList"></articleItem>
+            <articleItem :list-data="articleList"
+                         :top="$store.state.global.system.top_article"></articleItem>
             <paging action="getArticleListAction"
                     align="center"
                     :paging="paging"

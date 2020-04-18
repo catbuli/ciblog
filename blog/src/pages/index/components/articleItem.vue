@@ -1,6 +1,49 @@
 <template>
     <ul id="articleItem"
         ref="articleList">
+        <animationFrame v-if="top"
+                        id="topArticle"
+                        className="fade-out-sway"
+                        class="card">
+            <li>
+                <span class="article-title link"
+                      v-text="article.title"
+                      @click="jump(article.aid)"></span>
+                <span class="top"
+                      style="float:right">置顶</span>
+                <div class="card-top">
+                    <i class="iconfont iconflag">
+                        <a class="card-top-categories"
+                           v-for="category in article.category"
+                           :key="category.mid"
+                           target="_blank"
+                           :href="`/search/category/${category.mid}`">{{category.name}}</a>
+                    </i>
+                    <i class="iconfont icontime-circle"
+                       style="margin-left:10px">
+                        <span class="card-top-date">{{article.create_date|handleDate}}</span>
+                    </i>
+                </div>
+                <img class="article-image"
+                     :src="article.cover_url"
+                     @click="jump(article.aid)">
+                <p class="article-content"
+                   v-text="article.description"></p>
+                <div class='card-line'></div>
+                <div class="card-bottom">
+                    <span class="card-bottom-left">
+                        <a @click="jump(article.aid)"
+                           style="cursor: pointer;">
+                            ••• •••
+                        </a>
+                    </span>
+                    <span class="card-bottom-right">
+                        <i class="iconfont iconcomment">{{' '+article.comment_count}}</i>
+                        <i class="iconfont iconeye">{{' '+article.pv}}</i>
+                    </span>
+                </div>
+            </li>
+        </animationFrame>
         <animationFrame className="fade-out-sway"
                         class="card"
                         v-for="item in listData"
@@ -52,13 +95,27 @@ export default {
     components: {
         animationFrame
     },
+    data() {
+        return {
+            topRead: {}
+        };
+    },
     props: {
-        listData: {}
+        listData: {},
+        top: ""
     },
     filters: {
         handleDate(value) {
             if (value) return value.split(" ")[0];
         }
+    },
+    computed: {
+        article() {
+            return this.$store.state.article.article;
+        }
+    },
+    mounted() {
+        this.getTopArticle();
     },
     methods: {
         handleScroll(e) {
@@ -73,6 +130,11 @@ export default {
                     element.classList.add("show");
                 }
             });
+        },
+        getTopArticle() {
+            if (this.top) {
+                this.$store.dispatch("getArticleDataAction", this.top);
+            }
         },
         jump(id) {
             this.$router.push({
