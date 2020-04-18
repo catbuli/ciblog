@@ -26,9 +26,7 @@ export default {
         headEle,
         searchTool
     },
-    created() {
-        this.$store.dispatch("getSystemAciton");
-    },
+    created() {},
     computed: {
         banner() {
             let url = this.$store.state.global.system.randomBanner;

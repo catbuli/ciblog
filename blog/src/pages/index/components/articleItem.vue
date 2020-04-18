@@ -1,11 +1,9 @@
 <template>
     <ul id="articleItem"
         ref="articleList">
-        <animationFrame v-if="top"
-                        id="topArticle"
-                        className="fade-out-sway"
+        <animationFrame className="fade-out-sway"
                         class="card">
-            <li>
+            <li v-if="article">
                 <span class="article-title link"
                       v-text="article.title"
                       @click="jump(article.aid)"></span>
@@ -111,7 +109,14 @@ export default {
     },
     computed: {
         article() {
-            return this.$store.state.article.article;
+            if (this.$store.state.article.article) {
+                return this.$store.state.article.article;
+            }
+        }
+    },
+    watch: {
+        top() {
+            this.getTopArticle();
         }
     },
     mounted() {
