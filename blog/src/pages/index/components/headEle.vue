@@ -90,14 +90,14 @@ header {
     z-index: -1;
     position: relative;
     margin-bottom: 50px;
-    animation: show 1s ease-out 0.7s 1;
+    animation: show 1s ease-out 0.5s 1;
     animation-fill-mode: forwards;
     display: flex;
     background-position: center center;
     background-repeat: no-repeat;
     justify-content: center; /* 水平居中 */
     align-items: center;
-    transform: translateY(-100%);
+    transform: translateY(-140%);
 }
 /* 页头动画 */
 @keyframes show {

@@ -80,7 +80,11 @@ export default {
             }
         }
     },
-    mounted() {},
+    mounted() {
+        window.addEventListener("beforeunload", function() {
+            window.scrollTo(0, 0);
+        });
+    },
     created() {
         this.setTitle();
     }
