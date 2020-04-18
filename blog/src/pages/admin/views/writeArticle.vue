@@ -48,6 +48,11 @@
                             <el-switch v-model="article.allow_comment">
                             </el-switch>
                         </el-col>
+                        <el-col :span='12'>
+                            <h4>置顶</h4>
+                            <el-switch v-model="topArticle">
+                            </el-switch>
+                        </el-col>
                     </el-row>
                     <el-row class="setting-row"
                             v-if="style.isPC">
@@ -241,6 +246,29 @@ export default {
         }
     },
     computed: {
+        topArticle: {
+            get() {
+                let flag =
+                    this.$route.params.aid ==
+                    this.$store.state.global.system.top_article
+                        ? true
+                        : false;
+                return flag;
+            },
+            set(str) {
+                if (str) {
+                    this.$store.dispatch("setSystemAction", {
+                        name: "top_article",
+                        value: this.$route.params.aid
+                    });
+                } else {
+                    this.$store.dispatch("setSystemAction", {
+                        name: "top_article",
+                        value: ""
+                    });
+                }
+            }
+        },
         style() {
             return this.$store.getters.globalStyle;
         },
@@ -268,6 +296,7 @@ export default {
         check(data, list) {
             this.article.categoryList = list.checkedKeys;
         },
+        //获取meta列表
         getMetaList() {
             this.$store.dispatch("getCategoryListAction");
             this.$store.dispatch("getTagListAction");
@@ -311,7 +340,6 @@ export default {
                     offset: 50
                 });
             } else {
-                // console.log(this.article);
                 this.$store.dispatch("publishArticleAction", this.article);
             }
         },
