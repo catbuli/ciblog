@@ -544,6 +544,10 @@ export default {
                 text-align: center;
                 font-size: 1.5rem;
                 transform: translate(-50%, -50%);
+                -ms-transform: translate(-50%, -50%);
+                -moz-transform: translate(-50%, -50%);
+                -webkit-transform: translate(-50%, -50%);
+                -o-transform: translate(-50%, -50%);
                 margin: 0 auto;
                 padding: 0 30px;
                 position: absolute;
@@ -618,6 +622,10 @@ export default {
                         background-color: #fff;
                         border-color: #e5e5e5;
                         transform: rotate(45deg);
+                        -ms-transform: rotate(45deg);
+                        -moz-transform: rotate(45deg);
+                        -webkit-transform: rotate(45deg);
+                        -o-transform: rotate(45deg);
                     }
                     .comment-meta span:first-child {
                         background-color: #dfdddd;
@@ -670,7 +678,10 @@ export default {
 /* 评论新增动画 */
 .comment-enter {
     transform: translateX(100%);
-    /* transform: scale(0.3); */
+    -ms-transform: translateX(100%);
+    -moz-transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    -o-transform: translateX(100%);
     opacity: 0.3;
 }
 .comment-enter-active {
@@ -678,7 +689,10 @@ export default {
 }
 .comment-enter-to {
     transform: translateX(0);
-    /* transform: scale(1); */
+    -ms-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -webkit-transform: translateX(0);
+    -o-transform: translateX(0);
     opacity: 1;
 }
 </style>

@@ -74,22 +74,46 @@ div {
     0% {
         opacity: 0;
         transform: scale(0.4) rotateZ(-2deg);
+        -ms-transform: scale(0.4) rotateZ(-2deg);
+        -moz-transform: scale(0.4) rotateZ(-2deg);
+        -webkit-transform: scale(0.4) rotateZ(-2deg);
+        -o-transform: scale(0.4) rotateZ(-2deg);
     }
     20% {
         transform: rotateZ(2deg);
+        -ms-transform: rotateZ(2deg);
+        -moz-transform: rotateZ(2deg);
+        -webkit-transform: rotateZ(2deg);
+        -o-transform: rotateZ(2deg);
     }
     40% {
         transform: rotateZ(-2deg);
+        -ms-transform: rotateZ(-2deg);
+        -moz-transform: rotateZ(-2deg);
+        -webkit-transform: rotateZ(-2deg);
+        -o-transform: rotateZ(-2deg);
     }
     60% {
         transform: rotateZ(2deg);
+        -ms-transform: rotateZ(2deg);
+        -moz-transform: rotateZ(2deg);
+        -webkit-transform: rotateZ(2deg);
+        -o-transform: rotateZ(2deg);
     }
     80% {
         transform: rotateZ(-2deg);
+        -ms-transform: rotateZ(-2deg);
+        -moz-transform: rotateZ(-2deg);
+        -webkit-transform: rotateZ(-2deg);
+        -o-transform: rotateZ(-2deg);
     }
     100% {
         opacity: 1;
         transform: scale(1) rotateZ(0);
+        -ms-transform: scale(1) rotateZ(0);
+        -moz-transform: scale(1) rotateZ(0);
+        -webkit-transform: scale(1) rotateZ(0);
+        -o-transform: scale(1) rotateZ(0);
     }
 }
 // 从小到大 从无到有 左右晃动
