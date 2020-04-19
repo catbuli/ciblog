@@ -22,15 +22,17 @@
             <el-col :span="style.isPC?3:24"
                     :offset="style.isPC?5:0"
                     class="upload">
-                <el-upload multiple
+
+                <!-- <el-upload multiple
                            :style="{'text-align':style.isPC?'right':'left'}"
                            action="#"
                            :http-request="upload"
                            :file-list="fileList">
                     <el-button type="primary">点击上传</el-button>
-                    <!-- <div slot="tip"
+                </el-upload> -->
+                <!-- <div slot="tip"
                          class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div> -->
-                </el-upload>
+                <ciupload @afterUpload="afterUpload"></ciupload>
             </el-col>
         </el-row>
         <el-table class="file-table"
@@ -132,12 +134,14 @@
 <script>
 import adminFrame from "../components/common/adminFrame.vue";
 import paging from "@/components/common/paging.vue";
+import ciupload from "@/components/common/ciupload.vue";
 
 export default {
     name: "manageFile",
     components: {
         adminFrame,
-        paging
+        paging,
+        ciupload
     },
     data() {
         return {
@@ -183,6 +187,9 @@ export default {
             this.$post("/upload/add", fd, data => {
                 this.$store.dispatch("getFileListAction", this.paging);
             });
+        },
+        afterUpload(date) {
+            this.$store.dispatch("getFileListAction", this.paging);
         },
         selectFile(url) {
             this.url = url;
