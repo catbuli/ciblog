@@ -2,8 +2,9 @@
     <ul id="articleItem"
         ref="articleList">
         <animationFrame className="fade-out-sway"
+                        v-if="article&&top"
                         class="card">
-            <li v-if="article">
+            <li>
                 <span class="article-title link"
                       v-text="article.title"
                       @click="jump(article.aid)"></span>
