@@ -282,6 +282,10 @@ export default {
 
 .hamRotate180.active {
     transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
 }
 
 .ham5 .top {
@@ -344,6 +348,10 @@ export default {
     }
     img:hover {
         transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
     }
 }
 
@@ -410,6 +418,10 @@ export default {
             img {
                 height: 80%;
                 transform: translateY(20%);
+                -ms-transform: translateY(20%);
+                -moz-transform: translateY(20%);
+                -webkit-transform: translateY(20%);
+                -o-transform: translateY(20%);
             }
         }
     }
@@ -468,6 +480,10 @@ export default {
     transition: all ease 0.5s;
     // animation: hidden-nav ease 0.5s;
     transform: translateX(-101%);
+    -ms-transform: translateX(-101%);
+    -moz-transform: translateX(-101%);
+    -webkit-transform: translateX(-101%);
+    -o-transform: translateX(-101%);
 }
 .show-nav {
     transition: all ease 0.5s;

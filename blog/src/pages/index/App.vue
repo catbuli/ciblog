@@ -234,16 +234,28 @@ li {
 /* 路由切换动画 */
 .fade-enter {
     transform: translateY(100%);
+    -ms-transform: translateY(100%);
+    -moz-transform: translateY(100%);
+    -webkit-transform: translateY(100%);
+    -o-transform: translateY(100%);
 }
 .fade-enter-active {
     transition: all 1s ease;
 }
 .fade-enter-to {
     transform: translateY(0);
+    -ms-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -webkit-transform: translateY(0);
+    -o-transform: translateY(0);
 }
 
 .fade-leave {
     transform: translateY(0);
+    -ms-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -webkit-transform: translateY(0);
+    -o-transform: translateY(0);
     opacity: 1;
 }
 .fade-leave-active {
@@ -251,6 +263,10 @@ li {
 }
 .fade-leave-to {
     transform: translateY(-150%);
+    -ms-transform: translateY(-150%);
+    -moz-transform: translateY(-150%);
+    -webkit-transform: translateY(-150%);
+    -o-transform: translateY(-150%);
     opacity: 0;
 }
 </style>

@@ -119,10 +119,18 @@ export default {
     0% {
         opacity: 0;
         transform: scale(0);
+        -ms-transform: scale(0);
+        -moz-transform: scale(0);
+        -webkit-transform: scale(0);
+        -o-transform: scale(0);
     }
     100% {
         opacity: 1;
         transform: scale(1);
+        -ms-transform: scale(1);
+        -moz-transform: scale(1);
+        -webkit-transform: scale(1);
+        -o-transform: scale(1);
     }
 }
 .hidden {
@@ -134,11 +142,19 @@ export default {
     0% {
         opacity: 1;
         transform: scale(1);
+        -ms-transform: scale(1);
+        -moz-transform: scale(1);
+        -webkit-transform: scale(1);
+        -o-transform: scale(1);
         visibility: visible;
     }
     100% {
         opacity: 0;
         transform: scale(0);
+        -ms-transform: scale(0);
+        -moz-transform: scale(0);
+        -webkit-transform: scale(0);
+        -o-transform: scale(0);
     }
 }
 .search-bar {
@@ -148,6 +164,10 @@ export default {
     position: relative;
     margin: 0 auto;
     transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
 }
 #search-input {
     line-height: 64px;

@@ -36,7 +36,6 @@ export default {
             type: String,
             default:
                 "url('https://ciblog.oss-cn-shanghai.aliyuncs.com/images/bg4.jpg')"
-            // "url('https://ciblog.oss-cn-shanghai.aliyuncs.com/images/bg4.jpg')"
         }
     },
     computed: {
@@ -98,6 +97,10 @@ header {
     justify-content: center; /* 水平居中 */
     align-items: center;
     transform: translateY(-140%);
+    -ms-transform: translateY(-140%);
+    -moz-transform: translateY(-140%);
+    -webkit-transform: translateY(-140%);
+    -o-transform: translateY(-140%);
 }
 /* 页头动画 */
 @keyframes show {
@@ -106,6 +109,10 @@ header {
     }
     100% {
         transform: translateY(0%);
+        -ms-transform: translateY(0%);
+        -moz-transform: translateY(0%);
+        -webkit-transform: translateY(0%);
+        -o-transform: translateY(0%);
         opacity: 1;
     }
 }
@@ -120,6 +127,10 @@ header {
 .one {
     clip-path: polygon(0 0, 75% 0, 25% 100%, 0% 100%);
     transform: translateX(-200%) translateY(100%);
+    -ms-transform: translateX(-200%) translateY(100%);
+    -moz-transform: translateX(-200%) translateY(100%);
+    -webkit-transform: translateX(-200%) translateY(100%);
+    -o-transform: translateX(-200%) translateY(100%);
     animation: information 1s ease 1s 1;
     animation-fill-mode: forwards;
     z-index: 10;
@@ -127,6 +138,10 @@ header {
 .two {
     clip-path: polygon(100% 0, 75% 0, 25% 100%, 100% 100%);
     transform: translateX(200%) translateY(-100%);
+    -ms-transform: translateX(200%) translateY(-100%);
+    -moz-transform: translateX(200%) translateY(-100%);
+    -webkit-transform: translateX(200%) translateY(-100%);
+    -o-transform: translateX(200%) translateY(-100%);
     animation: information2 1s ease 1s 1;
     animation-fill-mode: forwards;
     z-index: 5;
@@ -134,17 +149,33 @@ header {
 @keyframes information {
     0% {
         transform: translateX(-200%) translateY(100%);
+        -ms-transform: translateX(-200%) translateY(100%);
+        -moz-transform: translateX(-200%) translateY(100%);
+        -webkit-transform: translateX(-200%) translateY(100%);
+        -o-transform: translateX(-200%) translateY(100%);
     }
     100% {
         transform: translateX(0) translateY(0);
+        -ms-transform: translateX(0) translateY(0);
+        -moz-transform: translateX(0) translateY(0);
+        -webkit-transform: translateX(0) translateY(0);
+        -o-transform: translateX(0) translateY(0);
     }
 }
 @keyframes information2 {
     0% {
         transform: translateX(200%) translateY(-100%);
+        -ms-transform: translateX(200%) translateY(-100%);
+        -moz-transform: translateX(200%) translateY(-100%);
+        -webkit-transform: translateX(200%) translateY(-100%);
+        -o-transform: translateX(200%) translateY(-100%);
     }
     100% {
         transform: translateX(0) translateY(0);
+        -ms-transform: translateX(0) translateY(0);
+        -moz-transform: translateX(0) translateY(0);
+        -webkit-transform: translateX(0) translateY(0);
+        -o-transform: translateX(0) translateY(0);
     }
 }
 .name-info {

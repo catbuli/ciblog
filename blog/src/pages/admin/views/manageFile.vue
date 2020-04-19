@@ -22,15 +22,18 @@
             <el-col :span="style.isPC?3:24"
                     :offset="style.isPC?5:0"
                     class="upload">
-                <el-upload multiple
+
+                <!-- <el-upload multiple
                            :style="{'text-align':style.isPC?'right':'left'}"
                            action="#"
                            :http-request="upload"
                            :file-list="fileList">
                     <el-button type="primary">点击上传</el-button>
-                    <!-- <div slot="tip"
+                </el-upload> -->
+                <!-- <div slot="tip"
                          class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div> -->
-                </el-upload>
+                <ciupload @afterUpload="afterUpload"
+                          multiple></ciupload>
             </el-col>
         </el-row>
         <el-table class="file-table"
@@ -74,9 +77,14 @@
                              width="50px"
                              align="center"
                              label="所属">
+                <template slot-scope="scope">
+                    <span v-if="scope.row.aid<0">无</span>
+                    <span v-else>{{scope.row.aid}}</span>
+                </template>
             </el-table-column>
             <el-table-column prop="status"
                              align="center"
+                             width="100px"
                              label="归档类型">
                 <template slot-scope="scope">
                     <span v-if="scope.row.status==0">归档文件</span>
@@ -132,12 +140,14 @@
 <script>
 import adminFrame from "../components/common/adminFrame.vue";
 import paging from "@/components/common/paging.vue";
+import ciupload from "@/components/common/ciupload.vue";
 
 export default {
     name: "manageFile",
     components: {
         adminFrame,
-        paging
+        paging,
+        ciupload
     },
     data() {
         return {
@@ -183,6 +193,9 @@ export default {
             this.$post("/upload/add", fd, data => {
                 this.$store.dispatch("getFileListAction", this.paging);
             });
+        },
+        afterUpload(date) {
+            this.$store.dispatch("getFileListAction", this.paging);
         },
         selectFile(url) {
             this.url = url;
@@ -239,15 +252,20 @@ export default {
 </script>
 
 <style scoped>
-@transition: ~"all 1s ease";
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 480px) {
     .el-col {
         margin: 5px auto;
+    }
+    .upload {
+        text-align: left !important;
     }
 } /* 超小设备（手机，小于 480px） */
 .file-table {
     width: 100%;
     margin: 20px auto;
+}
+.upload {
+    text-align: right;
 }
 .upload >>> .el-upload-list {
     display: none;

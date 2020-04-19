@@ -159,6 +159,10 @@ export default {
         }
         img:hover {
             transform: rotate(360deg);
+            -ms-transform: rotate(360deg);
+            -moz-transform: rotate(360deg);
+            -webkit-transform: rotate(360deg);
+            -o-transform: rotate(360deg);
         }
     }
     // .drag-bar {

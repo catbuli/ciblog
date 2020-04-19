@@ -81,11 +81,19 @@ export default {
 
 .show {
     transform: translateX(0);
+    -ms-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -webkit-transform: translateX(0);
+    -o-transform: translateX(0);
     opacity: 1;
     cursor: pointer;
 }
 .hidden {
     transform: translateX(200%);
+    -ms-transform: translateX(200%);
+    -moz-transform: translateX(200%);
+    -webkit-transform: translateX(200%);
+    -o-transform: translateX(200%);
     opacity: 0;
 }
 
@@ -97,24 +105,52 @@ export default {
     0% {
         opacity: 1;
         transform: translateX(-2px);
+        -ms-transform: translateX(-2px);
+        -moz-transform: translateX(-2px);
+        -webkit-transform: translateX(-2px);
+        -o-transform: translateX(-2px);
     }
     10% {
         transform: translateX(2px);
+        -ms-transform: translateX(2px);
+        -moz-transform: translateX(2px);
+        -webkit-transform: translateX(2px);
+        -o-transform: translateX(2px);
     }
     20% {
         transform: translateX(-2px);
+        -ms-transform: translateX(-2px);
+        -moz-transform: translateX(-2px);
+        -webkit-transform: translateX(-2px);
+        -o-transform: translateX(-2px);
     }
     30% {
         transform: translateX(2px);
+        -ms-transform: translateX(2px);
+        -moz-transform: translateX(2px);
+        -webkit-transform: translateX(2px);
+        -o-transform: translateX(2px);
     }
     40% {
         transform: translateX(-2px);
+        -ms-transform: translateX(-2px);
+        -moz-transform: translateX(-2px);
+        -webkit-transform: translateX(-2px);
+        -o-transform: translateX(-2px);
     }
     50% {
         transform: translateX(2px);
+        -ms-transform: translateX(2px);
+        -moz-transform: translateX(2px);
+        -webkit-transform: translateX(2px);
+        -o-transform: translateX(2px);
     }
     100% {
         transform: translateY(-1000px);
+        -ms-transform: translateY(-1000px);
+        -moz-transform: translateY(-1000px);
+        -webkit-transform: translateY(-1000px);
+        -o-transform: translateY(-1000px);
     }
 }
 </style>
