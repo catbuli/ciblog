@@ -36,7 +36,6 @@ export default {
             type: String,
             default:
                 "url('https://ciblog.oss-cn-shanghai.aliyuncs.com/images/bg4.jpg')"
-            // "url('https://ciblog.oss-cn-shanghai.aliyuncs.com/images/bg4.jpg')"
         }
     },
     computed: {

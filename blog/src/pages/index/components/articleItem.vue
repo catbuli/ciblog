@@ -7,8 +7,7 @@
                 <span class="article-title link"
                       v-text="article.title"
                       @click="jump(article.aid)"></span>
-                <span class="top"
-                      style="float:right">置顶</span>
+                <span class="top">置顶</span>
                 <div class="card-top">
                     <i class="iconfont iconflag">
                         <a class="card-top-categories"
@@ -186,6 +185,19 @@ export default {
         margin: 0 auto 60px;
         border-radius: 8px;
         padding: 15px;
+        overflow: hidden;
+        position: relative;
+        .top {
+            position: absolute;
+            color: white;
+            right: -65px;
+            font-size: 1.3rem;
+            text-align: center;
+            transform: rotateZ(40deg);
+            float: right;
+            width: 200px;
+            background-color: tomato;
+        }
         .article-title {
             margin: 0px;
             font-size: 1.5rem;
