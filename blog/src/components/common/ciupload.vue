@@ -6,7 +6,8 @@
             <input type="file"
                    class="ciupload-file"
                    name="ciupload"
-                   multiple="multiple"
+                   :multiple="multiple"
+                   accept="image/*"
                    ref="ciupload">
         </form>
         <button @click="click()">上传文件</button>
@@ -20,6 +21,12 @@ export default {
         return {
             dom: null
         };
+    },
+    props: {
+        multiple: {
+            type: Boolean,
+            default: false
+        }
     },
     mounted() {
         this.getdom();
@@ -38,7 +45,7 @@ export default {
             var fileObj = this.dom.files;
             var formData = new FormData();
             for (let i = 0; i < fileObj.length; i++) {
-                formData.append("image" + i, fileObj[i]);
+                formData.append("file" + i, fileObj[i]);
             }
             formData.append("aid", -2);
             this.$post("/upload/add", formData, data => {
@@ -53,9 +60,12 @@ export default {
 <style scoped>
 .ciupload-file {
     display: none;
+    width: auto;
+}
+.ciupload {
+    display: inline-block;
 }
 button {
-    width: 100%;
     display: inline-block;
     line-height: 1;
     white-space: nowrap;
