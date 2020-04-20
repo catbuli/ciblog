@@ -8,6 +8,7 @@
                    name="ciupload"
                    :multiple="multiple"
                    accept="image/*"
+                   @change="http()"
                    ref="ciupload">
         </form>
         <button @click="click()">上传文件</button>
@@ -26,7 +27,8 @@ export default {
         multiple: {
             type: Boolean,
             default: false
-        }
+        },
+        fileList: []
     },
     mounted() {
         this.getdom();
@@ -38,20 +40,11 @@ export default {
             });
         },
         click() {
-            this.dom.addEventListener("change", this.upload, false);
             this.dom.click();
         },
-        upload() {
-            var fileObj = this.dom.files;
-            var formData = new FormData();
-            for (let i = 0; i < fileObj.length; i++) {
-                formData.append("file" + i, fileObj[i]);
-            }
-            formData.append("aid", -2);
-            this.$post("/upload/add", formData, data => {
-                this.$emit("afterUpload", data);
-                this.dom.removeEventListener("change", this.upload, false);
-            });
+        http() {
+            this.$emit("http", this.dom.files);
+            this.dom.value = "";
         }
     }
 };

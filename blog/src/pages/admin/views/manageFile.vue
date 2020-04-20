@@ -22,17 +22,9 @@
             <el-col :span="style.isPC?3:24"
                     :offset="style.isPC?5:0"
                     class="upload">
-
-                <!-- <el-upload multiple
-                           :style="{'text-align':style.isPC?'right':'left'}"
-                           action="#"
-                           :http-request="upload"
-                           :file-list="fileList">
-                    <el-button type="primary">点击上传</el-button>
-                </el-upload> -->
                 <!-- <div slot="tip"
                          class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div> -->
-                <ciupload @afterUpload="afterUpload"
+                <ciupload @http="http"
                           multiple></ciupload>
             </el-col>
         </el-row>
@@ -194,8 +186,15 @@ export default {
                 this.$store.dispatch("getFileListAction", this.paging);
             });
         },
-        afterUpload(date) {
-            this.$store.dispatch("getFileListAction", this.paging);
+        http(file) {
+            var formData = new FormData();
+            for (let i = 0; i < file.length; i++) {
+                formData.append("file" + i, file[i]);
+            }
+            formData.append("aid", -2);
+            this.$post("/upload/add", formData, data => {
+                this.$store.dispatch("getFileListAction", this.paging);
+            });
         },
         selectFile(url) {
             this.url = url;
