@@ -33,6 +33,11 @@ export default {
                 state.previous = data.previous;
                 state.next = data.next;
             }
+        },
+        refresh(state, data) {
+            let __VALUE__ = JSON.parse(JSON.stringify(state.article))
+            __VALUE__.refresh = Math.random();
+            state.article = __VALUE__;
         }
     },
     actions: {
@@ -48,13 +53,15 @@ export default {
             rootState,
             commit
         }, data) {
-            // if (data != rootState.article.article.aid) {
-            post("/articlec/byid", {
-                aid: data
-            }, (data) => {
-                commit('setArticle', data.data);
-            });
-            // }
+            if (data != rootState.article.article.aid) {
+                post("/articlec/byid", {
+                    aid: data
+                }, (data) => {
+                    commit('setArticle', data.data);
+                });
+            } else {
+                commit('refresh');
+            }
         },
         publishArticleAction({
             rootState,
