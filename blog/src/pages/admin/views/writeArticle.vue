@@ -121,6 +121,7 @@
                         </el-col>
                     </el-row>
                     <el-row class="setting-row">
+                        <!-- <ciupload multipled></ciupload> -->
                         <upload :aid=Number(this.$route.params.aid)></upload>
                     </el-row>
                     <el-row class="setting-row"
@@ -142,6 +143,7 @@ import adminFrame from "../components/common/adminFrame.vue";
 import upload from "../components/common/upload.vue";
 import { post } from "@/lib/http";
 import { mavonEditor } from "mavon-editor";
+import ciupload from "@/components/common/ciupload.vue";
 import "mavon-editor/dist/css/index.css";
 export default {
     name: "writePost",
@@ -149,7 +151,8 @@ export default {
         adminTitle,
         adminFrame,
         mavonEditor,
-        upload
+        upload,
+        ciupload
     },
     data() {
         return {

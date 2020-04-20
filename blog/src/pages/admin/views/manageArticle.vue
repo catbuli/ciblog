@@ -76,6 +76,14 @@
                 </template>
             </el-table-column>
             <el-table-column align="center"
+                             width="60px">
+                <template slot-scope="scope">
+                    <el-badge value="置顶"
+                              v-if="scope.row.aid==topArticle">
+                    </el-badge>
+                </template>
+            </el-table-column>
+            <el-table-column align="center"
                              width="80px"
                              label="操作">
                 <template slot-scope="scope">
@@ -150,6 +158,9 @@ export default {
         },
         articleList() {
             return this.$store.state.article.articleList;
+        },
+        topArticle() {
+            return this.$store.state.global.system.top_article;
         }
     },
     watch: {
@@ -228,6 +239,9 @@ export default {
 .article-table {
     width: 100%;
     margin: 20px auto;
+}
+.article-table >>> sup {
+    vertical-align: top;
 }
 .operating-button {
     cursor: pointer;
