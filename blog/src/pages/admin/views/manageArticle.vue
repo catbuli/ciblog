@@ -68,7 +68,16 @@
                              align="left"
                              label="标题">
                 <template slot-scope="scope">
-                    <span>{{scope.row.title}}</span>
+                    <a class="article-title"
+                       @click="editArticle(scope.row.aid)">{{scope.row.title}}</a>
+                    <a :href="`/article/${scope.row.aid}`"
+                       v-if="scope.row.status<2"
+                       title="查看"
+                       target="_blank"
+                       class="operating-button">
+                        <i class="el-icon-location-outline">
+                        </i>
+                    </a>
                     <el-badge value="草稿"
                               type="info"
                               v-if="scope.row.status>0">
@@ -81,25 +90,6 @@
                     <el-badge value="置顶"
                               v-if="scope.row.aid==topArticle">
                     </el-badge>
-                </template>
-            </el-table-column>
-            <el-table-column align="center"
-                             width="80px"
-                             label="操作">
-                <template slot-scope="scope">
-                    <i class="el-icon-edit operating-button"
-                       @click="editArticle(scope.row.aid)"
-                       title="编辑"></i>
-                    <a :href="`/article/${scope.row.aid}`"
-                       v-if="scope.row.status<2"
-                       title="查看"
-                       target="_blank"
-                       class="operating-button">
-                        <i class="el-icon-location-outline">
-                        </i>
-                    </a>
-                    <!-- <i class="el-icon-delete operating-button"
-                       @click="delArticle(scope.row.aid)"></i> -->
                 </template>
             </el-table-column>
             <el-table-column prop=""
@@ -243,14 +233,15 @@ export default {
 .article-table >>> sup {
     vertical-align: top;
 }
-.operating-button {
+.article-title {
     cursor: pointer;
-    font-size: 20px;
+}
+.operating-button {
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 14px;
     display: inline-block;
     color: #606266;
-}
-.operating-button + .operating-button {
-    margin-left: 10px;
 }
 .article-table-category + .article-table-category::before {
     content: " • ";

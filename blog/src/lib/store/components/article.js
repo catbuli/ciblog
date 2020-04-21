@@ -1,9 +1,8 @@
 import {
     post
-} from '@/lib/http'
-import router from '@/pages/index/router'
-import adminRouter from '@/pages/admin/router'
-
+} from '@/lib/http';
+import router from '@/pages/index/router';
+import adminRouter from '@/pages/admin/router';
 
 export default {
     state: {
@@ -35,30 +34,36 @@ export default {
             }
         },
         refresh(state, data) {
-            let __VALUE__ = JSON.parse(JSON.stringify(state.article))
+            let __VALUE__ = JSON.parse(JSON.stringify(state.article));
             __VALUE__.refresh = Math.random();
             state.article = __VALUE__;
         }
     },
     actions: {
         getArticleListAction(context, data) {
-            post("/articlec", {
-                paging: data
-            }, (data) => {
-                context.commit('setArticleList', data.data);
-                context.commit('setPaging', data.paging);
-            });
+            post(
+                '/articlec', {
+                    paging: data
+                },
+                (data) => {
+                    context.commit('setArticleList', data.data);
+                    context.commit('setPaging', data.paging);
+                }
+            );
         },
         getArticleDataAction({
             rootState,
             commit
         }, data) {
             if (data != rootState.article.article.aid) {
-                post("/articlec/byid", {
-                    aid: data
-                }, (data) => {
-                    commit('setArticle', data.data);
-                });
+                post(
+                    '/articlec/byid', {
+                        aid: data
+                    },
+                    (data) => {
+                        commit('setArticle', data.data);
+                    }
+                );
             } else {
                 commit('refresh');
             }
@@ -67,29 +72,38 @@ export default {
             rootState,
             dispatch
         }, data) {
-            post("/articlec/publish", {
-                data
-            }, (data) => {
-                adminRouter.push('/admin/manage_article')
-            });
+            post(
+                '/articlec/publish', {
+                    data
+                },
+                (data) => {
+                    adminRouter.push('/admin/manage_article');
+                }
+            );
         },
         delArticleAction({
             rootState,
             dispatch
         }, data) {
-            post("/articlec/del", {
-                aid: data
-            }, (data) => {
-                dispatch('getArticleListAction', rootState.global.paging);
-            });
+            post(
+                '/articlec/del', {
+                    aid: data
+                },
+                (data) => {
+                    dispatch('getArticleListAction', rootState.global.paging);
+                }
+            );
         },
         draftAction(context, data) {
-            post("/articlec/draft", {
-                data: data
-            }, resp => {
-                context.commit('setArticle', resp.data);
-            });
+            post(
+                '/articlec/draft', {
+                    data: data
+                },
+                (resp) => {
+                    context.commit('setArticle', resp.data);
+                }
+            );
         }
     },
     modules: {}
-}
+};
