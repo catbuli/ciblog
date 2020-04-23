@@ -14,12 +14,12 @@ export default {
     mutations: {
         setArticleList(state, data) {
             state.articleList = data;
-            data.forEach((element, index) => {
-                if (element.status > 0) {
-                    element = JSON.parse(element.draft);
-                    data[index].title = element.title;
-                }
-            });
+            // data.forEach((element, index) => {
+            //     if (element.status > 0) {
+            //         element = JSON.parse(element.draft);
+            //         data[index].title = element.title;
+            //     }
+            // });
         },
         setArticle(state, data) {
             if (data.present.status > 0) {
@@ -32,6 +32,11 @@ export default {
                 state.previous = data.previous;
                 state.next = data.next;
             }
+        },
+        setIndexArticle(state, data) {
+            state.article = data.present;
+            state.previous = data.previous;
+            state.next = data.next;
         },
         refresh(state, data) {
             let __VALUE__ = JSON.parse(JSON.stringify(state.article));
@@ -62,6 +67,23 @@ export default {
                     },
                     (data) => {
                         commit('setArticle', data.data);
+                    }
+                );
+            } else {
+                commit('refresh');
+            }
+        },
+        getArticleIndexAction({
+            rootState,
+            commit
+        }, data) {
+            if (data != rootState.article.article.aid) {
+                post(
+                    '/articlec/byid', {
+                        aid: data
+                    },
+                    (data) => {
+                        commit('setIndexArticle', data.data);
                     }
                 );
             } else {

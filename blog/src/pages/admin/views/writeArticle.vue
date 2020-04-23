@@ -329,11 +329,6 @@ export default {
             if (!this.article.cover_url) {
                 this.article.cover_url = this.$store.state.global.system.randomBanner;
             }
-            if (this.article.categoryList.length == 0) {
-                this.article.categoryList = [
-                    this.$store.state.category.categoryList[0].mid
-                ];
-            }
             if (!this.article.title) {
                 scrollTo(0, 0);
                 this.$notify({

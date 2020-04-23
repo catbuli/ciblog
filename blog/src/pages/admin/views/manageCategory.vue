@@ -58,7 +58,7 @@
                 </template>
             </el-table-column>
         </el-table>
-        <el-dialog title="编辑评论"
+        <el-dialog title="编辑分类"
                    :visible.sync="isEdit">
             <el-input placeholder="请输入分类"
                       v-loading="loading"
