@@ -18,7 +18,9 @@ export default {
     mounted() {},
     methods: {
         backups() {
-            this.$post("/backups", {}, data => {});
+            this.$post("/backups", {}, data => {
+                window.open("//" + data.message);
+            });
         }
     }
 };

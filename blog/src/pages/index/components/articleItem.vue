@@ -138,7 +138,7 @@ export default {
         },
         getTopArticle() {
             if (this.top) {
-                this.$store.dispatch("getArticleDataAction", this.top);
+                this.$store.dispatch("getArticleIndexAction", this.top);
             }
         },
         jump(id) {

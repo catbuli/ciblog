@@ -301,7 +301,7 @@ export default {
     },
     methods: {
         getArticleData(aid) {
-            this.$store.dispatch("getArticleDataAction", aid);
+            this.$store.dispatch("getArticleIndexAction", aid);
         },
         getCommentList(aid) {
             this.paging.type = aid;
