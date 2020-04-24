@@ -58,10 +58,10 @@ export default {
             var scrollHeight =
                 document.documentElement.scrollHeight ||
                 document.body.scrollHeight;
-            if (scrollHeight < 20 + scrollTop + windowHeight) {
+            if (scrollHeight < 50 + scrollTop + windowHeight) {
                 this.$refs.timeline.classList.add = "open";
                 this.$refs.timeline.style.maxHeight = this.height + "px";
-                this.height += 50;
+                this.height += 70;
             }
         }
     }
@@ -74,7 +74,7 @@ export default {
 .timeline {
     text-align: left;
     position: relative;
-    max-height: 0px;
+    max-height: 30px;
     overflow: hidden;
     transition: max-height 0.8s;
     .timeline-item {
