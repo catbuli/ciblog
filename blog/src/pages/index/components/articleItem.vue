@@ -22,9 +22,9 @@
                         <span class="card-top-date">{{article.create_date|handleDate}}</span>
                     </i>
                 </div>
-                <img class="article-image"
-                     :src="article.cover_url"
-                     @click="jump(article.aid)">
+                <div class="article-image"
+                     :style="`background:url(${article.cover_url}) no-repeat center center/100% auto;`"
+                     @click="jump(article.aid)"></div>
                 <p class="article-content"
                    v-text="article.description"></p>
                 <div class='card-line'></div>
@@ -63,9 +63,9 @@
                         <span class="card-top-date">{{item.create_date|handleDate}}</span>
                     </i>
                 </div>
-                <img class="article-image"
-                     :src="item.cover_url"
-                     @click="jump(item.aid)">
+                <div class="article-image"
+                     :style="`background:url(${article.cover_url}) no-repeat center center/100% auto;`"
+                     @click="jump(item.aid)"></div>
                 <p class="article-content"
                    v-text="item.description"></p>
                 <div class='card-line'></div>
@@ -205,8 +205,10 @@ export default {
         }
         .article-image {
             width: 100%;
-            height: 330px;
+            height: 340px;
             cursor: pointer;
+            background: transparent no-repeat center center;
+            background-size: 100% auto;
         }
         .article-content {
             width: 80%;
