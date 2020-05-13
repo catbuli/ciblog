@@ -61,6 +61,11 @@ export default {
         },
         articleList() {
             return this.$store.state.article.articleList;
+        },
+        header() {
+            return this.$store.state.global.headerDOM
+                ? this.$store.state.global.headerDOM
+                : 800;
         }
     },
     watch: {
@@ -69,8 +74,9 @@ export default {
         }
     },
     methods: {
-        handlePage() {
+        handlePage(e) {
             this.loading = true;
+            window.scrollTo(0, this.header);
         },
         setTitle() {
             let nickname = this.$store.state.global.system.web_name;

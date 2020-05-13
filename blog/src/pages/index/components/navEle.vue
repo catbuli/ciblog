@@ -28,15 +28,18 @@
             <div class="count"
                  v-if="style.isPC">
                 <ul>
-                    <li>
+                    <li style="cursor: pointer;"
+                        @click="$router.push({path: `/log`})">
                         <p v-html="countList.articleCount"></p>
                         <p>文章</p>
                     </li>
-                    <li>
+                    <li style="cursor: pointer;"
+                        @click="$router.push({path: `/log`})">
                         <p v-html="countList.categoryCount"></p>
                         <p>分类</p>
                     </li>
-                    <li>
+                    <li style="cursor: pointer;"
+                        @click="$router.push({path: `/log`})">
                         <p v-html="countList.tagCount"></p>
                         <p>标签</p>
                     </li>

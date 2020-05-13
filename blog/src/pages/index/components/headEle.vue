@@ -118,7 +118,6 @@ header {
 }
 /* 信息显示 */
 .information {
-    top: 40%;
     color: white;
     position: absolute;
     text-align: center;
