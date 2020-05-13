@@ -41,7 +41,6 @@ export default {
     watch: {
         "$store.state.global.paging": function() {
             this.page = this.$store.state.global.paging;
-            this.backTop();
         }
     },
     mounted() {
@@ -51,22 +50,7 @@ export default {
         currentChange(e) {
             this.page.currentPage = e;
             this.$emit("function", e);
-            this.backTop();
             this.getList();
-        },
-        backTop() {
-            // let backTopTimer = setInterval(function() {
-            //     var scrollTop =
-            //         document.documentElement.scrollTop ||
-            //         document.body.scrollTop;
-            //     var speed = scrollTop / 10;
-            //     if (document.documentElement.scrollTop === 0) {
-            //         clearInterval(backTopTimer);
-            //     } else {
-            //         document.documentElement.scrollTop -= speed;
-            //     }
-            // }, 10);
-            scrollTo(0, 0);
         },
         getList() {
             this.$store.dispatch(this.action, this.page);
