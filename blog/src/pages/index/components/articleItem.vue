@@ -64,7 +64,7 @@
                     </i>
                 </div>
                 <div class="article-image"
-                     :style="`background:url(${article.cover_url}) no-repeat center center/100% auto;`"
+                     :style="`background:url(${item.cover_url}) no-repeat center center/100% auto;`"
                      @click="jump(item.aid)"></div>
                 <p class="article-content"
                    v-text="item.description"></p>
