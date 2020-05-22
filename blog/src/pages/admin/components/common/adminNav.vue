@@ -1,7 +1,6 @@
 <template>
     <nav id="admin-nav">
-        <el-menu class="el-menu-demo"
-                 background-color="#545c64"
+        <el-menu background-color="#545c64"
                  text-color="#fff"
                  active-text-color="#ff8819"
                  mode="horizontal"
