@@ -1,15 +1,14 @@
 <?php
 
-namespace app\ciblog\controller;
+namespace app\index\controller;
 
-use think\Controller;
-use app\ciblog\model\Comment;
-use app\ciblog\model\Article;
-use think\Exception;
 use app\common\Response;
 use app\common\Session;
-use app\ciblog\model\Setup;
-use think\Db;
+use app\index\model\Article;
+use app\index\model\Comment;
+use app\index\model\Setup;
+use think\Controller;
+use think\Exception;
 
 class Commentc extends Controller
 {
@@ -17,7 +16,7 @@ class Commentc extends Controller
      * 控制器默认方法 获取评论列表
      *
      * @param JSON $paging 分页信息
-     * @return JSON 
+     * @return JSON
      */
     public function index($paging)
     {
@@ -54,7 +53,7 @@ class Commentc extends Controller
     /**
      * 删除评论
      *
-     * @param array $cid 评论id 或者 评论id数组 
+     * @param array $cid 评论id 或者 评论id数组
      * @return JSON
      */
     public function del($cid)
@@ -134,7 +133,7 @@ class Commentc extends Controller
                     'status' => Setup::get(['user' => 1, 'name' => 'comment_check'])['value'] == 1 ? 0 : 1,
                     'ip' => $_SERVER['REMOTE_ADDR'],
                     'avatar_url' => $data['avatar_url'],
-                    'reply' => empty($data['reply']) ? null : json_encode($data['reply'])
+                    'reply' => empty($data['reply']) ? null : json_encode($data['reply']),
                 ]);
                 $comment->save();
                 return Response::result(200, "成功", "评论成功!");

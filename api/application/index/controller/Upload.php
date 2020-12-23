@@ -1,12 +1,12 @@
 <?php
 
-namespace app\ciblog\controller;
+namespace app\index\controller;
 
-use think\Controller;
 use app\common\Response;
 use app\common\Session;
+use app\index\model\File;
+use think\Controller;
 use think\Exception;
-use app\ciblog\model\File;
 use think\facade\Env;
 
 class Upload extends Controller
@@ -15,7 +15,7 @@ class Upload extends Controller
      * 文件上传默认控制器 获取文件列表
      *
      * @param JSON $paging 分页信息
-     * @return JSON 
+     * @return JSON
      */
     public function index($paging)
     {
@@ -32,7 +32,7 @@ class Upload extends Controller
     /**
      * 上传文件
      *
-     * @param integer $aid 文章id 
+     * @param integer $aid 文章id
      * @return JSON
      */
     public function add($aid = -1)

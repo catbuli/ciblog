@@ -1,10 +1,8 @@
 <?php
 
-namespace app\ciblog\model;
+namespace app\index\model;
 
 use think\Model;
-use think\Db;
-
 
 class File extends Model
 {

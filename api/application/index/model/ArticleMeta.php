@@ -1,10 +1,8 @@
 <?php
 
-namespace app\ciblog\model;
+namespace app\index\model;
 
 use think\Model;
-use think\Db;
-use think\Exception;
 
 class ArticleMeta extends Model
 {
@@ -17,9 +15,9 @@ class ArticleMeta extends Model
     {
         foreach ($data as $value) {
             $ArticleMeta = new ArticleMeta([
-                'aid'  =>  $aid,
-                'mid' =>  $value,
-                'type' => $type
+                'aid' => $aid,
+                'mid' => $value,
+                'type' => $type,
             ]);
             $ArticleMeta->addArticleMeta();
         };

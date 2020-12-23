@@ -1,14 +1,13 @@
 <?php
 
-namespace app\ciblog\controller;
+namespace app\index\controller;
 
-use think\Controller;
-use think\Exception;
 use app\common\Response;
 use app\common\Session;
 use app\common\TokenManage;
+use think\Controller;
+use think\Exception;
 use think\facade\Config;
-use think\Db;
 
 class Backups extends Controller
 {

@@ -1,15 +1,15 @@
 <?php
 
-namespace app\ciblog\controller;
+namespace app\index\controller;
 
 use app\common\Response;
 use app\common\Session;
 use app\common\TokenManage;
-use app\ciblog\model\Article;
-use app\ciblog\model\Comment;
-use app\ciblog\model\Meta;
-use app\ciblog\model\Setup;
-use app\ciblog\model\User;
+use app\index\model\Article;
+use app\index\model\Comment;
+use app\index\model\Meta;
+use app\index\model\Setup;
+use app\index\model\User;
 use think\Controller;
 use think\Exception;
 

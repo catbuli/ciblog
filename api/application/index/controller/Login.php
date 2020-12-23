@@ -1,13 +1,13 @@
 <?php
 
-namespace app\ciblog\controller;
+namespace app\index\controller;
 
-use think\Controller;
-use app\ciblog\model\User;
-use think\Exception;
-use app\common\TokenManage;
-use app\common\Session;
 use app\common\Response;
+use app\common\Session;
+use app\common\TokenManage;
+use app\index\model\User;
+use think\Controller;
+use think\Exception;
 
 class Login extends Controller
 {
@@ -21,7 +21,7 @@ class Login extends Controller
     public function index($name, $password)
     {
         try {
-            $data =  User::login($name, md5($password));
+            $data = User::login($name, md5($password));
             if ($data) {
                 return Response::result(200, "欢迎", "管理员-" . $data->nickname, [
                     'uid' => $data->uid,

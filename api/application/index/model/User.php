@@ -1,10 +1,8 @@
 <?php
 
-namespace app\ciblog\model;
+namespace app\index\model;
 
 use think\Model;
-use think\Db;
-
 
 class User extends Model
 {
@@ -22,7 +20,7 @@ class User extends Model
         $user = new User;
         // save方法第二个参数为更新条件
         return $user->save([
-            'password'  => $password,
-        ], ['uid' => $uid]);;
+            'password' => $password,
+        ], ['uid' => $uid]);
     }
 }

@@ -1,10 +1,8 @@
 <?php
 
-namespace app\ciblog\model;
+namespace app\index\model;
 
 use think\Model;
-use think\Db;
-use think\Exception;
 
 class Comment extends Model
 {
@@ -21,7 +19,7 @@ class Comment extends Model
             case 'aid':
                 return $this->where('aid', $paging['type'])->where('status', 1)->order('create_date desc')->select();
             default:
-                return $this->order('create_date desc')->select();;
+                return $this->order('create_date desc')->select();
         }
     }
     public static function count($field = '', $value = -1)
@@ -47,7 +45,7 @@ class Comment extends Model
     public function editStutas($cid, $status)
     {
         return $this->save([
-            'status'  => $status,
+            'status' => $status,
         ], ['cid' => $cid]);
     }
     public static function getCommentById($aid)

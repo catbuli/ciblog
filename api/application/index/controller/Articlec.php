@@ -1,15 +1,15 @@
 <?php
 
-namespace app\ciblog\controller;
+namespace app\index\controller;
 
-use think\Controller;
-use app\ciblog\model\Article;
-use app\ciblog\model\ArticleMeta;
-use app\ciblog\model\Comment;
-use think\Exception;
 use app\common\Response;
 use app\common\Session;
+use app\index\model\Article;
+use app\index\model\ArticleMeta;
+use app\index\model\Comment;
+use think\Controller;
 use think\Db;
+use think\Exception;
 
 class Articlec extends Controller
 {
@@ -111,7 +111,7 @@ class Articlec extends Controller
     /**
      * 删除文章
      *
-     * @param array $aid 文章id 或者 文章id数组 
+     * @param array $aid 文章id 或者 文章id数组
      * @return JSON 返回状态码 报错信息 数据
      */
     public function del($aid)

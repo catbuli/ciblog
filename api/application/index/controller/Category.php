@@ -1,15 +1,15 @@
 <?php
 
-namespace app\ciblog\controller;
+namespace app\index\controller;
 
-use think\Controller;
-use app\ciblog\model\Meta;
-use app\ciblog\model\Article;
-use app\ciblog\model\ArticleMeta;
-use think\Exception;
 use app\common\Response;
 use app\common\Session;
+use app\index\model\Article;
+use app\index\model\ArticleMeta;
+use app\index\model\Meta;
+use think\Controller;
 use think\Db;
+use think\Exception;
 
 class Category extends Controller
 {
@@ -50,9 +50,9 @@ class Category extends Controller
             } else {
                 $meta = new Meta();
                 $meta->data([
-                    'name'  =>  $name,
-                    'description' =>  $description,
-                    'type' => 'category'
+                    'name' => $name,
+                    'description' => $description,
+                    'type' => 'category',
                 ]);
                 $meta->save();
                 return Response::result(200, "成功", "分类添加成功!");
@@ -103,7 +103,7 @@ class Category extends Controller
             return Response::result(400, "失败", "该账号没有此操作的权限!", []);
         }
         try {
-            $meta  = Meta::get($category['mid']);
+            $meta = Meta::get($category['mid']);
             $meta->name = $category['name'];
             $meta->description = $category['description'];
             $meta->save();

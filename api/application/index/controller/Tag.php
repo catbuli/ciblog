@@ -1,14 +1,13 @@
 <?php
 
-namespace app\ciblog\controller;
+namespace app\index\controller;
 
-use app\ciblog\model\ArticleMeta;
-use think\Controller;
-use app\ciblog\model\Meta;
-use app\ciblog\controller\Backups;
-use think\Exception;
 use app\common\Response;
 use app\common\Session;
+use app\index\model\ArticleMeta;
+use app\index\model\Meta;
+use think\Controller;
+use think\Exception;
 
 class Tag extends Controller
 {
@@ -47,7 +46,7 @@ class Tag extends Controller
             } else {
                 $meta = new Meta();
                 $meta->data([
-                    'name'  =>  $name,
+                    'name' => $name,
                     'description' => null,
                     'type' => 'tag',
                     'order' => 0,

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\ciblog\controller;
+namespace app\index\controller;
 
 class Index
 {
