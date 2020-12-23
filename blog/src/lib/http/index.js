@@ -9,7 +9,7 @@ let instance = axios.create();
 let baseUrl = '';
 
 if (process.env.NODE_ENV == 'development') {
-    baseUrl = '/api/ciblog';
+    baseUrl = '/index';
 } else if (process.env.NODE_ENV == 'production') {
     baseUrl = process.env.VUE_APP_URL;
 }

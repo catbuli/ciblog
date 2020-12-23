@@ -3,13 +3,13 @@
 namespace app\common;
 
 use app\common\Session;
-use app\ciblog\model\User;
+use app\index\model\User;
 
 class TokenManage
 {
     /**
      * 签发app token
-     * 
+     *
      * @param Int $uid
      * @return String token令牌
      */
