@@ -5,11 +5,12 @@ vue.js（2.6.10）开发的博客平台
 
 # 技术栈
 
-vue2+vuex+vue-router+webpack+ES6/7+element-ui+less
+前端：vue2+vuex+vue-router+webpack+ES6/7+element-ui+less
+后端：tp5.1
 
 # 后端仓库
 
-[后端仓库地址](https://github.com/zhangyifei233/ciblog_api)
+api项目已经合并到此仓库
 
 # 效果演示
 
