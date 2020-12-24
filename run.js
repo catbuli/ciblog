@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /*
  * @Description 
  * @Author Catbuli
@@ -8,38 +9,67 @@
 
 "use strict";
 
-var exec_blog = new require("child_process").exec;
-var exec_api = new require("child_process").exec;
+const process = require('process');
 
-return new Promise(function (resolve, reject) {
 
-    // var cmd = "ipconfig";
-    // var blog = "cd /blog && npm run serve";
-    var blog = `cd ${__dirname}/blog && npm run serve`;
-    var api = `cd ${__dirname}/api && php think run`;
-    exec_blog(blog, {
-        maxBuffer: 1024 * 2000
-    }, function (err, stdout, stderr) {
-        if (err) {
-            console.log(err);
-            reject(err);
-        } else if (stderr.lenght > 0) {
-            reject(new Error(stderr.toString()));
-        } else {
-            exec_api(api, {
-                maxBuffer: 1024 * 2000
-            }, function (err, stdout, stderr) {
-                if (err) {
-                    console.log(err);
-                    reject(err);
-                } else if (stderr.lenght > 0) {
-                    reject(new Error(stderr.toString()));
-                } else {
-                    console.log(stdout);
-                    resolve();
-                }
-            });
-            resolve();
-        }
-    });
-});
+const commandSpawn = require("./script/commandSpawn")
+const { resolvePath } = require('./script/utils')
+
+async function dev() {
+
+
+
+    commandSpawn('npm', ['run', `serve`], `${__dirname}/blog`);
+
+    commandSpawn('php', ['think', `run`], `${__dirname}/api`);
+}
+
+dev();
+
+// return new Promise(function (resolve, reject) {
+
+//     var spawn_blog_ob = spawn_blog.spawn('npm', ['run', `serve`]);
+//     spawn_blog_ob.stdout.on('data', function (data) {
+//         console.log('stdout: ' + data);
+//     });
+
+//     spawn_blog_ob.stderr.on('data', function (data) {
+//         console.log('stderr: ' + data);
+//     });
+
+//     spawn_blog_ob.on('close', function (code) {
+//         console.log('子进程已退出，退出码 ' + code);
+//     });
+
+//     // // var cmd = "ipconfig";
+//     // // var blog = "cd /blog && npm run serve";
+//     // var blog = `cd ${__dirname}/blog && npm run serve`;
+//     // var api = `cd ${__dirname}/api && php think run`;
+//     // exec_blog(blog, {
+//     //     maxBuffer: 1024 * 2000
+//     // }, function (err, stdout, stderr) {
+//     //     console.log("blog", '')
+//     //     if (err) {
+//     //         console.log(err);
+//     //         reject(err);
+//     //     } else if (stderr.lenght > 0) {
+//     //         reject(new Error(stderr.toString()));
+//     //     } else {
+//     //         resolve();
+//     //     }
+//     // });
+//     // exec_api(api, {
+//     //     maxBuffer: 1024 * 2000
+//     // }, function (err, stdout, stderr) {
+//     //     console.log("api", '')
+//     //     if (err) {
+//     //         console.log(err);
+//     //         reject(err);
+//     //     } else if (stderr.lenght > 0) {
+//     //         reject(new Error(stderr.toString()));
+//     //     } else {
+//     //         console.log(stdout);
+//     //         resolve();
+//     //     }
+//     // });
+// });
