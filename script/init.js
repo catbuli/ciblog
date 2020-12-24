@@ -10,6 +10,7 @@
 
 
 var mysql = require('mysql');
+const config = require("../config")
 const { msgNormal, msgTitle, msgInfo, msgSuccess, msgError } = require("./consoleMsg");
 const exec = require('child_process').exec;
 const commandSpawn = require("./commandSpawn");
@@ -19,9 +20,9 @@ const { resolvePath } = require('./utils');
     msgTitle("ciblog   项目初始化开始：");
 
     var connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: '123',
+        host: config.DB_HOST,
+        user: config.DB_USERNAME,
+        password: config.DB_PASSWORD,
     });
 
     msgTitle("连接数据库：");
@@ -29,10 +30,10 @@ const { resolvePath } = require('./utils');
     msgSuccess("数据库连接成功");
 
     msgTitle("创建数据库，导入初始数据：");
-    await connection.query("CREATE DATABASE if not exists ciblog", function (err, result) {
+    await connection.query(`CREATE DATABASE if not exists ${config.DB_DATABASE}`, function (err, result) {
         if (err) throw err;
 
-        var spl = `mysql -uroot -p123 ciblog < ${resolvePath("./", "database.sql")}`;
+        var spl = `mysql -u${config.DB_USERNAME} -p${config.DB_PASSWORD} ${config.DB_DATABASE} < ${resolvePath("./", "database.sql")}`;
         exec(spl, {}, (err) => {
             if (err) throw err;
         });

@@ -15,7 +15,8 @@ const commandSpawn = (command, params, cwd) => {
         const result = spawn(command, params, {
             cwd,
             stdio: 'inherit', // 打印命令原始输出
-            shell: process.platform === 'win32', // 兼容windows系统
+            shell: process.platform === 'win32',
+            encoding: 'utf8', // 兼容windows系统
         });
 
         result.on('error', (err) => {
