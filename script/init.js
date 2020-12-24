@@ -18,12 +18,11 @@ const { resolvePath } = require('./utils');
 (async function init() {
     msgTitle("ciblog   项目初始化开始：");
 
-    msgTitle("脚本依赖安装：");
-    await commandSpawn('npm', ['install'], resolvePath("./", "./")).then(() => {
-        msgSuccess("脚本依赖安装成功");
-    }).catch((err) => {
-        msgError(err);
-    });
+    // await commandSpawn('npm', ['install'], resolvePath("./", "./")).then(() => {
+    //     msgSuccess("脚本依赖安装成功");
+    // }).catch((err) => {
+    //     msgError(err);
+    // });
 
     msgTitle("前端项目依赖安装：");
     await commandSpawn('npm', ['install'], resolvePath("./", "blog")).then(() => {
