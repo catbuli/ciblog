@@ -23,11 +23,14 @@ const { resolvePath } = require('./utils');
         host: config.DB_HOST,
         user: config.DB_USERNAME,
         password: config.DB_PASSWORD,
+        port: config.DB_PORT
     });
 
     msgTitle("连接数据库：");
-    connection.connect();
-    msgSuccess("数据库连接成功");
+    await connection.connect((err) => {
+        if (err) throw err;
+        msgSuccess("数据库连接成功");
+    });
 
     msgTitle("创建数据库，导入初始数据：");
     await connection.query(`CREATE DATABASE if not exists ${config.DB_DATABASE}`, function (err, result) {
@@ -56,5 +59,5 @@ const { resolvePath } = require('./utils');
 
     connection.end();
 
-    msgTitle("请运行 npm run dev 启动开发环境");
+    msgTitle("请运行 npm run dev 启动开发环境服务");
 }())
