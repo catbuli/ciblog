@@ -27,7 +27,7 @@ ps:有的时候发布会慢一点。（●>∀<●）
 
 ## 主要功能
 
-[开发状态](http://www.zhangyifei.top/archives/97/) 
+[开发状态](http://www.zhangyifei.top/archives/97/)
 
 - [ ] 前台 (基本功能完成)
   - [x] 侧边导航栏
