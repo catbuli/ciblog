@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "ciblog项目前后端仓库",
   "main": "run.js",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "chalk": "^4.1.0",
     "mysql": "^2.18.1"
   },
-  "devDependencies": {},
   "scripts": {
     "dev": "node ./script/run.js",
     "init": "node ./script/init.js"
