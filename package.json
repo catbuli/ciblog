@@ -1,0 +1,28 @@
+{
+  "name": "ciblog",
+  "version": "1.0.0",
+  "description": "ciblog项目前后端仓库",
+  "main": "run.js",
+  "dependencies": {
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "node ./script/run.js",
+    "init": "node ./script/init.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/catbuli/ciblog.git"
+  },
+  "keywords": [
+    "blog",
+    "catbuli"
+  ],
+  "author": "Catbuli",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/catbuli/ciblog/issues"
+  },
+  "homepage": "https://github.com/catbuli/ciblog#readme"
+}

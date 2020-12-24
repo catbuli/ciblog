@@ -12,16 +12,14 @@
 const process = require('process');
 
 
-const commandSpawn = require("./script/commandSpawn")
-const { resolvePath } = require('./script/utils')
+const commandSpawn = require("./commandSpawn")
+const { resolvePath } = require('./utils')
 
 async function dev() {
 
+    commandSpawn('npm', ['run', `serve`], `${__dirname}/../blog`);
 
-
-    commandSpawn('npm', ['run', `serve`], `${__dirname}/blog`);
-
-    commandSpawn('php', ['think', `run`], `${__dirname}/api`);
+    commandSpawn('php', ['think', `run`], `${__dirname}/../api`);
 }
 
 dev();

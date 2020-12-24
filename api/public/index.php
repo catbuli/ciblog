@@ -14,6 +14,7 @@ namespace think;
 
 // 开启session
 session_start();
+
 // 加载基础文件
 require __DIR__ . '/../thinkphp/base.php';
 
