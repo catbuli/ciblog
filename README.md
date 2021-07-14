@@ -3,6 +3,9 @@ vue.js（2.6.10）开发的博客平台
 
 外观是参照我很喜欢的一个typecho主题：Aria 作者：Siphils [作者仓库](https://github.com/Siphils/Typecho-Theme-Aria)
 
+# PS
+这个项目好久没有动过了，这段时间工作中学习对于开发有些新的收获。有时间的话的打算重构前端一些逻辑，后端打算用koa重写一下。最近有些懈怠了，这不太好。QAQ
+
 # 技术栈
 
 前端：vue2+vuex+vue-router+webpack+ES6/7+element-ui+less
